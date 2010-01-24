@@ -1,0 +1,146 @@
+
+test_delay1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000084  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .stab         0000072c  00000000  00000000  000000d8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  2 .stabstr      0000076a  00000000  00000000  00000804  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0a c0       	rjmp	.+20     	; 0x16 <__ctors_end>
+   2:	23 c0       	rjmp	.+70     	; 0x4a <__bad_interrupt>
+   4:	22 c0       	rjmp	.+68     	; 0x4a <__bad_interrupt>
+   6:	21 c0       	rjmp	.+66     	; 0x4a <__bad_interrupt>
+   8:	20 c0       	rjmp	.+64     	; 0x4a <__bad_interrupt>
+   a:	1f c0       	rjmp	.+62     	; 0x4a <__bad_interrupt>
+   c:	1e c0       	rjmp	.+60     	; 0x4a <__bad_interrupt>
+   e:	1d c0       	rjmp	.+58     	; 0x4a <__bad_interrupt>
+  10:	1c c0       	rjmp	.+56     	; 0x4a <__bad_interrupt>
+  12:	1b c0       	rjmp	.+54     	; 0x4a <__bad_interrupt>
+  14:	1a c0       	rjmp	.+52     	; 0x4a <__bad_interrupt>
+
+00000016 <__ctors_end>:
+  16:	11 24       	eor	r1, r1
+  18:	1f be       	out	0x3f, r1	; 63
+  1a:	cf ed       	ldi	r28, 0xDF	; 223
+  1c:	cd bf       	out	0x3d, r28	; 61
+
+0000001e <__do_copy_data>:
+  1e:	10 e0       	ldi	r17, 0x00	; 0
+  20:	a0 e6       	ldi	r26, 0x60	; 96
+  22:	b0 e0       	ldi	r27, 0x00	; 0
+  24:	e4 e8       	ldi	r30, 0x84	; 132
+  26:	f0 e0       	ldi	r31, 0x00	; 0
+  28:	03 c0       	rjmp	.+6      	; 0x30 <.do_copy_data_start>
+
+0000002a <.do_copy_data_loop>:
+  2a:	c8 95       	lpm
+  2c:	31 96       	adiw	r30, 0x01	; 1
+  2e:	0d 92       	st	X+, r0
+
+00000030 <.do_copy_data_start>:
+  30:	a0 36       	cpi	r26, 0x60	; 96
+  32:	b1 07       	cpc	r27, r17
+  34:	d1 f7       	brne	.-12     	; 0x2a <.do_copy_data_loop>
+
+00000036 <__do_clear_bss>:
+  36:	10 e0       	ldi	r17, 0x00	; 0
+  38:	a0 e6       	ldi	r26, 0x60	; 96
+  3a:	b0 e0       	ldi	r27, 0x00	; 0
+  3c:	01 c0       	rjmp	.+2      	; 0x40 <.do_clear_bss_start>
+
+0000003e <.do_clear_bss_loop>:
+  3e:	1d 92       	st	X+, r1
+
+00000040 <.do_clear_bss_start>:
+  40:	a0 36       	cpi	r26, 0x60	; 96
+  42:	b1 07       	cpc	r27, r17
+  44:	e1 f7       	brne	.-8      	; 0x3e <__SP_H__>
+  46:	0f d0       	rcall	.+30     	; 0x66 <main>
+  48:	1c c0       	rjmp	.+56     	; 0x82 <_exit>
+
+0000004a <__bad_interrupt>:
+  4a:	da cf       	rjmp	.-76     	; 0x0 <__heap_end>
+
+0000004c <delay_ms>:
+#include <util/delay.h>
+
+
+void delay_ms(unsigned int ms)
+/* delay for a minimum of <ms> */
+{
+  4c:	28 2f       	mov	r18, r24
+  4e:	39 2f       	mov	r19, r25
+  50:	06 c0       	rjmp	.+12     	; 0x5e <delay_ms+0x12>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  52:	80 e8       	ldi	r24, 0x80	; 128
+  54:	97 e0       	ldi	r25, 0x07	; 7
+  56:	01 97       	sbiw	r24, 0x01	; 1
+  58:	f1 f7       	brne	.-4      	; 0x56 <delay_ms+0xa>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+  5a:	21 50       	subi	r18, 0x01	; 1
+  5c:	30 40       	sbci	r19, 0x00	; 0
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+  5e:	21 15       	cp	r18, r1
+  60:	31 05       	cpc	r19, r1
+  62:	b9 f7       	brne	.-18     	; 0x52 <delay_ms+0x6>
+  64:	08 95       	ret
+
+00000066 <main>:
+                ms--;
+        }
+}
+
+int main(void)
+{
+  66:	cf ed       	ldi	r28, 0xDF	; 223
+  68:	d0 e0       	ldi	r29, 0x00	; 0
+  6a:	de bf       	out	0x3e, r29	; 62
+  6c:	cd bf       	out	0x3d, r28	; 61
+        //CLKPR=(1<<CLKPS0); // 4MHz
+        //CLKPR=((1<<CLKPS0)|(1<<CLKPS1)); // 1MHz
+        //CLKPR=((1<<CLKPS0)|(1<<CLKPS2)); // 0.25MHz
+
+        /* enable PB1 as output */
+        DDRB|= (1<<DDB1);
+  6e:	b9 9a       	sbi	0x17, 1	; 23
+
+        while (1) {
+                    /* led on, pin=0 */
+                    PORTB &= ~(1<<PB1);
+  70:	c1 98       	cbi	0x18, 1	; 24
+                    delay_ms(500);
+  72:	84 ef       	ldi	r24, 0xF4	; 244
+  74:	91 e0       	ldi	r25, 0x01	; 1
+  76:	ea df       	rcall	.-44     	; 0x4c <delay_ms>
+                    /* set output to 5V, LED off */
+                    PORTB|= (1<<PB1);
+  78:	c1 9a       	sbi	0x18, 1	; 24
+                    delay_ms(500);
+  7a:	84 ef       	ldi	r24, 0xF4	; 244
+  7c:	91 e0       	ldi	r25, 0x01	; 1
+  7e:	e6 df       	rcall	.-52     	; 0x4c <delay_ms>
+  80:	f7 cf       	rjmp	.-18     	; 0x70 <main+0xa>
+
+00000082 <_exit>:
+  82:	ff cf       	rjmp	.-2      	; 0x82 <_exit>

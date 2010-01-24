@@ -1,0 +1,1824 @@
+
+mini_ploter_01.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000782  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000002e  00800060  00000782  000007f6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000017  0080008e  000007b0  00000824  2**0
+                  ALLOC
+  3 .stab         00001e90  00000000  00000000  00000824  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      0000098f  00000000  00000000  000026b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0a c0       	rjmp	.+20     	; 0x16 <__ctors_end>
+   2:	23 c0       	rjmp	.+70     	; 0x4a <__bad_interrupt>
+   4:	22 c0       	rjmp	.+68     	; 0x4a <__bad_interrupt>
+   6:	21 c0       	rjmp	.+66     	; 0x4a <__bad_interrupt>
+   8:	20 c0       	rjmp	.+64     	; 0x4a <__bad_interrupt>
+   a:	1f c0       	rjmp	.+62     	; 0x4a <__bad_interrupt>
+   c:	1e c0       	rjmp	.+60     	; 0x4a <__bad_interrupt>
+   e:	1e c0       	rjmp	.+60     	; 0x4c <__vector_7>
+  10:	1c c0       	rjmp	.+56     	; 0x4a <__bad_interrupt>
+  12:	30 c0       	rjmp	.+96     	; 0x74 <__vector_9>
+  14:	1a c0       	rjmp	.+52     	; 0x4a <__bad_interrupt>
+
+00000016 <__ctors_end>:
+  16:	11 24       	eor	r1, r1
+  18:	1f be       	out	0x3f, r1	; 63
+  1a:	cf ed       	ldi	r28, 0xDF	; 223
+  1c:	cd bf       	out	0x3d, r28	; 61
+
+0000001e <__do_copy_data>:
+  1e:	10 e0       	ldi	r17, 0x00	; 0
+  20:	a0 e6       	ldi	r26, 0x60	; 96
+  22:	b0 e0       	ldi	r27, 0x00	; 0
+  24:	e2 e8       	ldi	r30, 0x82	; 130
+  26:	f7 e0       	ldi	r31, 0x07	; 7
+  28:	03 c0       	rjmp	.+6      	; 0x30 <.do_copy_data_start>
+
+0000002a <.do_copy_data_loop>:
+  2a:	c8 95       	lpm
+  2c:	31 96       	adiw	r30, 0x01	; 1
+  2e:	0d 92       	st	X+, r0
+
+00000030 <.do_copy_data_start>:
+  30:	ae 38       	cpi	r26, 0x8E	; 142
+  32:	b1 07       	cpc	r27, r17
+  34:	d1 f7       	brne	.-12     	; 0x2a <.do_copy_data_loop>
+
+00000036 <__do_clear_bss>:
+  36:	10 e0       	ldi	r17, 0x00	; 0
+  38:	ae e8       	ldi	r26, 0x8E	; 142
+  3a:	b0 e0       	ldi	r27, 0x00	; 0
+  3c:	01 c0       	rjmp	.+2      	; 0x40 <.do_clear_bss_start>
+
+0000003e <.do_clear_bss_loop>:
+  3e:	1d 92       	st	X+, r1
+
+00000040 <.do_clear_bss_start>:
+  40:	a5 3a       	cpi	r26, 0xA5	; 165
+  42:	b1 07       	cpc	r27, r17
+  44:	e1 f7       	brne	.-8      	; 0x3e <__SP_H__>
+  46:	2a d1       	rcall	.+596    	; 0x29c <main>
+  48:	9a c3       	rjmp	.+1844   	; 0x77e <_exit>
+
+0000004a <__bad_interrupt>:
+  4a:	da cf       	rjmp	.-76     	; 0x0 <__heap_end>
+
+0000004c <__vector_7>:
+char response_ok[]   = "\n\rOK\n\r";
+char response_cmd_not_implemented[]   = "\r\nCMD_NOTIMPL\n\r";
+
+/////   procedura obslugi odbiornika UART   /////
+SIGNAL(SIG_UART_RECV)
+{
+  4c:	1f 92       	push	r1
+  4e:	0f 92       	push	r0
+  50:	0f b6       	in	r0, 0x3f	; 63
+  52:	0f 92       	push	r0
+  54:	11 24       	eor	r1, r1
+  56:	8f 93       	push	r24
+   cli();
+  58:	f8 94       	cli
+   recived_cmd = UDR;   // odebrane zapamietuje w zmiennej recived_cmd
+  5a:	8c b1       	in	r24, 0x0c	; 12
+  5c:	80 93 90 00 	sts	0x0090, r24
+   flagrx  = 1;         // ustawia flage odebrania znaku
+  60:	81 e0       	ldi	r24, 0x01	; 1
+  62:	80 93 8e 00 	sts	0x008E, r24
+   sei();
+  66:	78 94       	sei
+}
+  68:	8f 91       	pop	r24
+  6a:	0f 90       	pop	r0
+  6c:	0f be       	out	0x3f, r0	; 63
+  6e:	0f 90       	pop	r0
+  70:	1f 90       	pop	r1
+  72:	18 95       	reti
+
+00000074 <__vector_9>:
+
+/////   procedura obslugi nadajnika UART   /////
+SIGNAL(SIG_UART_TRANS)
+{   
+  74:	1f 92       	push	r1
+  76:	0f 92       	push	r0
+  78:	0f b6       	in	r0, 0x3f	; 63
+  7a:	0f 92       	push	r0
+  7c:	11 24       	eor	r1, r1
+  7e:	8f 93       	push	r24
+  80:	9f 93       	push	r25
+  82:	ef 93       	push	r30
+  84:	ff 93       	push	r31
+   if ( bufor[m] != '\0' )
+  86:	80 91 60 00 	lds	r24, 0x0060
+  8a:	90 91 61 00 	lds	r25, 0x0061
+  8e:	e8 2f       	mov	r30, r24
+  90:	f9 2f       	mov	r31, r25
+  92:	ef 56       	subi	r30, 0x6F	; 111
+  94:	ff 4f       	sbci	r31, 0xFF	; 255
+  96:	e0 81       	ld	r30, Z
+  98:	ee 23       	and	r30, r30
+  9a:	19 f0       	breq	.+6      	; 0xa2 <__vector_9+0x2e>
+   {
+      UDR=bufor[m];
+  9c:	ec b9       	out	0x0c, r30	; 12
+      m++;
+  9e:	01 96       	adiw	r24, 0x01	; 1
+  a0:	03 c0       	rjmp	.+6      	; 0xa8 <__vector_9+0x34>
+   }
+   else if ( bufor[m] == '\0' )
+   {
+      //   UDR='\0';   //wysyla jeszcze znak konca'\0' i wylacza nad
+      //do poprawki   
+      UCR &= ~_BV(TXEN);   //zeruje bitTXEN wylacza nadajnik   
+  a2:	53 98       	cbi	0x0a, 3	; 10
+      m   = 1;
+  a4:	81 e0       	ldi	r24, 0x01	; 1
+  a6:	90 e0       	ldi	r25, 0x00	; 0
+  a8:	90 93 61 00 	sts	0x0061, r25
+  ac:	80 93 60 00 	sts	0x0060, r24
+   }
+}
+  b0:	ff 91       	pop	r31
+  b2:	ef 91       	pop	r30
+  b4:	9f 91       	pop	r25
+  b6:	8f 91       	pop	r24
+  b8:	0f 90       	pop	r0
+  ba:	0f be       	out	0x3f, r0	; 63
+  bc:	0f 90       	pop	r0
+  be:	1f 90       	pop	r1
+  c0:	18 95       	reti
+
+000000c2 <send_to_pc>:
+
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+  c2:	20 e0       	ldi	r18, 0x00	; 0
+  c4:	30 e0       	ldi	r19, 0x00	; 0
+  c6:	03 c0       	rjmp	.+6      	; 0xce <send_to_pc+0xc>
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+  c8:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+  ca:	2f 5f       	subi	r18, 0xFF	; 255
+  cc:	3f 4f       	sbci	r19, 0xFF	; 255
+  ce:	e8 2f       	mov	r30, r24
+  d0:	f9 2f       	mov	r31, r25
+  d2:	e2 0f       	add	r30, r18
+  d4:	f3 1f       	adc	r31, r19
+  d6:	e0 81       	ld	r30, Z
+  d8:	a2 2f       	mov	r26, r18
+  da:	b3 2f       	mov	r27, r19
+  dc:	af 56       	subi	r26, 0x6F	; 111
+  de:	bf 4f       	sbci	r27, 0xFF	; 255
+  e0:	ee 23       	and	r30, r30
+  e2:	91 f7       	brne	.-28     	; 0xc8 <send_to_pc+0x6>
+      bufor[n]=dane[n];
+
+   bufor[n] = dane[n];      //dodaje na koniec bufora '\0'
+  e4:	1c 92       	st	X, r1
+   UCR      |= _BV(TXEN);   //wlacza nadajnik
+  e6:	53 9a       	sbi	0x0a, 3	; 10
+   UDR      = bufor[0];     //wysyla pierwszy znak reszta wysyla w obsludze przerwania
+  e8:	80 91 91 00 	lds	r24, 0x0091
+  ec:	8c b9       	out	0x0c, r24	; 12
+}
+  ee:	08 95       	ret
+
+000000f0 <motor_driver>:
+// delay_us(NOSNA);
+// PORTB |= _BV(BIT); 
+
+void motor_driver(motor_cmd)
+{
+    switch ( motor_cmd )
+  f0:	84 30       	cpi	r24, 0x04	; 4
+  f2:	91 05       	cpc	r25, r1
+  f4:	f1 f0       	breq	.+60     	; 0x132 <motor_driver+0x42>
+  f6:	85 30       	cpi	r24, 0x05	; 5
+  f8:	91 05       	cpc	r25, r1
+  fa:	4c f4       	brge	.+18     	; 0x10e <motor_driver+0x1e>
+  fc:	82 30       	cpi	r24, 0x02	; 2
+  fe:	91 05       	cpc	r25, r1
+ 100:	99 f0       	breq	.+38     	; 0x128 <motor_driver+0x38>
+ 102:	83 30       	cpi	r24, 0x03	; 3
+ 104:	91 05       	cpc	r25, r1
+ 106:	94 f4       	brge	.+36     	; 0x12c <motor_driver+0x3c>
+ 108:	01 97       	sbiw	r24, 0x01	; 1
+ 10a:	f1 f4       	brne	.+60     	; 0x148 <motor_driver+0x58>
+ 10c:	09 c0       	rjmp	.+18     	; 0x120 <motor_driver+0x30>
+ 10e:	80 31       	cpi	r24, 0x10	; 16
+ 110:	91 05       	cpc	r25, r1
+ 112:	a9 f0       	breq	.+42     	; 0x13e <motor_driver+0x4e>
+ 114:	80 32       	cpi	r24, 0x20	; 32
+ 116:	91 05       	cpc	r25, r1
+ 118:	a9 f0       	breq	.+42     	; 0x144 <motor_driver+0x54>
+ 11a:	08 97       	sbiw	r24, 0x08	; 8
+ 11c:	a9 f4       	brne	.+42     	; 0x148 <motor_driver+0x58>
+ 11e:	0c c0       	rjmp	.+24     	; 0x138 <motor_driver+0x48>
+    {
+        case MOTOR_XY_PORT_INIT_CMD:
+            MOTOR_XY_PORT_REGS |= _BV(MOTOR_X_LEFT_PIN);
+ 120:	b8 9a       	sbi	0x17, 0	; 23
+            MOTOR_XY_PORT_REGS |= _BV(MOTOR_X_RIGHT_PIN);
+ 122:	b9 9a       	sbi	0x17, 1	; 23
+            MOTOR_XY_PORT &= ~_BV(MOTOR_X_LEFT_PIN);
+ 124:	c0 98       	cbi	0x18, 0	; 24
+            MOTOR_XY_PORT &= ~_BV(MOTOR_X_RIGHT_PIN);
+ 126:	c1 98       	cbi	0x18, 1	; 24
+        case MOTOR_X_STOP_CMD:
+            MOTOR_XY_PORT &= ~_BV(MOTOR_X_LEFT_PIN);
+ 128:	c0 98       	cbi	0x18, 0	; 24
+ 12a:	04 c0       	rjmp	.+8      	; 0x134 <motor_driver+0x44>
+            MOTOR_XY_PORT &= ~_BV(MOTOR_X_RIGHT_PIN);
+            break;
+        case MOTOR_X_STEPUP_CMD:
+            MOTOR_XY_PORT &= ~_BV(MOTOR_X_LEFT_PIN);
+ 12c:	c0 98       	cbi	0x18, 0	; 24
+            MOTOR_XY_PORT |= _BV(MOTOR_X_RIGHT_PIN);
+ 12e:	c1 9a       	sbi	0x18, 1	; 24
+ 130:	08 95       	ret
+            break;
+        case MOTOR_X_STEPDOWN_CMD:
+            MOTOR_XY_PORT |= _BV(MOTOR_X_LEFT_PIN);
+ 132:	c0 9a       	sbi	0x18, 0	; 24
+            MOTOR_XY_PORT &= ~_BV(MOTOR_X_RIGHT_PIN);
+ 134:	c1 98       	cbi	0x18, 1	; 24
+ 136:	08 95       	ret
+            break;
+        case MOTOR_Y_STOP_CMD:
+            MOTOR_XY_PORT &= ~_BV(MOTOR_Y_LEFT_PIN);
+ 138:	c2 98       	cbi	0x18, 2	; 24
+            MOTOR_XY_PORT &= ~_BV(MOTOR_Y_RIGHT_PIN);
+ 13a:	c3 98       	cbi	0x18, 3	; 24
+ 13c:	08 95       	ret
+            break;
+        case MOTOR_Y_STEPUP_CMD:
+            MOTOR_XY_PORT &= ~_BV(MOTOR_Y_LEFT_PIN);
+ 13e:	c2 98       	cbi	0x18, 2	; 24
+            MOTOR_XY_PORT |= _BV(MOTOR_Y_RIGHT_PIN);
+ 140:	c3 9a       	sbi	0x18, 3	; 24
+ 142:	08 95       	ret
+            break;
+        case MOTOR_Y_STEPDOWN_CMD:
+            MOTOR_XY_PORT |= _BV(MOTOR_Y_LEFT_PIN);
+ 144:	c2 9a       	sbi	0x18, 2	; 24
+            MOTOR_XY_PORT &= ~_BV(MOTOR_Y_RIGHT_PIN);
+ 146:	c3 98       	cbi	0x18, 3	; 24
+ 148:	08 95       	ret
+
+0000014a <delay_ms>:
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 14a:	20 e8       	ldi	r18, 0x80	; 128
+ 14c:	37 e0       	ldi	r19, 0x07	; 7
+ 14e:	05 c0       	rjmp	.+10     	; 0x15a <delay_ms+0x10>
+ 150:	e2 2f       	mov	r30, r18
+ 152:	f3 2f       	mov	r31, r19
+ 154:	31 97       	sbiw	r30, 0x01	; 1
+ 156:	f1 f7       	brne	.-4      	; 0x154 <delay_ms+0xa>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 158:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 15a:	00 97       	sbiw	r24, 0x00	; 0
+ 15c:	c9 f7       	brne	.-14     	; 0x150 <delay_ms+0x6>
+                _delay_ms(0.96);
+                ms--;
+        }
+}
+ 15e:	08 95       	ret
+
+00000160 <flash_led>:
+
+void flash_led(unsigned char nr)
+{
+ 160:	40 e0       	ldi	r20, 0x00	; 0
+ 162:	50 e0       	ldi	r21, 0x00	; 0
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+ 164:	90 e0       	ldi	r25, 0x00	; 0
+ 166:	60 e8       	ldi	r22, 0x80	; 128
+ 168:	77 e0       	ldi	r23, 0x07	; 7
+ 16a:	16 c0       	rjmp	.+44     	; 0x198 <flash_led+0x38>
+    {
+        PORTD |= _BV(LED_PORTD_PIN);
+ 16c:	96 9a       	sbi	0x12, 6	; 18
+ 16e:	2c e3       	ldi	r18, 0x3C	; 60
+ 170:	30 e0       	ldi	r19, 0x00	; 0
+ 172:	e6 2f       	mov	r30, r22
+ 174:	f7 2f       	mov	r31, r23
+ 176:	31 97       	sbiw	r30, 0x01	; 1
+ 178:	f1 f7       	brne	.-4      	; 0x176 <flash_led+0x16>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 17a:	21 50       	subi	r18, 0x01	; 1
+ 17c:	30 40       	sbci	r19, 0x00	; 0
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 17e:	c9 f7       	brne	.-14     	; 0x172 <flash_led+0x12>
+
+    for ( n = 0; n < nr; n++ )
+    {
+        PORTD |= _BV(LED_PORTD_PIN);
+        delay_ms(60);
+        PORTD &= ~_BV(LED_PORTD_PIN);
+ 180:	96 98       	cbi	0x12, 6	; 18
+ 182:	2c e3       	ldi	r18, 0x3C	; 60
+ 184:	30 e0       	ldi	r19, 0x00	; 0
+ 186:	e6 2f       	mov	r30, r22
+ 188:	f7 2f       	mov	r31, r23
+ 18a:	31 97       	sbiw	r30, 0x01	; 1
+ 18c:	f1 f7       	brne	.-4      	; 0x18a <flash_led+0x2a>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 18e:	21 50       	subi	r18, 0x01	; 1
+ 190:	30 40       	sbci	r19, 0x00	; 0
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 192:	c9 f7       	brne	.-14     	; 0x186 <flash_led+0x26>
+
+void flash_led(unsigned char nr)
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+ 194:	4f 5f       	subi	r20, 0xFF	; 255
+ 196:	5f 4f       	sbci	r21, 0xFF	; 255
+ 198:	48 17       	cp	r20, r24
+ 19a:	59 07       	cpc	r21, r25
+ 19c:	3c f3       	brlt	.-50     	; 0x16c <flash_led+0xc>
+        PORTD |= _BV(LED_PORTD_PIN);
+        delay_ms(60);
+        PORTD &= ~_BV(LED_PORTD_PIN);
+        delay_ms(60);
+    }
+}
+ 19e:	08 95       	ret
+
+000001a0 <test_rectangle_program>:
+
+void test_rectangle_program(unsigned char size_x, unsigned char size_y)
+{
+ 1a0:	cf 92       	push	r12
+ 1a2:	df 92       	push	r13
+ 1a4:	ef 92       	push	r14
+ 1a6:	ff 92       	push	r15
+ 1a8:	0f 93       	push	r16
+ 1aa:	1f 93       	push	r17
+ 1ac:	cf 93       	push	r28
+ 1ae:	df 93       	push	r29
+ 1b0:	f6 2e       	mov	r15, r22
+ 1b2:	c0 e0       	ldi	r28, 0x00	; 0
+ 1b4:	d0 e0       	ldi	r29, 0x00	; 0
+    int n = 0;
+
+    for ( n = 0; n < size_x; n++ )
+ 1b6:	c8 2e       	mov	r12, r24
+ 1b8:	dd 24       	eor	r13, r13
+ 1ba:	00 e8       	ldi	r16, 0x80	; 128
+ 1bc:	17 e0       	ldi	r17, 0x07	; 7
+ 1be:	12 c0       	rjmp	.+36     	; 0x1e4 <test_rectangle_program+0x44>
+    {
+        motor_driver(MOTOR_X_STEPUP_CMD);
+ 1c0:	83 e0       	ldi	r24, 0x03	; 3
+ 1c2:	90 e0       	ldi	r25, 0x00	; 0
+ 1c4:	95 df       	rcall	.-214    	; 0xf0 <motor_driver>
+        delay_ms(motor_speed_delay);
+ 1c6:	80 91 8f 00 	lds	r24, 0x008F
+ 1ca:	90 e0       	ldi	r25, 0x00	; 0
+ 1cc:	05 c0       	rjmp	.+10     	; 0x1d8 <test_rectangle_program+0x38>
+ 1ce:	e0 2f       	mov	r30, r16
+ 1d0:	f1 2f       	mov	r31, r17
+ 1d2:	31 97       	sbiw	r30, 0x01	; 1
+ 1d4:	f1 f7       	brne	.-4      	; 0x1d2 <test_rectangle_program+0x32>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 1d6:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 1d8:	00 97       	sbiw	r24, 0x00	; 0
+ 1da:	c9 f7       	brne	.-14     	; 0x1ce <test_rectangle_program+0x2e>
+
+    for ( n = 0; n < size_x; n++ )
+    {
+        motor_driver(MOTOR_X_STEPUP_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+ 1dc:	82 e0       	ldi	r24, 0x02	; 2
+ 1de:	90 e0       	ldi	r25, 0x00	; 0
+ 1e0:	87 df       	rcall	.-242    	; 0xf0 <motor_driver>
+
+void test_rectangle_program(unsigned char size_x, unsigned char size_y)
+{
+    int n = 0;
+
+    for ( n = 0; n < size_x; n++ )
+ 1e2:	21 96       	adiw	r28, 0x01	; 1
+ 1e4:	cc 15       	cp	r28, r12
+ 1e6:	dd 05       	cpc	r29, r13
+ 1e8:	5c f3       	brlt	.-42     	; 0x1c0 <test_rectangle_program+0x20>
+ 1ea:	c0 e0       	ldi	r28, 0x00	; 0
+ 1ec:	d0 e0       	ldi	r29, 0x00	; 0
+        motor_driver(MOTOR_X_STEPUP_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+
+    for ( n = 0; n < size_y; n++ )
+ 1ee:	ef 2c       	mov	r14, r15
+ 1f0:	ff 24       	eor	r15, r15
+ 1f2:	00 e8       	ldi	r16, 0x80	; 128
+ 1f4:	17 e0       	ldi	r17, 0x07	; 7
+ 1f6:	12 c0       	rjmp	.+36     	; 0x21c <test_rectangle_program+0x7c>
+    {
+        motor_driver(MOTOR_Y_STEPUP_CMD);
+ 1f8:	80 e1       	ldi	r24, 0x10	; 16
+ 1fa:	90 e0       	ldi	r25, 0x00	; 0
+ 1fc:	79 df       	rcall	.-270    	; 0xf0 <motor_driver>
+        delay_ms(motor_speed_delay);
+ 1fe:	80 91 8f 00 	lds	r24, 0x008F
+ 202:	90 e0       	ldi	r25, 0x00	; 0
+ 204:	05 c0       	rjmp	.+10     	; 0x210 <test_rectangle_program+0x70>
+ 206:	e0 2f       	mov	r30, r16
+ 208:	f1 2f       	mov	r31, r17
+ 20a:	31 97       	sbiw	r30, 0x01	; 1
+ 20c:	f1 f7       	brne	.-4      	; 0x20a <test_rectangle_program+0x6a>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 20e:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 210:	00 97       	sbiw	r24, 0x00	; 0
+ 212:	c9 f7       	brne	.-14     	; 0x206 <test_rectangle_program+0x66>
+
+    for ( n = 0; n < size_y; n++ )
+    {
+        motor_driver(MOTOR_Y_STEPUP_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+ 214:	82 e0       	ldi	r24, 0x02	; 2
+ 216:	90 e0       	ldi	r25, 0x00	; 0
+ 218:	6b df       	rcall	.-298    	; 0xf0 <motor_driver>
+        motor_driver(MOTOR_X_STEPUP_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+
+    for ( n = 0; n < size_y; n++ )
+ 21a:	21 96       	adiw	r28, 0x01	; 1
+ 21c:	ce 15       	cp	r28, r14
+ 21e:	df 05       	cpc	r29, r15
+ 220:	5c f3       	brlt	.-42     	; 0x1f8 <test_rectangle_program+0x58>
+ 222:	c0 e0       	ldi	r28, 0x00	; 0
+ 224:	d0 e0       	ldi	r29, 0x00	; 0
+ 226:	00 e8       	ldi	r16, 0x80	; 128
+ 228:	17 e0       	ldi	r17, 0x07	; 7
+ 22a:	12 c0       	rjmp	.+36     	; 0x250 <test_rectangle_program+0xb0>
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+
+    for ( n = 0; n < size_x; n++ )
+    {
+        motor_driver(MOTOR_X_STEPDOWN_CMD);
+ 22c:	84 e0       	ldi	r24, 0x04	; 4
+ 22e:	90 e0       	ldi	r25, 0x00	; 0
+ 230:	5f df       	rcall	.-322    	; 0xf0 <motor_driver>
+        delay_ms(motor_speed_delay);
+ 232:	80 91 8f 00 	lds	r24, 0x008F
+ 236:	90 e0       	ldi	r25, 0x00	; 0
+ 238:	05 c0       	rjmp	.+10     	; 0x244 <test_rectangle_program+0xa4>
+ 23a:	e0 2f       	mov	r30, r16
+ 23c:	f1 2f       	mov	r31, r17
+ 23e:	31 97       	sbiw	r30, 0x01	; 1
+ 240:	f1 f7       	brne	.-4      	; 0x23e <test_rectangle_program+0x9e>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 242:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 244:	00 97       	sbiw	r24, 0x00	; 0
+ 246:	c9 f7       	brne	.-14     	; 0x23a <test_rectangle_program+0x9a>
+
+    for ( n = 0; n < size_x; n++ )
+    {
+        motor_driver(MOTOR_X_STEPDOWN_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+ 248:	82 e0       	ldi	r24, 0x02	; 2
+ 24a:	90 e0       	ldi	r25, 0x00	; 0
+ 24c:	51 df       	rcall	.-350    	; 0xf0 <motor_driver>
+        motor_driver(MOTOR_Y_STEPUP_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+
+    for ( n = 0; n < size_x; n++ )
+ 24e:	21 96       	adiw	r28, 0x01	; 1
+ 250:	cc 15       	cp	r28, r12
+ 252:	dd 05       	cpc	r29, r13
+ 254:	5c f3       	brlt	.-42     	; 0x22c <test_rectangle_program+0x8c>
+ 256:	c0 e0       	ldi	r28, 0x00	; 0
+ 258:	d0 e0       	ldi	r29, 0x00	; 0
+ 25a:	00 e8       	ldi	r16, 0x80	; 128
+ 25c:	17 e0       	ldi	r17, 0x07	; 7
+ 25e:	12 c0       	rjmp	.+36     	; 0x284 <test_rectangle_program+0xe4>
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+
+    for ( n = 0; n < size_y; n++ )
+    {
+        motor_driver(MOTOR_Y_STEPDOWN_CMD);
+ 260:	80 e2       	ldi	r24, 0x20	; 32
+ 262:	90 e0       	ldi	r25, 0x00	; 0
+ 264:	45 df       	rcall	.-374    	; 0xf0 <motor_driver>
+        delay_ms(motor_speed_delay);
+ 266:	80 91 8f 00 	lds	r24, 0x008F
+ 26a:	90 e0       	ldi	r25, 0x00	; 0
+ 26c:	05 c0       	rjmp	.+10     	; 0x278 <test_rectangle_program+0xd8>
+ 26e:	e0 2f       	mov	r30, r16
+ 270:	f1 2f       	mov	r31, r17
+ 272:	31 97       	sbiw	r30, 0x01	; 1
+ 274:	f1 f7       	brne	.-4      	; 0x272 <test_rectangle_program+0xd2>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 276:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 278:	00 97       	sbiw	r24, 0x00	; 0
+ 27a:	c9 f7       	brne	.-14     	; 0x26e <test_rectangle_program+0xce>
+
+    for ( n = 0; n < size_y; n++ )
+    {
+        motor_driver(MOTOR_Y_STEPDOWN_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+ 27c:	82 e0       	ldi	r24, 0x02	; 2
+ 27e:	90 e0       	ldi	r25, 0x00	; 0
+ 280:	37 df       	rcall	.-402    	; 0xf0 <motor_driver>
+        motor_driver(MOTOR_X_STEPDOWN_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+
+    for ( n = 0; n < size_y; n++ )
+ 282:	21 96       	adiw	r28, 0x01	; 1
+ 284:	ce 15       	cp	r28, r14
+ 286:	df 05       	cpc	r29, r15
+ 288:	5c f3       	brlt	.-42     	; 0x260 <test_rectangle_program+0xc0>
+    {
+        motor_driver(MOTOR_Y_STEPDOWN_CMD);
+        delay_ms(motor_speed_delay);
+        motor_driver(MOTOR_X_STOP_CMD);
+    }
+}
+ 28a:	df 91       	pop	r29
+ 28c:	cf 91       	pop	r28
+ 28e:	1f 91       	pop	r17
+ 290:	0f 91       	pop	r16
+ 292:	ff 90       	pop	r15
+ 294:	ef 90       	pop	r14
+ 296:	df 90       	pop	r13
+ 298:	cf 90       	pop	r12
+ 29a:	08 95       	ret
+
+0000029c <main>:
+
+int main(void)
+{
+ 29c:	df 92       	push	r13
+ 29e:	ef 92       	push	r14
+ 2a0:	ff 92       	push	r15
+ 2a2:	0f 93       	push	r16
+ 2a4:	1f 93       	push	r17
+ 2a6:	cf 93       	push	r28
+ 2a8:	df 93       	push	r29
+    int n = 0;
+
+    motor_speed_delay = MOTOR_STEP_DELAY_10;
+ 2aa:	8a e0       	ldi	r24, 0x0A	; 10
+ 2ac:	80 93 8f 00 	sts	0x008F, r24
+
+    motor_driver(MOTOR_XY_PORT_INIT_CMD);
+ 2b0:	81 e0       	ldi	r24, 0x01	; 1
+ 2b2:	90 e0       	ldi	r25, 0x00	; 0
+ 2b4:	1d df       	rcall	.-454    	; 0xf0 <motor_driver>
+
+    DDRD = 0xFF;             // wyjscia na PORTD
+ 2b6:	8f ef       	ldi	r24, 0xFF	; 255
+ 2b8:	81 bb       	out	0x11, r24	; 17
+
+    UBRR = VUBRR;            // ustawianie predkosci transmisji   
+ 2ba:	83 e3       	ldi	r24, 0x33	; 51
+ 2bc:	89 b9       	out	0x09, r24	; 9
+    UCR  = 1<<RXCIE | 1<<RXEN | 1<<TXCIE;   // zezwolenie na przerwania od odb nad i zezw. na odb
+ 2be:	80 ed       	ldi	r24, 0xD0	; 208
+ 2c0:	8a b9       	out	0x0a, r24	; 10
+
+    sei();                   // wlacz przerwania
+ 2c2:	78 94       	sei
+ 2c4:	80 e0       	ldi	r24, 0x00	; 0
+ 2c6:	90 e0       	ldi	r25, 0x00	; 0
+ 2c8:	02 c0       	rjmp	.+4      	; 0x2ce <main+0x32>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 2ca:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 2cc:	01 96       	adiw	r24, 0x01	; 1
+ 2ce:	e8 2f       	mov	r30, r24
+ 2d0:	f9 2f       	mov	r31, r25
+ 2d2:	ed 58       	subi	r30, 0x8D	; 141
+ 2d4:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2d6:	e0 81       	ld	r30, Z
+ 2d8:	a8 2f       	mov	r26, r24
+ 2da:	b9 2f       	mov	r27, r25
+ 2dc:	af 56       	subi	r26, 0x6F	; 111
+ 2de:	bf 4f       	sbci	r27, 0xFF	; 255
+ 2e0:	ee 23       	and	r30, r30
+ 2e2:	99 f7       	brne	.-26     	; 0x2ca <main+0x2e>
+      bufor[n]=dane[n];
+
+   bufor[n] = dane[n];      //dodaje na koniec bufora '\0'
+ 2e4:	1c 92       	st	X, r1
+   UCR      |= _BV(TXEN);   //wlacza nadajnik
+ 2e6:	53 9a       	sbi	0x0a, 3	; 10
+   UDR      = bufor[0];     //wysyla pierwszy znak reszta wysyla w obsludze przerwania
+ 2e8:	80 91 91 00 	lds	r24, 0x0091
+ 2ec:	8c b9       	out	0x0c, r24	; 12
+ 2ee:	80 e0       	ldi	r24, 0x00	; 0
+ 2f0:	90 e0       	ldi	r25, 0x00	; 0
+ 2f2:	02 c0       	rjmp	.+4      	; 0x2f8 <main+0x5c>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 2f4:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 2f6:	01 96       	adiw	r24, 0x01	; 1
+ 2f8:	e8 2f       	mov	r30, r24
+ 2fa:	f9 2f       	mov	r31, r25
+ 2fc:	ee 59       	subi	r30, 0x9E	; 158
+ 2fe:	ff 4f       	sbci	r31, 0xFF	; 255
+ 300:	e0 81       	ld	r30, Z
+ 302:	a8 2f       	mov	r26, r24
+ 304:	b9 2f       	mov	r27, r25
+ 306:	af 56       	subi	r26, 0x6F	; 111
+ 308:	bf 4f       	sbci	r27, 0xFF	; 255
+ 30a:	ee 23       	and	r30, r30
+ 30c:	99 f7       	brne	.-26     	; 0x2f4 <main+0x58>
+      bufor[n]=dane[n];
+
+   bufor[n] = dane[n];      //dodaje na koniec bufora '\0'
+ 30e:	1c 92       	st	X, r1
+   UCR      |= _BV(TXEN);   //wlacza nadajnik
+ 310:	53 9a       	sbi	0x0a, 3	; 10
+   UDR      = bufor[0];     //wysyla pierwszy znak reszta wysyla w obsludze przerwania
+ 312:	80 91 91 00 	lds	r24, 0x0091
+ 316:	8c b9       	out	0x0c, r24	; 12
+ 318:	80 e0       	ldi	r24, 0x00	; 0
+ 31a:	90 e0       	ldi	r25, 0x00	; 0
+ 31c:	02 c0       	rjmp	.+4      	; 0x322 <main+0x86>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 31e:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 320:	01 96       	adiw	r24, 0x01	; 1
+ 322:	e8 2f       	mov	r30, r24
+ 324:	f9 2f       	mov	r31, r25
+ 326:	ed 58       	subi	r30, 0x8D	; 141
+ 328:	ff 4f       	sbci	r31, 0xFF	; 255
+ 32a:	e0 81       	ld	r30, Z
+ 32c:	a8 2f       	mov	r26, r24
+ 32e:	b9 2f       	mov	r27, r25
+ 330:	af 56       	subi	r26, 0x6F	; 111
+ 332:	bf 4f       	sbci	r27, 0xFF	; 255
+ 334:	ee 23       	and	r30, r30
+ 336:	99 f7       	brne	.-26     	; 0x31e <main+0x82>
+      bufor[n]=dane[n];
+
+   bufor[n] = dane[n];      //dodaje na koniec bufora '\0'
+ 338:	1c 92       	st	X, r1
+   UCR      |= _BV(TXEN);   //wlacza nadajnik
+ 33a:	53 9a       	sbi	0x0a, 3	; 10
+   UDR      = bufor[0];     //wysyla pierwszy znak reszta wysyla w obsludze przerwania
+ 33c:	80 91 91 00 	lds	r24, 0x0091
+ 340:	8c b9       	out	0x0c, r24	; 12
+ 342:	c0 e8       	ldi	r28, 0x80	; 128
+ 344:	d7 e0       	ldi	r29, 0x07	; 7
+                send_to_pc(response_ok);
+*/
+                test_rectangle_program(10, 10);
+               break;
+            case CMD_SET_MOTOR_SPEED_5:
+                motor_speed_delay = MOTOR_STEP_DELAY_5;
+ 346:	15 e0       	ldi	r17, 0x05	; 5
+               break;
+            case CMD_SET_MOTOR_SPEED_7:
+                motor_speed_delay = MOTOR_STEP_DELAY_7;
+               break;
+            case CMD_SET_MOTOR_SPEED_10:
+                motor_speed_delay = MOTOR_STEP_DELAY_10;
+ 348:	0a e0       	ldi	r16, 0x0A	; 10
+               break;
+            case CMD_SET_MOTOR_SPEED_5:
+                motor_speed_delay = MOTOR_STEP_DELAY_5;
+               break;
+            case CMD_SET_MOTOR_SPEED_7:
+                motor_speed_delay = MOTOR_STEP_DELAY_7;
+ 34a:	27 e0       	ldi	r18, 0x07	; 7
+ 34c:	f2 2e       	mov	r15, r18
+               break;
+            case CMD_SET_MOTOR_SPEED_10:
+                motor_speed_delay = MOTOR_STEP_DELAY_10;
+               break;
+            case CMD_SET_MOTOR_SPEED_20:
+                motor_speed_delay = MOTOR_STEP_DELAY_20;
+ 34e:	94 e1       	ldi	r25, 0x14	; 20
+ 350:	e9 2e       	mov	r14, r25
+               break;
+            case CMD_SET_MOTOR_SPEED_50:
+                motor_speed_delay = MOTOR_STEP_DELAY_50;
+ 352:	82 e3       	ldi	r24, 0x32	; 50
+ 354:	d8 2e       	mov	r13, r24
+    send_to_pc(responde_start_msg);
+    send_to_pc(responde_crlf);
+
+    while(1)
+    {
+      if ( flagrx )
+ 356:	80 91 8e 00 	lds	r24, 0x008E
+ 35a:	88 23       	and	r24, r24
+ 35c:	e1 f3       	breq	.-8      	; 0x356 <main+0xba>
+      {
+         switch ( recived_cmd )
+ 35e:	80 91 90 00 	lds	r24, 0x0090
+ 362:	86 36       	cpi	r24, 0x66	; 102
+ 364:	09 f4       	brne	.+2      	; 0x368 <main+0xcc>
+ 366:	40 c1       	rjmp	.+640    	; 0x5e8 <main+0x34c>
+ 368:	87 36       	cpi	r24, 0x67	; 103
+ 36a:	fc f4       	brge	.+62     	; 0x3aa <main+0x10e>
+ 36c:	85 33       	cpi	r24, 0x35	; 53
+ 36e:	09 f4       	brne	.+2      	; 0x372 <main+0xd6>
+ 370:	e2 c1       	rjmp	.+964    	; 0x736 <main+0x49a>
+ 372:	86 33       	cpi	r24, 0x36	; 54
+ 374:	74 f4       	brge	.+28     	; 0x392 <main+0xf6>
+ 376:	82 33       	cpi	r24, 0x32	; 50
+ 378:	09 f4       	brne	.+2      	; 0x37c <main+0xe0>
+ 37a:	83 c1       	rjmp	.+774    	; 0x682 <main+0x3e6>
+ 37c:	83 33       	cpi	r24, 0x33	; 51
+ 37e:	1c f4       	brge	.+6      	; 0x386 <main+0xea>
+ 380:	81 33       	cpi	r24, 0x31	; 49
+ 382:	81 f5       	brne	.+96     	; 0x3e4 <main+0x148>
+ 384:	53 c1       	rjmp	.+678    	; 0x62c <main+0x390>
+ 386:	83 33       	cpi	r24, 0x33	; 51
+ 388:	09 f4       	brne	.+2      	; 0x38c <main+0xf0>
+ 38a:	a6 c1       	rjmp	.+844    	; 0x6d8 <main+0x43c>
+ 38c:	84 33       	cpi	r24, 0x34	; 52
+ 38e:	51 f5       	brne	.+84     	; 0x3e4 <main+0x148>
+ 390:	ce c1       	rjmp	.+924    	; 0x72e <main+0x492>
+ 392:	87 33       	cpi	r24, 0x37	; 55
+ 394:	09 f4       	brne	.+2      	; 0x398 <main+0xfc>
+ 396:	d5 c1       	rjmp	.+938    	; 0x742 <main+0x4a6>
+ 398:	87 33       	cpi	r24, 0x37	; 55
+ 39a:	0c f4       	brge	.+2      	; 0x39e <main+0x102>
+ 39c:	cf c1       	rjmp	.+926    	; 0x73c <main+0x4a0>
+ 39e:	88 33       	cpi	r24, 0x38	; 56
+ 3a0:	09 f4       	brne	.+2      	; 0x3a4 <main+0x108>
+ 3a2:	d2 c1       	rjmp	.+932    	; 0x748 <main+0x4ac>
+ 3a4:	89 33       	cpi	r24, 0x39	; 57
+ 3a6:	f1 f4       	brne	.+60     	; 0x3e4 <main+0x148>
+ 3a8:	d2 c1       	rjmp	.+932    	; 0x74e <main+0x4b2>
+ 3aa:	8b 36       	cpi	r24, 0x6B	; 107
+ 3ac:	09 f4       	brne	.+2      	; 0x3b0 <main+0x114>
+ 3ae:	94 c0       	rjmp	.+296    	; 0x4d8 <main+0x23c>
+ 3b0:	8c 36       	cpi	r24, 0x6C	; 108
+ 3b2:	64 f4       	brge	.+24     	; 0x3cc <main+0x130>
+ 3b4:	88 36       	cpi	r24, 0x68	; 104
+ 3b6:	09 f4       	brne	.+2      	; 0x3ba <main+0x11e>
+ 3b8:	f5 c0       	rjmp	.+490    	; 0x5a4 <main+0x308>
+ 3ba:	88 36       	cpi	r24, 0x68	; 104
+ 3bc:	0c f4       	brge	.+2      	; 0x3c0 <main+0x124>
+ 3be:	ae c0       	rjmp	.+348    	; 0x51c <main+0x280>
+ 3c0:	89 36       	cpi	r24, 0x69	; 105
+ 3c2:	09 f4       	brne	.+2      	; 0x3c6 <main+0x12a>
+ 3c4:	67 c0       	rjmp	.+206    	; 0x494 <main+0x1f8>
+ 3c6:	8a 36       	cpi	r24, 0x6A	; 106
+ 3c8:	69 f4       	brne	.+26     	; 0x3e4 <main+0x148>
+ 3ca:	52 c0       	rjmp	.+164    	; 0x470 <main+0x1d4>
+ 3cc:	84 37       	cpi	r24, 0x74	; 116
+ 3ce:	09 f4       	brne	.+2      	; 0x3d2 <main+0x136>
+ 3d0:	c7 c0       	rjmp	.+398    	; 0x560 <main+0x2c4>
+ 3d2:	85 37       	cpi	r24, 0x75	; 117
+ 3d4:	1c f4       	brge	.+6      	; 0x3dc <main+0x140>
+ 3d6:	8c 36       	cpi	r24, 0x6C	; 108
+ 3d8:	29 f4       	brne	.+10     	; 0x3e4 <main+0x148>
+ 3da:	3b c0       	rjmp	.+118    	; 0x452 <main+0x1b6>
+ 3dc:	88 37       	cpi	r24, 0x78	; 120
+ 3de:	29 f0       	breq	.+10     	; 0x3ea <main+0x14e>
+ 3e0:	89 37       	cpi	r24, 0x79	; 121
+ 3e2:	e9 f0       	breq	.+58     	; 0x41e <main+0x182>
+ 3e4:	80 e0       	ldi	r24, 0x00	; 0
+ 3e6:	90 e0       	ldi	r25, 0x00	; 0
+ 3e8:	b7 c1       	rjmp	.+878    	; 0x758 <main+0x4bc>
+ 3ea:	20 e0       	ldi	r18, 0x00	; 0
+ 3ec:	30 e0       	ldi	r19, 0x00	; 0
+         {
+            case CMD_SET_HOME_X:
+                for ( n = 0; n < 6; n++ )
+                {
+                    PORTD |= _BV(LED_PORTD_PIN);
+ 3ee:	96 9a       	sbi	0x12, 6	; 18
+ 3f0:	84 e6       	ldi	r24, 0x64	; 100
+ 3f2:	90 e0       	ldi	r25, 0x00	; 0
+ 3f4:	ec 2f       	mov	r30, r28
+ 3f6:	fd 2f       	mov	r31, r29
+ 3f8:	31 97       	sbiw	r30, 0x01	; 1
+ 3fa:	f1 f7       	brne	.-4      	; 0x3f8 <main+0x15c>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 3fc:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 3fe:	d1 f7       	brne	.-12     	; 0x3f4 <main+0x158>
+            case CMD_SET_HOME_X:
+                for ( n = 0; n < 6; n++ )
+                {
+                    PORTD |= _BV(LED_PORTD_PIN);
+                    delay_ms(100);
+                    PORTD &= ~_BV(LED_PORTD_PIN);
+ 400:	96 98       	cbi	0x12, 6	; 18
+ 402:	84 e6       	ldi	r24, 0x64	; 100
+ 404:	90 e0       	ldi	r25, 0x00	; 0
+ 406:	ec 2f       	mov	r30, r28
+ 408:	fd 2f       	mov	r31, r29
+ 40a:	31 97       	sbiw	r30, 0x01	; 1
+ 40c:	f1 f7       	brne	.-4      	; 0x40a <main+0x16e>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 40e:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 410:	d1 f7       	brne	.-12     	; 0x406 <main+0x16a>
+      if ( flagrx )
+      {
+         switch ( recived_cmd )
+         {
+            case CMD_SET_HOME_X:
+                for ( n = 0; n < 6; n++ )
+ 412:	2f 5f       	subi	r18, 0xFF	; 255
+ 414:	3f 4f       	sbci	r19, 0xFF	; 255
+ 416:	26 30       	cpi	r18, 0x06	; 6
+ 418:	31 05       	cpc	r19, r1
+ 41a:	49 f7       	brne	.-46     	; 0x3ee <main+0x152>
+ 41c:	ad c1       	rjmp	.+858    	; 0x778 <main+0x4dc>
+ 41e:	20 e0       	ldi	r18, 0x00	; 0
+ 420:	30 e0       	ldi	r19, 0x00	; 0
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_HOME_Y:
+                for ( n = 0; n < 3; n++ )
+                {
+                    PORTD |= _BV(LED_PORTD_PIN);
+ 422:	96 9a       	sbi	0x12, 6	; 18
+ 424:	84 e6       	ldi	r24, 0x64	; 100
+ 426:	90 e0       	ldi	r25, 0x00	; 0
+ 428:	ec 2f       	mov	r30, r28
+ 42a:	fd 2f       	mov	r31, r29
+ 42c:	31 97       	sbiw	r30, 0x01	; 1
+ 42e:	f1 f7       	brne	.-4      	; 0x42c <main+0x190>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 430:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 432:	d1 f7       	brne	.-12     	; 0x428 <main+0x18c>
+            case CMD_SET_HOME_Y:
+                for ( n = 0; n < 3; n++ )
+                {
+                    PORTD |= _BV(LED_PORTD_PIN);
+                    delay_ms(100);
+                    PORTD &= ~_BV(LED_PORTD_PIN);
+ 434:	96 98       	cbi	0x12, 6	; 18
+ 436:	84 e6       	ldi	r24, 0x64	; 100
+ 438:	90 e0       	ldi	r25, 0x00	; 0
+ 43a:	ec 2f       	mov	r30, r28
+ 43c:	fd 2f       	mov	r31, r29
+ 43e:	31 97       	sbiw	r30, 0x01	; 1
+ 440:	f1 f7       	brne	.-4      	; 0x43e <main+0x1a2>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 442:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 444:	d1 f7       	brne	.-12     	; 0x43a <main+0x19e>
+                    delay_ms(100);
+                }
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_HOME_Y:
+                for ( n = 0; n < 3; n++ )
+ 446:	2f 5f       	subi	r18, 0xFF	; 255
+ 448:	3f 4f       	sbci	r19, 0xFF	; 255
+ 44a:	23 30       	cpi	r18, 0x03	; 3
+ 44c:	31 05       	cpc	r19, r1
+ 44e:	49 f7       	brne	.-46     	; 0x422 <main+0x186>
+ 450:	93 c1       	rjmp	.+806    	; 0x778 <main+0x4dc>
+                    delay_ms(100);
+                }
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_X:
+                motor_driver(MOTOR_X_STEPUP_CMD);
+ 452:	83 e0       	ldi	r24, 0x03	; 3
+ 454:	90 e0       	ldi	r25, 0x00	; 0
+ 456:	4c de       	rcall	.-872    	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 458:	80 91 8f 00 	lds	r24, 0x008F
+ 45c:	90 e0       	ldi	r25, 0x00	; 0
+ 45e:	05 c0       	rjmp	.+10     	; 0x46a <main+0x1ce>
+ 460:	ec 2f       	mov	r30, r28
+ 462:	fd 2f       	mov	r31, r29
+ 464:	31 97       	sbiw	r30, 0x01	; 1
+ 466:	f1 f7       	brne	.-4      	; 0x464 <main+0x1c8>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 468:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 46a:	00 97       	sbiw	r24, 0x00	; 0
+ 46c:	c9 f7       	brne	.-14     	; 0x460 <main+0x1c4>
+ 46e:	0e c0       	rjmp	.+28     	; 0x48c <main+0x1f0>
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_X_STOP_CMD);
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_X:
+                motor_driver(MOTOR_X_STEPDOWN_CMD);
+ 470:	84 e0       	ldi	r24, 0x04	; 4
+ 472:	90 e0       	ldi	r25, 0x00	; 0
+ 474:	3d de       	rcall	.-902    	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 476:	80 91 8f 00 	lds	r24, 0x008F
+ 47a:	90 e0       	ldi	r25, 0x00	; 0
+ 47c:	05 c0       	rjmp	.+10     	; 0x488 <main+0x1ec>
+ 47e:	ec 2f       	mov	r30, r28
+ 480:	fd 2f       	mov	r31, r29
+ 482:	31 97       	sbiw	r30, 0x01	; 1
+ 484:	f1 f7       	brne	.-4      	; 0x482 <main+0x1e6>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 486:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 488:	00 97       	sbiw	r24, 0x00	; 0
+ 48a:	c9 f7       	brne	.-14     	; 0x47e <main+0x1e2>
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_X:
+                motor_driver(MOTOR_X_STEPDOWN_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_X_STOP_CMD);
+ 48c:	82 e0       	ldi	r24, 0x02	; 2
+ 48e:	90 e0       	ldi	r25, 0x00	; 0
+ 490:	2f de       	rcall	.-930    	; 0xf0 <motor_driver>
+ 492:	72 c1       	rjmp	.+740    	; 0x778 <main+0x4dc>
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_Y:
+                motor_driver(MOTOR_Y_STEPUP_CMD);
+ 494:	80 e1       	ldi	r24, 0x10	; 16
+ 496:	90 e0       	ldi	r25, 0x00	; 0
+ 498:	2b de       	rcall	.-938    	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 49a:	80 91 8f 00 	lds	r24, 0x008F
+ 49e:	90 e0       	ldi	r25, 0x00	; 0
+ 4a0:	05 c0       	rjmp	.+10     	; 0x4ac <main+0x210>
+ 4a2:	ec 2f       	mov	r30, r28
+ 4a4:	fd 2f       	mov	r31, r29
+ 4a6:	31 97       	sbiw	r30, 0x01	; 1
+ 4a8:	f1 f7       	brne	.-4      	; 0x4a6 <main+0x20a>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 4aa:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 4ac:	00 97       	sbiw	r24, 0x00	; 0
+ 4ae:	c9 f7       	brne	.-14     	; 0x4a2 <main+0x206>
+//                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_Y:
+                motor_driver(MOTOR_Y_STEPUP_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+ 4b0:	88 e0       	ldi	r24, 0x08	; 8
+ 4b2:	90 e0       	ldi	r25, 0x00	; 0
+ 4b4:	1d de       	rcall	.-966    	; 0xf0 <motor_driver>
+ 4b6:	80 e0       	ldi	r24, 0x00	; 0
+ 4b8:	90 e0       	ldi	r25, 0x00	; 0
+ 4ba:	02 c0       	rjmp	.+4      	; 0x4c0 <main+0x224>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 4bc:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 4be:	01 96       	adiw	r24, 0x01	; 1
+ 4c0:	e8 2f       	mov	r30, r24
+ 4c2:	f9 2f       	mov	r31, r25
+ 4c4:	ea 58       	subi	r30, 0x8A	; 138
+ 4c6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 4c8:	e0 81       	ld	r30, Z
+ 4ca:	a8 2f       	mov	r26, r24
+ 4cc:	b9 2f       	mov	r27, r25
+ 4ce:	af 56       	subi	r26, 0x6F	; 111
+ 4d0:	bf 4f       	sbci	r27, 0xFF	; 255
+ 4d2:	ee 23       	and	r30, r30
+ 4d4:	99 f7       	brne	.-26     	; 0x4bc <main+0x220>
+ 4d6:	4b c1       	rjmp	.+662    	; 0x76e <main+0x4d2>
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_Y:
+                motor_driver(MOTOR_Y_STEPDOWN_CMD);
+ 4d8:	80 e2       	ldi	r24, 0x20	; 32
+ 4da:	90 e0       	ldi	r25, 0x00	; 0
+ 4dc:	09 de       	rcall	.-1006   	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 4de:	80 91 8f 00 	lds	r24, 0x008F
+ 4e2:	90 e0       	ldi	r25, 0x00	; 0
+ 4e4:	05 c0       	rjmp	.+10     	; 0x4f0 <main+0x254>
+ 4e6:	ec 2f       	mov	r30, r28
+ 4e8:	fd 2f       	mov	r31, r29
+ 4ea:	31 97       	sbiw	r30, 0x01	; 1
+ 4ec:	f1 f7       	brne	.-4      	; 0x4ea <main+0x24e>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 4ee:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 4f0:	00 97       	sbiw	r24, 0x00	; 0
+ 4f2:	c9 f7       	brne	.-14     	; 0x4e6 <main+0x24a>
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_Y:
+                motor_driver(MOTOR_Y_STEPDOWN_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+ 4f4:	88 e0       	ldi	r24, 0x08	; 8
+ 4f6:	90 e0       	ldi	r25, 0x00	; 0
+ 4f8:	fb dd       	rcall	.-1034   	; 0xf0 <motor_driver>
+ 4fa:	80 e0       	ldi	r24, 0x00	; 0
+ 4fc:	90 e0       	ldi	r25, 0x00	; 0
+ 4fe:	02 c0       	rjmp	.+4      	; 0x504 <main+0x268>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 500:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 502:	01 96       	adiw	r24, 0x01	; 1
+ 504:	e8 2f       	mov	r30, r24
+ 506:	f9 2f       	mov	r31, r25
+ 508:	ea 58       	subi	r30, 0x8A	; 138
+ 50a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 50c:	e0 81       	ld	r30, Z
+ 50e:	a8 2f       	mov	r26, r24
+ 510:	b9 2f       	mov	r27, r25
+ 512:	af 56       	subi	r26, 0x6F	; 111
+ 514:	bf 4f       	sbci	r27, 0xFF	; 255
+ 516:	ee 23       	and	r30, r30
+ 518:	99 f7       	brne	.-26     	; 0x500 <main+0x264>
+ 51a:	29 c1       	rjmp	.+594    	; 0x76e <main+0x4d2>
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_X_SPEED:
+                motor_driver(MOTOR_X_STEPDOWN_CMD);
+ 51c:	84 e0       	ldi	r24, 0x04	; 4
+ 51e:	90 e0       	ldi	r25, 0x00	; 0
+ 520:	e7 dd       	rcall	.-1074   	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 522:	80 91 8f 00 	lds	r24, 0x008F
+ 526:	90 e0       	ldi	r25, 0x00	; 0
+ 528:	05 c0       	rjmp	.+10     	; 0x534 <main+0x298>
+ 52a:	ec 2f       	mov	r30, r28
+ 52c:	fd 2f       	mov	r31, r29
+ 52e:	31 97       	sbiw	r30, 0x01	; 1
+ 530:	f1 f7       	brne	.-4      	; 0x52e <main+0x292>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 532:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 534:	00 97       	sbiw	r24, 0x00	; 0
+ 536:	c9 f7       	brne	.-14     	; 0x52a <main+0x28e>
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_X_SPEED:
+                motor_driver(MOTOR_X_STEPDOWN_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_X_STOP_CMD);
+ 538:	82 e0       	ldi	r24, 0x02	; 2
+ 53a:	90 e0       	ldi	r25, 0x00	; 0
+ 53c:	d9 dd       	rcall	.-1102   	; 0xf0 <motor_driver>
+ 53e:	80 e0       	ldi	r24, 0x00	; 0
+ 540:	90 e0       	ldi	r25, 0x00	; 0
+ 542:	02 c0       	rjmp	.+4      	; 0x548 <main+0x2ac>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 544:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 546:	01 96       	adiw	r24, 0x01	; 1
+ 548:	e8 2f       	mov	r30, r24
+ 54a:	f9 2f       	mov	r31, r25
+ 54c:	ea 58       	subi	r30, 0x8A	; 138
+ 54e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 550:	e0 81       	ld	r30, Z
+ 552:	a8 2f       	mov	r26, r24
+ 554:	b9 2f       	mov	r27, r25
+ 556:	af 56       	subi	r26, 0x6F	; 111
+ 558:	bf 4f       	sbci	r27, 0xFF	; 255
+ 55a:	ee 23       	and	r30, r30
+ 55c:	99 f7       	brne	.-26     	; 0x544 <main+0x2a8>
+ 55e:	07 c1       	rjmp	.+526    	; 0x76e <main+0x4d2>
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_X_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_X_SPEED:
+                motor_driver(MOTOR_X_STEPUP_CMD);
+ 560:	83 e0       	ldi	r24, 0x03	; 3
+ 562:	90 e0       	ldi	r25, 0x00	; 0
+ 564:	c5 dd       	rcall	.-1142   	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 566:	80 91 8f 00 	lds	r24, 0x008F
+ 56a:	90 e0       	ldi	r25, 0x00	; 0
+ 56c:	05 c0       	rjmp	.+10     	; 0x578 <main+0x2dc>
+ 56e:	ec 2f       	mov	r30, r28
+ 570:	fd 2f       	mov	r31, r29
+ 572:	31 97       	sbiw	r30, 0x01	; 1
+ 574:	f1 f7       	brne	.-4      	; 0x572 <main+0x2d6>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 576:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 578:	00 97       	sbiw	r24, 0x00	; 0
+ 57a:	c9 f7       	brne	.-14     	; 0x56e <main+0x2d2>
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_X_SPEED:
+                motor_driver(MOTOR_X_STEPUP_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_X_STOP_CMD);
+ 57c:	82 e0       	ldi	r24, 0x02	; 2
+ 57e:	90 e0       	ldi	r25, 0x00	; 0
+ 580:	b7 dd       	rcall	.-1170   	; 0xf0 <motor_driver>
+ 582:	80 e0       	ldi	r24, 0x00	; 0
+ 584:	90 e0       	ldi	r25, 0x00	; 0
+ 586:	02 c0       	rjmp	.+4      	; 0x58c <main+0x2f0>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 588:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 58a:	01 96       	adiw	r24, 0x01	; 1
+ 58c:	e8 2f       	mov	r30, r24
+ 58e:	f9 2f       	mov	r31, r25
+ 590:	ea 58       	subi	r30, 0x8A	; 138
+ 592:	ff 4f       	sbci	r31, 0xFF	; 255
+ 594:	e0 81       	ld	r30, Z
+ 596:	a8 2f       	mov	r26, r24
+ 598:	b9 2f       	mov	r27, r25
+ 59a:	af 56       	subi	r26, 0x6F	; 111
+ 59c:	bf 4f       	sbci	r27, 0xFF	; 255
+ 59e:	ee 23       	and	r30, r30
+ 5a0:	99 f7       	brne	.-26     	; 0x588 <main+0x2ec>
+ 5a2:	e5 c0       	rjmp	.+458    	; 0x76e <main+0x4d2>
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_X_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_Y_SPEED:
+                motor_driver(MOTOR_Y_STEPDOWN_CMD);
+ 5a4:	80 e2       	ldi	r24, 0x20	; 32
+ 5a6:	90 e0       	ldi	r25, 0x00	; 0
+ 5a8:	a3 dd       	rcall	.-1210   	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 5aa:	80 91 8f 00 	lds	r24, 0x008F
+ 5ae:	90 e0       	ldi	r25, 0x00	; 0
+ 5b0:	05 c0       	rjmp	.+10     	; 0x5bc <main+0x320>
+ 5b2:	ec 2f       	mov	r30, r28
+ 5b4:	fd 2f       	mov	r31, r29
+ 5b6:	31 97       	sbiw	r30, 0x01	; 1
+ 5b8:	f1 f7       	brne	.-4      	; 0x5b6 <main+0x31a>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 5ba:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 5bc:	00 97       	sbiw	r24, 0x00	; 0
+ 5be:	c9 f7       	brne	.-14     	; 0x5b2 <main+0x316>
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_DOWN_Y_SPEED:
+                motor_driver(MOTOR_Y_STEPDOWN_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+ 5c0:	88 e0       	ldi	r24, 0x08	; 8
+ 5c2:	90 e0       	ldi	r25, 0x00	; 0
+ 5c4:	95 dd       	rcall	.-1238   	; 0xf0 <motor_driver>
+ 5c6:	80 e0       	ldi	r24, 0x00	; 0
+ 5c8:	90 e0       	ldi	r25, 0x00	; 0
+ 5ca:	02 c0       	rjmp	.+4      	; 0x5d0 <main+0x334>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 5cc:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 5ce:	01 96       	adiw	r24, 0x01	; 1
+ 5d0:	e8 2f       	mov	r30, r24
+ 5d2:	f9 2f       	mov	r31, r25
+ 5d4:	ea 58       	subi	r30, 0x8A	; 138
+ 5d6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5d8:	e0 81       	ld	r30, Z
+ 5da:	a8 2f       	mov	r26, r24
+ 5dc:	b9 2f       	mov	r27, r25
+ 5de:	af 56       	subi	r26, 0x6F	; 111
+ 5e0:	bf 4f       	sbci	r27, 0xFF	; 255
+ 5e2:	ee 23       	and	r30, r30
+ 5e4:	99 f7       	brne	.-26     	; 0x5cc <main+0x330>
+ 5e6:	c3 c0       	rjmp	.+390    	; 0x76e <main+0x4d2>
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_Y_SPEED:
+                motor_driver(MOTOR_Y_STEPUP_CMD);
+ 5e8:	80 e1       	ldi	r24, 0x10	; 16
+ 5ea:	90 e0       	ldi	r25, 0x00	; 0
+ 5ec:	81 dd       	rcall	.-1278   	; 0xf0 <motor_driver>
+                delay_ms(motor_speed_delay);
+ 5ee:	80 91 8f 00 	lds	r24, 0x008F
+ 5f2:	90 e0       	ldi	r25, 0x00	; 0
+ 5f4:	05 c0       	rjmp	.+10     	; 0x600 <main+0x364>
+ 5f6:	ec 2f       	mov	r30, r28
+ 5f8:	fd 2f       	mov	r31, r29
+ 5fa:	31 97       	sbiw	r30, 0x01	; 1
+ 5fc:	f1 f7       	brne	.-4      	; 0x5fa <main+0x35e>
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+                _delay_ms(0.96);
+                ms--;
+ 5fe:	01 97       	sbiw	r24, 0x01	; 1
+/* delay for a minimum of <ms> */
+{
+        // we use a calibrated macro. This is more
+        // accurate and not so much compiler dependent
+        // as self made code.
+        while(ms){
+ 600:	00 97       	sbiw	r24, 0x00	; 0
+ 602:	c9 f7       	brne	.-14     	; 0x5f6 <main+0x35a>
+                send_to_pc(response_ok);
+               break;
+            case CMD_SET_UP_Y_SPEED:
+                motor_driver(MOTOR_Y_STEPUP_CMD);
+                delay_ms(motor_speed_delay);
+                motor_driver(MOTOR_Y_STOP_CMD);
+ 604:	88 e0       	ldi	r24, 0x08	; 8
+ 606:	90 e0       	ldi	r25, 0x00	; 0
+ 608:	73 dd       	rcall	.-1306   	; 0xf0 <motor_driver>
+ 60a:	80 e0       	ldi	r24, 0x00	; 0
+ 60c:	90 e0       	ldi	r25, 0x00	; 0
+ 60e:	02 c0       	rjmp	.+4      	; 0x614 <main+0x378>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 610:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 612:	01 96       	adiw	r24, 0x01	; 1
+ 614:	e8 2f       	mov	r30, r24
+ 616:	f9 2f       	mov	r31, r25
+ 618:	ea 58       	subi	r30, 0x8A	; 138
+ 61a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 61c:	e0 81       	ld	r30, Z
+ 61e:	a8 2f       	mov	r26, r24
+ 620:	b9 2f       	mov	r27, r25
+ 622:	af 56       	subi	r26, 0x6F	; 111
+ 624:	bf 4f       	sbci	r27, 0xFF	; 255
+ 626:	ee 23       	and	r30, r30
+ 628:	99 f7       	brne	.-26     	; 0x610 <main+0x374>
+ 62a:	a1 c0       	rjmp	.+322    	; 0x76e <main+0x4d2>
+                motor_driver(MOTOR_Y_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_TEST_1:
+                //flash_led(1);
+                motor_driver(MOTOR_X_STEPDOWN_CMD);
+ 62c:	84 e0       	ldi	r24, 0x04	; 4
+ 62e:	90 e0       	ldi	r25, 0x00	; 0
+ 630:	5f dd       	rcall	.-1346   	; 0xf0 <motor_driver>
+ 632:	8c 2f       	mov	r24, r28
+ 634:	9d 2f       	mov	r25, r29
+ 636:	01 97       	sbiw	r24, 0x01	; 1
+ 638:	f1 f7       	brne	.-4      	; 0x636 <main+0x39a>
+ 63a:	8c 2f       	mov	r24, r28
+ 63c:	9d 2f       	mov	r25, r29
+ 63e:	01 97       	sbiw	r24, 0x01	; 1
+ 640:	f1 f7       	brne	.-4      	; 0x63e <main+0x3a2>
+ 642:	8c 2f       	mov	r24, r28
+ 644:	9d 2f       	mov	r25, r29
+ 646:	01 97       	sbiw	r24, 0x01	; 1
+ 648:	f1 f7       	brne	.-4      	; 0x646 <main+0x3aa>
+ 64a:	8c 2f       	mov	r24, r28
+ 64c:	9d 2f       	mov	r25, r29
+ 64e:	01 97       	sbiw	r24, 0x01	; 1
+ 650:	f1 f7       	brne	.-4      	; 0x64e <main+0x3b2>
+ 652:	8c 2f       	mov	r24, r28
+ 654:	9d 2f       	mov	r25, r29
+ 656:	01 97       	sbiw	r24, 0x01	; 1
+ 658:	f1 f7       	brne	.-4      	; 0x656 <main+0x3ba>
+                delay_ms(5);
+                motor_driver(MOTOR_X_STOP_CMD);
+ 65a:	82 e0       	ldi	r24, 0x02	; 2
+ 65c:	90 e0       	ldi	r25, 0x00	; 0
+ 65e:	48 dd       	rcall	.-1392   	; 0xf0 <motor_driver>
+ 660:	80 e0       	ldi	r24, 0x00	; 0
+ 662:	90 e0       	ldi	r25, 0x00	; 0
+ 664:	02 c0       	rjmp	.+4      	; 0x66a <main+0x3ce>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 666:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 668:	01 96       	adiw	r24, 0x01	; 1
+ 66a:	e8 2f       	mov	r30, r24
+ 66c:	f9 2f       	mov	r31, r25
+ 66e:	ea 58       	subi	r30, 0x8A	; 138
+ 670:	ff 4f       	sbci	r31, 0xFF	; 255
+ 672:	e0 81       	ld	r30, Z
+ 674:	a8 2f       	mov	r26, r24
+ 676:	b9 2f       	mov	r27, r25
+ 678:	af 56       	subi	r26, 0x6F	; 111
+ 67a:	bf 4f       	sbci	r27, 0xFF	; 255
+ 67c:	ee 23       	and	r30, r30
+ 67e:	99 f7       	brne	.-26     	; 0x666 <main+0x3ca>
+ 680:	76 c0       	rjmp	.+236    	; 0x76e <main+0x4d2>
+                motor_driver(MOTOR_X_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_TEST_2:
+                //flash_led(2);
+                motor_driver(MOTOR_X_STEPUP_CMD);
+ 682:	83 e0       	ldi	r24, 0x03	; 3
+ 684:	90 e0       	ldi	r25, 0x00	; 0
+ 686:	34 dd       	rcall	.-1432   	; 0xf0 <motor_driver>
+ 688:	8c 2f       	mov	r24, r28
+ 68a:	9d 2f       	mov	r25, r29
+ 68c:	01 97       	sbiw	r24, 0x01	; 1
+ 68e:	f1 f7       	brne	.-4      	; 0x68c <main+0x3f0>
+ 690:	8c 2f       	mov	r24, r28
+ 692:	9d 2f       	mov	r25, r29
+ 694:	01 97       	sbiw	r24, 0x01	; 1
+ 696:	f1 f7       	brne	.-4      	; 0x694 <main+0x3f8>
+ 698:	8c 2f       	mov	r24, r28
+ 69a:	9d 2f       	mov	r25, r29
+ 69c:	01 97       	sbiw	r24, 0x01	; 1
+ 69e:	f1 f7       	brne	.-4      	; 0x69c <main+0x400>
+ 6a0:	8c 2f       	mov	r24, r28
+ 6a2:	9d 2f       	mov	r25, r29
+ 6a4:	01 97       	sbiw	r24, 0x01	; 1
+ 6a6:	f1 f7       	brne	.-4      	; 0x6a4 <main+0x408>
+ 6a8:	8c 2f       	mov	r24, r28
+ 6aa:	9d 2f       	mov	r25, r29
+ 6ac:	01 97       	sbiw	r24, 0x01	; 1
+ 6ae:	f1 f7       	brne	.-4      	; 0x6ac <main+0x410>
+                delay_ms(5);
+                motor_driver(MOTOR_X_STOP_CMD);
+ 6b0:	82 e0       	ldi	r24, 0x02	; 2
+ 6b2:	90 e0       	ldi	r25, 0x00	; 0
+ 6b4:	1d dd       	rcall	.-1478   	; 0xf0 <motor_driver>
+ 6b6:	80 e0       	ldi	r24, 0x00	; 0
+ 6b8:	90 e0       	ldi	r25, 0x00	; 0
+ 6ba:	02 c0       	rjmp	.+4      	; 0x6c0 <main+0x424>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 6bc:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 6be:	01 96       	adiw	r24, 0x01	; 1
+ 6c0:	e8 2f       	mov	r30, r24
+ 6c2:	f9 2f       	mov	r31, r25
+ 6c4:	ea 58       	subi	r30, 0x8A	; 138
+ 6c6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6c8:	e0 81       	ld	r30, Z
+ 6ca:	a8 2f       	mov	r26, r24
+ 6cc:	b9 2f       	mov	r27, r25
+ 6ce:	af 56       	subi	r26, 0x6F	; 111
+ 6d0:	bf 4f       	sbci	r27, 0xFF	; 255
+ 6d2:	ee 23       	and	r30, r30
+ 6d4:	99 f7       	brne	.-26     	; 0x6bc <main+0x420>
+ 6d6:	4b c0       	rjmp	.+150    	; 0x76e <main+0x4d2>
+                motor_driver(MOTOR_X_STOP_CMD);
+                send_to_pc(response_ok);
+               break;
+            case CMD_TEST_3:
+                //flash_led(3);
+                motor_driver(MOTOR_Y_STEPDOWN_CMD);
+ 6d8:	80 e2       	ldi	r24, 0x20	; 32
+ 6da:	90 e0       	ldi	r25, 0x00	; 0
+ 6dc:	09 dd       	rcall	.-1518   	; 0xf0 <motor_driver>
+ 6de:	8c 2f       	mov	r24, r28
+ 6e0:	9d 2f       	mov	r25, r29
+ 6e2:	01 97       	sbiw	r24, 0x01	; 1
+ 6e4:	f1 f7       	brne	.-4      	; 0x6e2 <main+0x446>
+ 6e6:	8c 2f       	mov	r24, r28
+ 6e8:	9d 2f       	mov	r25, r29
+ 6ea:	01 97       	sbiw	r24, 0x01	; 1
+ 6ec:	f1 f7       	brne	.-4      	; 0x6ea <main+0x44e>
+ 6ee:	8c 2f       	mov	r24, r28
+ 6f0:	9d 2f       	mov	r25, r29
+ 6f2:	01 97       	sbiw	r24, 0x01	; 1
+ 6f4:	f1 f7       	brne	.-4      	; 0x6f2 <main+0x456>
+ 6f6:	8c 2f       	mov	r24, r28
+ 6f8:	9d 2f       	mov	r25, r29
+ 6fa:	01 97       	sbiw	r24, 0x01	; 1
+ 6fc:	f1 f7       	brne	.-4      	; 0x6fa <main+0x45e>
+ 6fe:	8c 2f       	mov	r24, r28
+ 700:	9d 2f       	mov	r25, r29
+ 702:	01 97       	sbiw	r24, 0x01	; 1
+ 704:	f1 f7       	brne	.-4      	; 0x702 <main+0x466>
+                delay_ms(5);
+                motor_driver(MOTOR_Y_STOP_CMD);
+ 706:	88 e0       	ldi	r24, 0x08	; 8
+ 708:	90 e0       	ldi	r25, 0x00	; 0
+ 70a:	f2 dc       	rcall	.-1564   	; 0xf0 <motor_driver>
+ 70c:	80 e0       	ldi	r24, 0x00	; 0
+ 70e:	90 e0       	ldi	r25, 0x00	; 0
+ 710:	02 c0       	rjmp	.+4      	; 0x716 <main+0x47a>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 712:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 714:	01 96       	adiw	r24, 0x01	; 1
+ 716:	e8 2f       	mov	r30, r24
+ 718:	f9 2f       	mov	r31, r25
+ 71a:	ea 58       	subi	r30, 0x8A	; 138
+ 71c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 71e:	e0 81       	ld	r30, Z
+ 720:	a8 2f       	mov	r26, r24
+ 722:	b9 2f       	mov	r27, r25
+ 724:	af 56       	subi	r26, 0x6F	; 111
+ 726:	bf 4f       	sbci	r27, 0xFF	; 255
+ 728:	ee 23       	and	r30, r30
+ 72a:	99 f7       	brne	.-26     	; 0x712 <main+0x476>
+ 72c:	20 c0       	rjmp	.+64     	; 0x76e <main+0x4d2>
+                motor_driver(MOTOR_Y_STEPUP_CMD);
+                delay_ms(5);
+                motor_driver(MOTOR_Y_STOP_CMD);
+                send_to_pc(response_ok);
+*/
+                test_rectangle_program(10, 10);
+ 72e:	8a e0       	ldi	r24, 0x0A	; 10
+ 730:	6a e0       	ldi	r22, 0x0A	; 10
+ 732:	36 dd       	rcall	.-1428   	; 0x1a0 <test_rectangle_program>
+ 734:	21 c0       	rjmp	.+66     	; 0x778 <main+0x4dc>
+               break;
+            case CMD_SET_MOTOR_SPEED_5:
+                motor_speed_delay = MOTOR_STEP_DELAY_5;
+ 736:	10 93 8f 00 	sts	0x008F, r17
+ 73a:	1e c0       	rjmp	.+60     	; 0x778 <main+0x4dc>
+               break;
+            case CMD_SET_MOTOR_SPEED_7:
+                motor_speed_delay = MOTOR_STEP_DELAY_7;
+ 73c:	f0 92 8f 00 	sts	0x008F, r15
+ 740:	1b c0       	rjmp	.+54     	; 0x778 <main+0x4dc>
+               break;
+            case CMD_SET_MOTOR_SPEED_10:
+                motor_speed_delay = MOTOR_STEP_DELAY_10;
+ 742:	00 93 8f 00 	sts	0x008F, r16
+ 746:	18 c0       	rjmp	.+48     	; 0x778 <main+0x4dc>
+               break;
+            case CMD_SET_MOTOR_SPEED_20:
+                motor_speed_delay = MOTOR_STEP_DELAY_20;
+ 748:	e0 92 8f 00 	sts	0x008F, r14
+ 74c:	15 c0       	rjmp	.+42     	; 0x778 <main+0x4dc>
+               break;
+            case CMD_SET_MOTOR_SPEED_50:
+                motor_speed_delay = MOTOR_STEP_DELAY_50;
+ 74e:	d0 92 8f 00 	sts	0x008F, r13
+ 752:	12 c0       	rjmp	.+36     	; 0x778 <main+0x4dc>
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+      bufor[n]=dane[n];
+ 754:	ec 93       	st	X, r30
+/////   funkcja kopiujaca tablice dane do bufora i inicjujaca wysylanie      ////
+void send_to_pc(char dane[])
+{
+   short int n;
+
+   for(n=0;dane[n]!='\0';n++)   //kopiuje dane[] do bufora[]
+ 756:	01 96       	adiw	r24, 0x01	; 1
+ 758:	e8 2f       	mov	r30, r24
+ 75a:	f9 2f       	mov	r31, r25
+ 75c:	e3 58       	subi	r30, 0x83	; 131
+ 75e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 760:	e0 81       	ld	r30, Z
+ 762:	a8 2f       	mov	r26, r24
+ 764:	b9 2f       	mov	r27, r25
+ 766:	af 56       	subi	r26, 0x6F	; 111
+ 768:	bf 4f       	sbci	r27, 0xFF	; 255
+ 76a:	ee 23       	and	r30, r30
+ 76c:	99 f7       	brne	.-26     	; 0x754 <main+0x4b8>
+      bufor[n]=dane[n];
+
+   bufor[n] = dane[n];      //dodaje na koniec bufora '\0'
+ 76e:	1c 92       	st	X, r1
+   UCR      |= _BV(TXEN);   //wlacza nadajnik
+ 770:	53 9a       	sbi	0x0a, 3	; 10
+   UDR      = bufor[0];     //wysyla pierwszy znak reszta wysyla w obsludze przerwania
+ 772:	80 91 91 00 	lds	r24, 0x0091
+ 776:	8c b9       	out	0x0c, r24	; 12
+            default:
+                send_to_pc(response_cmd_not_implemented);
+                break;
+         }
+
+         flagrx=0;   //zeruje flage odbioru zeby juz nie wchodzilo w tego if-a
+ 778:	10 92 8e 00 	sts	0x008E, r1
+ 77c:	ec cd       	rjmp	.-1064   	; 0x356 <main+0xba>
+
+0000077e <_exit>:
+ 77e:	f8 94       	cli
+
+00000780 <__stop_program>:
+ 780:	ff cf       	rjmp	.-2      	; 0x780 <__stop_program>

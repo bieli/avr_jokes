@@ -1,0 +1,383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<title>AVR Controlled GP2D120 Distance Sensor</title>
+
+	<meta name="generator" content="WordPress 2.2.3" /> <!-- leave this for stats -->
+
+	<link rel="stylesheet" href="http://www.micahcarrick.com/wp-content/themes/whiteasmilk/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/wp-content/themes/whiteasmilk/print.css" type="text/css" media="print" />
+	
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.micahcarrick.com/feed" />
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://www.micahcarrick.com/feed/rss" />
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://www.micahcarrick.com/feed/atom" />
+	<link rel="pingback" href="http://www.micahcarrick.com/xmlrpc.php" />
+    <link rel="icon" href="http://www.gnome.org/favicon.ico" type="image/vnd.microsoft.icon" />
+    
+		<link rel='archives' title='September 2009' href='http://www.micahcarrick.com/2009/09' />
+	<link rel='archives' title='May 2008' href='http://www.micahcarrick.com/2008/05' />
+	<link rel='archives' title='January 2008' href='http://www.micahcarrick.com/2008/01' />
+	<link rel='archives' title='December 2007' href='http://www.micahcarrick.com/2007/12' />
+	<link rel='archives' title='November 2007' href='http://www.micahcarrick.com/2007/11' />
+	<link rel='archives' title='October 2007' href='http://www.micahcarrick.com/2007/10' />
+	<link rel='archives' title='September 2007' href='http://www.micahcarrick.com/2007/09' />
+	<link rel='archives' title='April 2007' href='http://www.micahcarrick.com/2007/04' />
+	<link rel='archives' title='August 2006' href='http://www.micahcarrick.com/2006/08' />
+	<link rel='archives' title='June 2006' href='http://www.micahcarrick.com/2006/06' />
+	<link rel='archives' title='May 2006' href='http://www.micahcarrick.com/2006/05' />
+	<link rel='archives' title='March 2006' href='http://www.micahcarrick.com/2006/03' />
+	<link rel='archives' title='February 2006' href='http://www.micahcarrick.com/2006/02' />
+	<link rel='archives' title='November 2005' href='http://www.micahcarrick.com/2005/11' />
+	<link rel='archives' title='May 2005' href='http://www.micahcarrick.com/2005/05' />
+	<link rel='archives' title='April 2005' href='http://www.micahcarrick.com/2005/04' />
+
+		<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.micahcarrick.com/xmlrpc.php?rsd" />
+<!-- all in one seo pack 0.6.3.3 -->
+<meta name="description" content="This page will provide you with my schematic and AVR gcc source code for my demo file. It simply uses the ADC on an ATMega8 mpu to read the analog output of the GP2D120 and send the distance in centimeters to my laptop through the serial port (actually, through a USB to serial converter)."/>
+<meta name="keywords" content="AVR Microcontrollers,Robotics/Electronics,avr,gp2d120,microcontroller,avr, sensor, gp2d12, pg2d120, proximity, robotics, atmega8, atmega, atmel, atmel avr, distance sensor, distance, sensor, schematic, circuit, source, source code"/>
+</head>
+<body>
+
+<div id="page">
+<div id="header">		
+	<h1><a href="http://www.micahcarrick.com">Micah Carrick</a></h1>
+	<!-- <p id="blog_description">linux. portland. programming. skateboarding. robots.</p> -->
+	
+	<div class="adsense">
+    	<script type="text/javascript"><!--
+        google_ad_client = "pub-1394888893417857";
+        google_ad_width = 468;
+        google_ad_height = 15;
+        google_ad_format = "468x15_0ads_al";
+        //2007-09-25: micahcarrick.com_header
+        google_color_border = "E6E9EF";
+        google_color_bg = "FFFFFF";
+        google_color_link = "3B6EA5";
+        google_color_text = "333333";
+        google_color_url = "3B6EA5";
+        //-->
+        </script>
+        <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+    </div>
+    
+    <script type="text/javascript"><!--
+		google_ad_client = "pub-1394888893417857";
+		google_ad_output = "textlink";
+		google_ad_format = "ref_text";
+		google_cpa_choice = "CAEaCAKmptC1t1oaUNQCUAVQDVC0A1C8A1Ap";
+		//-->
+		</script>
+		<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
+</div>
+<hr class="hrhide" />
+
+			<div id="sidebar">
+		<ul>
+
+			<!-- Author information is disabled per default. Uncomment and fill in your details if you want to use it.
+			<li><h2>Author</h2>
+			<p>A little something about you, the author. Nothing lengthy, just an overview.</p>
+			</li>
+			-->
+
+            <li><h2>SEARCH</h2>
+				<form method="get" id="searchform" action="/index.php">
+<div><input type="text" value="" name="s" id="s"
+style="border: 1px solid #666666; padding: 2px; width: 100px;" />
+<input type="submit" id="searchsubmit" value="Go" />
+</div>
+</form>
+			</li>	
+            
+			            
+
+			<li><h2><img src="http://www.micahcarrick.com/mc_images/categories.png"
+                        alt="Blog Categories" 
+                        style="vertical-align: baseline; margin-right: 5px;"/>Categories</h2>
+				<ul>
+					<li><a href="http://www.micahcarrick.com/category/avr-microcontrollers" title="AVR Microcontroller Programming, Tutorials, and Projects">AVR Microcontrollers</a> (10)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/c-programming" title="C and Linux Programming Notes ">C Programming</a> (9)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/gtk" title="GTK+ and Linux Programming Articles">GTK+</a> (14)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/linux" title="Linux Install Notes and How-to">Linux</a> (29)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/my-robots" title="My Robotics Projects">My Robots</a> (1)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/php" title="Open Source PHP Source Code">PHP</a> (6)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/pic-microcontrollers" title="PIC Microcontrollers in Linux, Projects, Programmers">PIC Microcontrollers</a> (4)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/python" title="Python programming">Python</a> (1)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/robotics-electronics" title="Robotics and Electronics, Schematics, Build Notes">Robotics/Electronics</a> (15)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/site-news" title="News About MicahCarrick.com">Site News</a> (1)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/uncategorized" title="View all posts filed under Uncategorized">Uncategorized</a> (1)
+</li>
+	<li><a href="http://www.micahcarrick.com/category/web-development" title="Web Programming Notes and Articles">Web Development</a> (11)
+</li>
+				</ul>
+			</li>
+
+             <li><h2><img src="http://www.micahcarrick.com/mc_images/star.gif"
+                        alt="Popular Posts" 
+                        style="vertical-align: baseline; margin-right: 5px;"/>Popular Posts</h2>
+                   <ul>
+                   <li><a href="http://www.micahcarrick.com/12-24-2007/gtk-glade-tutorial-part-1.html">GTK+ and Glade3 GUI Programming Tutorial - Part 1</a></li><li><a href="http://www.micahcarrick.com/04-19-2005/php-paypal-ipn-integration-class.html">PHP Paypal IPN Integration Class</a></li><li><a href="http://www.micahcarrick.com/09-29-2007/gedit-html-editor.html">Customizing gedit as a Web Developer's IDE</a></li><li><a href="http://www.micahcarrick.com/01-01-2008/gtk-glade-tutorial-part-3.html">GTK+ and Glade3 GUI Programming Tutorial - Part 3</a></li><li><a href="http://www.micahcarrick.com/12-27-2007/gtk-glade-tutorial-part-2.html">GTK+ and Glade3 GUI Programming Tutorial - Part 2</a></li><li><a href="http://www.micahcarrick.com/11-14-2007/gedit-symbol-browser-plugin.html">Gedit Symbol Browser Plugin</a></li><li><a href="http://www.micahcarrick.com/04-19-2005/php-zip-code-range-and-distance-calculation.html">PHP Zip Code Range and Distance Calculation</a></li><li><a href="http://www.micahcarrick.com/03-02-2006/gnome-programming-tutorial.html">Tutorial: Simple Gnome Application Using libglade and C/GTK+</a></li>                   </ul>
+                </li>
+                
+                <li><h2>
+                    <img src="http://www.micahcarrick.com/mc_images/rss.png"
+                        alt="RSS Subscription" 
+                        style="vertical-align: baseline; margin-right: 5px;"/>RSS Feeds</h2>
+                    <ul>
+                        <li><a href="http://www.micahcarrick.com/feed">Posts</a></li>
+                        <li><a href="http://www.micahcarrick.com/comments/feed">Comments</a></li>
+                    </ul>
+                </li>
+
+            <li><h2><img src="http://www.micahcarrick.com/mc_images/archive.png"
+                        alt="Archives" 
+                        style="vertical-align: baseline; margin-right: 5px;"/>Archives</h2>
+				<ul>
+					<li><a href='http://www.micahcarrick.com/2009/09' title='September 2009'>September 2009</a></li>
+	<li><a href='http://www.micahcarrick.com/2008/05' title='May 2008'>May 2008</a></li>
+	<li><a href='http://www.micahcarrick.com/2008/01' title='January 2008'>January 2008</a></li>
+	<li><a href='http://www.micahcarrick.com/2007/12' title='December 2007'>December 2007</a></li>
+	<li><a href='http://www.micahcarrick.com/2007/11' title='November 2007'>November 2007</a></li>
+	<li><a href='http://www.micahcarrick.com/2007/10' title='October 2007'>October 2007</a></li>
+	<li><a href='http://www.micahcarrick.com/2007/09' title='September 2007'>September 2007</a></li>
+	<li><a href='http://www.micahcarrick.com/2007/04' title='April 2007'>April 2007</a></li>
+	<li><a href='http://www.micahcarrick.com/2006/08' title='August 2006'>August 2006</a></li>
+	<li><a href='http://www.micahcarrick.com/2006/06' title='June 2006'>June 2006</a></li>
+	<li><a href='http://www.micahcarrick.com/2006/05' title='May 2006'>May 2006</a></li>
+	<li><a href='http://www.micahcarrick.com/2006/03' title='March 2006'>March 2006</a></li>
+	<li><a href='http://www.micahcarrick.com/2006/02' title='February 2006'>February 2006</a></li>
+	<li><a href='http://www.micahcarrick.com/2005/11' title='November 2005'>November 2005</a></li>
+	<li><a href='http://www.micahcarrick.com/2005/05' title='May 2005'>May 2005</a></li>
+	<li><a href='http://www.micahcarrick.com/2005/04' title='April 2005'>April 2005</a></li>
+				</ul>
+			</li>
+				
+            	<li id="linkcat-2" class="linkcat"><h2>Links</h2>
+	<ul>
+<li><a href="http://www.gtkbook.com" title="GTK+ 2.x Programming Book">Foundations of GTK+ Development</a></li>
+<li><a href="http://www.gtkforums.com" title="GTK+ Programming Discussion Forums">GTK+ Forums</a></li>
+<li><a href="http://www.HotScripts.com/?RID=N342874" title="The net&#039;s largest script collection">Hot Scripts</a></li>
+<li><a href="http://www.programmersheaven.com" title="Free code and resrouces for programmers">Programmer&#039;s Heaven</a></li>
+
+	</ul>
+</li>
+            
+		    <li><h2>Tags</h2>
+		    <div style="font-size: 80%; padding-left: 5px;"><a href="http://www.micahcarrick.com/tag/linux/" title="linux (18)" style="font-size:250%">linux</a> <a href="http://www.micahcarrick.com/tag/gtk/" title="gtk (11)" style="font-size:230%">gtk</a> <a href="http://www.micahcarrick.com/tag/microcontroller/" title="microcontroller (10)" style="font-size:210%">microcontroller</a> <a href="http://www.micahcarrick.com/tag/avr/" title="avr (10)" style="font-size:210%">avr</a> <a href="http://www.micahcarrick.com/tag/tutorial/" title="tutorial (6)" style="font-size:189%">tutorial</a> <a href="http://www.micahcarrick.com/tag/gnome/" title="gnome (6)" style="font-size:189%">gnome</a> <a href="http://www.micahcarrick.com/tag/c-programming/" title="c programming (6)" style="font-size:189%">c programming</a> <a href="http://www.micahcarrick.com/tag/php/" title="php (5)" style="font-size:170%">php</a> <a href="http://www.micahcarrick.com/tag/linux-programming/" title="linux programming (5)" style="font-size:170%">linux programming</a> <a href="http://www.micahcarrick.com/tag/ubuntu/" title="ubuntu (4)" style="font-size:150%">ubuntu</a> <a href="http://www.micahcarrick.com/tag/pic/" title="pic (4)" style="font-size:150%">pic</a> <a href="http://www.micahcarrick.com/tag/wifi/" title="wifi (3)" style="font-size:130%">wifi</a> <a href="http://www.micahcarrick.com/tag/web-development/" title="web development (3)" style="font-size:130%">web development</a> <a href="http://www.micahcarrick.com/tag/gutsy/" title="gutsy (3)" style="font-size:130%">gutsy</a> <a href="http://www.micahcarrick.com/tag/glade/" title="glade (3)" style="font-size:130%">glade</a> <a href="http://www.micahcarrick.com/tag/avr-gcc/" title="avr gcc (3)" style="font-size:130%">avr gcc</a> <a href="http://www.micahcarrick.com/tag/python/" title="python (2)" style="font-size:110%">python</a> <a href="http://www.micahcarrick.com/tag/mysql/" title="mysql (2)" style="font-size:110%">mysql</a> <a href="http://www.micahcarrick.com/tag/libglade/" title="libglade (2)" style="font-size:110%">libglade</a> <a href="http://www.micahcarrick.com/tag/install-notes/" title="install notes (2)" style="font-size:110%">install notes</a> <a href="http://www.micahcarrick.com/tag/ide/" title="ide (2)" style="font-size:110%">ide</a> <a href="http://www.micahcarrick.com/tag/html-editor/" title="html editor (2)" style="font-size:110%">html editor</a> <a href="http://www.micahcarrick.com/tag/gedit/" title="gedit (2)" style="font-size:110%">gedit</a> <a href="http://www.micahcarrick.com/tag/fedora/" title="fedora (2)" style="font-size:110%">fedora</a> <a href="http://www.micahcarrick.com/tag/c/" title="c (2)" style="font-size:110%">c</a> <a href="http://www.micahcarrick.com/tag/avrusb500/" title="AvrUsb500 (2)" style="font-size:110%">AvrUsb500</a> <a href="http://www.micahcarrick.com/tag/zip-code/" title="zip code (1)" style="font-size:90%">zip code</a> <a href="http://www.micahcarrick.com/tag/wireless/" title="wireless (1)" style="font-size:90%">wireless</a> <a href="http://www.micahcarrick.com/tag/windows-xp/" title="windows xp (1)" style="font-size:90%">windows xp</a> <a href="http://www.micahcarrick.com/tag/widget/" title="widget (1)" style="font-size:90%">widget</a> <a href="http://www.micahcarrick.com/tag/web-developer/" title="web developer (1)" style="font-size:90%">web developer</a> <a href="http://www.micahcarrick.com/tag/visual-basic/" title="visual basic (1)" style="font-size:90%">visual basic</a> <a href="http://www.micahcarrick.com/tag/unison/" title="unison (1)" style="font-size:90%">unison</a> <a href="http://www.micahcarrick.com/tag/timestamp/" title="timestamp (1)" style="font-size:90%">timestamp</a> <a href="http://www.micahcarrick.com/tag/synchronize/" title="synchronize (1)" style="font-size:90%">synchronize</a> <a href="http://www.micahcarrick.com/tag/symbol-browser/" title="symbol browser (1)" style="font-size:90%">symbol browser</a> <a href="http://www.micahcarrick.com/tag/sql/" title="sql (1)" style="font-size:90%">sql</a> <a href="http://www.micahcarrick.com/tag/sansa-view/" title="sansa view (1)" style="font-size:90%">sansa view</a> <a href="http://www.micahcarrick.com/tag/sansa/" title="sansa (1)" style="font-size:90%">sansa</a> <a href="http://www.micahcarrick.com/tag/robot/" title="robot (1)" style="font-size:90%">robot</a> <a href="http://www.micahcarrick.com/tag/resize-partition/" title="resize partition (1)" style="font-size:90%">resize partition</a> <a href="http://www.micahcarrick.com/tag/pygtk/" title="pygtk (1)" style="font-size:90%">pygtk</a> <a href="http://www.micahcarrick.com/tag/plugin/" title="plugin (1)" style="font-size:90%">plugin</a> <a href="http://www.micahcarrick.com/tag/plug-in/" title="plug in (1)" style="font-size:90%">plug in</a> <a href="http://www.micahcarrick.com/tag/pic-programmer/" title="pic programmer (1)" style="font-size:90%">pic programmer</a> <a href="http://www.micahcarrick.com/tag/paypal/" title="paypal (1)" style="font-size:90%">paypal</a> <a href="http://www.micahcarrick.com/tag/payment-notification/" title="payment notification (1)" style="font-size:90%">payment notification</a> <a href="http://www.micahcarrick.com/tag/payment-gateway/" title="payment gateway (1)" style="font-size:90%">payment gateway</a> <a href="http://www.micahcarrick.com/tag/oscilloscope/" title="oscilloscope (1)" style="font-size:90%">oscilloscope</a> <a href="http://www.micahcarrick.com/tag/open-source/" title="open source (1)" style="font-size:90%">open source</a> <a href="http://www.micahcarrick.com/tag/ntfs-partition/" title="ntfs partition (1)" style="font-size:90%">ntfs partition</a> <a href="http://www.micahcarrick.com/tag/ntfs/" title="ntfs (1)" style="font-size:90%">ntfs</a> <a href="http://www.micahcarrick.com/tag/mtp/" title="mtp (1)" style="font-size:90%">mtp</a> <a href="http://www.micahcarrick.com/tag/msc/" title="msc (1)" style="font-size:90%">msc</a> <a href="http://www.micahcarrick.com/tag/mp3-player/" title="mp3 player (1)" style="font-size:90%">mp3 player</a> <a href="http://www.micahcarrick.com/tag/lcd/" title="LCD (1)" style="font-size:90%">LCD</a> <a href="http://www.micahcarrick.com/tag/ipn/" title="ipn (1)" style="font-size:90%">ipn</a> <a href="http://www.micahcarrick.com/tag/installing-ubuntu/" title="installing ubuntu (1)" style="font-size:90%">installing ubuntu</a> <a href="http://www.micahcarrick.com/tag/htaccess/" title="htaccess (1)" style="font-size:90%">htaccess</a> <a href="http://www.micahcarrick.com/tag/gtkbuilder/" title="gtkbuilder (1)" style="font-size:90%">gtkbuilder</a> <a href="http://www.micahcarrick.com/tag/gtk-builder-convert/" title="gtk builder convert (1)" style="font-size:90%">gtk builder convert</a> <a href="http://www.micahcarrick.com/tag/gtk-book/" title="gtk book (1)" style="font-size:90%">gtk book</a> <a href="http://www.micahcarrick.com/tag/gpsim/" title="gpsim (1)" style="font-size:90%">gpsim</a> <a href="http://www.micahcarrick.com/tag/gp2d120/" title="gp2d120 (1)" style="font-size:90%">gp2d120</a> <a href="http://www.micahcarrick.com/tag/google-webmaster-tools/" title="google webmaster tools (1)" style="font-size:90%">google webmaster tools</a> <a href="http://www.micahcarrick.com/tag/glade3/" title="glade3 (1)" style="font-size:90%">glade3</a> <a href="http://www.micahcarrick.com/tag/gdl/" title="gdl (1)" style="font-size:90%">gdl</a> <a href="http://www.micahcarrick.com/tag/function-browser/" title="function browser (1)" style="font-size:90%">function browser</a> <a href="http://www.micahcarrick.com/tag/firefox/" title="firefox (1)" style="font-size:90%">firefox</a> <a href="http://www.micahcarrick.com/tag/error-console/" title="error console (1)" style="font-size:90%">error console</a> <a href="http://www.micahcarrick.com/tag/dual-boot/" title="dual boot (1)" style="font-size:90%">dual boot</a> <a href="http://www.micahcarrick.com/tag/dom-inspector/" title="dom inspector (1)" style="font-size:90%">dom inspector</a> <a href="http://www.micahcarrick.com/tag/dock/" title="dock (1)" style="font-size:90%">dock</a> <a href="http://www.micahcarrick.com/tag/distance/" title="distance (1)" style="font-size:90%">distance</a> <a href="http://www.micahcarrick.com/tag/developer/" title="developer (1)" style="font-size:90%">developer</a> <a href="http://www.micahcarrick.com/tag/database/" title="database (1)" style="font-size:90%">database</a> <a href="http://www.micahcarrick.com/tag/d830/" title="d830 (1)" style="font-size:90%">d830</a> <a href="http://www.micahcarrick.com/tag/custom-error/" title="custom error (1)" style="font-size:90%">custom error</a> <a href="http://www.micahcarrick.com/tag/ctags/" title="ctags (1)" style="font-size:90%">ctags</a> <a href="http://www.micahcarrick.com/tag/command/" title="command (1)" style="font-size:90%">command</a> <a href="http://www.micahcarrick.com/tag/bcm4328/" title="bcm4328 (1)" style="font-size:90%">bcm4328</a> <a href="http://www.micahcarrick.com/tag/avrdude/" title="avrdude (1)" style="font-size:90%">avrdude</a> <a href="http://www.micahcarrick.com/tag/authorize.net/" title="authorize.net (1)" style="font-size:90%">authorize.net</a> <a href="http://www.micahcarrick.com/tag/anjuta/" title="Anjuta (1)" style="font-size:90%">Anjuta</a> <a href="http://www.micahcarrick.com/tag/aim/" title="aim (1)" style="font-size:90%">aim</a> <a href="http://www.micahcarrick.com/tag/802.11g/" title="802.11g (1)" style="font-size:90%">802.11g</a> </div>
+		    </li>
+
+		</ul>
+	</div>
+
+	<div id="content" class="narrowcolumn" style="margin:0px; ">
+
+  
+        Previous: <a href="http://www.micahcarrick.com/03-10-2006/gtk-font-color-dialogs.html">Color and Font Selection Dialogs in C/GTK+ with libglade</a><br/>	    Next: <a href="http://www.micahcarrick.com/05-12-2006/avr-tutorial-digital-output.html">AVR Tutorial: Introduction and Digital Output</a><br/>        <br />
+		<div class="post">
+			<h2 id="post-10"><a href="http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html" rel="bookmark" title="Permanent Link: AVR Controlled GP2D120 Distance Sensor">AVR Controlled GP2D120 Distance Sensor</a></h2>
+			<small>May 11th, 2006 <!-- by admin --></small>
+	
+			<div class="entry">
+				<p> Sharp's GP2D120 (and the GP2D12) is an infared distance sensor which is pretty  common in the hobby robotics community.  I purshaces a couple of these from <a href="http://www.digikey.com/">DigiKey</a> to use in a small wall-huggin robot. I spent quite a bit of time experimenting with it.  This page will provide you with my schematic and AVR gcc source code for my demo file.  It simply uses the ADC on an ATMega8 mpu to read the analog output of the GP2D120 and send the distance in centimeters to my laptop through the serial port (actually, through a USB to serial converter).</p>
+<p><span id="more-10"></span><a name="#description"></a></p>
+<h3>Circuit Description</h3>
+<p>I began simply experimenting with the GP2D120 comparing the analog voltage to distance, plotting that data in a chart (Fig. 1), and comparing with the data sheet. My data turned out to be pretty similar to the chart in the datasheet-- which was good  news.  However, one important thing to notice is that the curve increases from 0 up to a peak at around 3cm. So the data for 0-3cm must be ignored. It is  because of this that you will want to mount the sensor about 3cm back when  using it in a robot or other practical application.</p>
+<p>Since the maximum output I got from the sensor was 3.15V or so, I have setup my ATMega8 ADC to use a 3.3V reference voltage.  This allows me to use the maximum range.  I setup my 3.3V reference to the AREF pin on the AVR using a LM317Z variable voltage regulator.  I keep a few of these around as they are a cheap and easy way to get any a regulated voltage from 1.2V to almost 30V.  In the schematic, (Fig. 2) the LM317Z's output is controlled by adjusting R3.  It's important to use this 3.3V reference if you're going to be using my code, as my lookup table is based a 3.3V reference voltage.</p>
+<p>I originally had the output of the sensor on an LCD, however, I changed over to using the AVR's UART and sending the data to my laptop through the RS-232 serial port (actually, I only have USB so I'm using a RS-232 to USB converter). I convert the TX/RX output from the AVR to RS-232 using the MAX232 chip. This  is not shown in the schematic as I'm actually using a little board I made from  a magazine article in Nuts and Volts Novermber 2000 issue: <em>RS-232 ON A BREADBOARD</em>  by Al Williams.  There are hundreds of schematics for using this chip out there, or, you can just purchase the <a href="http://www.awce.com/rs1.htm">       RS-I Serial Interface Adapter</a>.</p>
+<p>The data is sent using Peter Fleury's UART library where the ADC value and it's corresponding distance is simply scrolled continually down a terminal screen (Fig. 3).  I'm using Minicom on Linux, however, Hypterterminal works just fine in Windows. You just need to setup the emulation for N-8-1 at 9600 baud.  I added the 8MHz crystal as I got garbage data when using the ATMega8's internal 1MHz oscillator (which is what is factory shipped, so I had to change the fuses).</p>
+<p>The lookup table is stored in program flash and based on an 8-bit ADC value, which  means that I have to first setup the ADC to left-justify the result and then just take the upper 8 bits of the 10-bit result by reading the ADCH register.</p>
+<p style="display: block; text-align: center">    <strong>Fig. 1 - Data Charted Through Experiment</strong><br />
+<a href="http://www.micahcarrick.com/files/atmega8/gp2d120-1/datachart.jpg" target="_blank">    <img src="http://www.micahcarrick.com/files/atmega8/gp2d120-1/datachart.jpg" style="width: 421px; height: 269px" alt="Screenshot of GP2D120 Demo output" border="1" /><br />
+Click to Enlarge    </a></p>
+<p style="display: block; text-align: center">    <strong>Fig. 2 - Schematic</strong><br />
+<a href="http://www.micahcarrick.com/files/atmega8/gp2d120-1/circuit.png" target="_blank">    <img src="http://www.micahcarrick.com/files/atmega8/gp2d120-1/circuit.png" style="width: 374px; height: 172px" alt="Schematic for GP2D120 AVR demo" border="1" /><br />
+Click to Enlarge    </a></p>
+<p style="display: block; text-align: center">    <strong>Fig. 3 - Screenshot of Data from AVR (via) RS-232</strong><br />
+<a href="http://www.micahcarrick.com/files/atmega8/gp2d120-1/screenshot.png" target="_blank">    <img src="http://www.micahcarrick.com/files/atmega8/gp2d120-1/screenshot.png" style="width: 415px; height: 269px" alt="Screenshot of GP2D120 Demo output" border="1" /><br />
+Click to Enlarge    </a></p>
+<p><a name="#download"></a></p>
+<h3>Download Project Files</h3>
+<p>Download <a href="http://www.micahcarrick.com/files/atmega8/gp2d120-1/gp2d120-1.tar.gz">gp2d120-1.tar.gz</a></p>
+<p><strong>Files in gp2d120-1.tar.gz:</strong></p>
+<ul>
+<li>main.c - Main program for the ATMega8 AVR (GPL).</li>
+<li>gp2d120.c/gp2d120.h - Routines and lookup table for GP2D120 (GPL).</li>
+<li>uart.c/uart.h - Peter Fleury's UART library.</li>
+<li>Makefile - Makefile for avr-gcc and avrdude in Linux.</li>
+<li>gp2d120-1.hex - Tested hex file of compiled program for ATMega8 AVR.</li>
+<li>circuit.sch - Schematic in Eagle format.</li>
+<li>circuit.png, screenshot.png, datachart.jpg - Figures 1, 2, and 3 above.</li>
+</ul>
+<p><a name="#resources"></a></p>
+<h3>Resources</h3>
+<ul>
+<li>       <a href="http://www.sharpsma.com/part.php?PartID=3901">       Sharp GP2D120 Datasheet and Application Note       </a></li>
+<li>       <a href="http://homepage.hispeed.ch/peterfleury/avr-software.html">       Peter Fleury's avr-gcc UART library       </a></li>
+<li>       <a href="http://www.awce.com/rs1.htm">       The RS-I Serial Interface Adapter (commercial version of article below)       </a></li>
+<li>       RS-232 ON A BREADBOARD - Al Williams. Nuts &amp; Volts Magazine, Nov, 2000</li>
+</ul>
+	            
+					            <br />
+				<p class="postmetadata alt">
+					<small>
+						Posted on
+						<strong>Thursday, May 11th, 2006</strong> at <strong>8:45 am</strong>
+						<hr/> 
+						<!--  -->
+						<strong>Categories</strong><br/>
+						<a href="http://www.micahcarrick.com/category/avr-microcontrollers" title="View all posts in AVR Microcontrollers" rel="category tag">AVR Microcontrollers</a>  <a href="http://www.micahcarrick.com/category/robotics-electronics" title="View all posts in Robotics/Electronics" rel="category tag">Robotics/Electronics</a>						<br/><br/>
+						<strong>Related Posts</strong><br />
+	                    <ul class="utwrelposts"><li><a href="http://www.micahcarrick.com/05-15-2006/avr-tutorial-switch-debounce.html">AVR Tutorial: Switch Input and Debounce</a></li><li><a href="http://www.micahcarrick.com/05-12-2006/avr-tutorial-clock-source.html">AVR Tutorial: About the Clock Source</a></li><li><a href="http://www.micahcarrick.com/05-12-2006/avr-tutorial-digital-output.html"> AVR Tutorial: Introduction and Digital Output</a></li><li><a href="http://www.micahcarrick.com/02-24-2006/avr-toggle-led-test-program-for-avrusb500.html">AVR Toggle LED: Test Program for AvrUsb500</a></li><li><a href="http://www.micahcarrick.com/02-15-2006/installing-gnu-tools-avr-gcc.html">Installing the GNU tools (avr-gcc) for AVRs</a></li><li><a href="http://www.micahcarrick.com/10-09-2007/avr-microcontroller-ide.html">KontrollerLab: An AVR IDE for Linux</a></li><li><a href="http://www.micahcarrick.com/05-27-2006/failurebot-line-following-robot.html">FailureBot 5 - A Line Following Robot</a></li><li><a href="http://www.micahcarrick.com/02-26-2006/avr-3-wire-hd44780-lcd-interface-avr-gcc.html">AVR 3-Wire HD44780 LCD Interface (avr-gcc)</a></li><li><a href="http://www.micahcarrick.com/02-24-2006/avrusb500-avrdude.html">Setting up the AvrUsb500 and avrdude</a></li><li><a href="http://www.micahcarrick.com/05-01-2005/linux-compatible-pic-programmers.html">Linux Compatible PIC Programmers</a></li><li><a href="http://www.micahcarrick.com/04-26-2005/pic-interrupts-gpsim.html">Testing C Interrupts using Breakpoints in GPSIM</a></li><li><a href="http://www.micahcarrick.com/04-25-2005/pic-c-programming-linux.html">Programming PIC's in Linux using C with SDCC</a></li><li><a href="http://www.micahcarrick.com/04-19-2005/pic-programming-linux.html">Intro to Programming PIC Microcontrollers in Linux</a></li></ul>
+	                    <br/>	<br/>                    
+	                    <strong>Technorati Tags</strong>
+	                    <div class="utwtags"><a href="http://www.technorati.com/tag/"><img src="http://www.micahcarrick.com/wp-content/plugins/UltimateTagWarrior/technoratiicon.jpg" alt="Technorati"/></a> <a href="http://www.technorati.com/tag/avr" rel="tag">avr</a>, <a href="http://www.technorati.com/tag/gp2d120" rel="tag">gp2d120</a>, <a href="http://www.technorati.com/tag/microcontroller" rel="tag">microcontroller</a></div>
+	                    <br/>
+						<div class="social_bookmarks"><strong>Bookmark This Page</strong><br/>
+    <a href="http://del.icio.us/post?url=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html"<img src="http://www.micahcarrick.com/wp-content/themes/whiteasmilk/images/bookmark_icons/delicious.png"
+    style="vertical-align: middle;" /></a>
+    <a href="http://del.icio.us/post?url=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html">del.icio.us</a>&nbsp;
+    
+    <a href="http://www.facebook.com/share.php?u=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html"<img src="http://www.micahcarrick.com/wp-content/themes/whiteasmilk/images/bookmark_icons/facebook.png"
+    style="vertical-align: middle;" /></a>
+    <a href="http://www.facebook.com/share.php?u=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html">Facebook</a>&nbsp;
+    
+    <a href="http://digg.com/submit?phase=2&url=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html"<img src="http://www.micahcarrick.com/wp-content/themes/whiteasmilk/images/bookmark_icons/digg.png"
+    style="vertical-align: middle;" /></a>
+    <a href="http://digg.com/submit?phase=2&url=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html">Digg</a>&nbsp;
+    
+    <a href="http://www.google.com/bookmarks/mark?op=edit&bkmk=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html"<img src="http://www.micahcarrick.com/wp-content/themes/whiteasmilk/images/bookmark_icons/google.png"
+    style="vertical-align: middle;" /></a>
+    <a href="http://www.google.com/bookmarks/mark?op=edit&bkmk=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html">Google</a>&nbsp;
+    
+    <a href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html"<img src="http://www.micahcarrick.com/wp-content/themes/whiteasmilk/images/bookmark_icons/yahoo.png"
+    style="vertical-align: middle;" /></a>
+    <a href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html">Yahoo!</a>&nbsp;
+    </div>						
+					</small>
+				</p>
+			</div>
+		</div>
+	
+	
+	
+<!-- You can start editing here. -->
+
+	<h3 id="comments">2 Responses to &#8220;AVR Controlled GP2D120 Distance Sensor&#8221;</h3> 
+
+    <p>
+    <img src="http://www.micahcarrick.com/mc_images/rss.png"
+        alt="RSS Subscription" 
+        style="vertical-align: middle; margin-right: 2px;"/>
+        <a href='http://www.micahcarrick.com/05-11-2006/avr-controlled-gp2d120-distance-sensor.html/feed'>Comments RSS Feed</a>	
+    </p>
+    
+	<ol class="commentlist">
+
+	
+		<!-- <li class="alt" id="comment-16166"> -->
+		<li style="border: 1px solid #dcdcc0; background-color: #fffffb;">
+			<cite>Ashwati</cite> Says:
+						<br />
+
+			<small class="commentmetadata">June 7th, 2008 at 8:36 pm</small>
+
+			<p>I have been refering your pages for my project. Useful bits of information embedded in them. Thank you very much for spending time on uploading information.</p>
+
+		</li>
+
+	
+	
+		<!-- <li class="" id="comment-20786"> -->
+		<li style="border: 1px solid #dcdcc0; background-color: #fffffb;">
+			<cite>mahdi</cite> Says:
+						<br />
+
+			<small class="commentmetadata">August 29th, 2008 at 3:09 pm</small>
+
+			<p>hi<br />
+i'm a beginner in avr programming that trying to use the ADC in ATMEGA16 to read the analog data from SHARP GP2D12  and need a c program for CodeVision compiler.can u show me how to connect this sensor to avr and a LCD ?</p>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h3 id="respond">Leave a Reply</h3>
+
+
+<form action="http://www.micahcarrick.com/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;code&gt; &lt;em&gt; &lt;i&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="90%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="10" />
+</p>
+
+</form>
+
+
+	
+	
+	</div>
+      
+
+<div id="footer">
+
+<script type="text/javascript"><!--
+ amzn_cl_tag="micahcarrickc-20";
+ amzn_cl_link_color="0C8B03";
+ amzn_cl_max_links=5;
+ amzn_cl_link_style=2;
+ amzn_cl_exact_match=1;
+ amzn_cl_categories="a,d,e,f";
+//--></script>
+<!-- <script type="text/javascript" src="http://cls.assoc-amazon.com/s/cls.js"></script> -->
+
+Contact me: email (at) micahcarrick com
+
+<!-- 
+Valid <a href="http://validator.w3.org/check/referer">XHTML</a> and <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>.
+-->
+<!-- 49 queries. 0.227 seconds. -->
+</div>
+</div>
+
+<!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubrick/ -->
+
+		
+</body>
+</html>

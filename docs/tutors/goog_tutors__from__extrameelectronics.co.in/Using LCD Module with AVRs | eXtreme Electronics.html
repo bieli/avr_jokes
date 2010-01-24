@@ -1,0 +1,2525 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Using LCD Module with AVRs | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; Using LCD Module with AVRs Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='DC Motor Control' href='http://extremeelectronics.co.in/avr-tutorials/dc-motor-control/' />
+<link rel='next' title='Using Internal peripherals of AVR MCUs.' href='http://extremeelectronics.co.in/avr-tutorials/using-internal-peripherals-of-avr-mcus/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,369] -->
+<meta name="description" content="When you start working with LCD modules you will start feeling the real power of MCU and your imaginations will be touching sky you will wonder how many" />
+<meta name="keywords" content="avr,lcd interface,mcu,xboard mini,avr tutorials" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-15">
+<div class="date"> Jul-28th-2008 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/" rel="bookmark" title="Permanent Link: Using LCD Module with AVRs">Using LCD Module with AVRs</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>When you start working with LCD modules you will start feeling the real power 
+  of MCU and your imaginations will be touching sky you will wonder how many exciting 
+  a powerful gadgets you can create and that’s so very easily.</p>
+<p>LCD Modules can present textual information to user. It’s like a cheap “monitor” 
+  that you can hook in all of your gadgets. They come in various types. The most 
+  popular one can display 2 lines of 16 characters. These can be easily interfaced 
+  to MCU's, thanks to the API( Functions used to easily access the modules) we 
+  provide. LCD interfacing is just fun ! </p>
+<table width="300" border="0" align="center" cellpadding="3" cellspacing="3" bordercolor="#0066ff">
+  <tbody>
+    <tr> 
+      <td bordercolor="ffffff"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/LCD.jpg" alt="lcd module" width="294" height="142" /></td>
+    </tr>
+    <tr>
+      <td bordercolor="ffffff"><h3 align="center">Fig: A 16x2 LCD Module</h3></td>
+    </tr>
+    <tr> 
+      <td bordercolor="ffffff"> <div>
+          <div align="center"><a title="Buy LCD Modules Online In India - shop.eXtremeElectronics.co.in " href="http://shop.extremeelectronics.co.in/product_info.php?cPath=25&products_id=32">Buy 
+            LCD Modules Online In India</a></div>
+        </div></td>
+    </tr>
+  </tbody>
+</table>
+<p>&nbsp;</p>
+<h2>PIN Configurations.</h2>
+<p>The lcd modules has 16 PINs for interfacing. The details are given below. </p>
+<table border="0" cellpadding="5" cellspacing="3" width="300">
+  <tr> 
+    <td align="right" bgcolor="#8080ff"> <p align="left"><strong><font color="#FFFFFF">LCD 
+        Module Pin Configuration </font></strong></p></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"> <p align="left">1 VSS (GND Supply)</p></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"> <p align="left">2 VCC (+5V)</p></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"> <p align="left">3 VEE (Contrast Adjust)</p></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">4 RS</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">5 R/W</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">6 E</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">7 DB0</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">8 DB1</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">9 DB2</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">10 DB3</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">11 DB4</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">12 DB5</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">13 DB6</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">14 DB7</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">15 LED +</div></td>
+  </tr>
+  <tr> 
+    <td align="right" bgcolor="#c0c0ff"><div align="left">16 LED -</div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h2>Connection with Board MINI.</h2>
+<p>The lcd module can be easily connected to the Board™ MINI the connection is 
+  as follows.</p>
+<table width="248" border="0" align="center" cellpadding="3" cellspacing="3" bordercolor="#0066ff">
+<tbody>
+<tr>
+<td width="230" bordercolor="ffffff"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd-connection.GIF" alt="lcd modulec connection with avr" width="228" height="244" /></td>
+</tr>
+<tr>
+<td bordercolor="ffffff">
+<div>
+          <h3 align="center">Fig: Connection</h3>
+</div></td>
+</tr>
+</tbody></table>
+Connect the required pins of PORTC and PORTD as shown in the diagram. The PORTs 
+are clearly marked in the board. Connect to PORTD using a 8 PIN connecter and 
+to PORTC using a 6 PIN connecter. Then supply the LCD using the onboard 5V supply 
+output using a 2 PIN connecter. Leave D0-D4 of LCD unconnected.<em><strong> Note 
+all the required connecters are provided with the kit.</strong></em> 
+<h2>Adding LCD support to your project</h2>
+To add LCD support to your C projects we have made a easy to use library. To use 
+this library first create a new project in AVR Studio then copy the following 
+files to your project folder. lcd.c lcd.h myutils.h from x:\xAPI\lcd-v20\ (where 
+x:\ is your CD/DVD drive) then add them to your project by right clicking project 
+view and selecting “Add Existing Source File(s)…” and then select the “lcd.c”. 
+Similarly add “lcd.h” and “myutils.h” in Header Files section. Now you are ready 
+to start coding LCD applications !!! 
+<table width="248" border="0" align="center" cellpadding="3" cellspacing="3" bordercolor="#0066ff">
+<tbody>
+<tr>
+<td width="230" bordercolor="ffffff"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/add-file-to-proj.GIF" alt="avr studio" width="296" height="396" /></td>
+</tr>
+<tr>
+<td bordercolor="ffffff">
+<div>
+          <h3 align="center">Fig: Adding files to projects.</h3>
+</div></td>
+</tr>
+</tbody></table>
+<h2>Programming.</h2>
+<p>In your main C file include the file lcd.h as #include “lcd.h” then initialize 
+  the LCD subsystem using a call to LCDInit(LS_BLINK|LS_ULINE); the argument specify 
+  the type of cursor required the LS_BLINK gives a blinking cursor. LS_ULINE gives 
+  a underlined cursor. To <strong>write any text</strong> call LCDWriteString("Welcome"); 
+  To <strong>write any number</strong> call void LCDWriteInt(int val,unsigned 
+  int field_length); This will print a integer contained in “val” . The field 
+  length is the length of field in which the number is printed. </p>
+<p>For example LCDWriteInt(3,4); will print as follows </p>
+<table width="320" border="0" cellpadding="10" cellspacing="10">
+  <tr>
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd1.PNG" alt="lcd module " width="218" height="127" /></div></td>
+  </tr>
+</table>
+<p>While LCDWriteInt(123,5) will print as follows.</p>
+<table width="320" border="0" cellpadding="10" cellspacing="10">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd2.PNG" alt="lcd module" width="218" height="127" /></div></td>
+  </tr>
+</table>
+<p>&nbsp; </p>
+<p>To <strong>goto any particular position</strong> on screen call. </p>
+<table border="0" cellspacing="3" cellpadding="3" width="90%">
+<tbody>
+<tr>
+<td bgcolor="#ffff66">void LCDGotoXY(uint8_t x,uint8_t y);</td>
+</tr>
+</tbody></table>
+For example the following will take the cursor to (11,1) i.e. 12th column of second line.
+<table border="0" cellspacing="3" cellpadding="3" width="90%">
+<tbody>
+<tr>
+<td bgcolor="#ffff66">LCDGotoXY(11,1);</td>
+</tr>
+</tbody></table>
+<table width="440" border="0" align="center" cellpadding="3" cellspacing="3" bordercolor="#0066ff">
+<tbody>
+<tr>
+<td width="422" bordercolor="ffffff"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd-cords.PNG" alt="using lcd module  with avr microcontrollers" width="420" height="158" /></td>
+</tr>
+<tr>
+<td bordercolor="ffffff">
+<div>
+          <h3 align="center">Fig: Cursor Positioning.</h3>
+</div></td>
+</tr>
+</tbody></table>
+<p>Now anything you write to LCD will be printed at (11,1). </p>
+<p><strong>Clearing the display</strong> </p>
+<table border="0" cellspacing="3" cellpadding="3" width="90%">
+<tbody>
+<tr>
+<td bgcolor="#ffff66">LCDClear();</td>
+</tr>
+</tbody></table>
+This will clear the display and bring the cursor back to (0,0). There are two 
+more functions that will go to specific position and print in one call. 
+<table border="0" cellspacing="3" cellpadding="3" width="90%">
+<tbody>
+<tr>
+<td bgcolor="#ffff66"><pre><strong>LCDWriteStringXY(x,y,msg);
+____________________________</strong></pre>
+        <pre><strong>x,y :</strong> the location where to print “msg” </pre>
+        <pre><strong>msg :</strong> the message to print </pre>
+        <pre><strong><em>Ex:</em></strong> LCDWriteStringXY(3,0,”hello”); </pre>
+        <pre>    LCDWriteStringXY(8,1,”world”); 
+<strong>Output:
+</strong></pre>
+        <table width="440" border="0" align="center" cellpadding="3" cellspacing="3" bordercolor="#0066ff">
+          <tbody>
+            <tr> 
+              <td width="422" bordercolor="ffffff"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd-cords-2.PNG" alt="using lcd module  with avr microcontrollers" width="420" height="158" /></td>
+            </tr>
+            <tr> 
+              <td bordercolor="ffffff"> <div> 
+                  <h3 align="center">Fig: Cursor Positioning.</h3>
+                </div></td>
+            </tr>
+          </tbody>
+        </table></td>
+</tr>
+</tbody></table>
+Similarly there is a function for integers. 
+<table border="0" cellspacing="3" cellpadding="3" width="90%">
+<tbody>
+<tr>
+<td bgcolor="#ffff66"><pre><strong>LCDWriteIntXY(x,y,num,field_length);</strong>
+____________________________________
+<strong>x,y :</strong> the location where to print “num”
+<strong>num : </strong>the integer number to print  
+<strong>field_length :</strong> the length of field (see LCDWriteInt() function above).</pre></td>
+</tr>
+</tbody></table>
+Now you know the basics of LCD interfacing lets jump to a sample program that will demonstrate the functions you learned.
+
+Note: The sample programs are available under “samples” folder in support CD. The hex files ready to burn are available under “hex” folder under the “samples” folder.
+<h2>Sample Program</h2>
+<pre><code><span style="color: #000000;">
+<span style="color: #008000;">#include &lt;avr/io.h&gt;</span>
+<span style="color: #008000;">#include &lt;util/delay.h&gt;</span>
+
+<span style="color: #008000;">#include "lcd.h"</span>
+
+<strong>void</strong> main()
+{
+   <strong>unsigned char</strong> i;
+
+   <span style="color: #000080;"><em>//Initialize LCD module</em></span>
+   InitLCD(LS_BLINK|LS_ULINE);
+
+   <span style="color: #000080;"><em>//Clear the screen</em></span>
+   LCDClear();
+
+   <span style="color: #000080;"><em>//Simple string printing</em></span>
+   LCDWriteString(<span style="color: #0000ff;">"Congrats "</span>);
+
+   <span style="color: #000080;"><em>//A string on line 2</em></span>
+   LCDWriteStringXY(<span style="color: #ff0080;">0</span>,<span style="color: #ff0080;">1</span>,<span style="color: #0000ff;">"Loading "</span>);
+
+   <span style="color: #000080;"><em>//Print some numbers</em></span>
+   <strong>for</strong> (i=<span style="color: #ff0080;">0</span>;i&lt;<span style="color: #ff0080;">99</span>;i+=<span style="color: #ff0080;">1</span>)
+   {
+      LCDWriteIntXY(<span style="color: #ff0080;">9</span>,<span style="color: #ff0080;">1</span>,i,<span style="color: #ff0080;">3</span>);
+      LCDWriteStringXY(<span style="color: #ff0080;">12</span>,<span style="color: #ff0080;">1</span>,<span style="color: #0000ff;">"%"</span>);
+      _delay_loop_2(<span style="color: #ff0080;">0</span>);
+      _delay_loop_2(<span style="color: #ff0080;">0</span>);
+      _delay_loop_2(<span style="color: #ff0080;">0</span>);
+      _delay_loop_2(<span style="color: #ff0080;">0</span>);
+
+   }
+
+   <span style="color: #000080;"><em>//Clear the screen</em></span>
+   LCDClear();
+
+   <span style="color: #000080;"><em>//Some more text</em></span>
+
+   LCDWriteString(<span style="color: #0000ff;">"Hello world"</span>);
+   LCDWriteStringXY(<span style="color: #ff0080;">0</span>,<span style="color: #ff0080;">1</span>,<span style="color: #0000ff;">"By YourName Here"</span>);    <span style="color: #000080;"><em>// &lt;--- Write ur NAME HERE !!!!!!!!!!!</em></span>
+
+   <span style="color: #000080;"><em>//Wait</em></span>
+   <strong>for</strong>(i=<span style="color: #ff0080;">0</span>;i&lt;<span style="color: #ff0080;">100</span>;i++) _delay_loop_2(<span style="color: #ff0080;">0</span>);
+
+   <span style="color: #000080;"><em>//Some More ......</em></span>
+   LCDClear();
+   LCDWriteString(<span style="color: #0000ff;">"    eXtreme"</span>);
+   LCDWriteStringXY(<span style="color: #ff0080;">0</span>,<span style="color: #ff0080;">1</span>,<span style="color: #0000ff;">"  Electronics"</span>);
+
+}
+</span>
+</code></pre>
+<h2>Advance Use – Configuring Connections.</h2>
+The library is designed to be fully customizable. If you want to connect the LCD module to some different i/o ports of the MCU then you can do so easily. You just have to modify the lcd.h file. Let’s see how.
+
+Open lcd.h and find a section “LCD Connections” it looks like
+<table border="0" cellspacing="3" cellpadding="3" width="440" align="center" bordercolor="#0066ff">
+<tbody>
+<tr>
+<td width="422" bordercolor="ffffff"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd_h.PNG" alt="lcd library setup for avr mcu" width="471" height="291" /></td>
+</tr>
+<tr>
+<td bordercolor="ffffff">
+<div>
+          <h3 align="center">Fig: Configuring LCD Connection.</h3>
+</div></td>
+</tr>
+</tbody></table>
+<p>Set LCD_DATA to the port where you have connected the LCD data lines. Data 
+  Lines must be connected to any port say PORTB starting from pin-0 to pin-3. 
+  i.e. If you set #define LCD_DATA B you should connect like this :</p>
+<p align="center"><strong><em>PORTB.0-&gt;DATA4 PORTB.1-&gt;DATA5 PORTB.2-&gt;DATA6 
+  PORTB.3-&gt;DATA7 </em></strong></p>
+<p>The library uses advance 4-bit mode so DATA0-DATA-3 of LCD are not used, saving 
+  4 MCU pins! Now set the port where you have connected LCD’s ‘E’ signal. In example 
+  it is PORTD so #define LCD_E D Then specify to which PIN of PORTD it is connected, 
+  this is done by #define LCD_E_POS PD6 So ‘E’ pin of LCD is connected to PORTD-6 
+  In same way set RS and RW signals. And that’s all! So you saw how easy is to 
+  customize the library. </p>
+<h2>Downloads</h2>
+<p><a href="http://www.extremeelectronics.co.in/avrtutorials/download/lcd.zip">Download 
+  this tutorials with all required files.(library and sample code included) </a></p>
+<p>&nbsp; </p>
+<table border="0" cellspacing="3" cellpadding="3" width="90%" bgcolor="#999999" bordercolor="#000000">
+  <tbody>
+<tr>
+<td bordercolor="#999999"><h4>What's next ???</h4></td>
+</tr>
+<tr>
+<td bordercolor="#999999">We will see what different Internal peripherals
+available on the AVR mcu and the methods of interface/communication from
+them. This will help you use internal peripheral like ADC,Timers,USARTs
+etc which will be covered in later tutorials.</td>
+</tr>
+</tbody></table>
+<p>Have fun and don’t forget to bookmark this page. If you think this tutorial 
+  has helped you please post a <strong>comment.</strong> </p></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Monday, July 28th, 2008 at 7:50 am						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">98 Responses to &#8220;Using LCD Module with AVRs&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-14">
+<div class="commentnumber">1</div>
+			<cite>Abhijeet Says: </cite>
+						<br />
+
+
+
+<p>Thanks for the tutorials n carry on&#8230; rest assured there are many people learning something from them! Can&#8217;t wait for the next articles!</p>
+<small class="commentmetadata"><a href="#comment-14" title="">July 28th, 2008 at 9:53 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-45">
+<div class="commentnumber">2</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/' rel='external nofollow' class='url'>Using the Analog To Digital Converter. | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] ForLCD Interfacing See- &#8220;LCD Interfacing Tutorial&#8221; [...]</p>
+<small class="commentmetadata"><a href="#comment-45" title="">September 18th, 2008 at 12:22 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-115">
+<div class="commentnumber">3</div>
+			<cite><a href='http://extremeelectronics.co.in/code-libraries/using-ir-remote-with-avr-mcus/' rel='external nofollow' class='url'>Using IR remote with AVR MCUs | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] the key code of the various keys on your remote control. To learn more about LCD interface with AVRs see this. The connection is different for ATmega8 and ATmega16/32 so I am giving both [...]</p>
+<small class="commentmetadata"><a href="#comment-115" title="">November 2nd, 2008 at 9:52 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-624">
+<div class="commentnumber">4</div>
+			<cite>Nick Says: </cite>
+						<br />
+
+
+
+<p>Why is this lcd display being operated using 2 ports? Can it be set up to use only one?</p>
+<small class="commentmetadata"><a href="#comment-624" title="">December 3rd, 2008 at 5:12 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-625">
+<div class="commentnumber">5</div>
+			<cite>Nick Says: </cite>
+						<br />
+
+
+
+<p>Oops i&#8217;m an idiot. This site was very helpful, THANKS!</p>
+<small class="commentmetadata"><a href="#comment-625" title="">December 3rd, 2008 at 5:32 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-629">
+<div class="commentnumber">6</div>
+			<cite>bla Says: </cite>
+						<br />
+
+
+
+<p>wonderful site, but your css-layout seems to be broken on<br />
+<a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/" rel="nofollow">http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/</a><br />
+(tables are not displayed correctly!)</p>
+<small class="commentmetadata"><a href="#comment-629" title="">December 6th, 2008 at 12:37 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-630">
+<div class="commentnumber">7</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@bla</p>
+<p>Hi,<br />
+Thanks for reporting! Ya the content just now looks horrible!!! Yesterday I applied a new theme and due to lack of time cannot complete it properly.</p>
+<p>I will clean everything soon.</p>
+<small class="commentmetadata"><a href="#comment-630" title="">December 6th, 2008 at 7:08 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-648">
+<div class="commentnumber">8</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@bla</p>
+<p>I have edited the page, now the layout is much better and readable.</p>
+<small class="commentmetadata"><a href="#comment-648" title="">December 13th, 2008 at 11:37 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-704">
+<div class="commentnumber">9</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-temperature-sensor-lm35/' rel='external nofollow' class='url'>Interfacing Temperature Sensor with AVR Microcontrollers - LM35 | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] Using LCD Modules with AVRs. [...]</p>
+<small class="commentmetadata"><a href="#comment-704" title="">January 11th, 2009 at 10:30 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-721">
+<div class="commentnumber">10</div>
+			<cite>yaksha Says: </cite>
+						<br />
+
+
+
+<p>Hi,<br />
+I managed to burn the hex file onto the MCu but im unable to see the output on the LCD. how can i fix this?</p>
+<small class="commentmetadata"><a href="#comment-721" title="">January 13th, 2009 at 1:08 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-724">
+<div class="commentnumber">11</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Check the following</p>
+<p>1)The Code is for ATmega8 MCU<br />
+2) See the connection section in lcd.h file and confirm that they are same as the physical connection u made.<br />
+3)Connect a 10K POT between Vcc and GND and the centre PIN to PIN 3 of LCD (contrast) and adjust it till chars are visible. But as in circuit above u can also GND this PIN.<br />
+4)Pls check all connection</p>
+<p>We can discuss further on this in forum<br />
+<a href="http://forum.extremeelectronics.co.in/viewforum.php?f=2" rel="nofollow">http://forum.extremeelectronics.co.in/viewforum.php?f=2</a></p>
+<small class="commentmetadata"><a href="#comment-724" title="">January 13th, 2009 at 5:11 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-815">
+<div class="commentnumber">12</div>
+			<cite>pooja Says: </cite>
+						<br />
+
+
+
+<p>Thanks for the Tutorials&#8230; I need a help that how the data trnasmitted to LCD and where the data is stored to display on the LCD.Pls kindly clear my doubt by explaining the transfer of data to LCD&#8230;</p>
+<small class="commentmetadata"><a href="#comment-815" title="">January 16th, 2009 at 10:54 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-817">
+<div class="commentnumber">13</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Pooja<br />
+ <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<p>To know the internals pls explore the source code and see this link</p>
+<p><a href="http://forum.extremeelectronics.co.in/viewtopic.php?f=3&#038;t=9" rel="nofollow">http://forum.extremeelectronics.co.in/viewtopic.php?f=3&#038;t=9</a></p>
+<small class="commentmetadata"><a href="#comment-817" title="">January 16th, 2009 at 12:21 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-873">
+<div class="commentnumber">14</div>
+			<cite>Jonathan Says: </cite>
+						<br />
+
+
+
+<p>Hi.</p>
+<p>Thanks! After trying out like 6 other lcd libraries out there on my ATMEGA-128 @ 16Mhz, yours is the only one I could get to work! Thanks!</p>
+<small class="commentmetadata"><a href="#comment-873" title="">January 20th, 2009 at 2:37 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-874">
+<div class="commentnumber">15</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Jonathan,<br />
+ <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /><br />
+Nice to meet you! I am happy that my codes are helping peoples.</p>
+<small class="commentmetadata"><a href="#comment-874" title="">January 20th, 2009 at 9:02 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-915">
+<div class="commentnumber">16</div>
+			<cite><a href='http://www.pa2600.com' rel='external nofollow' class='url'>levitis_leviathan</a> Says: </cite>
+						<br />
+
+
+
+<p>Avinash: Great library!  Easy to use and modify. A question, however:  How can I print the value of a variable, such as the character contained in the serial UDR register, to the LCD?</p>
+<small class="commentmetadata"><a href="#comment-915" title="">January 29th, 2009 at 1:52 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-917">
+<div class="commentnumber">17</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Levitis,</p>
+<p>Yes you can print the content of a varriable.</p>
+<p>1)char type : USE function LCDData(char_varriable);<br />
+2)int type see: LCDWriteInt() &#038; LCDWriteIntXY() functions.</p>
+<p> <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' />  Have a nice day !</p>
+<small class="commentmetadata"><a href="#comment-917" title="">January 29th, 2009 at 8:22 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1164">
+<div class="commentnumber">18</div>
+			<cite>Mozard Dia Says: </cite>
+						<br />
+
+
+
+<p>Thank you very much!<br />
+How can i configure the library file to use it with a 4 lines 20 characters LCS?Please any help.</p>
+<small class="commentmetadata"><a href="#comment-1164" title="">February 20th, 2009 at 12:36 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1165">
+<div class="commentnumber">19</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello,</p>
+<p>The 4 line modules are actually 2 LCD module pack into one.<br />
+I think they are accessed like two different modules. They have 2 HD44780 controllers in them.</p>
+<small class="commentmetadata"><a href="#comment-1165" title="">February 20th, 2009 at 12:45 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1208">
+<div class="commentnumber">20</div>
+			<cite>Rakesh Says: </cite>
+						<br />
+
+
+
+<p>Can u explain the functions that you wrote in the lcd.h file..</p>
+<small class="commentmetadata"><a href="#comment-1208" title="">February 27th, 2009 at 12:06 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1220">
+<div class="commentnumber">21</div>
+			<cite>Andrei911 Says: </cite>
+						<br />
+
+
+
+<p>It helped me a lot, thanks. You are doing a good job <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_wink.gif' alt=';)' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-1220" title="">March 4th, 2009 at 2:37 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1247">
+<div class="commentnumber">22</div>
+			<cite>ankit agarwal Says: </cite>
+						<br />
+
+
+
+<p>Dear Avinash,<br />
+When i am compling your code it is giving 5 errors and it is saying that &#8220;lcd.h : no such file or directory exist&#8221; what should i do&#8230;</p>
+<small class="commentmetadata"><a href="#comment-1247" title="">March 8th, 2009 at 3:34 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1324">
+<div class="commentnumber">23</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/easy-24c-i2c-serial-eeprom-interfacing-with-avr-microcontrollers/' rel='external nofollow' class='url'>Easy 24C I2C Serial EEPROM Interfacing with AVR Microcontrollers | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] program demonstrate the use of external EEPROM interfaing functions. The program makes use of the LCD library for AVRs to display information in a 16&#215;2 LCD display. The program first writes 8Kbytes of data to a 24c64 [...]</p>
+<small class="commentmetadata"><a href="#comment-1324" title="">March 20th, 2009 at 1:19 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1406">
+<div class="commentnumber">24</div>
+			<cite>suhas Says: </cite>
+						<br />
+
+
+
+<p>in this statement how to select portb(4-7) instead of 0-3?<br />
+#define LCD_DATA C	//Port PC0-PC3 are connected to D4-D7</p>
+<p>code is very useful. Thank you..</p>
+<small class="commentmetadata"><a href="#comment-1406" title="">March 28th, 2009 at 11:30 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1419">
+<div class="commentnumber">25</div>
+			<cite><a href='http://cameraarea.com' rel='external nofollow' class='url'>Elizabeth</a> Says: </cite>
+						<br />
+
+
+
+<p>Great ideas, is there a place to elaborate on this all?</p>
+<small class="commentmetadata"><a href="#comment-1419" title="">April 3rd, 2009 at 6:56 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1420">
+<div class="commentnumber">26</div>
+			<cite><a href='http://blog.raditpunakawan.com' rel='external nofollow' class='url'>RaditPunakawan</a> Says: </cite>
+						<br />
+
+
+
+<p>Wew..thx bro! this lib is very helpful!!! now i can working on my final project&#8230;..lol</p>
+<small class="commentmetadata"><a href="#comment-1420" title="">April 3rd, 2009 at 2:43 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1493">
+<div class="commentnumber">27</div>
+			<cite>Erik Diaz Says: </cite>
+						<br />
+
+
+
+<p>La pagina es espectacular, soy fanatico de los AVR&#8230;<br />
+en su sitio he encontrado cosas muy buenas!!</p>
+<p>Thanks&#8230;<br />
+Saludos desde CHILE!!!</p>
+<small class="commentmetadata"><a href="#comment-1493" title="">April 20th, 2009 at 7:24 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1696">
+<div class="commentnumber">28</div>
+			<cite>santosh Says: </cite>
+						<br />
+
+
+
+<p>can we do the program for LCD through WINAVR for ATMEGA16??????????????????</p>
+<small class="commentmetadata"><a href="#comment-1696" title="">May 16th, 2009 at 6:18 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1704">
+<div class="commentnumber">29</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@SANTOSH</strong></p>
+<p><strong>SO WHAT IS THE THAT LONG PAGE ABOUT ???</strong></p>
+<p>DON&#8217;T POST SUCH SILLY QUESTIONS!</p>
+<small class="commentmetadata"><a href="#comment-1704" title="">May 17th, 2009 at 7:56 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1759">
+<div class="commentnumber">30</div>
+			<cite>sanjay Says: </cite>
+						<br />
+
+
+
+<p>my lcd data pins are connected to portb as<br />
+DATA 4 &#8211; PINB 4<br />
+DATA 5 &#8211; PINB 5<br />
+DATA 6 &#8211; PINB 6<br />
+DATA 7 &#8211; PINB 7 </p>
+<p>can you give the right modification in lcd.h connection</p>
+<small class="commentmetadata"><a href="#comment-1759" title="">May 24th, 2009 at 1:49 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1760">
+<div class="commentnumber">31</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@ Sanjay</p>
+<p>Tell me the position of RS/RW/ and E Pins<br />
+also the MCU in use</p>
+<p>Currently you can only use LOWER NIBBLE OF A PORT (i.e. bit 0-3) for data port.</p>
+<p>And you are trying to use higher nibble (i.e. bit 4-7) which is NOT possible.</p>
+<p> <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> Thankyou.</p>
+<small class="commentmetadata"><a href="#comment-1760" title="">May 24th, 2009 at 7:01 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1761">
+<div class="commentnumber">32</div>
+			<cite>sanjay Says: </cite>
+						<br />
+
+
+
+<p>the pin cinfiguration is as<br />
+RS – PB.0<br />
+RW – PB.1<br />
+EN – PB.3<br />
+D0 – PB.4<br />
+D1 – PB.5<br />
+D2 – PB.6<br />
+D3 – PB.7<br />
+and working in 4bit mode</p>
+<small class="commentmetadata"><a href="#comment-1761" title="">May 24th, 2009 at 10:38 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1763">
+<div class="commentnumber">33</div>
+			<cite><a href='http://www.chalia.net' rel='external nofollow' class='url'>Aditiya</a> Says: </cite>
+						<br />
+
+
+
+<p>Thanks for your tutorial,</p>
+<p>I have some question about your tutorial, I&#8217;ve been used codevision avr before, and now migrate to winavr, my LCD data port belong to PORT C4, C5, C6, C7</p>
+<p>how to set my data port in your lcd.h ?</p>
+<small class="commentmetadata"><a href="#comment-1763" title="">May 25th, 2009 at 5:59 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1770">
+<div class="commentnumber">34</div>
+			<cite>Varun Says: </cite>
+						<br />
+
+
+
+<p>First of all&#8230;&#8230;thank you very very much Avinash. Brilliant job with the tuts. Hats off&#8230;.<br />
+I did try this out with ATmega8 and it worked A ok.<br />
+But now want to try this out with ATmega32 and the code doesnt seem to work.<br />
+Before trying it out with ATmega32 i did chance the code in lcd.h file like shown below.<br />
+But i don&#8217;t seem to get any o/p. </p>
+<p>Can you please help and tell me why this code only works for ATmega8 and not ATmega32 ? </p>
+<p>#define LCD_DATA C	//Port PC0-PC3 are connected to D4-D7 </p>
+<p>#define LCD_E D //Enable OR strobe signal<br />
+#define LCD_E_POS	PD6	//Position of enable in above port </p>
+<p>#define LCD_RS D<br />
+#define LCD_RS_POS PD4 </p>
+<p>#define LCD_RW D<br />
+#define LCD_RW_POS PD5</p>
+<small class="commentmetadata"><a href="#comment-1770" title="">May 25th, 2009 at 9:27 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1775">
+<div class="commentnumber">35</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Varun<br />
+Yes it works with ATmega8/16/32 and many more. Just check the CPU speed you set. In AVR Studio Give exact CPU frequency(crystal) in actual use.</p>
+<small class="commentmetadata"><a href="#comment-1775" title="">May 26th, 2009 at 4:18 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1977">
+<div class="commentnumber">36</div>
+			<cite>Andriu Says: </cite>
+						<br />
+
+
+
+<p>Thank tou very much Avinash.<br />
+I have tried it but it did not work. I am using AVR Studio for an ATMEGA8.<br />
+When I try to Build the project there are two errors:<br />
+&#8220;&#8230; Section .text will not fit in region text&#8221;<br />
+and<br />
+&#8220;&#8230; region text overflowed by 3506 bytes&#8221;</p>
+<p>Please, could you help me with this?</p>
+<p>Thank you</p>
+<small class="commentmetadata"><a href="#comment-1977" title="">June 24th, 2009 at 1:38 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1979">
+<div class="commentnumber">37</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Andriu,</p>
+<p>The problem is that you have OPTIMIZATION turned off. Go to Project->Configuration and change optimization to O2. And report to me if it solved the problem. <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-1979" title="">June 24th, 2009 at 6:16 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1984">
+<div class="commentnumber">38</div>
+			<cite>Andriu Says: </cite>
+						<br />
+
+
+
+<p>You were right, now it is built, but nothing is written in the LCD.<br />
+It seems to write only the first line and a few seconds later, it seems to write the two lines of the LCD but there are no characters, all the points get black.<br />
+I have a 10K pot and move the contrast but it does not work. Either it is all white or all black, the characters are not printed.<br />
+In project options I have selected FREquency 12000000 Hz. Is it correct?</p>
+<p>Thank you again for your time</p>
+<small class="commentmetadata"><a href="#comment-1984" title="">June 25th, 2009 at 12:08 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2011">
+<div class="commentnumber">39</div>
+			<cite>Andriu Says: </cite>
+						<br />
+
+
+
+<p>Hello,</p>
+<p>I have been trying and I can not make it work.<br />
+I have connected ENABLE at PB5, RS at PB4 and RW at PD7.<br />
+Can be there the problem? Should I connect all of them to the same port?</p>
+<p>Thank you, Avinash</p>
+<small class="commentmetadata"><a href="#comment-2011" title="">July 1st, 2009 at 12:33 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2014">
+<div class="commentnumber">40</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Andriu,</p>
+<p>What is the freq of crystal u r usin?<br />
+and tell me the details of connection (all pins)</p>
+<small class="commentmetadata"><a href="#comment-2014" title="">July 1st, 2009 at 10:16 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2019">
+<div class="commentnumber">41</div>
+			<cite>Andriu Says: </cite>
+						<br />
+
+
+
+<p>I am using STK500 and I amtrying to make it work at 1 MHz.<br />
+I have changed in lcd.c and lcd.h: #define F_CPU 1000000UL<br />
+In Project, Configuration options, Frequency: 1000000 Hz<br />
+and when I program I select:<br />
+ &#8211; Fuses: Internal RC osc 1Mhz (I have also tried Ext. Clock) </p>
+<p>Connections:<br />
+PB0 &#8211;&gt; data 4 (11 in LCD)<br />
+PB1 &#8211;&gt; data 5 (12 in LCD)<br />
+PB2 &#8211;&gt; data 6 (13 in LCD)<br />
+PB3 &#8211;&gt; data 7 (14 in LCD)<br />
+PB4 &#8211;&gt; RS (4 in LCD)<br />
+PB5 &#8211;&gt; ENABLE (6 in LCD)<br />
+PD7 &#8211;&gt; RW (5 in LCD)</p>
+<p>The first line of the display is black and the second is white.<br />
+I have repeated the assembly with a new LCD and new cables and the same is happening again. I guess I am forgetting something.</p>
+<small class="commentmetadata"><a href="#comment-2019" title="">July 1st, 2009 at 10:05 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2022">
+<div class="commentnumber">42</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Andriu,</p>
+<p>Have u edited the lcd.h file&#8217;s connection section ???</p>
+<small class="commentmetadata"><a href="#comment-2022" title="">July 2nd, 2009 at 11:12 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2025">
+<div class="commentnumber">43</div>
+			<cite>Andriu Says: </cite>
+						<br />
+
+
+
+<p>Yes, I have edited the lcd.h file. This is the text:<br />
+#ifndef F_CPU<br />
+	#define F_CPU 1000000UL<br />
+#endif</p>
+<p>&#8230;</p>
+<p>#define LCD_DATA B	//Port PB0-PB3 are connected to D4-D7</p>
+<p>#define LCD_E B 		//Enable OR strobe signal<br />
+#define LCD_E_POS	PB5	//Position of enable in above port</p>
+<p>#define LCD_RS B<br />
+#define LCD_RS_POS 	PB4</p>
+<p>#define LCD_RW D<br />
+#define LCD_RW_POS 	PD7</p>
+<small class="commentmetadata"><a href="#comment-2025" title="">July 2nd, 2009 at 9:37 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2103">
+<div class="commentnumber">44</div>
+			<cite>shashi Says: </cite>
+						<br />
+
+
+
+<p>hey nice tutorial avinash&#8230;.<br />
+if i connected the lm 35 to adc0 and humidity sensor to adc1  how to write the code for it can  you help me for this</p>
+<small class="commentmetadata"><a href="#comment-2103" title="">July 13th, 2009 at 9:32 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2122">
+<div class="commentnumber">45</div>
+			<cite>Andriu Says: </cite>
+						<br />
+
+
+
+<p>Avinash,</p>
+<p>thank you very much. At last I managed to make it work. I do not know why (your code seems to me all right), the atmega was in an infinite loop when I called to InitLCD(). </p>
+<p>I have changed in function void LCDBusyLoop() the condition while (busy) for while(busy==0&#215;00) to force it to leave the loop. And in main() I write</p>
+<p>InitLCD(LS_ULINE);<br />
+LCDClear();<br />
+LCDWriteStringXY(0,0, &#8221;    &#8220;);<br />
+LCDWriteStringXY(0, 0, &#8220;Hello World&#8221;);</p>
+<p>Somehow it works.<br />
+Again, thank you very much for the code and for your answers.<br />
+Best regards from Spain</p>
+<small class="commentmetadata"><a href="#comment-2122" title="">July 16th, 2009 at 3:10 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2193">
+<div class="commentnumber">46</div>
+			<cite>Dollar Says: </cite>
+						<br />
+
+
+
+<p>Avinash,<br />
+Thanks a lot for your nice working Tutorial. I have become successful in LCD programming using ur files..<br />
+A little problem is that it sometimes does not want to start instantly. After switch off/on of power, it then starts&#8230;.Why is that..?</p>
+<small class="commentmetadata"><a href="#comment-2193" title="">July 25th, 2009 at 9:37 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2199">
+<div class="commentnumber">47</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>Hy!<br />
+Thank you for these gresat tutorials.<br />
+I have managed to get my 2X16 LCD to work on  PORT B, but I noticed that I need that port for other things(on Atmega 16).<br />
+I&#8217;ve connected the LCD to PORT C:<br />
+PC 0-3 to LCD 11-14<br />
+PC4 &#8211; RS<br />
+PC5 &#8211; RW<br />
+PC6 &#8211; E<br />
+I also edited the lcd.h as it follows:<br />
+#define LCD_DATA C	//Port PC0-PC3 are connected to D4-D7</p>
+<p>#define LCD_E C 		//Enable OR strobe signal<br />
+#define LCD_E_POS	PC6	//Position of enable in above port</p>
+<p>#define LCD_RS C<br />
+#define LCD_RS_POS 	PC4</p>
+<p>#define LCD_RW C<br />
+#define LCD_RW_POS PC5</p>
+<p>The lcd doesn&#8217;t working, it shows only the first line with all points on.<br />
+I have also checked the connections with a multimeter. Everything is ok.<br />
+Please help me!</p>
+<small class="commentmetadata"><a href="#comment-2199" title="">July 25th, 2009 at 11:52 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2200">
+<div class="commentnumber">48</div>
+			<cite>Bhargav Says: </cite>
+						<br />
+
+
+
+<p>@Andrei</p>
+<p>While using PORTC in ATmega16 you need to disable the JTAG functionality which is by default enabled on the ATmega16.<br />
+See that u have disabled the JTAG functionality first.<br />
+To disable the JTAG u need to change the high fuse bits&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2200" title="">July 25th, 2009 at 11:59 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2207">
+<div class="commentnumber">49</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>Thanks for the respone. but it still doesn&#8217;t work.<br />
+I have disabled the JTAG option and the result is the same.<br />
+..with AVR Burn-o-mat i wrote D9 on hfuse</p>
+<small class="commentmetadata"><a href="#comment-2207" title="">July 26th, 2009 at 12:55 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2208">
+<div class="commentnumber">50</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>..and another thing, if i reset the MCU, one time lcd displays one line full oh pixels, and other time it shows 2 lines. I don&#8217;t know what is the problem.</p>
+<small class="commentmetadata"><a href="#comment-2208" title="">July 26th, 2009 at 12:59 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2209">
+<div class="commentnumber">51</div>
+			<cite>Bhargav Says: </cite>
+						<br />
+
+
+
+<p>@Andrei<br />
+please tell ur gmail id.</p>
+<small class="commentmetadata"><a href="#comment-2209" title="">July 26th, 2009 at 1:01 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2210">
+<div class="commentnumber">52</div>
+			<cite>Bhargav Says: </cite>
+						<br />
+
+
+
+<p>R u able to do that with other ports</p>
+<small class="commentmetadata"><a href="#comment-2210" title="">July 26th, 2009 at 1:02 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2211">
+<div class="commentnumber">53</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>I have only an yahoo account bboyandru</p>
+<small class="commentmetadata"><a href="#comment-2211" title="">July 26th, 2009 at 1:04 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2212">
+<div class="commentnumber">54</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>and yes, with port B it worked</p>
+<small class="commentmetadata"><a href="#comment-2212" title="">July 26th, 2009 at 1:05 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2213">
+<div class="commentnumber">55</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>It ain&#8217;t working anymore, neither with PORT B <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_sad.gif' alt=':(' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-2213" title="">July 26th, 2009 at 1:24 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2214">
+<div class="commentnumber">56</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>Yes!!!!<br />
+It is working, on PORTC too, thank you so much for your time.</p>
+<p>The problem was that in lcd.c I have modified LCDBusyLoop function as mentioned above ( while(busy==0×00) ). I replaced with while(busy) as Avinash wrote first and is working. And with PORT C the problem was with disabling JTAG.</p>
+<p>Thank you so much!</p>
+<small class="commentmetadata"><a href="#comment-2214" title="">July 26th, 2009 at 1:45 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2301">
+<div class="commentnumber">57</div>
+			<cite>Tandy Says: </cite>
+						<br />
+
+
+
+<p>Hey just wanted to check whether the LCD display you are using uses a HD44780 controller or a KS0066 controller.</p>
+<p>And also to check if you know whether there are any differences between them.</p>
+<p>Thanks</p>
+<small class="commentmetadata"><a href="#comment-2301" title="">August 4th, 2009 at 7:29 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2303">
+<div class="commentnumber">58</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Trandy</p>
+<p>They are HD44780 based</p>
+<small class="commentmetadata"><a href="#comment-2303" title="">August 4th, 2009 at 9:06 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2533">
+<div class="commentnumber">59</div>
+			<cite>Krishna Says: </cite>
+						<br />
+
+
+
+<p>hi thanks a lot buddy!</p>
+<p>I have a small question please, I did all the connections properly and compiled your sample program successfully. I also accordingly changed the 12000000UL to 16000000UL in both the c file and the header file (libraries) since I&#8217;m using an external 16MHz crystal.</p>
+<p>My problem is that it shows all black on the first line in each box. I have no idea why, any ideas?</p>
+<p>thanks man <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_razz.gif' alt=':P' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-2533" title="">September 1st, 2009 at 10:05 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2534">
+<div class="commentnumber">60</div>
+			<cite>Krishna Says: </cite>
+						<br />
+
+
+
+<p>oh btw im using the atmega32. This is for a uni project im working on so it needs an lcd and I was lucky I found yours <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> thank you!</p>
+<small class="commentmetadata"><a href="#comment-2534" title="">September 1st, 2009 at 10:06 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2535">
+<div class="commentnumber">61</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hey Man (Krishan),</p>
+<p>Do u think you can use the external crystal by just hooking the crystal to MCU? Also pls see above comments, u need to disable JTAG to use PORTC on ATmega32</p>
+<small class="commentmetadata"><a href="#comment-2535" title="">September 1st, 2009 at 10:13 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2536">
+<div class="commentnumber">62</div>
+			<cite>Krishna Says: </cite>
+						<br />
+
+
+
+<p>Hi!</p>
+<p>The external crystal is connected to the mcu. Yes sure thanks I&#8217;ll disable the JTAG on the atmega32 via the fuse bits and see what happens.</p>
+<p>btw that was a fast reply <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_razz.gif' alt=':P' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-2536" title="">September 1st, 2009 at 10:23 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2537">
+<div class="commentnumber">63</div>
+			<cite>Krishna Says: </cite>
+						<br />
+
+
+
+<p>Dude you are the best! it works!! The jtag was the issue <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_razz.gif' alt=':P' class='wp-smiley' /> </p>
+<p>Also I just want to confirm in your tutorial it says that: LCDWriteInt(int val,unsigned int field_length);</p>
+<p>val is a integer value, whatever that may be, will be displayed. So if I had a global value named &#8216;distance&#8217; instead of &#8216;val&#8217; (since my project calculates distance), whatever value that the program calculates and stores into distance it would be displayed on the lcd.</p>
+<small class="commentmetadata"><a href="#comment-2537" title="">September 1st, 2009 at 10:47 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2716">
+<div class="commentnumber">64</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' rel='external nofollow' class='url'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] program use our LCD driver library more details of which can be found in here. Use avr-gcc + AVR Studio to [...]</p>
+<small class="commentmetadata"><a href="#comment-2716" title="">September 17th, 2009 at 11:05 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2742">
+<div class="commentnumber">65</div>
+			<cite>krishna Says: </cite>
+						<br />
+
+
+
+<p>how do i add header files in case i m using winavr(programmers notepad n makefile) instead of Avrstudio..??</p>
+<small class="commentmetadata"><a href="#comment-2742" title="">September 20th, 2009 at 2:03 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2751">
+<div class="commentnumber">66</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Krishna No need to add headers files just put then project dir</strong></p>
+<small class="commentmetadata"><a href="#comment-2751" title="">September 22nd, 2009 at 11:01 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2778">
+<div class="commentnumber">67</div>
+			<cite>Kostas Says: </cite>
+						<br />
+
+
+
+<p>Nice Tutorial.Well i am one of those who has this problem, especially with portC and my jtag fuse is disabled but the problem remains.I have atmega32 with external crystal 8 mhz and using AVRSTUDIO 4  .I am sure that i have disabled JTAG fuse bit but if i am wrong here are my fuse bits : hbits are 0xD9 and lowbits 0xFD.I need immediately to use portc for Lcd only!With other ports there are no problems, its working well!Any help and reply if possible&#8230;<br />
+Thanks</p>
+<small class="commentmetadata"><a href="#comment-2778" title="">September 30th, 2009 at 11:28 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2780">
+<div class="commentnumber">68</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Kostas<br />
+Use High Fuse = 0xC9 and Low Fuse = 0xFF</strong></p>
+<small class="commentmetadata"><a href="#comment-2780" title="">October 1st, 2009 at 8:30 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2785">
+<div class="commentnumber">69</div>
+			<cite>Andy Says: </cite>
+						<br />
+
+
+
+<p>hey buddy! just would like to say many thanks for the libraries, they work great.</p>
+<p>I just have a question please. Here&#8217;s a small snippet of code.</p>
+<p>int main(void)<br />
+{<br />
+// Initialize the LCD<br />
+InitLCD(LS_BLINK|LS_ULINE);</p>
+<p>//Clear the screen<br />
+LCDClear();</p>
+<p>welcome(); // Welcome the user to the device</p>
+<p>// Initialization code here for the timers and some variables<br />
+sei(); // Enable global interrupts</p>
+<p>for(;;)<br />
+{<br />
+//  Would like some code to run here<br />
+}<br />
+return 0;<br />
+}</p>
+<small class="commentmetadata"><a href="#comment-2785" title="">October 1st, 2009 at 8:40 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2788">
+<div class="commentnumber">70</div>
+			<cite>Andy Says: </cite>
+						<br />
+
+
+
+<p>My question is that the function welcome() displays my name, and then the name of the project perfectly, however after that no code in the infinite for(;;) loop runs. I would liked to have some calculation routine there however if the LCD libraries are enabled (that is, not commented out) the for(;;) loop and the code inside it won&#8217;t run. However if the libraries initialization are commented out then access to the for(;;) loop is restored and code in it runs.</p>
+<p>I noticed this on the built-in debugging (im using atmega32 with the simulator also being being atmega32 within avrstudio). Also in practice, the code that was in the for(;;) routine never ran.</p>
+<p>During debugging, when the simulator comes to the line:<br />
+InitLCD(LS_BLINK|LS_ULINE);  &lt;&#8211;</p>
+<p>AVRStudio then switches to LCD.c towards start of the line:<br />
+initLCD(unint8_t style)</p>
+<p>Then when F11 is pressed again to resume debugging it goes to the delay_basic.h file to the line:<br />
+_delay_loop+_2(uint16_6 __count)</p>
+<small class="commentmetadata"><a href="#comment-2788" title="">October 2nd, 2009 at 3:40 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2789">
+<div class="commentnumber">71</div>
+			<cite>Andy Says: </cite>
+						<br />
+
+
+
+<p>Then when F11 is pressed again it goes to the delay.h line to the _delay_ms(double_ms) function. It&#8217;s here that it is forever stuck in the while loop:</p>
+<p>while(__ticks)<br />
+{<br />
+_delay_loop_2((F_CPU)/4e3) / 10);<br />
+_ticks&#8211;;<br />
+{</p>
+<p>So I think this is probably the reason why any code in the for(;;) routine in the main function never runs. Any ideas? Please help thank you&#8230;</p>
+<p>PS: Sorry for bridging the question over 3 posts, I didn&#8217;t think it would allow the post to be all in one.</p>
+<small class="commentmetadata"><a href="#comment-2789" title="">October 2nd, 2009 at 3:41 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2792">
+<div class="commentnumber">72</div>
+			<cite>kanha Says: </cite>
+						<br />
+
+
+
+<p>hii<br />
+avinash thanks for the tutorial..<br />
+i m trying this api for atmega16l..<br />
+what should be the frequency of mcu and what will be the fuse bits corresponding to that frequency..</p>
+<small class="commentmetadata"><a href="#comment-2792" title="">October 3rd, 2009 at 8:46 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2803">
+<div class="commentnumber">73</div>
+			<cite>Mohit Agarwal Says: </cite>
+						<br />
+
+
+
+<p>hi<br />
+thnx for your gr8 tut<br />
+ihave some problem<br />
+the pin cinfiguration I used is as<br />
+RS – PB.0<br />
+RW – PB.1<br />
+EN – PB.3<br />
+D0 – PB.4<br />
+D1 – PB.5<br />
+D2 – PB.6<br />
+D3 – PB.7<br />
+and working in 4bit mode<br />
+where do i have to make changes in the lcd.h file for the data pins and what should i write<br />
+plz urgent</p>
+<small class="commentmetadata"><a href="#comment-2803" title="">October 4th, 2009 at 1:59 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2819">
+<div class="commentnumber">74</div>
+			<cite>Kostas Says: </cite>
+						<br />
+
+
+
+<p>Hmm&#8230;.Ainstain said that two things are infinite: the universe and human stupidity; and I&#8217;m not sure about the universe.I fixed it ,it was in front of my eyes, hardware problem.The DIP connector i used for PORTC it was backwards etc:Port0-port1&#8230;.ground-Vcc for the other ports and for portC were Port7-Port6&#8230;ground-Vcc.Well i deserve the title &#8220;the ..rk of the week&#8221;:P.Thanks for your quick answer Avinash and keep your great work going on and on.</p>
+<small class="commentmetadata"><a href="#comment-2819" title="">October 7th, 2009 at 3:35 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2858">
+<div class="commentnumber">75</div>
+			<cite>binal Says: </cite>
+						<br />
+
+
+
+<p>hey avinash i want to print the degree symbol on the lcd..plz could you help me wid that..thanking..waiting for your reply&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2858" title="">October 15th, 2009 at 2:55 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2863">
+<div class="commentnumber">76</div>
+			<cite>Varun Says: </cite>
+						<br />
+
+
+
+<p>Hey avinash&#8230;..Your lib worked great on 16&#215;2 LCD&#8230;..i was wondering whether i cud use the same lib for a 16&#215;4 LCD module&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2863" title="">October 16th, 2009 at 4:05 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2890">
+<div class="commentnumber">77</div>
+			<cite>monang Says: </cite>
+						<br />
+
+
+
+<p>why I cant access the forum.extreem electronics</p>
+<small class="commentmetadata"><a href="#comment-2890" title="">October 22nd, 2009 at 4:06 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2892">
+<div class="commentnumber">78</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Monang</p>
+<p>Some hacker attacked the server and injected malicious code in it so I have to stop the site. I will restart it once every thing is corrected. It was very horrible experience. </strong></p>
+<small class="commentmetadata"><a href="#comment-2892" title="">October 22nd, 2009 at 5:46 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2895">
+<div class="commentnumber">79</div>
+			<cite>Ravi Kiran Says: </cite>
+						<br />
+
+
+
+<p>Sir,<br />
+Your way of teaching AVR is awesome&#8230;. I did not read any text book but understood AVR and able to use it for my projects.</p>
+<p>I have problem with the LCD library that you have provided on the website. My problem is my LCD is connected to port B and I want to change the library code for it. The LCD uses databits D0-D3. The connections are made as follows-</p>
+<p>RS-PB.0<br />
+RW-PB.1<br />
+EN-PB.3<br />
+D0-PB.4<br />
+D1-PB.5<br />
+D2-PB.6<br />
+D3-PB.7</p>
+<p>In the library code it is given that Px.0-Px.3 should be connected to D4-D7 of LCD. But my development board does not allow that. So please tell me how to connect PB.4-PB.7 pins of AVR to LCD&#8217;s D0-D3 data pins.</p>
+<p>Thank You</p>
+<small class="commentmetadata"><a href="#comment-2895" title="">October 22nd, 2009 at 10:41 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2900">
+<div class="commentnumber">80</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' rel='external nofollow' class='url'>Interfacing DS1307 RTC Chip with AVR Microcontroller | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] LCD Interfacing library for Atmel AVR MCUs [...]</p>
+<small class="commentmetadata"><a href="#comment-2900" title="">October 23rd, 2009 at 10:45 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2905">
+<div class="commentnumber">81</div>
+			<cite>Jimi Says: </cite>
+						<br />
+
+
+
+<p>HI Avinash,</p>
+<p>This tutorial is of great use.</p>
+<p>I have a small question, I am trying to display characters on lcd sent via serial port. But when i send &#8216;a&#8217;, lcd displays &#8216;97&#8242;. Can you tell me how to convert ASCII to letter to display &#8216;a&#8217;.</p>
+<p>My code is:</p>
+<p>data = USARTReadChar();  //reads the letter<br />
+itoa(data,buf,16); //converts to ASCII<br />
+send_lcd_str(buf); //this function displays only strings</p>
+<p>Thanks.</p>
+<small class="commentmetadata"><a href="#comment-2905" title="">October 23rd, 2009 at 4:01 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2909">
+<div class="commentnumber">82</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Jimi</p>
+<p>The code will be like this</p>
+<p>char data[2];</p>
+<p>data[0] = USARTReadChar(); //reads the letter<br />
+data[1]=&#8217;\0&#8242;;</p>
+<p>send_lcd_str(data); //this function displays only strings</strong></p>
+<small class="commentmetadata"><a href="#comment-2909" title="">October 23rd, 2009 at 6:17 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2955">
+<div class="commentnumber">83</div>
+			<cite>Varun Says: </cite>
+						<br />
+
+
+
+<p>Hey avinash…..Your lib worked great on 16×2 LCD…..i was wondering whether i cud use the same lib for a 16×4 LCD module…</p>
+<small class="commentmetadata"><a href="#comment-2955" title="">October 31st, 2009 at 11:00 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2980">
+<div class="commentnumber">84</div>
+			<cite>Oscar Says: </cite>
+						<br />
+
+
+
+<p>Avinash,</p>
+<p>I was hoping you could elaborate more on your comments below. I would also like to use these libraries to control  a 4X20 LCD and don&#8217;t really know where to start in editing the libraries.</p>
+<p>Avinash Says:<br />
+Hello,<br />
+The 4 line modules are actually 2 LCD module pack into one.<br />
+I think they are accessed like two different modules. They have 2 HD44780 controllers in them.<br />
+February 20th, 2009 at 12:45 pm</p>
+<small class="commentmetadata"><a href="#comment-2980" title="">November 6th, 2009 at 11:29 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2981">
+<div class="commentnumber">85</div>
+			<cite>danial Says: </cite>
+						<br />
+
+
+
+<p>hello avinash,<br />
+your library is very easy to us,i use it for interfacing 16*2 lcd module but for 16*4 its not working.plz help to use it with 16*4 .</p>
+<small class="commentmetadata"><a href="#comment-2981" title="">November 6th, 2009 at 12:42 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3101">
+<div class="commentnumber">86</div>
+			<cite>Ian Says: </cite>
+						<br />
+
+
+
+<p>Dear Avinash,<br />
+This page and your code was very helpful. I&#8217;ve got an LCD module working on PORTB of an ATTiny2313. Can you help with the following. I would like to turn the cursor off. I looked up the codes for the HD44780 and found the cursor off code. I tried adding the following to lcd.h<br />
+#define LS_NONE 0B00000000<br />
+Then I initialised the lcd with InitLCD(LS_NONE);<br />
+I still get both a flashing and underlined cursor. Is there any way to turn it off?</p>
+<small class="commentmetadata"><a href="#comment-3101" title="">November 29th, 2009 at 11:17 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3104">
+<div class="commentnumber">87</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Ian</p>
+<p>I also tried to give command as per the datasheet but could not turn off the cursor. I don&#8217;t know whats the problem. If you find a solution please share with me. Thanks <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-3104" title="">November 30th, 2009 at 8:19 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3106">
+<div class="commentnumber">88</div>
+			<cite>seema Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash,<br />
+You said you have two different codes for ATMega8 and ATMega16/32<br />
+I am using ATMega16 so can you give the code or I can use ATMega8 code with some changes . I have already made some changes as per your tutorial. But I am using same lcd.c, “lcd.h” and “myutils.h file with only these changes:<br />
+LCD CONNECTIONS<br />
+*************************************************/<br />
+#define LCD_DATA B	//Port PB0-PB3 are connected to D4-D7<br />
+#define LCD_E B //Enable OR strobe signal<br />
+#define LCD_E_POS	PB4	//Position of enable in above port<br />
+#define LCD_RS C<br />
+#define LCD_RS_POS PC7<br />
+#define LCD_RW C<br />
+#define LCD_RW_POS PC6<br />
+Is it correct or I need to change something else also</p>
+<small class="commentmetadata"><a href="#comment-3106" title="">November 30th, 2009 at 5:31 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3113">
+<div class="commentnumber">89</div>
+			<cite>seema Says: </cite>
+						<br />
+
+
+
+<p>hey avinash ,<br />
+my comment is still in waiting &#8230;..would you please accept it.<br />
+Please help my program is not working .</p>
+<small class="commentmetadata"><a href="#comment-3113" title="">December 1st, 2009 at 3:17 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3115">
+<div class="commentnumber">90</div>
+			<cite>seema Says: </cite>
+						<br />
+
+
+
+<p>Hey I am sorry avinash , m new in this field &#8230;.but I didnt found ATMega16 code in your tutorial &#8230;.as you said you have written codes for ATMega16 also . can you please send me that link .<br />
+If there is no code in your tutorial then is it possible to make some changes in ATMega8 code to use in ATmega16. </p>
+<p>thanking you<br />
+Seema</p>
+<small class="commentmetadata"><a href="#comment-3115" title="">December 1st, 2009 at 4:09 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3153">
+<div class="commentnumber">91</div>
+			<cite>Sarunas Says: </cite>
+						<br />
+
+
+
+<p>Hi, great website and library<br />
+I found that cursor does&#8217;t react to ULINE and NONE(as was said), so I looked at lcd datasheet, and found that function set command have to be befor.<br />
+so int the LCDInit(&#8230;) write</p>
+<p>LCDCmd(0b00101000);//function set 4-bit,2 line 5&#215;7 dot format<br />
+LCDCmd(0b00001100|style);//Display On</p>
+<p>and it works perfectly</p>
+<p>thank&#8217;s</p>
+<small class="commentmetadata"><a href="#comment-3153" title="">December 6th, 2009 at 6:18 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3154">
+<div class="commentnumber">92</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Sarunas<br />
+ <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<p>Many thanks for solving the problem. I will try it out. </strong><em></em></p>
+<small class="commentmetadata"><a href="#comment-3154" title="">December 6th, 2009 at 6:45 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3260">
+<div class="commentnumber">93</div>
+			<cite>Rohan Says: </cite>
+						<br />
+
+
+
+<p>Avinash</p>
+<p>thats really cool as your others. But is seems to me your library doesnt work for the blue lcd. its ok for the green.<br />
+Is the blue differ from green except led color?</p>
+<small class="commentmetadata"><a href="#comment-3260" title="">December 24th, 2009 at 10:21 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3265">
+<div class="commentnumber">94</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Rohan</p>
+<p>It works flawlessly on BLUE LCDs too !!! I have tested with many modules.<br />
+Just use your Common Sense and you will get it working (I won&#8217;t give a silly tip so as how to use blue LCD as any one with brain can figure it out in less than 2 minute)</strong></p>
+<small class="commentmetadata"><a href="#comment-3265" title="">December 25th, 2009 at 9:01 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3353">
+<div class="commentnumber">95</div>
+			<cite>seema Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash ,</p>
+<p>HAPPY NEW YEAR and may god you and fulfill your dreams. hey avinash I didnt found atmega16 code for LCD display . would you please help me to get a code for atmega16 . m using 2&#215;8 and 2&#215;16 lcd display . In your tutorial its given only for atmega8 .<br />
+thanking you</p>
+<small class="commentmetadata"><a href="#comment-3353" title="">January 7th, 2010 at 2:27 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3356">
+<div class="commentnumber">96</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Seema</p>
+<p>Its for all AVR so will work with ATmega16 too !</p>
+<small class="commentmetadata"><a href="#comment-3356" title="">January 8th, 2010 at 9:13 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3378">
+<div class="commentnumber">97</div>
+			<cite>ritesh Says: </cite>
+						<br />
+
+
+
+<p>hey avinash&#8230;.</p>
+<p>good work man&#8230;do you have any thing with LCD connected to RS-232. so that I can send data from PC to LCD.</p>
+<p>Ritesh</p>
+<small class="commentmetadata"><a href="#comment-3378" title="">January 12th, 2010 at 2:16 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3381">
+<div class="commentnumber">98</div>
+			<cite>ritesh Says: </cite>
+						<br />
+
+
+
+<p>ritesh Says:<br />
+hey avinash….<br />
+good work man…do you have any tutorial with LCD connected to RS-232. so that I can send data from PC to LCD.<br />
+Ritesh</p>
+<small class="commentmetadata"><a href="#comment-3381" title="">January 12th, 2010 at 8:12 pm</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="15" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-0/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=1' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/usb_avr_programmer_v2.gif' alt='USB AVR Programmer v2.0' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

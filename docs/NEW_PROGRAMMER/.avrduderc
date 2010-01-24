@@ -1,0 +1,6 @@
+default_parallel = "usb";
+default_programmer = "AVR-Doper";
+
+
+
+

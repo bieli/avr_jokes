@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
+<head>
+	<meta http-equiv="ContentType" content="application/xhtml+xml; charset=utf-8"/>
+	<title> Mikrokontrolery </title>
+	<link rel="stylesheet" href="Mikrokontrolery_pliki/base.css" type="text/css"/>
+	<link rel="stylesheet" href="Mikrokontrolery_pliki/highlight.css" type="text/css"/>
+	<link rel="home" title="Strona główna" href="http://www.opcode.eu.org/"/>
+	
+</head><body>
+<table><tr><td valign="top" class="menu"/><td valign="top" rowspan="2">
+<!-- DOCUMENT -->
+
+
+<p class="art_menu"><a href="#mikrokontrolery:potrzebny_sprzet_i_oprogramowanie">Potrzebne oprogramowanie i sprzęt:</a> :: <a href="#mikrokontrolery:kompilacja">Kompilacja (programów w C dla AVR):</a> :: <a href="#mikrokontrolery:debugowanie">Debugowanie, ...:</a> :: <a href="#mikrokontrolery:nutos">Nut/OS</a> :: <a href="#mikrokontrolery:arm">ARM</a> :: <a href="#mikrokontrolery:linki">Linki i moje projekty</a></p>
+<div id="mikrokontrolery"/><h1 class="center">Mikrokontrolery</h1>
+
+<p><a class="Wikipedia" href="http://pl.wikipedia.org/wiki/Mikrokontroler">mikrokontrolery</a> są to programowalne, scalone układy cyfrowe integrujące w sobie jednostkę centralną (CPU), pamięć (zarówno operacyjną jak i służącą do przechowywania programu oraz danych) oraz układy wspomagające takie jak przetworniki analogowo-cyfrowe, ... .</p>
+
+<p>W dziale tym zajmiemy się głównie układami opartymi na mikrokontrolerach <a class="Wikipedia" href="http://pl.wikipedia.org/wiki/Atmel%20AVR">AVR</a> oraz programowaniem tych układów w C (z elementami asemblera). Na wstępie zachęcam do zapoznania się z instrukcją modułu zawierającego mikrokontroler ATMega128, dodatkowy RAM (z zewnętrznym kontrolerem pamięci) oraz kontroler ethernetowy: <a class="ext_doc" href="http://www.propox.com/download/docs/MMnet02_pl.pdf">MMnet02</a> (zwłaszcza opis działania kontrolera pamięci i metody podłączenia do wyświetlacza LCD - uświadamia też pewne aspekty działania PC) oraz z materiałami z zajęć na Wydziale Fizyki UW na temat <a class="ext_doc" href="http://www.fuw.edu.pl/~pablo/s/">sterowanie z wykorzystaniem komputera</a>. Zachęcam też do zajrzenia do działu <a class="int" href="http://www.opcode.eu.org/c_cpp/#c_cpp">programowanie w C/C++</a> na mojej stronie.</p>
+<div id="mikrokontrolery:potrzebny_sprzet_i_oprogramowanie"/><h3 class="center">Potrzebne oprogramowanie i sprzęt:</h3>
+<p>* mikrokontroler z podpiętym czymś do wejść oraz wyjść<br/>
+	* kompilator avr-gcc (dostępny dla Linuxa oraz w WinAVR dla Windows) wraz z blibliotek avrc<br/>
+	* programator isp lub jtag (zarówno soft, jak i na ogół sprzęt, <a class="ext_homepage" href="http://www.amwaw.edu.pl/~adybkows/elka/ispprog.html">projekt prostego programatora SIP</a>)<br/>
+	* debugger, symulator, ...</p>
+
+<div id="mikrokontrolery:kompilacja"/><h3 class="center">Kompilacja (programów w C dla AVR):</h3>
+<p>Kompilujemy i linkujemy: <code>avr-gcc -mmcu=atmega128 -Os -ggdb <var>plik_zrodlowy.c</var> -o <var>plik_wynikowy.o</var></code><br/>
+Tworzymy plik hex:<code>avr-objcopy -O ihex <var>plik_wejsciowy.elf</var> <var>plik_wynikowy.hex</var></code></p>
+<!--Kompilujemy pliki źródłowe: <code>avr-gcc -ggdb -mmcu=atmega128 -Os -c <var>plik_zrodlowy.c</var> -o <var>plik_wynikowy.o</var></code>
+Linkujemy: <code>avr-gcc -ggdb -mmcu=atmega128 -o <var>plik_wynikowy.elf</var> <var>plik_wejsciowy.o</code> kiedyś: avr-ld - -section-start .init=0 -o prog.elf prog.o /usr/avr/lib/crts2313.o -->
+
+<div id="mikrokontrolery:debugowanie"/><h3 class="center">Debugowanie, ...:</h3>
+<p>O debugowaniu, dezasemblerowaniu i symulacji z wykorzystaniem narzędzi linuxowych napisałem w <a class="int" href="http://www.opcode.eu.org/programowanie/#inne_jezyki_programowania:gdb">"Debugowanie (gdb)"</a>. Jednak opisany tam program do symulacji nie jest jeszcze idealny i może się zdarzyć że nie będzie działał poprawnie, drobne problemy miałem też z jtag. Wtedy pozostaje skorzystanie z Atmelowskiego "AVRStudio". Pakiet ten potrafi wczytać plik hex, dokonać jego dezasembleryzacji oraz symulować działanie tej aplikacji (zarówno softwarowo jak i w układzie docelowym (przez jtag)).</p>
+<p>Przy szukaniu błędów w programie uruchamianym już w układzie bardzo przydatny jest port szeregowy przez który program może podawać co aktualnie robi, a my możemy wpływać na jego działanie. Przykłady wykorzystania portu szeregowego można zobaczyć m.in. w moim projekcie "Sterownik ogrzewania akwariowego".</p>
+
+
+<div id="mikrokontrolery:nutos"/><h3 class="center">Nut/OS</h3>
+<p>Jednym z projektów dotyczących programowania mikrokontrolerów jest dystrybuowany na zasadach licencji typu BSD system czasu rzeczywistego z stosem TCP/IP - <a class="ext_homepage" href="http://www.ethernut.de/en/software.html">Nut/OS</a>. Poniżej zamieszczę krótki poradnik dotyczący wykorzystania tego systemu w wspomnianym wyżej module sieciowym Mmnet02.</p>
+<ol>
+	<li>instalujemy na komputerze Nut/OS - <a class="ext_doc" href="http://www.ethernut.de/en/documents/debiansage.html">opis instalacji Nut/OS dla Debian</a> (możemy to też zrobić troszkę inaczej: 1. <code>apt-get install doxygen graphviz liblua50-dev liblualib50-dev lua50 libwxbase2.6-dev libwxgtk2.6-dev wx2.6-headers</code>; 2. w <kbd class="path">tools/nutconf/nutcomponent.c</kbd> poprawiamy stosowne #include na <code>lua50/lua.h</code> i <code>lua50/lauxlib.h</code>; 3. <code>nutconfigure -b _build -c conf/MMnet02.conf -l _lib -m avr-gcc create-buildtree</code>)</li>
+	<li>budujemy biblioteki oraz drzewo przykładowych programów (np. przy pomocy nutconf - do NutOSa załączone są pliki opisujące konfigurację dla Mmnet02, w przypadku problemów z ściezkami warto zajrzeć do opcji programu)</li>
+	<li>w katalogu w którym utworzyliśmy drzewo z przykładowymi programami tworzymy podkatalog na nasz projekt i kopiujemy do niego plik Makefile np. z basemon i dostosowywujemy do swoich potrzeb (nazwę projektu, listę plików źródłowych, bibliotek itp.)</li>
+	<li>w katalogu naszego projektu tworzymy program ... zachęcam do skorzystania na początek z stworzonego przeze mnie <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/nut_first.c">nut_first.c</a> oraz do zapoznania się z przykładami w wygenerowanym drzewie (m.in. serwer http, ftp, ...).</li>
+</ol>
+
+<div id="mikrokontrolery:arm"/><h3 class="center">ARM</h3>
+
+<p>ARM czyli <dfn>Advanced RISC Machine</dfn> jest zaawansowną 32-bitową architektórą procesorów (mikrokontrolerów). Procesory tego typu bardzo często wykorzystywane są w systemach wbudowanych, routerach sprzętowych, telefonach IP itp.</p><div id="mikrokontrolery:linki"/><h3 class="center">Linki i moje projekty</h3>
+
+<p>Zachęcam także do zapoznania się z moimi projektami związanymi z programowaniem mikrokontrolerów: <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/NutOS_IM_notify/#mikrokontrolery:PROJECTS:nutos_IM_notify">powiadamiacz o IM dla jabberd2 (AVR NutOS)</a>, <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/#mikrokontrolery:PROJECTS:sterownik_ogrzewania">sterownik ogrzewania (AVR)</a>, <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_oswietlenia/#mikrokontrolery:PROJECTS:sterownik_oswietlenia">sterownik oświetlenia (AVR)</a>, <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/#mikrokontrolery:PROJECTS:centralka_alarmowa">centralka alarmowa</a>, <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/konwerter_usb/#mikrokontrolery:PROJECTS:przejsciowka_usb">konwerter USB do RS232/RS485/8bit/OneWire/I2C/SPI</a>.</p>
+
+<p>Zobacz w Sieci: <a class="ext_doc" href="http://atmega32.republika.pl/">programowanie mikrokontrolera ATmega32</a> (m.in. opis liczników, komparatora, ...), <a class="ext_doc" href="http://avr.elektroda.eu/?q=node/8">AVR-GCC w praktyce</a>(m.in. opis kozystania z liczników, przewań, przetwornika, ...), <a class="ext_doc" href="http://radzio.dxp.pl/">radzio.dxp.pl</a>, <a class="ext_doc" href="http://mikrokontrolery.net/">mikrokontrolery.net</a>, <a class="ext_doc" href="http://www.easy-soft.tsnet.pl/">easy - soft</a>, <a class="ext_doc" href="http://server.eletel.p.lodz.pl/~romaniuk/index.html">P.Romaniuk, dr, adiunkt IE PL</a>, <a class="ext" href="http://www.avrside.ep.com.pl/">AvrSide</a>, <a class="ext_doc" href="http://www.tvgenerator.narod.ru./">MU_page</a>, <a class="ext_homepage" href="http://www.sics.se/~adam/uip/">The uIP Embedded TCP/IP Stack</a>, <a class="ext_homepage" href="http://www.klinux.org/">Klinux - embedded Linux</a>, <a class="ext_homepage" href="http://www.uclinux.org/">uClinux - Embedded Linux/Microcontroller Projec</a>, <a class="ext_doc" href="http://www.pg.gda.pl/~zbczaja/">Zbigniew Czaja - strona domowa</a>, <a class="ext_doc" href="http://www.patron.net.pl/artykuly/AVR_tutorial.htm">tutorial AVR</a>, <a class="ext_doc" href="http://www.ia.pw.edu.pl/~robotyka/wr/index.php?jezyk=pl&amp;naglowek=main_page&amp;lista=main">Laboratorium Robotyki IAPW - sekcja MindStorms</a></p>
+
+</td></tr><tr><td valign="top" class="menu">
+
+<!-- MENU -->
+
+
+<p class="menu_path"><a class="int" href="http://www.opcode.eu.org/">OpCode</a> -&gt; Mikrokontrolery:</p><hr/>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/onewire.c/">onewire.c</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/lcd.c/">lcd.c</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/opoznienia.c/">opoznienia.c</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/my_rs485.c/">my_rs485.c</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_oswietlenia/">Sterownik oświetlenia</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/">Centralka alarmowa</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/konwerter_usb/">konwerter USB → RS232/RS485/8bit/OneWire/I2C/SPI</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/NutOS_IM_notify/">NutOS Jabber Notify Pack</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/">Sterownik ogrzewania akwariowego</a></p>
+<!-- WYSZUKIWARKA -->
+<form method="get" action="http://www.google.pl/search" class="search">
+	<p class="center">
+		<input type="hidden" name="num" value="30"/>
+		<input type="hidden" name="ie" value="utf-8"/>
+		<input type="hidden" name="oe" value="utf-8"/>
+		<i><label for="q">Wyszukiwarka:</label></i><br/>
+		<input type="text" name="q" id="q" size="25" maxlength="1024"/><br/>
+		<input type="checkbox" name="lr" id="lr" value="lang_pl"/><label for="lr">tylko w języku polskim</label><br/>
+		<input type="checkbox" name="as_q" id="as_q" value="site:opcode.eu.org" checked="checked"/><label for="as_q">tylko ten serwis WWW *</label><br/>
+		<input type="submit" value="  Szukaj z Google  "/>
+	</p>
+	<p class="fotter">*) to że czegoś nie można znaleźć nie oznacza że tego tu niema ... - niektóre strony z jakiś powodów mogą nie być (jeszcze) zindeksowane.</p>
+	<p class="center"><a href="http://www.google.pl/"><img src="Mikrokontrolery_pliki/powered_by_google.png" alt="Powered by Google"/></a></p>
+</form>
+ 
+
+</td></tr></table>
+
+<hr/>
+<p class="fotter">
+Copyright (c) 1999-2008, Robert Paciorek (http://www.opcode.eu.org/), <a class="Wikipedia" href="http://pl.wikipedia.org/wiki/Licencja_BSD">BSD-type license</a>
+				<br/><br/><br/>Redystrybucja wersji źródłowych i wynikowych, po lub bez dokonywania
+modyfikacji JEST DOZWOLONA, pod warunkiem zachowania niniejszej informacji o
+prawach autorskich. Autor NIE ponosi JAKIEJKOLWIEK odpowiedzialności za skutki
+użytkowania tego dokumentu/programu oraz za wykorzystanie zawartych tu informacji.<br/><br/>This program is free software. Redistribution and use in source and binary
+forms, with or without modification, ARE PERMITTED provided save this copyright
+notice. This document/program is distributed WITHOUT any warranty, use at YOUR
+own risk.<br/>
+</p>
+<p class="fotter"><a href="http://validator.w3.org/check/referer">
+	<img height="31" width="88" src="Mikrokontrolery_pliki/valid-xhtml11.png" alt="Valid XHTML 1.1" class="right noprint"/></a>
+	Dokument ten (URL: http://www.opcode.eu.org/mikrokontrolery)
+	należy do serwisu <a href="http://www.opcode.eu.org/">OpCode</a>. Autorem tej strony jest <a href="http://www.opcode.eu.org/bercik/">Robert Paciorek</a>,
+	wszelkie uwagi proszę kierować na adres e-mail serwisu: <a href="mailto:webmaster@opcode.eu.org">webmaster@opcode.eu.org</a>.
+	<br/>Data ostatniej modyfikacji artykulu: 2008-01-15 19:33:12 (UTC) (data ta może być zafałszowana niemerytorycznymi modyfikacjami artykułu).</p>
+
+
+</body></html>

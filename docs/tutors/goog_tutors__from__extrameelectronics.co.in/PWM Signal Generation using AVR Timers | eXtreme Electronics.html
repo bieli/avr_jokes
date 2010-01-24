@@ -1,0 +1,1279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>PWM Signal Generation using AVR Timers | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; PWM Signal Generation by Using AVR Timers. Part II Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/pwm-signal-generation-by-using-avr-timers-part-ii/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='PWM Signal Generation by Using AVR Timers.' href='http://extremeelectronics.co.in/avr-tutorials/pwm-signal-generation-by-using-avr-timers/' />
+<link rel='next' title='Synchronous Serial Communication Tutorial – The Basics of I2C and SPI.' href='http://extremeelectronics.co.in/avr-tutorials/synchronous-serial-communication-tutorial-%e2%80%93-the-basics-of-i2c-and-spi/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,393] -->
+<meta name="description" content="Learn how to generate PWM signals of varying duty cycle to control LEDs, Motors etc." />
+<meta name="keywords" content="avr tutorial,avr project,avr gcc,c,c++,mcu,avr microcontrollers,pwm tutorial,pwm led,pwm motor,pwm avr gcc,pwm c code,pwm c program,avr tutorials,code snippets" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-151">
+<div class="date"> Feb-8th-2009 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/pwm-signal-generation-by-using-avr-timers-part-ii/" rel="bookmark" title="Permanent Link: PWM Signal Generation by Using AVR Timers. Part II">PWM Signal Generation by Using AVR Timers. Part II</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>In this tutorial we will set up the TIMER0 in fast pwm mode and use it to generate 
+  PWM signals of varying duty cycles. In this way we would be generating analog 
+  signals of voltages between 0 and 5v. In the example we will connect this output 
+  to a LED and see how it varies its brightness. Please see the previous tutorials 
+  on PWM and TIMERs before reading this tutorial.</p>
+<p><strong>PWM</strong></p>
+<ul>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/introduction-to-pwm-pulse-width-modulation/">Introduction 
+    to PWM - Pulse Width Modulation</a></li>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/pwm-signal-generation-by-using-avr-timers/">PWM 
+    Signal Generation with AVR Timers.</a></li>
+</ul>
+<p><strong>Timers</strong></p>
+<ul>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/">Introduction 
+    To AVR Timers.</a></li>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-i/">Timers 
+    In Compare Mode Part I</a></li>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-ii/">Timers 
+    In Compare Mode Part II</a></li>
+</ul>
+<h2>Setting Up TIMER0 in Fast PWM mode</h2>
+    
+<p>Setting up the TIMER0 in fast pwm mode is very easy and just require one line 
+  of code. You only need to deal with one register named TCCR0 (<font color="#0033FF"><strong>T</strong></font>imer 
+  <font color="#0033CC"> <strong>C</strong></font>ounter <font color="#0033CC"><strong>C</strong></font>ontrol 
+  <font color="#0033CC"> <strong>R</strong></font>egister For Timer <font color="#0033CC"><strong>0</strong></font>). 
+  You just need to set up various bits in it to get the required setting. The 
+  various bits of TCCR0 is given below.</p>
+<h4>TCCR0</h4>
+<p>This register is used for configuring the TIMER0. See Timer Tutorial for more 
+  info. The explanation of various bits of this register is as follows.</p>
+<table width="640" border="1" cellpadding="1" cellspacing="1" bordercolor="#FFFFFF">
+  <tr bgcolor="#0099FF"> 
+    <td><div align="center">Bit No</div></td>
+    <td><div align="center">7</div></td>
+    <td><div align="center">6</div></td>
+    <td><div align="center">5</div></td>
+    <td><div align="center">4</div></td>
+    <td><div align="center">3</div></td>
+    <td><div align="center">2</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">0</div></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td><div align="center">Name</div></td>
+    <td bgcolor="#CCCCCC"><div align="center">FOC0</div></td>
+    <td bgcolor="#FF0000"><div align="center">WGM00</div></td>
+    <td bgcolor="#FF0000"><div align="center">COM01</div></td>
+    <td bgcolor="#FF0000"><div align="center">COM00</div></td>
+    <td bgcolor="#FF0000"><div align="center">WGM01</div></td>
+    <td bgcolor="#FF0000"><div align="center">CS02</div></td>
+    <td bgcolor="#FF0000"><div align="center">CS01</div></td>
+    <td bgcolor="#FF0000"><div align="center">CS00</div></td>
+  </tr>
+  <tr bgcolor="#0099FF"> 
+    <td><div align="center">Initial Val</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+  </tr>
+</table>
+<p>(Note The Bits in RED are discussed here)</p>
+<p><strong>WGM - Wave Form Generation Mode</strong></p>
+<p>The table below shows the various modes supported by TIMER0. We have covered 
+  Normal mode in &quot;<a href="http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/">Timer0 
+  tutorial</a>&quot; and CTC mode in &quot;<a href="http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-i/">Timers 
+  In compare mode</a>&quot; tutorial. And this tutorial we are interested in Fast 
+  PWM mode.</p>
+<table width="80%" border="0" cellspacing="2" cellpadding="2">
+  <tr bgcolor="#0099FF"> 
+    <td><div align="center"><font color="#FFFFFF"><strong>Mode</strong></font></div></td>
+    <td><div align="center"><font color="#FFFFFF"><strong>WGM00</strong></font></div></td>
+    <td><div align="center"><font color="#FFFFFF"><strong>WGM01</strong></font></div></td>
+    <td><div align="center"><font color="#FFFFFF"><strong>Mode Of Operation</strong></font></div></td>
+  </tr>
+  <tr bgcolor="#999999"> 
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">Normal</div></td>
+  </tr>
+  <tr bgcolor="#999999"> 
+    <td><div align="center">1</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">PWM Phase Correct</div></td>
+  </tr>
+  <tr bgcolor="#999999"> 
+    <td><div align="center">2</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">CTC</div></td>
+  </tr>
+  <tr bgcolor="#FF0000"> 
+    <td><div align="center">3</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">Fast PWM</div></td>
+  </tr>
+</table>
+<p>From the table it is clear that for Fast PWM we need mode 3. To get it we must 
+  set WGM00=1 and WGM01=1</p>
+<p><strong>COM - Compare Output Mode</strong></p>
+<p>These bits are used to set the Output mode in various Wave form generation 
+  mode. For Fast PWM mode these can be used to achieve following output modes.</p>
+<table width="80%" border="0" cellspacing="2" cellpadding="2">
+  <tr bgcolor="#0099FF"> 
+    <td><div align="center"><font color="#FFFFFF"><strong>COM01</strong></font></div></td>
+    <td><div align="center"><font color="#FFFFFF"><strong>COM00</strong></font></div></td>
+    <td><div align="center"><font color="#FFFFFF"><strong>Output Mode</strong></font></div></td>
+  </tr>
+  <tr bgcolor="#999999"> 
+    <td><div align="center">0</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">Normal Port Operation (OC0 disconnected)</div></td>
+  </tr>
+  <tr bgcolor="#999999"> 
+    <td><div align="center">1</div></td>
+    <td><div align="center">0</div></td>
+    <td><div align="center">RESERVED</div></td>
+  </tr>
+  <tr bgcolor="#FF0000"> 
+    <td><div align="center">0</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">Non Inverted PWM</div></td>
+  </tr>
+  <tr bgcolor="#999999"> 
+    <td><div align="center">1</div></td>
+    <td><div align="center">1</div></td>
+    <td><div align="center">Inverted PWM</div></td>
+  </tr>
+</table>
+<p>We need the &quot;Non Inverted PWM output mode&quot; so we set COM01=0 and 
+  COM00=1</p>
+<p><strong>CS - Clock Select</strong></p>
+<p>These are used to set an Input Clock for TIMER. We set them as follows to get 
+  Ftimer=F_CPU (i.e. no prescalling). See &quot;<a href="http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/s">Timer 
+  Tutorial</a>&quot; for more info.</p>
+<p>CS02 = 0</p>
+<p>CS01 = 0</p>
+<p>CS00 = 1</p>
+<p>Now the TIMER is in Fast PWM mode to vary its output duty cycle we just need 
+  to set the OCR0 (Output Compare Register for Timer 0). For example setting it 
+  to 0 will generate PWM with duty cycle 0% (Totally off) while setting it to 
+  128 will generate 50% duty cycle and 255 will generate 100% duty cycle signals.</p>
+<p>Note: The output waveform is available in the associated Output Compare Pin 
+  of the microcontroller. For example for Timer 0 the associated OC pin is OC0. 
+  You can find its location from Pin diagram in datasheet. In ATmega16 and ATmega32 
+  it is on PORTB bit 3, i.e. PB3. <em><strong>This pin must be set to output to 
+  get the PWM signals. </strong></em></p>
+<h2>Sample Program</h2>
+<p>The in the following program we set up TIMER0 in fast pwm mode and use the 
+  generated PWM signals to vary the brightness of a LED. This is the simplest 
+  program to get you started with PWM signal generation. We start with minimum 
+  brightness and increase it gradually and then again reduce it gradually to zero. 
+  This process is repeated as long as the system is powered.</p>
+<pre><code><font color="#000000">
+<font color="#008000">#include &lt;avr/io.h&gt;</font>
+<font color="#008000">#include &lt;util/delay.h&gt;</font>
+
+<b>void</b> InitPWM()
+{
+   <font color="#000080"><i>/*</i></font>
+<font color="#000080"><i>   TCCR0 - Timer Counter Control Register (TIMER0)</i></font>
+<font color="#000080"><i>   -----------------------------------------------</i></font>
+<font color="#000080"><i>   BITS DESCRIPTION</i></font>
+<font color="#000080"><i>   </i></font>
+
+<font color="#000080"><i>   NO:   NAME   DESCRIPTION</i></font>
+<font color="#000080"><i>   --------------------------</i></font>
+<font color="#000080"><i>   BIT 7 : FOC0   Force Output Compare [Not used in this example]</i></font>
+<font color="#000080"><i>   BIT 6 : WGM00  Wave form generartion mode [SET to 1]</i></font>
+<font color="#000080"><i>   BIT 5 : COM01  Compare Output Mode        [SET to 1]</i></font>
+<font color="#000080"><i>   BIT 4 : COM00  Compare Output Mode        [SET to 0]</i></font>
+
+<font color="#000080"><i>   BIT 3 : WGM01  Wave form generation mode [SET to 1]</i></font>
+<font color="#000080"><i>   BIT 2 : CS02   Clock Select               [SET to 0]</i></font>
+<font color="#000080"><i>   BIT 1 : CS01   Clock Select               [SET to 0]</i></font>
+<font color="#000080"><i>   BIT 0 : CS00   Clock Select               [SET to 1]</i></font>
+
+<font color="#000080"><i>   The above settings are for</i></font>
+<font color="#000080"><i>   --------------------------</i></font>
+
+<font color="#000080"><i>   Timer Clock = CPU Clock (No Prescalling)</i></font>
+<font color="#000080"><i>   Mode        = Fast PWM</i></font>
+<font color="#000080"><i>   PWM Output  = Non Inverted</i></font>
+
+<font color="#000080"><i>   */</i></font>
+
+
+   TCCR0|=(<font color="#ff0080">1</font>&lt;&lt;WGM00)|(<font color="#ff0080">1</font>&lt;&lt;WGM01)|(<font color="#ff0080">1</font>&lt;&lt;COM01)|(<font color="#ff0080">1</font>&lt;&lt;CS00);
+
+   <font color="#000080"><i>//Set OC0 PIN as output. It is  PB3 on ATmega16 ATmega32</i></font>
+
+   DDRB|=(<font color="#ff0080">1</font>&lt;&lt;PB3);
+}
+
+<font color="#000080"><i>/******************************************************************</i></font>
+<font color="#000080"><i>Sets the duty cycle of output. </i></font>
+
+<font color="#000080"><i>Arguments</i></font>
+<font color="#000080"><i>---------</i></font>
+<font color="#000080"><i>duty: Between 0 - 255</i></font>
+
+<font color="#000080"><i>0= 0%</i></font>
+
+<font color="#000080"><i>255= 100%</i></font>
+
+<font color="#000080"><i>The Function sets the duty cycle of pwm output generated on OC0 PIN</i></font>
+<font color="#000080"><i>The average voltage on this output pin will be</i></font>
+
+<font color="#000080"><i>         duty</i></font>
+<font color="#000080"><i> Vout=  ------ x 5v</i></font>
+<font color="#000080"><i>         255 </i></font>
+
+<font color="#000080"><i>This can be used to control the brightness of LED or Speed of Motor.</i></font>
+<font color="#000080"><i>*********************************************************************/</i></font>
+
+<b>void</b> SetPWMOutput(uint8_t duty)
+{
+   OCR0=duty;
+}
+
+<font color="#000080"><i>/******************************************************************** </i></font>
+
+<font color="#000080"><i>Simple Wait Loop</i></font>
+
+<font color="#000080"><i>*********************************************************************/</i></font>
+
+<b>void</b> Wait()
+{
+ _delay_loop_2(<font color="#ff0080">3200</font>);
+}
+
+<b>void</b> main()
+{
+   uint8_t brightness=<font color="#ff0080">0</font>;
+
+   <font color="#000080"><i>//Initialize PWM Channel 0</i></font>
+   InitPWM();
+
+   <font color="#000080"><i>//Do this forever</i></font>
+
+   <b>while</b>(<font color="#ff0080">1</font>)
+   {
+      <font color="#000080"><i>//Now Loop with increasing brightness</i></font>
+
+      <b>for</b>(brightness=<font color="#ff0080">0</font>;brightness&lt;<font color="#ff0080">255</font>;brightness++)
+      {
+         <font color="#000080"><i>//Now Set The Brighness using PWM</i></font>
+
+         SetPWMOutput(brightness);
+
+         <font color="#000080"><i>//Now Wait For Some Time</i></font>
+         Wait();
+      }
+
+      <font color="#000080"><i>//Now Loop with decreasing brightness</i></font>
+
+      <b>for</b>(brightness=<font color="#ff0080">255</font>;brightness&gt;<font color="#ff0080">0</font>;brightness--)
+      {
+         <font color="#000080"><i>//Now Set The Brighness using PWM</i></font>
+
+         SetPWMOutput(brightness);
+
+         <font color="#000080"><i>//Now Wait For Some Time</i></font>
+         Wait();
+      }
+   }
+}
+</font>
+</code></pre>
+<p><a href="http://extremeelectronics.co.in/avrtutorials/code/pwm.c">Download 
+  Sample Program</a></p>
+<p><a href="http://extremeelectronics.co.in/avrtutorials/code/pwm.hex">Download 
+  Compiled HEX file for ATmega16 / ATmega32 @ 1 MHz</a></p>
+<h2>Hardware Setup</h2>
+<p>To run and test this program you need an AVR MCU (ATmega16 or ATmega32)(ATmega8 
+  won't work!). To keep the hardware simple we will use the MCU with internal 
+  1MHz oscillator (this is default factory setting for new MCUs). We will add 
+  a good quality RED LED to output compare pin (OC0) of the MCU. This is PIN no 
+  4 on ATmega16/32 Micros. Vcc PIN (pin 10) is connected to +5v and Gnd PIN(pin 
+  11,31) is connected to gnd. This is not show in diagram.</p>
+<table width="98%" border="0" cellpadding="1" cellspacing="1">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/pwm_led.gif" alt="avr pwm controlled led schematic project" width="447" height="615"></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"> 
+        <h3>Fig. 1 - A PWM controlled LED</h3>
+      </div></td>
+  </tr>
+  <tr> 
+    <td><p>&nbsp;</p>
+      <p>&nbsp;</p></td>
+  </tr>
+</table>
+<p>You can program the chip using this <a href="http://extremeelectronics.co.in/avr-tutorials/part-iii-making-programmer-and-target/">simple 
+  avr programmer</a> or <a title="Buy USB AVR Programmer Online from shop.eXtremeElectronics.co.in" href="http://shop.extremeelectronics.co.in/product_info.php?cPath=21&products_id=28">buy 
+  a USB Programmer</a>.</p>
+<h2>Video</h2>
+<p>The PWM controlled LED in Action !!!</p>
+<div align="center"><br>
+  <object width="640" height="505">
+    <param name="movie" value="http://www.youtube.com/v/Zk6E3QCzNvc&hl=en&fs=1&color1=0x234900&color2=0x4e9e00"></param>
+    <param name="allowFullScreen" value="true"></param>
+    <param name="allowscriptaccess" value="always"></param>
+    <embed src="http://www.youtube.com/v/Zk6E3QCzNvc&hl=en&fs=1&color1=0x234900&color2=0x4e9e00" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="505"></embed></object>
+</div></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Sunday, February 8th, 2009 at 11:15 am						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>,  <a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts in Code Snippets" rel="category tag">Code Snippets</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/pwm-signal-generation-by-using-avr-timers-part-ii/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/pwm-signal-generation-by-using-avr-timers-part-ii/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">25 Responses to &#8220;PWM Signal Generation by Using AVR Timers. Part II&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-1393">
+<div class="commentnumber">1</div>
+			<cite>johns Says: </cite>
+						<br />
+
+
+
+<p>using which software u draw the circuits.Pls recommmend a<br />
+good avr simulation software.</p>
+<small class="commentmetadata"><a href="#comment-1393" title="">March 26th, 2009 at 7:34 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1399">
+<div class="commentnumber">2</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello John,</p>
+<p>The best avr simulation software is VMLab<br />
+<a href="http://www.amctools.com/" rel="nofollow">http://www.amctools.com/</a></p>
+<p>Its little hard in the begining as there is no GUI circuit maker, you have to make circuit by writting netlist. But don&#8217;t get afraid you will quickly get it. And then it will be very powerful tool for you.</p>
+<small class="commentmetadata"><a href="#comment-1399" title="">March 27th, 2009 at 7:10 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1426">
+<div class="commentnumber">3</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Mitchell</p>
+<p>Pls see ATTiny Datasheet for info on Registers. May be the ATtiny TIMER0 DOES NOT have PWM(pls confirm this by datasheet). </p>
+<p>Many Modification may be needed to port it as this is for Mega series.</p>
+<small class="commentmetadata"><a href="#comment-1426" title="">April 7th, 2009 at 8:05 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1446">
+<div class="commentnumber">4</div>
+			<cite>Nataraja Says: </cite>
+						<br />
+
+
+
+<p>when simulating<br />
+in oshon&#8217;s software (AVR IDE)<br />
+i am not geting the PWM output&#8230;&#8230;.<br />
+i am using atmega32</p>
+<small class="commentmetadata"><a href="#comment-1446" title="">April 12th, 2009 at 5:59 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1447">
+<div class="commentnumber">5</div>
+			<cite>Nataraja Says: </cite>
+						<br />
+
+
+
+<p>help &#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;&#8230;</p>
+<small class="commentmetadata"><a href="#comment-1447" title="">April 12th, 2009 at 6:00 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1448">
+<div class="commentnumber">6</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@ Nataraja.</p>
+<p>Hello <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<p>Please, How can I know whats wrong with ur setup. Assuming that the code is 100% correct, proceed with debuging. Try to spot the problem urself.</p>
+<p>Try moving this line to beginning of InitPWM() function</p>
+<p>DDRB|=(1<<PB3);</p>
+<small class="commentmetadata"><a href="#comment-1448" title="">April 12th, 2009 at 6:26 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1449">
+<div class="commentnumber">7</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>DDRB|=( 1 << PB3 );</p>
+<small class="commentmetadata"><a href="#comment-1449" title="">April 12th, 2009 at 6:27 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1450">
+<div class="commentnumber">8</div>
+			<cite>Nataraja Says: </cite>
+						<br />
+
+
+
+<p>Download Sample Program<br />
+the hex file after compiling and this file which u gave</p>
+<p>Download Compiled HEX file<br />
+dont match !!!!!!!!</p>
+<small class="commentmetadata"><a href="#comment-1450" title="">April 12th, 2009 at 8:52 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1520">
+<div class="commentnumber">9</div>
+			<cite>Andrei Says: </cite>
+						<br />
+
+
+
+<p>Hi, and thank you Avinash for these wonderful tutorials!</p>
+<p>Attiny13 has two comparators on timer0, OC0A(PB0, pin 5 of the MCU) and OC0B(PB1, pin 6 of the MCU), in PDIP configuration.<br />
+So, you need to change<br />
+DDRB |= ( 1 &lt;&lt; PB3 ); //PB3 means 3<br />
+to<br />
+DDRB |= ( 1 &lt;&lt; PB0 ); //pin 0 of Port B</p>
+<small class="commentmetadata"><a href="#comment-1520" title="">April 23rd, 2009 at 6:50 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1536">
+<div class="commentnumber">10</div>
+			<cite>microsys Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash</p>
+<p>Fantastic tut.<br />
+Thanks for your time.<br />
+Sample code that works, wow. Cool</p>
+<p>I have already recomended your tute to fellow students at uni.</p>
+<p>Regards<br />
+microsys</p>
+<small class="commentmetadata"><a href="#comment-1536" title="">April 27th, 2009 at 7:16 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1537">
+<div class="commentnumber">11</div>
+			<cite>microsys Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash</p>
+<p>Fantastic tut.<br />
+Thanks for your time.<br />
+Sample code that works, wow. Cool</p>
+<p>I have already recomended your tute to fellow students at uni.</p>
+<p>australia</p>
+<p>Regards<br />
+microsys</p>
+<small class="commentmetadata"><a href="#comment-1537" title="">April 27th, 2009 at 7:16 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1604">
+<div class="commentnumber">12</div>
+			<cite>Sandeep Says: </cite>
+						<br />
+
+
+
+<p>Very Nice Tutorial on PWM. Thanks a lot.<br />
+Regards,<br />
+Sandeep</p>
+<small class="commentmetadata"><a href="#comment-1604" title="">May 6th, 2009 at 5:09 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1605">
+<div class="commentnumber">13</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Sandeep,</p>
+<p>Thanks! <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-1605" title="">May 6th, 2009 at 8:04 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1774">
+<div class="commentnumber">14</div>
+			<cite>Amit khade Says: </cite>
+						<br />
+
+
+
+<p>Dear sir,  </p>
+<p>I have downloaded VMLAB and installed it. But i don&#8217;t know how to use it with WinAVR.  Currently i m working with ATMEGA16.</p>
+<p>Please help me&#8230;</p>
+<p>Thank You!</p>
+<small class="commentmetadata"><a href="#comment-1774" title="">May 26th, 2009 at 4:17 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1777">
+<div class="commentnumber">15</div>
+			<cite>sanjay Says: </cite>
+						<br />
+
+
+
+<p>hi avinash<br />
+thanks for this great tutorial.<br />
+Can you make a programme for PWM at 38 Mhz so that i can use that with TSOP1738.</p>
+<small class="commentmetadata"><a href="#comment-1777" title="">May 26th, 2009 at 4:50 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2043">
+<div class="commentnumber">16</div>
+			<cite>Nischey Grover Says: </cite>
+						<br />
+
+
+
+<p>@sanjay<br />
+TSOP requires 38KHz (not MHz).Using PWM we can only generate certain values of frequencies(F_CPU,F_CPU/1024 etc)generally F_CPU is 16 Mhz,so we cant just produce any frequency we wish.</p>
+<p>@avinash<br />
+is there some way to produce waveforms of desired frequency using avr mcu&#8217;s.Also,there is a small webpage error,the link &#8220;timer tutorial&#8221; under &#8220;clock select&#8221; points to serial comm tut page.(just a small error!!).</p>
+<small class="commentmetadata"><a href="#comment-2043" title="">July 5th, 2009 at 12:54 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2057">
+<div class="commentnumber">17</div>
+			<cite>Tanmay Says: </cite>
+						<br />
+
+
+
+<p>Hey Avinash,<br />
+Would like to thank you for the awesum tutorials you have put online for help with AVRs. I am studying in NZ and we are currently working on a path follower robot capable of solving a maze. It is using Atmega8. Was trying to get the PWM working for the robot but am a little confused about the use of timer/counter. Would TCNT2 ( counter 2) which has got both output compare and an 8 bit counter be useful for PWM? Is that the major change I have to do in this code (replacing the registers from TCNT0 to TCNT2) or am I forgettoing something else?<br />
+Would be grateful for your help<br />
+Cheers<br />
+Tanmay</p>
+<small class="commentmetadata"><a href="#comment-2057" title="">July 7th, 2009 at 7:45 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2058">
+<div class="commentnumber">18</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Tanmay</p>
+<p>See datasheet of ATmega8. I recommend use the TIMER1 it has got 2 PWM outputs.</p>
+<small class="commentmetadata"><a href="#comment-2058" title="">July 7th, 2009 at 8:13 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2130">
+<div class="commentnumber">19</div>
+			<cite>nutzlos Says: </cite>
+						<br />
+
+
+
+<p>Wonderful tutorial.Just wanted to know how 2 PWM outputs would be more beneficial as explained above?</p>
+<small class="commentmetadata"><a href="#comment-2130" title="">July 17th, 2009 at 11:49 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2189">
+<div class="commentnumber">20</div>
+			<cite>ravi Says: </cite>
+						<br />
+
+
+
+<p>wll  nutzlos i am also in same projct hlp me,in shortest path  finding ,no idea how to wrt code for it ,using atmega 128</p>
+<small class="commentmetadata"><a href="#comment-2189" title="">July 24th, 2009 at 9:32 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2611">
+<div class="commentnumber">21</div>
+			<cite>sanju Says: </cite>
+						<br />
+
+
+
+<p>Thanks a lot sir.</p>
+<p>I have no words to say my convenience. The datasheet was craking my head. It was redicules. This was so easy. And very understandable&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2611" title="">September 7th, 2009 at 2:51 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3263">
+<div class="commentnumber">22</div>
+			<cite>Prashanth Says: </cite>
+						<br />
+
+
+
+<p>Is it possible to produce PWM out of any pin</p>
+<small class="commentmetadata"><a href="#comment-3263" title="">December 25th, 2009 at 2:51 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3266">
+<div class="commentnumber">23</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Prashanth</p>
+<blockquote><p>Is it <strong>possible</strong> to produce PWM out of any pin</p></blockquote>
+<p>Answer: Nothing is Impossible !</p>
+<small class="commentmetadata"><a href="#comment-3266" title="">December 25th, 2009 at 9:05 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3270">
+<div class="commentnumber">24</div>
+			<cite><a href='http://miniprojects-be-btech.blogspot.com/' rel='external nofollow' class='url'>nataraja</a> Says: </cite>
+						<br />
+
+
+
+<p>y not ?<br />
+it is possible , 32 servo controller etc etc<br />
+use atmega series MCU&#8217;s to control  servos at their I/O pins (PWM output)<br />
+.<br />
+but there are restriction , depends on the application and most of the case&#8217;s u have use another MCU,<br />
+master salve system kinda &#8230;.<br />
+.<br />
+i have used 30 pins of my ATmega32 lo control servo&#8217;s (30 of them)2 pins left for TX,RX</p>
+<small class="commentmetadata"><a href="#comment-3270" title="">December 25th, 2009 at 12:47 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3272">
+<div class="commentnumber">25</div>
+			<cite>Prashanth Says: </cite>
+						<br />
+
+
+
+<p>Thanks for the reply.this is exactly wat i have been waiting for</p>
+<small class="commentmetadata"><a href="#comment-3272" title="">December 25th, 2009 at 4:01 pm</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="151" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-2/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=6' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/extreme_burner_pic_ad.jpg' alt='eXtreme Burner PIC' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,3 @@
+sudo avrdude -p m8 -c stk500v2 -P avrdoper -F -D -vvv
+sudo avrdude  -p m8 -P avrdoper -c stk500v2 -F -U eeprom:r:/tmp/1231.hex:i -vvv
+sudo avrdude  -p m8  -P avrdoper -c stk500v2 -F -U flash:r:/tmp/1231.hex:i -vvvv

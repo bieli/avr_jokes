@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
+<head>
+	<meta http-equiv="ContentType" content="application/xhtml+xml; charset=utf-8"/>
+	<title> Sterownik ogrzewania akwariowego </title>
+	<link rel="stylesheet" href="Sterownik%20ogrzewania%20akwariowego_pliki/base.css" type="text/css"/>
+	<link rel="stylesheet" href="Sterownik%20ogrzewania%20akwariowego_pliki/highlight.css" type="text/css"/>
+	<link rel="home" title="Strona główna" href="http://www.opcode.eu.org/"/>
+	
+</head><body>
+<table><tr><td valign="top" class="menu"/><td valign="top" rowspan="2">
+<!-- DOCUMENT -->
+
+
+<p class="art_menu"><a href="#mikrokontrolery:PROJECTS:sterownik_ogrzewania"><b>Sterownik ogrzewania akwariowego</b></a></p>
+<div id="mikrokontrolery:PROJECTS:sterownik_ogrzewania"/><h2>Sterownik ogrzewania akwariowego</h2>
+
+<p><img height="206" width="192" class="right" src="Sterownik%20ogrzewania%20akwariowego_pliki/wyswietlacz.png" alt="Widok na wyświetlacz i złącze RS232"/>Na stronie tej zamieszczam projekt oraz oprogramowanie mikroprocesorowego sterownika ogrzewania akwariowego, opartego na mikrokontrolerze AT90S2313, wykonanego w 2005 roku. Układ posiada dwa niezależne tory sterownicze ("akwarium" i "terrarium") umożliwiające sterowanie dwoma zestawami grzałek z wykorzystaniem dwóch termometrów cyfrowych DS18b20. Informacje o temperaturze i jej odniesieniu do zadanych parametrów podawane są na wyświetlaczu alfanumerycznym LCD (opartym o sterownik HD44780). System umożliwia komunikację (odczyt i zapis konfiguracji oraz odczyt aktualnych parametrów i sterowanie urządzeniem) poprzez port RS232.</p>
+
+<h3 class="center">Elektronika</h3>
+
+<p>Część elektroniczna składa się z płytki drukowanej, na której umieszczone zostały moduł zasilania (stabilizator +5V), moduł mikrokontrolera, moduł komunikacji z RS232 oraz moduł wykonawczy (przekaźniki) i podłączanej do niej 26 pinową taśmą płytki czołowej na której znajduje się wyświetlacz, złącze RS232, reset i sygnalizator alarmu.<br/><br/>
+<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/mikrokontroler.png">schemat płytki obwodów elektronicznych</a> (<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/mikrokontroler.sch">źródło pakietu GEDA</a>)<br/>
+<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/mikrokontroler.pcb">projekt płytki drukowanej PCB</a> (wersja do wydruki i przeniesienia na płytkę - <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/mikrokontroler.pcb.pdf">PDF</a>)<br/>
+<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/plytka_czolowa.sch">podłączenia płytki czołowej (GEDA)</a></p>
+
+
+<h3 class="center">Oprogramowanie</h3>
+
+<p>Oprogramowanie składa się z programu głównego dla mikrokontrolera (<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/mikro.c/#mikrokontrolery:PROJECTS:sterownik_ogrzewania:mikro.c">mikro.c</a>) dwóch bibliotek funkcji (<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/lcd.c/#mikrokontrolery:PROJECTS:biblioteczki:lcd.c">lcd.c</a> i <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/onewire.c/#mikrokontrolery:PROJECTS:biblioteczki:onewire.c">onewire.c</a>) do obsługi wyświetlacza i termometru oraz programu do odczytu numeru ROM termometru (<a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/onewire_get_rom.c/#mikrokontrolery:PROJECTS:sterownik_ogrzewania:onewire_get_rom.c">onewire_get_rom.c</a>). W poniższym archiwum zamieszczone dodatkowo są także wersje PC'owe programów do obsługi termometru i wyświetlacza.</p>
+
+<h3 class="center">Fotki</h3>
+<p class="center"><img height="410" width="620" src="Sterownik%20ogrzewania%20akwariowego_pliki/uklad_sterownika.png" alt="Widok na płytkę główna sterownika"/></p>
+<p class="center"><img height="365" width="480" src="Sterownik%20ogrzewania%20akwariowego_pliki/panel_frontowy.png" alt="Widok panelu frontowego od tyłu, poniżej przełączniki oświetlenia"/></p>
+
+<p class="download"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/sterownik_ogrzewania.tgz">Pobierz</a></p>
+
+<h3 class="center">Kierunki rozwoju</h3>
+
+<p>W przyszłości można by zastąpić RS232 poprzez RS485, co umożliwiłoby pracę sterownika w sieci. Rozważyć można także zmianę protokołu komunikacji RS z binarnego na tekstowy, a także zastąpienie przekaźników zestawem triak + optotriak. Możliwe byłoby dodanie do sterownika (raczej po przeportowaniu na Atmega8) funkcji dwu kanałowego sterownika oświetlenia.</p>
+
+<p>Zobacz w Sieci: <a class="ext_homepage" href="http://mterm.w.interia.pl/">Wielozadaniowy sterownik akwarystyczny "MTerm"</a>, <a class="ext_homepage" href="http://skalar.mcten.pl/">Skalar - Mikroprocesorowy Sterownik Akwariowy</a>, <a class="ext_homepage" href="http://www.elektroda.pl/rtvforum/viewtopic.php?t=589928">Sterownik do akwarium</a>.</p>
+
+</td></tr><tr><td valign="top" class="menu">
+
+<!-- MENU -->
+
+
+<p class="menu_path"><a class="int" href="http://www.opcode.eu.org/">OpCode</a> -&gt; <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/">Mikrokontrolery</a> -&gt; Sterownik ogrzewania akwariowego:</p><hr/>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/mikro.c/">mikro.c</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania/onewire_get_rom.c/">onewire_get_rom.c</a></p>
+<!-- WYSZUKIWARKA -->
+<form method="get" action="http://www.google.pl/search" class="search">
+	<p class="center">
+		<input type="hidden" name="num" value="30"/>
+		<input type="hidden" name="ie" value="utf-8"/>
+		<input type="hidden" name="oe" value="utf-8"/>
+		<i><label for="q">Wyszukiwarka:</label></i><br/>
+		<input type="text" name="q" id="q" size="25" maxlength="1024"/><br/>
+		<input type="checkbox" name="lr" id="lr" value="lang_pl"/><label for="lr">tylko w języku polskim</label><br/>
+		<input type="checkbox" name="as_q" id="as_q" value="site:opcode.eu.org" checked="checked"/><label for="as_q">tylko ten serwis WWW *</label><br/>
+		<input type="submit" value="  Szukaj z Google  "/>
+	</p>
+	<p class="fotter">*) to że czegoś nie można znaleźć nie oznacza że tego tu niema ... - niektóre strony z jakiś powodów mogą nie być (jeszcze) zindeksowane.</p>
+	<p class="center"><a href="http://www.google.pl/"><img src="Sterownik%20ogrzewania%20akwariowego_pliki/powered_by_google.png" alt="Powered by Google"/></a></p>
+</form>
+ 
+
+</td></tr></table>
+
+<hr/>
+<p class="fotter">
+Copyright (c) 1999-2008, Robert Paciorek (http://www.opcode.eu.org/), <a class="Wikipedia" href="http://pl.wikipedia.org/wiki/Licencja_BSD">BSD-type license</a>
+				<br/><br/><br/>Redystrybucja wersji źródłowych i wynikowych, po lub bez dokonywania
+modyfikacji JEST DOZWOLONA, pod warunkiem zachowania niniejszej informacji o
+prawach autorskich. Autor NIE ponosi JAKIEJKOLWIEK odpowiedzialności za skutki
+użytkowania tego dokumentu/programu oraz za wykorzystanie zawartych tu informacji.<br/><br/>This program is free software. Redistribution and use in source and binary
+forms, with or without modification, ARE PERMITTED provided save this copyright
+notice. This document/program is distributed WITHOUT any warranty, use at YOUR
+own risk.<br/>
+</p>
+<p class="fotter"><a href="http://validator.w3.org/check/referer">
+	<img height="31" width="88" src="Sterownik%20ogrzewania%20akwariowego_pliki/valid-xhtml11.png" alt="Valid XHTML 1.1" class="right noprint"/></a>
+	Dokument ten (URL: http://www.opcode.eu.org/mikrokontrolery/sterownik_ogrzewania)
+	należy do serwisu <a href="http://www.opcode.eu.org/">OpCode</a>. Autorem tej strony jest <a href="http://www.opcode.eu.org/bercik/">Robert Paciorek</a>,
+	wszelkie uwagi proszę kierować na adres e-mail serwisu: <a href="mailto:webmaster@opcode.eu.org">webmaster@opcode.eu.org</a>.
+	<br/>Data ostatniej modyfikacji artykulu: 2008-08-24 17:58:33 (UTC) (data ta może być zafałszowana niemerytorycznymi modyfikacjami artykułu).</p>
+
+
+</body></html>

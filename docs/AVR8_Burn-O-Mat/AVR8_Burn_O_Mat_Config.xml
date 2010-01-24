@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AVR_Burn_O_Mat_Config>
+  <AVR_Fuses>
+    <AVR name="m8" caption="ATmega8">
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="Select if PC6 is I/O pin or RESET pin" mode="expert"/>
+      <Fuse name="WDTON" bit="6" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m16" caption="ATmega16">
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m32" caption="ATmega32">
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m64" caption="ATmega64">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="M103C" bit="1" fuseByte="efuse" default="0" desc="ATmega103 compatibility mode"/>
+      <Fuse name="WDTON" bit="0" fuseByte="efuse" default="1" desc="Watchdog Timer always on"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m128" caption="ATmega128">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="M103C" bit="1" fuseByte="efuse" default="0" desc="ATmega103 compatibility mode"/>
+      <Fuse name="WDTON" bit="0" fuseByte="efuse" default="1" desc="Watchdog Timer always on"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m48" caption="ATmega48">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E1" bit="1" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="SELFPRGEN" bit="0" fuseByte="efuse" default="1" desc="Self Programming Enable"/>
+
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="Select if PC6 is I/O pin or RESET pin" mode="expert"/>
+      <Fuse name="DWEN" bit="6" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m88" caption="ATmega88">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="efuse" default="0" desc="Select boot size"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="efuse" default="0" desc="Select boot size"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="efuse" default="1" desc="Select reset vector"/>
+
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="Select if PC6 is I/O pin or RESET pin" mode="expert"/>
+      <Fuse name="DWEN" bit="6" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m168" caption="ATmega168">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="efuse" default="0" desc="Select boot size"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="efuse" default="0" desc="Select boot size"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="efuse" default="1" desc="Select reset vector"/>
+
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="Select if PC6 is I/O pin or RESET pin" mode="expert"/>
+      <Fuse name="DWEN" bit="6" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m162" caption="ATmega162">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="M161C" bit="4" fuseByte="efuse" default="1" desc="ATmega161 compatibility mode"/>
+      <Fuse name="BODLEVEL2" bit="3" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="UNUSED_E0" bit="0" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m8515" caption="ATmega8515">
+      <Fuse name="S8515C" bit="7" fuseByte="hfuse" default="1" desc="AT90S4414/8515 compatibility mode"/>
+      <Fuse name="WDTON" bit="6" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m8535" caption="ATmega8535">
+      <Fuse name="S8535C" bit="7" fuseByte="hfuse" default="1" desc="Select AT90S8535 compatibility mode"/>
+      <Fuse name="WDTON" bit="6" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="CKOPT" bit="4" fuseByte="hfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="BODLEVEL" bit="7" fuseByte="lfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="lfuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="t2313" caption="ATtiny2313">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E1" bit="1" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="SELFPRGEN" bit="0" fuseByte="efuse" default="1" desc="Self Programming Enable"/>
+
+      <Fuse name="DWEN" bit="7" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="EESAVE" bit="6" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="BODLEVEL2" bit="3" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RSTDISBL" bit="0" fuseByte="hfuse" default="1" desc="Select if PC6 is I/O pin or RESET pin" mode="expert"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m164" caption="ATmega164">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m324" caption="ATmega324">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m644" caption="ATmega644">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m169" caption="ATmega169">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="3" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RESERVED" bit="0" fuseByte="efuse" default="1" desc="reserved" mode="expert"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m329" caption="ATmega329">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RSTDISBL" bit="0" fuseByte="efuse" default="1" desc="External reset disable" mode="expert"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m3290" caption="ATmega3290">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RSTDISBL" bit="0" fuseByte="efuse" default="1" desc="External reset disable" mode="expert"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m649" caption="ATmega649">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RSTDISBL" bit="0" fuseByte="efuse" default="1" desc="External reset disable" mode="expert"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m6490" caption="ATmega6490">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RSTDISBL" bit="0" fuseByte="efuse" default="1" desc="External reset disable" mode="expert"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="m640" caption="ATmega640">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    
+    <AVR name="m1280" caption="ATmega1280">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    
+    <AVR name="m1281" caption="ATmega1281">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    
+    <AVR name="m2560" caption="ATmega2560">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    
+    <AVR name="m2561" caption="ATmega2561">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="efuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="OCDEN" bit="7" fuseByte="hfuse" default="1" desc="Enable OCD (on chip debug)" mode="expert"/>
+      <Fuse name="JTAGEN" bit="6" fuseByte="hfuse" default="0" desc="Enable JTAG" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BOOTSZ1" bit="2" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTSZ0" bit="1" fuseByte="hfuse" default="0" desc="Select Boot Size (see Table 82 for details)"/>
+      <Fuse name="BOOTRST" bit="0" fuseByte="hfuse" default="1" desc="Select Reset Vector"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock output"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    
+    <AVR name="t12" caption="ATtiny12">
+      <Fuse name="BODLEVEL" bit="7" fuseByte="fuse" default="0" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="6" fuseByte="fuse" default="1" desc="Brown out detector enable"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="fuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="RSTDISBL" bit="4" fuseByte="fuse" default="1" desc="External reset disable" mode="expert"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="fuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="fuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="fuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="fuse" default="0" desc="Select Clock source"/>
+    </AVR>    
+    <AVR name="t13" caption="ATtiny13">
+      <Fuse name="UNUSED_H7" bit="7" fuseByte="hfuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H6" bit="6" fuseByte="hfuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H5" bit="5" fuseByte="hfuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="SELFPRGEN" bit="4" fuseByte="hfuse" default="1" desc="Self Programming Enable"/>
+      <Fuse name="DWEN" bit="3" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="BODLEVEL1" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="RSTDISBL" bit="0" fuseByte="hfuse" default="1" desc="External reset disable" mode="expert"/>
+
+      <Fuse name="SPIEN" bit="7" fuseByte="lfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="EESAVE" bit="6" fuseByte="lfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="WDTON" bit="5" fuseByte="lfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="CKDIV8" bit="4" fuseByte="lfuse" default="0" desc="Devide clock by 8"/>
+      <Fuse name="SUT1" bit="3" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="2" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="t25" caption="ATtiny25">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H1" bit="1" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="SELFPRGEN" bit="0" fuseByte="efuse" default="1" desc="Self Programming Enable"/>
+
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="External reset disable" mode="expert"/>
+      <Fuse name="DWEN" bit="6" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Divide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock Output Enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="t45" caption="ATtiny45">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H1" bit="1" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="SELFPRGEN" bit="0" fuseByte="efuse" default="1" desc="Self Programming Enable"/>
+
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="External reset disable" mode="expert"/>
+      <Fuse name="DWEN" bit="6" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Divide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock Output Enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="t85" caption="ATtiny85">
+      <Fuse name="UNUSED_E7" bit="7" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E6" bit="6" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E5" bit="5" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E4" bit="4" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E3" bit="3" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_E2" bit="2" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H1" bit="1" fuseByte="efuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="SELFPRGEN" bit="0" fuseByte="efuse" default="1" desc="Self Programming Enable"/>
+
+      <Fuse name="RSTDISBL" bit="7" fuseByte="hfuse" default="1" desc="External reset disable" mode="expert"/>
+      <Fuse name="DWEN" bit="6" fuseByte="hfuse" default="1" desc="debugWIRE enable" mode="expert"/>
+      <Fuse name="SPIEN" bit="5" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="WDTON" bit="4" fuseByte="hfuse" default="1" desc="Watchdog timer always on"/>
+      <Fuse name="EESAVE" bit="3" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL2" bit="2" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL1" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODLEVEL0" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+
+      <Fuse name="CKDIV8" bit="7" fuseByte="lfuse" default="0" desc="Divide clock by 8"/>
+      <Fuse name="CKOUT" bit="6" fuseByte="lfuse" default="1" desc="Clock Output Enable"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+    </AVR>
+    <AVR name="t26" caption="ATtiny26">
+      <Fuse name="UNUSED_H7" bit="7" fuseByte="hfuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H6" bit="6" fuseByte="hfuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="UNUSED_H5" bit="5" fuseByte="hfuse" default="1" desc="unused" mode="expert"/>
+      <Fuse name="RSTDISBL" bit="4" fuseByte="hfuse" default="1" desc="External reset disable" mode="expert"/>
+      <Fuse name="SPIEN" bit="3" fuseByte="hfuse" default="0" desc="Enable Serial Program and Data Downloading" mode="expert"/>
+      <Fuse name="EESAVE" bit="2" fuseByte="hfuse" default="1" desc="EEPROM memory is preserved through the Chip Erase"/>
+      <Fuse name="BODLEVEL" bit="1" fuseByte="hfuse" default="1" desc="Brown out detector trigger level"/>
+      <Fuse name="BODEN" bit="0" fuseByte="hfuse" default="1" desc="Brown out detector enable"/>
+
+      <Fuse name="PLLCK" bit="7" fuseByte="lfuse" default="1" desc="Use PLL for internal clock"/>
+      <Fuse name="CKOPT" bit="6" fuseByte="lfuse" default="1" desc="Oscillator options"/>
+      <Fuse name="SUT1" bit="5" fuseByte="lfuse" default="1" desc="Select start-up time"/>
+      <Fuse name="SUT0" bit="4" fuseByte="lfuse" default="0" desc="Select start-up time"/>
+      <Fuse name="CKSEL3" bit="3" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL2" bit="2" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL1" bit="1" fuseByte="lfuse" default="0" desc="Select Clock source"/>
+      <Fuse name="CKSEL0" bit="0" fuseByte="lfuse" default="1" desc="Select Clock source"/>
+    </AVR>
+  </AVR_Fuses>
+  
+</AVR_Burn_O_Mat_Config>

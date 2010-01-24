@@ -1,0 +1,1381 @@
+
+main.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000988  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         000000d2  00800060  00000988  00000a1c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000002  00800132  00800132  00000aee  2**0
+                  ALLOC
+  3 .stab         00000da4  00000000  00000000  00000af0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000d66  00000000  00000000  00001894  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+   8:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+   c:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  10:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  14:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  18:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  1c:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  20:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  24:	0c 94 ef 00 	jmp	0x1de	; 0x1de <__vector_9>
+  28:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  2c:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  30:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  34:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  38:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  3c:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  40:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  44:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  48:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  4c:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+  50:	0c 94 45 00 	jmp	0x8a	; 0x8a <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	11 e0       	ldi	r17, 0x01	; 1
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e8 e8       	ldi	r30, 0x88	; 136
+  68:	f9 e0       	ldi	r31, 0x09	; 9
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a2 33       	cpi	r26, 0x32	; 50
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	11 e0       	ldi	r17, 0x01	; 1
+  78:	a2 e3       	ldi	r26, 0x32	; 50
+  7a:	b1 e0       	ldi	r27, 0x01	; 1
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a4 33       	cpi	r26, 0x34	; 52
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0c 94 66 04 	jmp	0x8cc	; 0x8cc <main>
+
+0000008a <__bad_interrupt>:
+  8a:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000008e <_Z10USART_Initj>:
+#include <avr/signal.h>
+//#include <avr/interrupt.h>
+
+void USART_Init( unsigned int baud )
+  8e:	cf 93       	push	r28
+  90:	df 93       	push	r29
+  92:	cd b7       	in	r28, 0x3d	; 61
+  94:	de b7       	in	r29, 0x3e	; 62
+  96:	22 97       	sbiw	r28, 0x02	; 2
+  98:	0f b6       	in	r0, 0x3f	; 63
+  9a:	f8 94       	cli
+  9c:	de bf       	out	0x3e, r29	; 62
+  9e:	0f be       	out	0x3f, r0	; 63
+  a0:	cd bf       	out	0x3d, r28	; 61
+  a2:	9a 83       	std	Y+2, r25	; 0x02
+  a4:	89 83       	std	Y+1, r24	; 0x01
+{
+/* Set baud rate */
+UBRRH = (unsigned char)(baud>>8);
+  a6:	e0 e4       	ldi	r30, 0x40	; 64
+  a8:	f0 e0       	ldi	r31, 0x00	; 0
+  aa:	89 81       	ldd	r24, Y+1	; 0x01
+  ac:	9a 81       	ldd	r25, Y+2	; 0x02
+  ae:	89 2f       	mov	r24, r25
+  b0:	99 27       	eor	r25, r25
+  b2:	80 83       	st	Z, r24
+UBRRL = (unsigned char)baud;
+  b4:	e9 e2       	ldi	r30, 0x29	; 41
+  b6:	f0 e0       	ldi	r31, 0x00	; 0
+  b8:	89 81       	ldd	r24, Y+1	; 0x01
+  ba:	80 83       	st	Z, r24
+/* Enable receiver and transmitter */
+UCSRB = (1<<RXEN)|(1<<TXEN);
+  bc:	ea e2       	ldi	r30, 0x2A	; 42
+  be:	f0 e0       	ldi	r31, 0x00	; 0
+  c0:	88 e1       	ldi	r24, 0x18	; 24
+  c2:	80 83       	st	Z, r24
+/* Set frame format: 8data, 2stop bit */
+UCSRC = (1<<URSEL)|(1<<USBS)|(3<<UCSZ0);
+  c4:	e0 e4       	ldi	r30, 0x40	; 64
+  c6:	f0 e0       	ldi	r31, 0x00	; 0
+  c8:	8e e8       	ldi	r24, 0x8E	; 142
+  ca:	80 83       	st	Z, r24
+  cc:	22 96       	adiw	r28, 0x02	; 2
+  ce:	0f b6       	in	r0, 0x3f	; 63
+  d0:	f8 94       	cli
+  d2:	de bf       	out	0x3e, r29	; 62
+  d4:	0f be       	out	0x3f, r0	; 63
+  d6:	cd bf       	out	0x3d, r28	; 61
+  d8:	df 91       	pop	r29
+  da:	cf 91       	pop	r28
+  dc:	08 95       	ret
+
+000000de <_Z14USART_Transmith>:
+}
+
+void USART_Transmit( unsigned char data )
+  de:	cf 93       	push	r28
+  e0:	df 93       	push	r29
+  e2:	cd b7       	in	r28, 0x3d	; 61
+  e4:	de b7       	in	r29, 0x3e	; 62
+  e6:	22 97       	sbiw	r28, 0x02	; 2
+  e8:	0f b6       	in	r0, 0x3f	; 63
+  ea:	f8 94       	cli
+  ec:	de bf       	out	0x3e, r29	; 62
+  ee:	0f be       	out	0x3f, r0	; 63
+  f0:	cd bf       	out	0x3d, r28	; 61
+  f2:	89 83       	std	Y+1, r24	; 0x01
+{
+/* Wait for empty transmit buffer */
+while ( !( UCSRA & (1<<UDRE)) );
+  f4:	eb e2       	ldi	r30, 0x2B	; 43
+  f6:	f0 e0       	ldi	r31, 0x00	; 0
+  f8:	80 81       	ld	r24, Z
+  fa:	99 27       	eor	r25, r25
+  fc:	80 72       	andi	r24, 0x20	; 32
+  fe:	90 70       	andi	r25, 0x00	; 0
+ 100:	1a 82       	std	Y+2, r1	; 0x02
+ 102:	00 97       	sbiw	r24, 0x00	; 0
+ 104:	11 f4       	brne	.+4      	; 0x10a <_Z14USART_Transmith+0x2c>
+ 106:	81 e0       	ldi	r24, 0x01	; 1
+ 108:	8a 83       	std	Y+2, r24	; 0x02
+ 10a:	8a 81       	ldd	r24, Y+2	; 0x02
+ 10c:	88 23       	and	r24, r24
+ 10e:	91 f7       	brne	.-28     	; 0xf4 <_Z14USART_Transmith+0x16>
+/* Put data into buffer, sends the data */
+UDR = data;
+ 110:	ec e2       	ldi	r30, 0x2C	; 44
+ 112:	f0 e0       	ldi	r31, 0x00	; 0
+ 114:	89 81       	ldd	r24, Y+1	; 0x01
+ 116:	80 83       	st	Z, r24
+ 118:	22 96       	adiw	r28, 0x02	; 2
+ 11a:	0f b6       	in	r0, 0x3f	; 63
+ 11c:	f8 94       	cli
+ 11e:	de bf       	out	0x3e, r29	; 62
+ 120:	0f be       	out	0x3f, r0	; 63
+ 122:	cd bf       	out	0x3d, r28	; 61
+ 124:	df 91       	pop	r29
+ 126:	cf 91       	pop	r28
+ 128:	08 95       	ret
+
+0000012a <_Z21USART_Transmit_StringPc>:
+}
+
+void USART_Transmit_String( char *data )
+ 12a:	cf 93       	push	r28
+ 12c:	df 93       	push	r29
+ 12e:	cd b7       	in	r28, 0x3d	; 61
+ 130:	de b7       	in	r29, 0x3e	; 62
+ 132:	22 97       	sbiw	r28, 0x02	; 2
+ 134:	0f b6       	in	r0, 0x3f	; 63
+ 136:	f8 94       	cli
+ 138:	de bf       	out	0x3e, r29	; 62
+ 13a:	0f be       	out	0x3f, r0	; 63
+ 13c:	cd bf       	out	0x3d, r28	; 61
+ 13e:	9a 83       	std	Y+2, r25	; 0x02
+ 140:	89 83       	std	Y+1, r24	; 0x01
+{
+	while (*data != 0)
+ 142:	0a c0       	rjmp	.+20     	; 0x158 <_Z21USART_Transmit_StringPc+0x2e>
+	{
+		USART_Transmit (*data);
+ 144:	e9 81       	ldd	r30, Y+1	; 0x01
+ 146:	fa 81       	ldd	r31, Y+2	; 0x02
+ 148:	80 81       	ld	r24, Z
+ 14a:	0e 94 6f 00 	call	0xde	; 0xde <_Z14USART_Transmith>
+		data++;
+ 14e:	89 81       	ldd	r24, Y+1	; 0x01
+ 150:	9a 81       	ldd	r25, Y+2	; 0x02
+ 152:	01 96       	adiw	r24, 0x01	; 1
+ 154:	9a 83       	std	Y+2, r25	; 0x02
+ 156:	89 83       	std	Y+1, r24	; 0x01
+ 158:	e9 81       	ldd	r30, Y+1	; 0x01
+ 15a:	fa 81       	ldd	r31, Y+2	; 0x02
+ 15c:	80 81       	ld	r24, Z
+ 15e:	88 23       	and	r24, r24
+ 160:	89 f7       	brne	.-30     	; 0x144 <_Z21USART_Transmit_StringPc+0x1a>
+ 162:	22 96       	adiw	r28, 0x02	; 2
+ 164:	0f b6       	in	r0, 0x3f	; 63
+ 166:	f8 94       	cli
+ 168:	de bf       	out	0x3e, r29	; 62
+ 16a:	0f be       	out	0x3f, r0	; 63
+ 16c:	cd bf       	out	0x3d, r28	; 61
+ 16e:	df 91       	pop	r29
+ 170:	cf 91       	pop	r28
+ 172:	08 95       	ret
+
+00000174 <_Z7delaymsm>:
+	};
+
+}
+
+unsigned int volatile counter;
+
+void delayms ( unsigned long _counter )
+ 174:	cf 93       	push	r28
+ 176:	df 93       	push	r29
+ 178:	cd b7       	in	r28, 0x3d	; 61
+ 17a:	de b7       	in	r29, 0x3e	; 62
+ 17c:	25 97       	sbiw	r28, 0x05	; 5
+ 17e:	0f b6       	in	r0, 0x3f	; 63
+ 180:	f8 94       	cli
+ 182:	de bf       	out	0x3e, r29	; 62
+ 184:	0f be       	out	0x3f, r0	; 63
+ 186:	cd bf       	out	0x3d, r28	; 61
+ 188:	69 83       	std	Y+1, r22	; 0x01
+ 18a:	7a 83       	std	Y+2, r23	; 0x02
+ 18c:	8b 83       	std	Y+3, r24	; 0x03
+ 18e:	9c 83       	std	Y+4, r25	; 0x04
+{	
+	counter = _counter/10;
+ 190:	89 81       	ldd	r24, Y+1	; 0x01
+ 192:	9a 81       	ldd	r25, Y+2	; 0x02
+ 194:	ab 81       	ldd	r26, Y+3	; 0x03
+ 196:	bc 81       	ldd	r27, Y+4	; 0x04
+ 198:	2a e0       	ldi	r18, 0x0A	; 10
+ 19a:	30 e0       	ldi	r19, 0x00	; 0
+ 19c:	40 e0       	ldi	r20, 0x00	; 0
+ 19e:	50 e0       	ldi	r21, 0x00	; 0
+ 1a0:	bc 01       	movw	r22, r24
+ 1a2:	cd 01       	movw	r24, r26
+ 1a4:	0e 94 a2 04 	call	0x944	; 0x944 <__udivmodsi4>
+ 1a8:	da 01       	movw	r26, r20
+ 1aa:	c9 01       	movw	r24, r18
+ 1ac:	90 93 33 01 	sts	0x0133, r25
+ 1b0:	80 93 32 01 	sts	0x0132, r24
+	while ( counter );
+ 1b4:	80 91 32 01 	lds	r24, 0x0132
+ 1b8:	90 91 33 01 	lds	r25, 0x0133
+ 1bc:	1d 82       	std	Y+5, r1	; 0x05
+ 1be:	00 97       	sbiw	r24, 0x00	; 0
+ 1c0:	11 f0       	breq	.+4      	; 0x1c6 <_Z7delaymsm+0x52>
+ 1c2:	81 e0       	ldi	r24, 0x01	; 1
+ 1c4:	8d 83       	std	Y+5, r24	; 0x05
+ 1c6:	8d 81       	ldd	r24, Y+5	; 0x05
+ 1c8:	88 23       	and	r24, r24
+ 1ca:	a1 f7       	brne	.-24     	; 0x1b4 <_Z7delaymsm+0x40>
+ 1cc:	25 96       	adiw	r28, 0x05	; 5
+ 1ce:	0f b6       	in	r0, 0x3f	; 63
+ 1d0:	f8 94       	cli
+ 1d2:	de bf       	out	0x3e, r29	; 62
+ 1d4:	0f be       	out	0x3f, r0	; 63
+ 1d6:	cd bf       	out	0x3d, r28	; 61
+ 1d8:	df 91       	pop	r29
+ 1da:	cf 91       	pop	r28
+ 1dc:	08 95       	ret
+
+000001de <__vector_9>:
+}
+
+SIGNAL ( SIG_OVERFLOW0 )
+ 1de:	1f 92       	push	r1
+ 1e0:	0f 92       	push	r0
+ 1e2:	0f b6       	in	r0, 0x3f	; 63
+ 1e4:	0f 92       	push	r0
+ 1e6:	11 24       	eor	r1, r1
+ 1e8:	8f 93       	push	r24
+ 1ea:	9f 93       	push	r25
+ 1ec:	ef 93       	push	r30
+ 1ee:	ff 93       	push	r31
+ 1f0:	cf 93       	push	r28
+ 1f2:	df 93       	push	r29
+ 1f4:	cd b7       	in	r28, 0x3d	; 61
+ 1f6:	de b7       	in	r29, 0x3e	; 62
+{
+	counter--;
+ 1f8:	80 91 32 01 	lds	r24, 0x0132
+ 1fc:	90 91 33 01 	lds	r25, 0x0133
+ 200:	01 97       	sbiw	r24, 0x01	; 1
+ 202:	90 93 33 01 	sts	0x0133, r25
+ 206:	80 93 32 01 	sts	0x0132, r24
+	TCNT0=0xb2;
+ 20a:	e2 e5       	ldi	r30, 0x52	; 82
+ 20c:	f0 e0       	ldi	r31, 0x00	; 0
+ 20e:	82 eb       	ldi	r24, 0xB2	; 178
+ 210:	80 83       	st	Z, r24
+ 212:	df 91       	pop	r29
+ 214:	cf 91       	pop	r28
+ 216:	ff 91       	pop	r31
+ 218:	ef 91       	pop	r30
+ 21a:	9f 91       	pop	r25
+ 21c:	8f 91       	pop	r24
+ 21e:	0f 90       	pop	r0
+ 220:	0f be       	out	0x3f, r0	; 63
+ 222:	0f 90       	pop	r0
+ 224:	1f 90       	pop	r1
+ 226:	18 95       	reti
+
+00000228 <_ZN5CNodeC2Ev>:
+#include "node.hpp"
+
+CNode::CNode()
+ 228:	cf 93       	push	r28
+ 22a:	df 93       	push	r29
+ 22c:	cd b7       	in	r28, 0x3d	; 61
+ 22e:	de b7       	in	r29, 0x3e	; 62
+ 230:	22 97       	sbiw	r28, 0x02	; 2
+ 232:	0f b6       	in	r0, 0x3f	; 63
+ 234:	f8 94       	cli
+ 236:	de bf       	out	0x3e, r29	; 62
+ 238:	0f be       	out	0x3f, r0	; 63
+ 23a:	cd bf       	out	0x3d, r28	; 61
+ 23c:	9a 83       	std	Y+2, r25	; 0x02
+ 23e:	89 83       	std	Y+1, r24	; 0x01
+{
+	mEvidence = NULL;
+ 240:	89 81       	ldd	r24, Y+1	; 0x01
+ 242:	9a 81       	ldd	r25, Y+2	; 0x02
+ 244:	fc 01       	movw	r30, r24
+ 246:	e8 5b       	subi	r30, 0xB8	; 184
+ 248:	ff 4f       	sbci	r31, 0xFF	; 255
+ 24a:	11 82       	std	Z+1, r1	; 0x01
+ 24c:	10 82       	st	Z, r1
+	mCardinalNumber = 0;
+ 24e:	89 81       	ldd	r24, Y+1	; 0x01
+ 250:	9a 81       	ldd	r25, Y+2	; 0x02
+ 252:	fc 01       	movw	r30, r24
+ 254:	e1 5b       	subi	r30, 0xB1	; 177
+ 256:	ff 4f       	sbci	r31, 0xFF	; 255
+ 258:	11 82       	std	Z+1, r1	; 0x01
+ 25a:	10 82       	st	Z, r1
+	mEliminationSet = false;
+ 25c:	89 81       	ldd	r24, Y+1	; 0x01
+ 25e:	9a 81       	ldd	r25, Y+2	; 0x02
+ 260:	fc 01       	movw	r30, r24
+ 262:	e2 5b       	subi	r30, 0xB2	; 178
+ 264:	ff 4f       	sbci	r31, 0xFF	; 255
+ 266:	10 82       	st	Z, r1
+ 268:	22 96       	adiw	r28, 0x02	; 2
+ 26a:	0f b6       	in	r0, 0x3f	; 63
+ 26c:	f8 94       	cli
+ 26e:	de bf       	out	0x3e, r29	; 62
+ 270:	0f be       	out	0x3f, r0	; 63
+ 272:	cd bf       	out	0x3d, r28	; 61
+ 274:	df 91       	pop	r29
+ 276:	cf 91       	pop	r28
+ 278:	08 95       	ret
+
+0000027a <_ZN5CNodeC1Ev>:
+ 27a:	cf 93       	push	r28
+ 27c:	df 93       	push	r29
+ 27e:	cd b7       	in	r28, 0x3d	; 61
+ 280:	de b7       	in	r29, 0x3e	; 62
+ 282:	22 97       	sbiw	r28, 0x02	; 2
+ 284:	0f b6       	in	r0, 0x3f	; 63
+ 286:	f8 94       	cli
+ 288:	de bf       	out	0x3e, r29	; 62
+ 28a:	0f be       	out	0x3f, r0	; 63
+ 28c:	cd bf       	out	0x3d, r28	; 61
+ 28e:	9a 83       	std	Y+2, r25	; 0x02
+ 290:	89 83       	std	Y+1, r24	; 0x01
+ 292:	89 81       	ldd	r24, Y+1	; 0x01
+ 294:	9a 81       	ldd	r25, Y+2	; 0x02
+ 296:	fc 01       	movw	r30, r24
+ 298:	e8 5b       	subi	r30, 0xB8	; 184
+ 29a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 29c:	11 82       	std	Z+1, r1	; 0x01
+ 29e:	10 82       	st	Z, r1
+ 2a0:	89 81       	ldd	r24, Y+1	; 0x01
+ 2a2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2a4:	fc 01       	movw	r30, r24
+ 2a6:	e1 5b       	subi	r30, 0xB1	; 177
+ 2a8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2aa:	11 82       	std	Z+1, r1	; 0x01
+ 2ac:	10 82       	st	Z, r1
+ 2ae:	89 81       	ldd	r24, Y+1	; 0x01
+ 2b0:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2b2:	fc 01       	movw	r30, r24
+ 2b4:	e2 5b       	subi	r30, 0xB2	; 178
+ 2b6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2b8:	10 82       	st	Z, r1
+ 2ba:	22 96       	adiw	r28, 0x02	; 2
+ 2bc:	0f b6       	in	r0, 0x3f	; 63
+ 2be:	f8 94       	cli
+ 2c0:	de bf       	out	0x3e, r29	; 62
+ 2c2:	0f be       	out	0x3f, r0	; 63
+ 2c4:	cd bf       	out	0x3d, r28	; 61
+ 2c6:	df 91       	pop	r29
+ 2c8:	cf 91       	pop	r28
+ 2ca:	08 95       	ret
+
+000002cc <_ZN21CProbabilisticNetworkC1Ev>:
+#include <stdlib.h>
+#include "probabilisticnetwork.hpp"
+
+
+CProbabilisticNetwork::CProbabilisticNetwork()
+ 2cc:	cf 93       	push	r28
+ 2ce:	df 93       	push	r29
+ 2d0:	cd b7       	in	r28, 0x3d	; 61
+ 2d2:	de b7       	in	r29, 0x3e	; 62
+ 2d4:	26 97       	sbiw	r28, 0x06	; 6
+ 2d6:	0f b6       	in	r0, 0x3f	; 63
+ 2d8:	f8 94       	cli
+ 2da:	de bf       	out	0x3e, r29	; 62
+ 2dc:	0f be       	out	0x3f, r0	; 63
+ 2de:	cd bf       	out	0x3d, r28	; 61
+ 2e0:	9a 83       	std	Y+2, r25	; 0x02
+ 2e2:	89 83       	std	Y+1, r24	; 0x01
+ 2e4:	89 81       	ldd	r24, Y+1	; 0x01
+ 2e6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 2e8:	9e 83       	std	Y+6, r25	; 0x06
+ 2ea:	8d 83       	std	Y+5, r24	; 0x05
+ 2ec:	88 e0       	ldi	r24, 0x08	; 8
+ 2ee:	90 e0       	ldi	r25, 0x00	; 0
+ 2f0:	9c 83       	std	Y+4, r25	; 0x04
+ 2f2:	8b 83       	std	Y+3, r24	; 0x03
+ 2f4:	0f c0       	rjmp	.+30     	; 0x314 <_ZN21CProbabilisticNetworkC1Ev+0x48>
+ 2f6:	8d 81       	ldd	r24, Y+5	; 0x05
+ 2f8:	9e 81       	ldd	r25, Y+6	; 0x06
+ 2fa:	0e 94 3d 01 	call	0x27a	; 0x27a <_ZN5CNodeC1Ev>
+ 2fe:	8d 81       	ldd	r24, Y+5	; 0x05
+ 300:	9e 81       	ldd	r25, Y+6	; 0x06
+ 302:	8f 5a       	subi	r24, 0xAF	; 175
+ 304:	9f 4f       	sbci	r25, 0xFF	; 255
+ 306:	9e 83       	std	Y+6, r25	; 0x06
+ 308:	8d 83       	std	Y+5, r24	; 0x05
+ 30a:	8b 81       	ldd	r24, Y+3	; 0x03
+ 30c:	9c 81       	ldd	r25, Y+4	; 0x04
+ 30e:	01 97       	sbiw	r24, 0x01	; 1
+ 310:	9c 83       	std	Y+4, r25	; 0x04
+ 312:	8b 83       	std	Y+3, r24	; 0x03
+ 314:	8b 81       	ldd	r24, Y+3	; 0x03
+ 316:	9c 81       	ldd	r25, Y+4	; 0x04
+ 318:	2f ef       	ldi	r18, 0xFF	; 255
+ 31a:	8f 3f       	cpi	r24, 0xFF	; 255
+ 31c:	92 07       	cpc	r25, r18
+ 31e:	59 f7       	brne	.-42     	; 0x2f6 <_ZN21CProbabilisticNetworkC1Ev+0x2a>
+{
+	mDirected = true;
+ 320:	89 81       	ldd	r24, Y+1	; 0x01
+ 322:	9a 81       	ldd	r25, Y+2	; 0x02
+ 324:	fc 01       	movw	r30, r24
+ 326:	ef 51       	subi	r30, 0x1F	; 31
+ 328:	fd 4f       	sbci	r31, 0xFD	; 253
+ 32a:	81 e0       	ldi	r24, 0x01	; 1
+ 32c:	80 83       	st	Z, r24
+	mMoral = -1;
+ 32e:	89 81       	ldd	r24, Y+1	; 0x01
+ 330:	9a 81       	ldd	r25, Y+2	; 0x02
+ 332:	fc 01       	movw	r30, r24
+ 334:	ee 51       	subi	r30, 0x1E	; 30
+ 336:	fd 4f       	sbci	r31, 0xFD	; 253
+ 338:	8f ef       	ldi	r24, 0xFF	; 255
+ 33a:	9f ef       	ldi	r25, 0xFF	; 255
+ 33c:	91 83       	std	Z+1, r25	; 0x01
+ 33e:	80 83       	st	Z, r24
+	mTriangular = -1;
+ 340:	89 81       	ldd	r24, Y+1	; 0x01
+ 342:	9a 81       	ldd	r25, Y+2	; 0x02
+ 344:	fc 01       	movw	r30, r24
+ 346:	ec 51       	subi	r30, 0x1C	; 28
+ 348:	fd 4f       	sbci	r31, 0xFD	; 253
+ 34a:	8f ef       	ldi	r24, 0xFF	; 255
+ 34c:	9f ef       	ldi	r25, 0xFF	; 255
+ 34e:	91 83       	std	Z+1, r25	; 0x01
+ 350:	80 83       	st	Z, r24
+	mEliminationTree = false;
+ 352:	89 81       	ldd	r24, Y+1	; 0x01
+ 354:	9a 81       	ldd	r25, Y+2	; 0x02
+ 356:	fc 01       	movw	r30, r24
+ 358:	ea 51       	subi	r30, 0x1A	; 26
+ 35a:	fd 4f       	sbci	r31, 0xFD	; 253
+ 35c:	10 82       	st	Z, r1
+ 35e:	26 96       	adiw	r28, 0x06	; 6
+ 360:	0f b6       	in	r0, 0x3f	; 63
+ 362:	f8 94       	cli
+ 364:	de bf       	out	0x3e, r29	; 62
+ 366:	0f be       	out	0x3f, r0	; 63
+ 368:	cd bf       	out	0x3d, r28	; 61
+ 36a:	df 91       	pop	r29
+ 36c:	cf 91       	pop	r28
+ 36e:	08 95       	ret
+
+00000370 <_ZN21CProbabilisticNetworkC2Ev>:
+ 370:	cf 93       	push	r28
+ 372:	df 93       	push	r29
+ 374:	cd b7       	in	r28, 0x3d	; 61
+ 376:	de b7       	in	r29, 0x3e	; 62
+ 378:	26 97       	sbiw	r28, 0x06	; 6
+ 37a:	0f b6       	in	r0, 0x3f	; 63
+ 37c:	f8 94       	cli
+ 37e:	de bf       	out	0x3e, r29	; 62
+ 380:	0f be       	out	0x3f, r0	; 63
+ 382:	cd bf       	out	0x3d, r28	; 61
+ 384:	9a 83       	std	Y+2, r25	; 0x02
+ 386:	89 83       	std	Y+1, r24	; 0x01
+ 388:	89 81       	ldd	r24, Y+1	; 0x01
+ 38a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 38c:	9e 83       	std	Y+6, r25	; 0x06
+ 38e:	8d 83       	std	Y+5, r24	; 0x05
+ 390:	88 e0       	ldi	r24, 0x08	; 8
+ 392:	90 e0       	ldi	r25, 0x00	; 0
+ 394:	9c 83       	std	Y+4, r25	; 0x04
+ 396:	8b 83       	std	Y+3, r24	; 0x03
+ 398:	0f c0       	rjmp	.+30     	; 0x3b8 <_ZN21CProbabilisticNetworkC2Ev+0x48>
+ 39a:	8d 81       	ldd	r24, Y+5	; 0x05
+ 39c:	9e 81       	ldd	r25, Y+6	; 0x06
+ 39e:	0e 94 3d 01 	call	0x27a	; 0x27a <_ZN5CNodeC1Ev>
+ 3a2:	8d 81       	ldd	r24, Y+5	; 0x05
+ 3a4:	9e 81       	ldd	r25, Y+6	; 0x06
+ 3a6:	8f 5a       	subi	r24, 0xAF	; 175
+ 3a8:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3aa:	9e 83       	std	Y+6, r25	; 0x06
+ 3ac:	8d 83       	std	Y+5, r24	; 0x05
+ 3ae:	8b 81       	ldd	r24, Y+3	; 0x03
+ 3b0:	9c 81       	ldd	r25, Y+4	; 0x04
+ 3b2:	01 97       	sbiw	r24, 0x01	; 1
+ 3b4:	9c 83       	std	Y+4, r25	; 0x04
+ 3b6:	8b 83       	std	Y+3, r24	; 0x03
+ 3b8:	8b 81       	ldd	r24, Y+3	; 0x03
+ 3ba:	9c 81       	ldd	r25, Y+4	; 0x04
+ 3bc:	2f ef       	ldi	r18, 0xFF	; 255
+ 3be:	8f 3f       	cpi	r24, 0xFF	; 255
+ 3c0:	92 07       	cpc	r25, r18
+ 3c2:	59 f7       	brne	.-42     	; 0x39a <_ZN21CProbabilisticNetworkC2Ev+0x2a>
+ 3c4:	89 81       	ldd	r24, Y+1	; 0x01
+ 3c6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 3c8:	fc 01       	movw	r30, r24
+ 3ca:	ef 51       	subi	r30, 0x1F	; 31
+ 3cc:	fd 4f       	sbci	r31, 0xFD	; 253
+ 3ce:	81 e0       	ldi	r24, 0x01	; 1
+ 3d0:	80 83       	st	Z, r24
+ 3d2:	89 81       	ldd	r24, Y+1	; 0x01
+ 3d4:	9a 81       	ldd	r25, Y+2	; 0x02
+ 3d6:	fc 01       	movw	r30, r24
+ 3d8:	ee 51       	subi	r30, 0x1E	; 30
+ 3da:	fd 4f       	sbci	r31, 0xFD	; 253
+ 3dc:	8f ef       	ldi	r24, 0xFF	; 255
+ 3de:	9f ef       	ldi	r25, 0xFF	; 255
+ 3e0:	91 83       	std	Z+1, r25	; 0x01
+ 3e2:	80 83       	st	Z, r24
+ 3e4:	89 81       	ldd	r24, Y+1	; 0x01
+ 3e6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 3e8:	fc 01       	movw	r30, r24
+ 3ea:	ec 51       	subi	r30, 0x1C	; 28
+ 3ec:	fd 4f       	sbci	r31, 0xFD	; 253
+ 3ee:	8f ef       	ldi	r24, 0xFF	; 255
+ 3f0:	9f ef       	ldi	r25, 0xFF	; 255
+ 3f2:	91 83       	std	Z+1, r25	; 0x01
+ 3f4:	80 83       	st	Z, r24
+ 3f6:	89 81       	ldd	r24, Y+1	; 0x01
+ 3f8:	9a 81       	ldd	r25, Y+2	; 0x02
+ 3fa:	fc 01       	movw	r30, r24
+ 3fc:	ea 51       	subi	r30, 0x1A	; 26
+ 3fe:	fd 4f       	sbci	r31, 0xFD	; 253
+ 400:	10 82       	st	Z, r1
+ 402:	26 96       	adiw	r28, 0x06	; 6
+ 404:	0f b6       	in	r0, 0x3f	; 63
+ 406:	f8 94       	cli
+ 408:	de bf       	out	0x3e, r29	; 62
+ 40a:	0f be       	out	0x3f, r0	; 63
+ 40c:	cd bf       	out	0x3d, r28	; 61
+ 40e:	df 91       	pop	r29
+ 410:	cf 91       	pop	r28
+ 412:	08 95       	ret
+
+00000414 <_ZN5CNodeD2Ev>:
+}
+
+CNode::~CNode()
+ 414:	cf 93       	push	r28
+ 416:	df 93       	push	r29
+ 418:	cd b7       	in	r28, 0x3d	; 61
+ 41a:	de b7       	in	r29, 0x3e	; 62
+ 41c:	22 97       	sbiw	r28, 0x02	; 2
+ 41e:	0f b6       	in	r0, 0x3f	; 63
+ 420:	f8 94       	cli
+ 422:	de bf       	out	0x3e, r29	; 62
+ 424:	0f be       	out	0x3f, r0	; 63
+ 426:	cd bf       	out	0x3d, r28	; 61
+ 428:	9a 83       	std	Y+2, r25	; 0x02
+ 42a:	89 83       	std	Y+1, r24	; 0x01
+ 42c:	22 96       	adiw	r28, 0x02	; 2
+ 42e:	0f b6       	in	r0, 0x3f	; 63
+ 430:	f8 94       	cli
+ 432:	de bf       	out	0x3e, r29	; 62
+ 434:	0f be       	out	0x3f, r0	; 63
+ 436:	cd bf       	out	0x3d, r28	; 61
+ 438:	df 91       	pop	r29
+ 43a:	cf 91       	pop	r28
+ 43c:	08 95       	ret
+
+0000043e <_ZN5CNodeD1Ev>:
+ 43e:	cf 93       	push	r28
+ 440:	df 93       	push	r29
+ 442:	cd b7       	in	r28, 0x3d	; 61
+ 444:	de b7       	in	r29, 0x3e	; 62
+ 446:	22 97       	sbiw	r28, 0x02	; 2
+ 448:	0f b6       	in	r0, 0x3f	; 63
+ 44a:	f8 94       	cli
+ 44c:	de bf       	out	0x3e, r29	; 62
+ 44e:	0f be       	out	0x3f, r0	; 63
+ 450:	cd bf       	out	0x3d, r28	; 61
+ 452:	9a 83       	std	Y+2, r25	; 0x02
+ 454:	89 83       	std	Y+1, r24	; 0x01
+ 456:	22 96       	adiw	r28, 0x02	; 2
+ 458:	0f b6       	in	r0, 0x3f	; 63
+ 45a:	f8 94       	cli
+ 45c:	de bf       	out	0x3e, r29	; 62
+ 45e:	0f be       	out	0x3f, r0	; 63
+ 460:	cd bf       	out	0x3d, r28	; 61
+ 462:	df 91       	pop	r29
+ 464:	cf 91       	pop	r28
+ 466:	08 95       	ret
+
+00000468 <_ZN21CProbabilisticNetworkD1Ev>:
+}
+
+CProbabilisticNetwork::~CProbabilisticNetwork()
+ 468:	cf 93       	push	r28
+ 46a:	df 93       	push	r29
+ 46c:	cd b7       	in	r28, 0x3d	; 61
+ 46e:	de b7       	in	r29, 0x3e	; 62
+ 470:	24 97       	sbiw	r28, 0x04	; 4
+ 472:	0f b6       	in	r0, 0x3f	; 63
+ 474:	f8 94       	cli
+ 476:	de bf       	out	0x3e, r29	; 62
+ 478:	0f be       	out	0x3f, r0	; 63
+ 47a:	cd bf       	out	0x3d, r28	; 61
+ 47c:	9a 83       	std	Y+2, r25	; 0x02
+ 47e:	89 83       	std	Y+1, r24	; 0x01
+{
+}
+ 480:	89 81       	ldd	r24, Y+1	; 0x01
+ 482:	9a 81       	ldd	r25, Y+2	; 0x02
+ 484:	00 97       	sbiw	r24, 0x00	; 0
+ 486:	c9 f0       	breq	.+50     	; 0x4ba <_ZN21CProbabilisticNetworkD1Ev+0x52>
+ 488:	89 81       	ldd	r24, Y+1	; 0x01
+ 48a:	9a 81       	ldd	r25, Y+2	; 0x02
+ 48c:	9c 01       	movw	r18, r24
+ 48e:	27 52       	subi	r18, 0x27	; 39
+ 490:	3d 4f       	sbci	r19, 0xFD	; 253
+ 492:	3c 83       	std	Y+4, r19	; 0x04
+ 494:	2b 83       	std	Y+3, r18	; 0x03
+ 496:	89 81       	ldd	r24, Y+1	; 0x01
+ 498:	9a 81       	ldd	r25, Y+2	; 0x02
+ 49a:	2b 81       	ldd	r18, Y+3	; 0x03
+ 49c:	3c 81       	ldd	r19, Y+4	; 0x04
+ 49e:	82 17       	cp	r24, r18
+ 4a0:	93 07       	cpc	r25, r19
+ 4a2:	59 f0       	breq	.+22     	; 0x4ba <_ZN21CProbabilisticNetworkD1Ev+0x52>
+ 4a4:	8b 81       	ldd	r24, Y+3	; 0x03
+ 4a6:	9c 81       	ldd	r25, Y+4	; 0x04
+ 4a8:	81 55       	subi	r24, 0x51	; 81
+ 4aa:	90 40       	sbci	r25, 0x00	; 0
+ 4ac:	9c 83       	std	Y+4, r25	; 0x04
+ 4ae:	8b 83       	std	Y+3, r24	; 0x03
+ 4b0:	8b 81       	ldd	r24, Y+3	; 0x03
+ 4b2:	9c 81       	ldd	r25, Y+4	; 0x04
+ 4b4:	0e 94 1f 02 	call	0x43e	; 0x43e <_ZN5CNodeD1Ev>
+ 4b8:	ee cf       	rjmp	.-36     	; 0x496 <_ZN21CProbabilisticNetworkD1Ev+0x2e>
+ 4ba:	24 96       	adiw	r28, 0x04	; 4
+ 4bc:	0f b6       	in	r0, 0x3f	; 63
+ 4be:	f8 94       	cli
+ 4c0:	de bf       	out	0x3e, r29	; 62
+ 4c2:	0f be       	out	0x3f, r0	; 63
+ 4c4:	cd bf       	out	0x3d, r28	; 61
+ 4c6:	df 91       	pop	r29
+ 4c8:	cf 91       	pop	r28
+ 4ca:	08 95       	ret
+
+000004cc <_ZN21CProbabilisticNetworkD2Ev>:
+ 4cc:	cf 93       	push	r28
+ 4ce:	df 93       	push	r29
+ 4d0:	cd b7       	in	r28, 0x3d	; 61
+ 4d2:	de b7       	in	r29, 0x3e	; 62
+ 4d4:	24 97       	sbiw	r28, 0x04	; 4
+ 4d6:	0f b6       	in	r0, 0x3f	; 63
+ 4d8:	f8 94       	cli
+ 4da:	de bf       	out	0x3e, r29	; 62
+ 4dc:	0f be       	out	0x3f, r0	; 63
+ 4de:	cd bf       	out	0x3d, r28	; 61
+ 4e0:	9a 83       	std	Y+2, r25	; 0x02
+ 4e2:	89 83       	std	Y+1, r24	; 0x01
+ 4e4:	89 81       	ldd	r24, Y+1	; 0x01
+ 4e6:	9a 81       	ldd	r25, Y+2	; 0x02
+ 4e8:	00 97       	sbiw	r24, 0x00	; 0
+ 4ea:	c9 f0       	breq	.+50     	; 0x51e <_ZN21CProbabilisticNetworkD2Ev+0x52>
+ 4ec:	89 81       	ldd	r24, Y+1	; 0x01
+ 4ee:	9a 81       	ldd	r25, Y+2	; 0x02
+ 4f0:	9c 01       	movw	r18, r24
+ 4f2:	27 52       	subi	r18, 0x27	; 39
+ 4f4:	3d 4f       	sbci	r19, 0xFD	; 253
+ 4f6:	3c 83       	std	Y+4, r19	; 0x04
+ 4f8:	2b 83       	std	Y+3, r18	; 0x03
+ 4fa:	89 81       	ldd	r24, Y+1	; 0x01
+ 4fc:	9a 81       	ldd	r25, Y+2	; 0x02
+ 4fe:	2b 81       	ldd	r18, Y+3	; 0x03
+ 500:	3c 81       	ldd	r19, Y+4	; 0x04
+ 502:	82 17       	cp	r24, r18
+ 504:	93 07       	cpc	r25, r19
+ 506:	59 f0       	breq	.+22     	; 0x51e <_ZN21CProbabilisticNetworkD2Ev+0x52>
+ 508:	8b 81       	ldd	r24, Y+3	; 0x03
+ 50a:	9c 81       	ldd	r25, Y+4	; 0x04
+ 50c:	81 55       	subi	r24, 0x51	; 81
+ 50e:	90 40       	sbci	r25, 0x00	; 0
+ 510:	9c 83       	std	Y+4, r25	; 0x04
+ 512:	8b 83       	std	Y+3, r24	; 0x03
+ 514:	8b 81       	ldd	r24, Y+3	; 0x03
+ 516:	9c 81       	ldd	r25, Y+4	; 0x04
+ 518:	0e 94 1f 02 	call	0x43e	; 0x43e <_ZN5CNodeD1Ev>
+ 51c:	ee cf       	rjmp	.-36     	; 0x4fa <_ZN21CProbabilisticNetworkD2Ev+0x2e>
+ 51e:	24 96       	adiw	r28, 0x04	; 4
+ 520:	0f b6       	in	r0, 0x3f	; 63
+ 522:	f8 94       	cli
+ 524:	de bf       	out	0x3e, r29	; 62
+ 526:	0f be       	out	0x3f, r0	; 63
+ 528:	cd bf       	out	0x3d, r28	; 61
+ 52a:	df 91       	pop	r29
+ 52c:	cf 91       	pop	r28
+ 52e:	08 95       	ret
+
+00000530 <_ZN5CNode4LoadEjPcS0_S0_jb>:
+{
+}
+
+
+int 
+CNode::Load(uint Number, string Name, string State1, string State2, uint Cardinal, bool ElSet)
+ 530:	cf 92       	push	r12
+ 532:	ef 92       	push	r14
+ 534:	ff 92       	push	r15
+ 536:	0f 93       	push	r16
+ 538:	1f 93       	push	r17
+ 53a:	cf 93       	push	r28
+ 53c:	df 93       	push	r29
+ 53e:	cd b7       	in	r28, 0x3d	; 61
+ 540:	de b7       	in	r29, 0x3e	; 62
+ 542:	2d 97       	sbiw	r28, 0x0d	; 13
+ 544:	0f b6       	in	r0, 0x3f	; 63
+ 546:	f8 94       	cli
+ 548:	de bf       	out	0x3e, r29	; 62
+ 54a:	0f be       	out	0x3f, r0	; 63
+ 54c:	cd bf       	out	0x3d, r28	; 61
+ 54e:	9a 83       	std	Y+2, r25	; 0x02
+ 550:	89 83       	std	Y+1, r24	; 0x01
+ 552:	7c 83       	std	Y+4, r23	; 0x04
+ 554:	6b 83       	std	Y+3, r22	; 0x03
+ 556:	5e 83       	std	Y+6, r21	; 0x06
+ 558:	4d 83       	std	Y+5, r20	; 0x05
+ 55a:	38 87       	std	Y+8, r19	; 0x08
+ 55c:	2f 83       	std	Y+7, r18	; 0x07
+ 55e:	1a 87       	std	Y+10, r17	; 0x0a
+ 560:	09 87       	std	Y+9, r16	; 0x09
+ 562:	fc 86       	std	Y+12, r15	; 0x0c
+ 564:	eb 86       	std	Y+11, r14	; 0x0b
+ 566:	cd 86       	std	Y+13, r12	; 0x0d
+{
+	mNumber = Number;
+ 568:	8b 81       	ldd	r24, Y+3	; 0x03
+ 56a:	9c 81       	ldd	r25, Y+4	; 0x04
+ 56c:	9c 01       	movw	r18, r24
+ 56e:	44 27       	eor	r20, r20
+ 570:	55 27       	eor	r21, r21
+ 572:	89 81       	ldd	r24, Y+1	; 0x01
+ 574:	9a 81       	ldd	r25, Y+2	; 0x02
+ 576:	fc 01       	movw	r30, r24
+ 578:	e6 5b       	subi	r30, 0xB6	; 182
+ 57a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 57c:	20 83       	st	Z, r18
+ 57e:	31 83       	std	Z+1, r19	; 0x01
+ 580:	42 83       	std	Z+2, r20	; 0x02
+ 582:	53 83       	std	Z+3, r21	; 0x03
+	strcpy(mName, Name);
+ 584:	89 81       	ldd	r24, Y+1	; 0x01
+ 586:	9a 81       	ldd	r25, Y+2	; 0x02
+ 588:	9c 01       	movw	r18, r24
+ 58a:	20 5d       	subi	r18, 0xD0	; 208
+ 58c:	3f 4f       	sbci	r19, 0xFF	; 255
+ 58e:	8d 81       	ldd	r24, Y+5	; 0x05
+ 590:	9e 81       	ldd	r25, Y+6	; 0x06
+ 592:	bc 01       	movw	r22, r24
+ 594:	c9 01       	movw	r24, r18
+ 596:	0e 94 9b 04 	call	0x936	; 0x936 <strcpy>
+
+	strcpy(mStateNameArray[0], State1);
+ 59a:	29 81       	ldd	r18, Y+1	; 0x01
+ 59c:	3a 81       	ldd	r19, Y+2	; 0x02
+ 59e:	8f 81       	ldd	r24, Y+7	; 0x07
+ 5a0:	98 85       	ldd	r25, Y+8	; 0x08
+ 5a2:	bc 01       	movw	r22, r24
+ 5a4:	c9 01       	movw	r24, r18
+ 5a6:	0e 94 9b 04 	call	0x936	; 0x936 <strcpy>
+	strcpy(mStateNameArray[1], State2); 
+ 5aa:	89 81       	ldd	r24, Y+1	; 0x01
+ 5ac:	9a 81       	ldd	r25, Y+2	; 0x02
+ 5ae:	9c 01       	movw	r18, r24
+ 5b0:	28 5e       	subi	r18, 0xE8	; 232
+ 5b2:	3f 4f       	sbci	r19, 0xFF	; 255
+ 5b4:	89 85       	ldd	r24, Y+9	; 0x09
+ 5b6:	9a 85       	ldd	r25, Y+10	; 0x0a
+ 5b8:	bc 01       	movw	r22, r24
+ 5ba:	c9 01       	movw	r24, r18
+ 5bc:	0e 94 9b 04 	call	0x936	; 0x936 <strcpy>
+
+	mCardinalNumber = Cardinal;
+ 5c0:	89 81       	ldd	r24, Y+1	; 0x01
+ 5c2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 5c4:	fc 01       	movw	r30, r24
+ 5c6:	e1 5b       	subi	r30, 0xB1	; 177
+ 5c8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5ca:	8b 85       	ldd	r24, Y+11	; 0x0b
+ 5cc:	9c 85       	ldd	r25, Y+12	; 0x0c
+ 5ce:	91 83       	std	Z+1, r25	; 0x01
+ 5d0:	80 83       	st	Z, r24
+	mEliminationSet = ElSet;
+ 5d2:	89 81       	ldd	r24, Y+1	; 0x01
+ 5d4:	9a 81       	ldd	r25, Y+2	; 0x02
+ 5d6:	fc 01       	movw	r30, r24
+ 5d8:	e2 5b       	subi	r30, 0xB2	; 178
+ 5da:	ff 4f       	sbci	r31, 0xFF	; 255
+ 5dc:	8d 85       	ldd	r24, Y+13	; 0x0d
+ 5de:	80 83       	st	Z, r24
+	
+	return 1;
+ 5e0:	81 e0       	ldi	r24, 0x01	; 1
+ 5e2:	90 e0       	ldi	r25, 0x00	; 0
+ 5e4:	2d 96       	adiw	r28, 0x0d	; 13
+ 5e6:	0f b6       	in	r0, 0x3f	; 63
+ 5e8:	f8 94       	cli
+ 5ea:	de bf       	out	0x3e, r29	; 62
+ 5ec:	0f be       	out	0x3f, r0	; 63
+ 5ee:	cd bf       	out	0x3d, r28	; 61
+ 5f0:	df 91       	pop	r29
+ 5f2:	cf 91       	pop	r28
+ 5f4:	1f 91       	pop	r17
+ 5f6:	0f 91       	pop	r16
+ 5f8:	ff 90       	pop	r15
+ 5fa:	ef 90       	pop	r14
+ 5fc:	cf 90       	pop	r12
+ 5fe:	08 95       	ret
+
+00000600 <_ZN21CProbabilisticNetwork4LoadEv>:
+
+
+int
+CProbabilisticNetwork::Load()
+ 600:	cf 92       	push	r12
+ 602:	ef 92       	push	r14
+ 604:	ff 92       	push	r15
+ 606:	0f 93       	push	r16
+ 608:	1f 93       	push	r17
+ 60a:	cf 93       	push	r28
+ 60c:	df 93       	push	r29
+ 60e:	cd b7       	in	r28, 0x3d	; 61
+ 610:	de b7       	in	r29, 0x3e	; 62
+ 612:	24 97       	sbiw	r28, 0x04	; 4
+ 614:	0f b6       	in	r0, 0x3f	; 63
+ 616:	f8 94       	cli
+ 618:	de bf       	out	0x3e, r29	; 62
+ 61a:	0f be       	out	0x3f, r0	; 63
+ 61c:	cd bf       	out	0x3d, r28	; 61
+ 61e:	9c 83       	std	Y+4, r25	; 0x04
+ 620:	8b 83       	std	Y+3, r24	; 0x03
+{
+	mMode = 2;
+ 622:	8b 81       	ldd	r24, Y+3	; 0x03
+ 624:	9c 81       	ldd	r25, Y+4	; 0x04
+ 626:	fc 01       	movw	r30, r24
+ 628:	e1 52       	subi	r30, 0x21	; 33
+ 62a:	fd 4f       	sbci	r31, 0xFD	; 253
+ 62c:	82 e0       	ldi	r24, 0x02	; 2
+ 62e:	90 e0       	ldi	r25, 0x00	; 0
+ 630:	91 83       	std	Z+1, r25	; 0x01
+ 632:	80 83       	st	Z, r24
+	mDirected = 0;
+ 634:	8b 81       	ldd	r24, Y+3	; 0x03
+ 636:	9c 81       	ldd	r25, Y+4	; 0x04
+ 638:	fc 01       	movw	r30, r24
+ 63a:	ef 51       	subi	r30, 0x1F	; 31
+ 63c:	fd 4f       	sbci	r31, 0xFD	; 253
+ 63e:	10 82       	st	Z, r1
+	mMoral = 1;
+ 640:	8b 81       	ldd	r24, Y+3	; 0x03
+ 642:	9c 81       	ldd	r25, Y+4	; 0x04
+ 644:	fc 01       	movw	r30, r24
+ 646:	ee 51       	subi	r30, 0x1E	; 30
+ 648:	fd 4f       	sbci	r31, 0xFD	; 253
+ 64a:	81 e0       	ldi	r24, 0x01	; 1
+ 64c:	90 e0       	ldi	r25, 0x00	; 0
+ 64e:	91 83       	std	Z+1, r25	; 0x01
+ 650:	80 83       	st	Z, r24
+	mTriangular = 1;
+ 652:	8b 81       	ldd	r24, Y+3	; 0x03
+ 654:	9c 81       	ldd	r25, Y+4	; 0x04
+ 656:	fc 01       	movw	r30, r24
+ 658:	ec 51       	subi	r30, 0x1C	; 28
+ 65a:	fd 4f       	sbci	r31, 0xFD	; 253
+ 65c:	81 e0       	ldi	r24, 0x01	; 1
+ 65e:	90 e0       	ldi	r25, 0x00	; 0
+ 660:	91 83       	std	Z+1, r25	; 0x01
+ 662:	80 83       	st	Z, r24
+	mEliminationTree = 1;
+ 664:	8b 81       	ldd	r24, Y+3	; 0x03
+ 666:	9c 81       	ldd	r25, Y+4	; 0x04
+ 668:	fc 01       	movw	r30, r24
+ 66a:	ea 51       	subi	r30, 0x1A	; 26
+ 66c:	fd 4f       	sbci	r31, 0xFD	; 253
+ 66e:	81 e0       	ldi	r24, 0x01	; 1
+ 670:	80 83       	st	Z, r24
+	
+	
+	mNodeArray[0].Load(0, "Visit to Asia?", "NoVisit", "Visit", 8, 0);
+ 672:	eb 81       	ldd	r30, Y+3	; 0x03
+ 674:	fc 81       	ldd	r31, Y+4	; 0x04
+ 676:	80 e6       	ldi	r24, 0x60	; 96
+ 678:	90 e0       	ldi	r25, 0x00	; 0
+ 67a:	26 e6       	ldi	r18, 0x66	; 102
+ 67c:	30 e0       	ldi	r19, 0x00	; 0
+ 67e:	4e e6       	ldi	r20, 0x6E	; 110
+ 680:	50 e0       	ldi	r21, 0x00	; 0
+ 682:	cc 24       	eor	r12, r12
+ 684:	ee 24       	eor	r14, r14
+ 686:	ff 24       	eor	r15, r15
+ 688:	68 94       	set
+ 68a:	e3 f8       	bld	r14, 3
+ 68c:	8c 01       	movw	r16, r24
+ 68e:	60 e0       	ldi	r22, 0x00	; 0
+ 690:	70 e0       	ldi	r23, 0x00	; 0
+ 692:	cf 01       	movw	r24, r30
+ 694:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[1].Load(1, "Tuberculosis?", "Absent", "Present", 7, 0);
+ 698:	8b 81       	ldd	r24, Y+3	; 0x03
+ 69a:	9c 81       	ldd	r25, Y+4	; 0x04
+ 69c:	fc 01       	movw	r30, r24
+ 69e:	ef 5a       	subi	r30, 0xAF	; 175
+ 6a0:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6a2:	8d e7       	ldi	r24, 0x7D	; 125
+ 6a4:	90 e0       	ldi	r25, 0x00	; 0
+ 6a6:	25 e8       	ldi	r18, 0x85	; 133
+ 6a8:	30 e0       	ldi	r19, 0x00	; 0
+ 6aa:	4c e8       	ldi	r20, 0x8C	; 140
+ 6ac:	50 e0       	ldi	r21, 0x00	; 0
+ 6ae:	cc 24       	eor	r12, r12
+ 6b0:	0f 2e       	mov	r0, r31
+ 6b2:	f7 e0       	ldi	r31, 0x07	; 7
+ 6b4:	ef 2e       	mov	r14, r31
+ 6b6:	ff 24       	eor	r15, r15
+ 6b8:	f0 2d       	mov	r31, r0
+ 6ba:	8c 01       	movw	r16, r24
+ 6bc:	61 e0       	ldi	r22, 0x01	; 1
+ 6be:	70 e0       	ldi	r23, 0x00	; 0
+ 6c0:	cf 01       	movw	r24, r30
+ 6c2:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[2].Load(2, "Smoking?", "NonSmoker", "Smoker", 6, 0);
+ 6c6:	8b 81       	ldd	r24, Y+3	; 0x03
+ 6c8:	9c 81       	ldd	r25, Y+4	; 0x04
+ 6ca:	fc 01       	movw	r30, r24
+ 6cc:	ee 55       	subi	r30, 0x5E	; 94
+ 6ce:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6d0:	8a e9       	ldi	r24, 0x9A	; 154
+ 6d2:	90 e0       	ldi	r25, 0x00	; 0
+ 6d4:	21 ea       	ldi	r18, 0xA1	; 161
+ 6d6:	30 e0       	ldi	r19, 0x00	; 0
+ 6d8:	4b ea       	ldi	r20, 0xAB	; 171
+ 6da:	50 e0       	ldi	r21, 0x00	; 0
+ 6dc:	cc 24       	eor	r12, r12
+ 6de:	0f 2e       	mov	r0, r31
+ 6e0:	f6 e0       	ldi	r31, 0x06	; 6
+ 6e2:	ef 2e       	mov	r14, r31
+ 6e4:	ff 24       	eor	r15, r15
+ 6e6:	f0 2d       	mov	r31, r0
+ 6e8:	8c 01       	movw	r16, r24
+ 6ea:	62 e0       	ldi	r22, 0x02	; 2
+ 6ec:	70 e0       	ldi	r23, 0x00	; 0
+ 6ee:	cf 01       	movw	r24, r30
+ 6f0:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[3].Load(3, "Lung Cancer?", "Absent", "Present", 5, 0);
+ 6f4:	8b 81       	ldd	r24, Y+3	; 0x03
+ 6f6:	9c 81       	ldd	r25, Y+4	; 0x04
+ 6f8:	fc 01       	movw	r30, r24
+ 6fa:	ed 50       	subi	r30, 0x0D	; 13
+ 6fc:	ff 4f       	sbci	r31, 0xFF	; 255
+ 6fe:	8d e7       	ldi	r24, 0x7D	; 125
+ 700:	90 e0       	ldi	r25, 0x00	; 0
+ 702:	25 e8       	ldi	r18, 0x85	; 133
+ 704:	30 e0       	ldi	r19, 0x00	; 0
+ 706:	44 eb       	ldi	r20, 0xB4	; 180
+ 708:	50 e0       	ldi	r21, 0x00	; 0
+ 70a:	cc 24       	eor	r12, r12
+ 70c:	0f 2e       	mov	r0, r31
+ 70e:	f5 e0       	ldi	r31, 0x05	; 5
+ 710:	ef 2e       	mov	r14, r31
+ 712:	ff 24       	eor	r15, r15
+ 714:	f0 2d       	mov	r31, r0
+ 716:	8c 01       	movw	r16, r24
+ 718:	63 e0       	ldi	r22, 0x03	; 3
+ 71a:	70 e0       	ldi	r23, 0x00	; 0
+ 71c:	cf 01       	movw	r24, r30
+ 71e:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[4].Load(4, "Bronchitis?", "Absent", "Present", 3, 0);
+ 722:	8b 81       	ldd	r24, Y+3	; 0x03
+ 724:	9c 81       	ldd	r25, Y+4	; 0x04
+ 726:	fc 01       	movw	r30, r24
+ 728:	ec 5b       	subi	r30, 0xBC	; 188
+ 72a:	fe 4f       	sbci	r31, 0xFE	; 254
+ 72c:	8d e7       	ldi	r24, 0x7D	; 125
+ 72e:	90 e0       	ldi	r25, 0x00	; 0
+ 730:	25 e8       	ldi	r18, 0x85	; 133
+ 732:	30 e0       	ldi	r19, 0x00	; 0
+ 734:	41 ec       	ldi	r20, 0xC1	; 193
+ 736:	50 e0       	ldi	r21, 0x00	; 0
+ 738:	cc 24       	eor	r12, r12
+ 73a:	0f 2e       	mov	r0, r31
+ 73c:	f3 e0       	ldi	r31, 0x03	; 3
+ 73e:	ef 2e       	mov	r14, r31
+ 740:	ff 24       	eor	r15, r15
+ 742:	f0 2d       	mov	r31, r0
+ 744:	8c 01       	movw	r16, r24
+ 746:	64 e0       	ldi	r22, 0x04	; 4
+ 748:	70 e0       	ldi	r23, 0x00	; 0
+ 74a:	cf 01       	movw	r24, r30
+ 74c:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[5].Load(5, "TuberculosisOrLungCancer?", "Nothing", "CancerOrTuberculosis", 2, 0);
+ 750:	8b 81       	ldd	r24, Y+3	; 0x03
+ 752:	9c 81       	ldd	r25, Y+4	; 0x04
+ 754:	fc 01       	movw	r30, r24
+ 756:	eb 56       	subi	r30, 0x6B	; 107
+ 758:	fe 4f       	sbci	r31, 0xFE	; 254
+ 75a:	8d ec       	ldi	r24, 0xCD	; 205
+ 75c:	90 e0       	ldi	r25, 0x00	; 0
+ 75e:	22 ee       	ldi	r18, 0xE2	; 226
+ 760:	30 e0       	ldi	r19, 0x00	; 0
+ 762:	4a ee       	ldi	r20, 0xEA	; 234
+ 764:	50 e0       	ldi	r21, 0x00	; 0
+ 766:	cc 24       	eor	r12, r12
+ 768:	ee 24       	eor	r14, r14
+ 76a:	ff 24       	eor	r15, r15
+ 76c:	68 94       	set
+ 76e:	e1 f8       	bld	r14, 1
+ 770:	8c 01       	movw	r16, r24
+ 772:	65 e0       	ldi	r22, 0x05	; 5
+ 774:	70 e0       	ldi	r23, 0x00	; 0
+ 776:	cf 01       	movw	r24, r30
+ 778:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[6].Load(6, "X-RayResults", "Normal", "Abnormal", 4, 0);
+ 77c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 77e:	9c 81       	ldd	r25, Y+4	; 0x04
+ 780:	fc 01       	movw	r30, r24
+ 782:	ea 51       	subi	r30, 0x1A	; 26
+ 784:	fe 4f       	sbci	r31, 0xFE	; 254
+ 786:	84 e0       	ldi	r24, 0x04	; 4
+ 788:	91 e0       	ldi	r25, 0x01	; 1
+ 78a:	2d e0       	ldi	r18, 0x0D	; 13
+ 78c:	31 e0       	ldi	r19, 0x01	; 1
+ 78e:	44 e1       	ldi	r20, 0x14	; 20
+ 790:	51 e0       	ldi	r21, 0x01	; 1
+ 792:	cc 24       	eor	r12, r12
+ 794:	ee 24       	eor	r14, r14
+ 796:	ff 24       	eor	r15, r15
+ 798:	68 94       	set
+ 79a:	e2 f8       	bld	r14, 2
+ 79c:	8c 01       	movw	r16, r24
+ 79e:	66 e0       	ldi	r22, 0x06	; 6
+ 7a0:	70 e0       	ldi	r23, 0x00	; 0
+ 7a2:	cf 01       	movw	r24, r30
+ 7a4:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[7].Load(7, "Dyspnea?", "Absent", "Present", 1, 0);
+ 7a8:	8b 81       	ldd	r24, Y+3	; 0x03
+ 7aa:	9c 81       	ldd	r25, Y+4	; 0x04
+ 7ac:	fc 01       	movw	r30, r24
+ 7ae:	e9 5c       	subi	r30, 0xC9	; 201
+ 7b0:	fd 4f       	sbci	r31, 0xFD	; 253
+ 7b2:	8d e7       	ldi	r24, 0x7D	; 125
+ 7b4:	90 e0       	ldi	r25, 0x00	; 0
+ 7b6:	25 e8       	ldi	r18, 0x85	; 133
+ 7b8:	30 e0       	ldi	r19, 0x00	; 0
+ 7ba:	41 e2       	ldi	r20, 0x21	; 33
+ 7bc:	51 e0       	ldi	r21, 0x01	; 1
+ 7be:	cc 24       	eor	r12, r12
+ 7c0:	ee 24       	eor	r14, r14
+ 7c2:	ff 24       	eor	r15, r15
+ 7c4:	e3 94       	inc	r14
+ 7c6:	8c 01       	movw	r16, r24
+ 7c8:	67 e0       	ldi	r22, 0x07	; 7
+ 7ca:	70 e0       	ldi	r23, 0x00	; 0
+ 7cc:	cf 01       	movw	r24, r30
+ 7ce:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	mNodeArray[8].Load(7, "Dys", "Normal", "Abnormal", 9, 0);
+ 7d2:	8b 81       	ldd	r24, Y+3	; 0x03
+ 7d4:	9c 81       	ldd	r25, Y+4	; 0x04
+ 7d6:	fc 01       	movw	r30, r24
+ 7d8:	e8 57       	subi	r30, 0x78	; 120
+ 7da:	fd 4f       	sbci	r31, 0xFD	; 253
+ 7dc:	84 e0       	ldi	r24, 0x04	; 4
+ 7de:	91 e0       	ldi	r25, 0x01	; 1
+ 7e0:	2d e0       	ldi	r18, 0x0D	; 13
+ 7e2:	31 e0       	ldi	r19, 0x01	; 1
+ 7e4:	4a e2       	ldi	r20, 0x2A	; 42
+ 7e6:	51 e0       	ldi	r21, 0x01	; 1
+ 7e8:	cc 24       	eor	r12, r12
+ 7ea:	0f 2e       	mov	r0, r31
+ 7ec:	f9 e0       	ldi	r31, 0x09	; 9
+ 7ee:	ef 2e       	mov	r14, r31
+ 7f0:	ff 24       	eor	r15, r15
+ 7f2:	f0 2d       	mov	r31, r0
+ 7f4:	8c 01       	movw	r16, r24
+ 7f6:	67 e0       	ldi	r22, 0x07	; 7
+ 7f8:	70 e0       	ldi	r23, 0x00	; 0
+ 7fa:	cf 01       	movw	r24, r30
+ 7fc:	0e 94 98 02 	call	0x530	; 0x530 <_ZN5CNode4LoadEjPcS0_S0_jb>
+	
+USART_Transmit_String("\n\r");
+ 800:	8e e2       	ldi	r24, 0x2E	; 46
+ 802:	91 e0       	ldi	r25, 0x01	; 1
+ 804:	0e 94 95 00 	call	0x12a	; 0x12a <_Z21USART_Transmit_StringPc>
+USART_Transmit_String("\n\r");
+ 808:	8e e2       	ldi	r24, 0x2E	; 46
+ 80a:	91 e0       	ldi	r25, 0x01	; 1
+ 80c:	0e 94 95 00 	call	0x12a	; 0x12a <_Z21USART_Transmit_StringPc>
+	int i;
+	for ( i=0; i<9; i++)
+ 810:	1a 82       	std	Y+2, r1	; 0x02
+ 812:	19 82       	std	Y+1, r1	; 0x01
+ 814:	45 c0       	rjmp	.+138    	; 0x8a0 <_ZN21CProbabilisticNetwork4LoadEv+0x2a0>
+	{
+		USART_Transmit_String("\n\r");
+ 816:	8e e2       	ldi	r24, 0x2E	; 46
+ 818:	91 e0       	ldi	r25, 0x01	; 1
+ 81a:	0e 94 95 00 	call	0x12a	; 0x12a <_Z21USART_Transmit_StringPc>
+		USART_Transmit_String(mNodeArray[i].mName);
+ 81e:	29 81       	ldd	r18, Y+1	; 0x01
+ 820:	3a 81       	ldd	r19, Y+2	; 0x02
+ 822:	81 e5       	ldi	r24, 0x51	; 81
+ 824:	90 e0       	ldi	r25, 0x00	; 0
+ 826:	ac 01       	movw	r20, r24
+ 828:	24 9f       	mul	r18, r20
+ 82a:	c0 01       	movw	r24, r0
+ 82c:	25 9f       	mul	r18, r21
+ 82e:	90 0d       	add	r25, r0
+ 830:	34 9f       	mul	r19, r20
+ 832:	90 0d       	add	r25, r0
+ 834:	11 24       	eor	r1, r1
+ 836:	9c 01       	movw	r18, r24
+ 838:	20 5d       	subi	r18, 0xD0	; 208
+ 83a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 83c:	8b 81       	ldd	r24, Y+3	; 0x03
+ 83e:	9c 81       	ldd	r25, Y+4	; 0x04
+ 840:	82 0f       	add	r24, r18
+ 842:	93 1f       	adc	r25, r19
+ 844:	0e 94 95 00 	call	0x12a	; 0x12a <_Z21USART_Transmit_StringPc>
+		USART_Transmit_String(mNodeArray[i].mStateNameArray[0]);
+ 848:	29 81       	ldd	r18, Y+1	; 0x01
+ 84a:	3a 81       	ldd	r19, Y+2	; 0x02
+ 84c:	81 e5       	ldi	r24, 0x51	; 81
+ 84e:	90 e0       	ldi	r25, 0x00	; 0
+ 850:	a9 01       	movw	r20, r18
+ 852:	48 9f       	mul	r20, r24
+ 854:	90 01       	movw	r18, r0
+ 856:	49 9f       	mul	r20, r25
+ 858:	30 0d       	add	r19, r0
+ 85a:	58 9f       	mul	r21, r24
+ 85c:	30 0d       	add	r19, r0
+ 85e:	11 24       	eor	r1, r1
+ 860:	8b 81       	ldd	r24, Y+3	; 0x03
+ 862:	9c 81       	ldd	r25, Y+4	; 0x04
+ 864:	82 0f       	add	r24, r18
+ 866:	93 1f       	adc	r25, r19
+ 868:	0e 94 95 00 	call	0x12a	; 0x12a <_Z21USART_Transmit_StringPc>
+		USART_Transmit_String(mNodeArray[i].mStateNameArray[1]);
+ 86c:	29 81       	ldd	r18, Y+1	; 0x01
+ 86e:	3a 81       	ldd	r19, Y+2	; 0x02
+ 870:	81 e5       	ldi	r24, 0x51	; 81
+ 872:	90 e0       	ldi	r25, 0x00	; 0
+ 874:	ac 01       	movw	r20, r24
+ 876:	24 9f       	mul	r18, r20
+ 878:	c0 01       	movw	r24, r0
+ 87a:	25 9f       	mul	r18, r21
+ 87c:	90 0d       	add	r25, r0
+ 87e:	34 9f       	mul	r19, r20
+ 880:	90 0d       	add	r25, r0
+ 882:	11 24       	eor	r1, r1
+ 884:	9c 01       	movw	r18, r24
+ 886:	28 5e       	subi	r18, 0xE8	; 232
+ 888:	3f 4f       	sbci	r19, 0xFF	; 255
+ 88a:	8b 81       	ldd	r24, Y+3	; 0x03
+ 88c:	9c 81       	ldd	r25, Y+4	; 0x04
+ 88e:	82 0f       	add	r24, r18
+ 890:	93 1f       	adc	r25, r19
+ 892:	0e 94 95 00 	call	0x12a	; 0x12a <_Z21USART_Transmit_StringPc>
+ 896:	89 81       	ldd	r24, Y+1	; 0x01
+ 898:	9a 81       	ldd	r25, Y+2	; 0x02
+ 89a:	01 96       	adiw	r24, 0x01	; 1
+ 89c:	9a 83       	std	Y+2, r25	; 0x02
+ 89e:	89 83       	std	Y+1, r24	; 0x01
+ 8a0:	89 81       	ldd	r24, Y+1	; 0x01
+ 8a2:	9a 81       	ldd	r25, Y+2	; 0x02
+ 8a4:	89 30       	cpi	r24, 0x09	; 9
+ 8a6:	91 05       	cpc	r25, r1
+ 8a8:	0c f4       	brge	.+2      	; 0x8ac <_ZN21CProbabilisticNetwork4LoadEv+0x2ac>
+ 8aa:	b5 cf       	rjmp	.-150    	; 0x816 <_ZN21CProbabilisticNetwork4LoadEv+0x216>
+	}
+
+	return 1;
+ 8ac:	81 e0       	ldi	r24, 0x01	; 1
+ 8ae:	90 e0       	ldi	r25, 0x00	; 0
+ 8b0:	24 96       	adiw	r28, 0x04	; 4
+ 8b2:	0f b6       	in	r0, 0x3f	; 63
+ 8b4:	f8 94       	cli
+ 8b6:	de bf       	out	0x3e, r29	; 62
+ 8b8:	0f be       	out	0x3f, r0	; 63
+ 8ba:	cd bf       	out	0x3d, r28	; 61
+ 8bc:	df 91       	pop	r29
+ 8be:	cf 91       	pop	r28
+ 8c0:	1f 91       	pop	r17
+ 8c2:	0f 91       	pop	r16
+ 8c4:	ff 90       	pop	r15
+ 8c6:	ef 90       	pop	r14
+ 8c8:	cf 90       	pop	r12
+ 8ca:	08 95       	ret
+
+000008cc <main>:
+   5               	__SP_L__ = 0x3d
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.global __do_copy_data
+   9               		.global __do_clear_bss
+ 8cc:	cf 93       	push	r28
+ 8ce:	df 93       	push	r29
+ 8d0:	cd b7       	in	r28, 0x3d	; 61
+ 8d2:	de b7       	in	r29, 0x3e	; 62
+ 8d4:	c7 5e       	subi	r28, 0xE7	; 231
+ 8d6:	d2 40       	sbci	r29, 0x02	; 2
+ 8d8:	0f b6       	in	r0, 0x3f	; 63
+ 8da:	f8 94       	cli
+ 8dc:	de bf       	out	0x3e, r29	; 62
+ 8de:	0f be       	out	0x3f, r0	; 63
+ 8e0:	cd bf       	out	0x3d, r28	; 61
+  11               		.text
+  12               	.Ltext0:
+ 8e2:	eb e3       	ldi	r30, 0x3B	; 59
+ 8e4:	f0 e0       	ldi	r31, 0x00	; 0
+ 8e6:	8f ef       	ldi	r24, 0xFF	; 255
+ 8e8:	80 83       	st	Z, r24
+  88               	.global	_Z10USART_Initj
+ 8ea:	ea e3       	ldi	r30, 0x3A	; 58
+ 8ec:	f0 e0       	ldi	r31, 0x00	; 0
+ 8ee:	8f ef       	ldi	r24, 0xFF	; 255
+ 8f0:	80 83       	st	Z, r24
+  90               	_Z10USART_Initj:
+ 8f2:	e2 e5       	ldi	r30, 0x52	; 82
+ 8f4:	f0 e0       	ldi	r31, 0x00	; 0
+ 8f6:	82 eb       	ldi	r24, 0xB2	; 178
+ 8f8:	80 83       	st	Z, r24
+  92               	.Ltext1:
+ 8fa:	e3 e5       	ldi	r30, 0x53	; 83
+ 8fc:	f0 e0       	ldi	r31, 0x00	; 0
+ 8fe:	85 e0       	ldi	r24, 0x05	; 5
+ 900:	80 83       	st	Z, r24
+   1:func.h        **** #include <avr/signal.h>
+ 902:	e9 e5       	ldi	r30, 0x59	; 89
+ 904:	f0 e0       	ldi	r31, 0x00	; 0
+ 906:	81 e0       	ldi	r24, 0x01	; 1
+ 908:	80 83       	st	Z, r24
+   2:func.h        **** //#include <avr/interrupt.h>
+   3:func.h        **** 
+ 90a:	e1 e3       	ldi	r30, 0x31	; 49
+ 90c:	f0 e0       	ldi	r31, 0x00	; 0
+ 90e:	82 e0       	ldi	r24, 0x02	; 2
+ 910:	80 83       	st	Z, r24
+   4:func.h        **** void USART_Init( unsigned int baud )
+ 912:	e2 e3       	ldi	r30, 0x32	; 50
+ 914:	f0 e0       	ldi	r31, 0x00	; 0
+ 916:	82 e0       	ldi	r24, 0x02	; 2
+ 918:	80 83       	st	Z, r24
+  93               	8,0,4,.LM0-_Z10USART_Initj
+ 91a:	83 e3       	ldi	r24, 0x33	; 51
+ 91c:	90 e0       	ldi	r25, 0x00	; 0
+ 91e:	0e 94 47 00 	call	0x8e	; 0x8e <_Z10USART_Initj>
+  94               	.LM0:
+  95               	/* prologue: frame size=2 */
+  96 0000 CF93      		push r28
+ 922:	78 94       	sei
+  97 0002 DF93      		push r29
+  98 0004 CDB7      		in r28,__SP_L__
+  99 0006 DEB7      		in r29,__SP_H__
+ 924:	ce 01       	movw	r24, r28
+ 926:	01 96       	adiw	r24, 0x01	; 1
+ 928:	0e 94 66 01 	call	0x2cc	; 0x2cc <_ZN21CProbabilisticNetworkC1Ev>
+ 100 0008 2297      		sbiw r28,2
+ 92c:	ce 01       	movw	r24, r28
+ 92e:	01 96       	adiw	r24, 0x01	; 1
+ 930:	0e 94 00 03 	call	0x600	; 0x600 <_ZN21CProbabilisticNetwork4LoadEv>
+ 101 000a 0FB6      		in __tmp_reg__,__SREG__
+ 102 000c F894      		cli
+ 103 000e DEBF      		out __SP_H__,r29
+ 934:	ff cf       	rjmp	.-2      	; 0x934 <main+0x68>
+
+00000936 <strcpy>:
+ 936:	fb 01       	movw	r30, r22
+ 938:	dc 01       	movw	r26, r24
+ 93a:	01 90       	ld	r0, Z+
+ 93c:	0d 92       	st	X+, r0
+ 93e:	00 20       	and	r0, r0
+ 940:	e1 f7       	brne	.-8      	; 0x93a <strcpy+0x4>
+ 942:	08 95       	ret
+
+00000944 <__udivmodsi4>:
+ 944:	a1 e2       	ldi	r26, 0x21	; 33
+ 946:	1a 2e       	mov	r1, r26
+ 948:	aa 1b       	sub	r26, r26
+ 94a:	bb 1b       	sub	r27, r27
+ 94c:	fd 01       	movw	r30, r26
+ 94e:	0d c0       	rjmp	.+26     	; 0x96a <__udivmodsi4_ep>
+
+00000950 <__udivmodsi4_loop>:
+ 950:	aa 1f       	adc	r26, r26
+ 952:	bb 1f       	adc	r27, r27
+ 954:	ee 1f       	adc	r30, r30
+ 956:	ff 1f       	adc	r31, r31
+ 958:	a2 17       	cp	r26, r18
+ 95a:	b3 07       	cpc	r27, r19
+ 95c:	e4 07       	cpc	r30, r20
+ 95e:	f5 07       	cpc	r31, r21
+ 960:	20 f0       	brcs	.+8      	; 0x96a <__udivmodsi4_ep>
+ 962:	a2 1b       	sub	r26, r18
+ 964:	b3 0b       	sbc	r27, r19
+ 966:	e4 0b       	sbc	r30, r20
+ 968:	f5 0b       	sbc	r31, r21
+
+0000096a <__udivmodsi4_ep>:
+ 96a:	66 1f       	adc	r22, r22
+ 96c:	77 1f       	adc	r23, r23
+ 96e:	88 1f       	adc	r24, r24
+ 970:	99 1f       	adc	r25, r25
+ 972:	1a 94       	dec	r1
+ 974:	69 f7       	brne	.-38     	; 0x950 <__udivmodsi4_loop>
+ 976:	60 95       	com	r22
+ 978:	70 95       	com	r23
+ 97a:	80 95       	com	r24
+ 97c:	90 95       	com	r25
+ 97e:	9b 01       	movw	r18, r22
+ 980:	ac 01       	movw	r20, r24
+ 982:	bd 01       	movw	r22, r26
+ 984:	cf 01       	movw	r24, r30
+ 986:	08 95       	ret

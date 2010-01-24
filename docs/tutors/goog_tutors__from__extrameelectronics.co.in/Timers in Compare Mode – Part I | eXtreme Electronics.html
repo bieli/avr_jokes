@@ -1,0 +1,1182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Timers in Compare Mode &#8211; Part I | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; Timers in Compare Mode &#8211; Part I Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-i/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='Interfacing Temperature Sensor &#8211; LM35' href='http://extremeelectronics.co.in/avr-tutorials/interfacing-temperature-sensor-lm35/' />
+<link rel='next' title='Timers in Compare Mode &#8211; Part II' href='http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-ii/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,380] -->
+<meta name="description" content="Hi Friends, In last tutorials we discussed about the basics of TIMERs of AVR. In this tutorial we will go a step further and use the timer in compare mode" />
+<meta name="keywords" content="clock,compare mode,interrupt,timer1,avr tutorials" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-31">
+<div class="date"> Oct-24th-2008 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-i/" rel="bookmark" title="Permanent Link: Timers in Compare Mode &#8211; Part I">Timers in Compare Mode &#8211; Part I</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>Hi Friends,</p>
+<p>In last tutorials we discussed about the basics of TIMERs of AVR. In this tutorial 
+  we will go a step further and use the timer in <strong><em>compare mode </em></strong>. 
+  In our first tutorial on timer we set the clock of the timer using a prescaler 
+  and then let the timer run and whenever it overflowed it informed us. This way 
+  we computed time. But this has its limitations we cannot compute time very accurately. 
+  To make it more accurate we can use the compare mode of the timer. In compare 
+  mode we load a register called Output Compare Register with a value of our choice 
+  and the timer will compare the current value of timer with that of Output Compare 
+  Register continuously and when they match the following things can be configured 
+  to happen.</p>
+<ol>
+  <li>A related Output Compare Pin can be made to go high,low or toggle automatically. 
+    This mode is ideal for generating square waves of different frequency.</li>
+  <li>It can be used to generate PWM signals used to implement a DAC digital to 
+    analog converter which can be used to control the speed of DC motors.</li>
+  <li>Simply generate an interrupt and call our handler.</li>
+</ol>
+<p>On a compare match we can configure the timer to reset it self to 0. This is 
+  called CTC - Clear Timer on Compare match.</p>
+<p>The compare feature is not present in the 8 bit TIMER0 of the ATmega8 so we 
+  will use the TIMER1 which is a 16 Bit timer. First we need to setup the timer's 
+  prescaler as described in the <font color="#FF0000">Timer0</font> tutorial. 
+  <font color="#FF0000"><a href="http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/">Please 
+  see this tutorial for a basic introduction of TIMER</a></font>s.</p>
+<p>The TIMER1 has two compare units so it has two output compare register OC1A 
+  and OC1B. The '1' in the name signifies that they are for timer '1'.</p>
+<p>In this tutorial we will create a standard time base which will be useful for 
+  many projects requiring timing such as clocks,timers,stopwatches etc. For this 
+  we will configure the timer to generate an Compare match every millisecond and 
+  in the ISR we will increment a variable clock_millisecond. In this way we will 
+  have a accurate time base which we can use for computing time in seconds,minutes 
+  and hours.</p>
+<h2>References</h2>
+<p><font color="#FF0000"><a href="http://extremeelectronics.co.in/avr-tutorials/using-internal-peripherals-of-avr-mcus/">For 
+  learning about the basic idea of peripherals and their use with AVRs please 
+  see this tutorial.</a></font></p>
+<p><font color="#FF0000"><a href="http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/">For 
+  learning about basics of timers see this.</a></font></p>
+<h2>AVR's Timers1 Registers</h2>
+<p>I will state the meaning of only those bits which are required for this tutorial. 
+  These bits are marked with a gray back ground in the table. For details about 
+  other bits please consult the datasheets.</p>
+<h2><img src="http://www.extremeelectronics.co.in/avrtutorials/images/arrow.PNG" width="28" height="28">Timer/Counter1 
+  Control Register A (TCCR1A)</h2>
+<p>This register is used to configure the TIMER1. It has the following bits</p>
+<table width="640" border="1" cellpadding="1" cellspacing="1" bordercolor="#006600">
+  <tr> 
+    <td><p align="center"><strong>Bit</strong></p></td>
+    <td><p align="center"><strong>7</strong></p></td>
+    <td><p align="center"><strong>6</strong></p></td>
+    <td><p align="center"><strong>5</strong></p></td>
+    <td><p align="center"><strong>4</strong></p></td>
+    <td><p align="center"><strong>3</strong></p></td>
+    <td><p align="center"><strong>2</strong></p></td>
+    <td><p align="center"><strong>1</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><font color="#009900"><strong>Name</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>COM1A1</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>COM1A0</strong></font></p></td>
+    <td><p align="center"><font color="#009900"><strong>COM1B1</strong></font></p></td>
+    <td><p align="center"><font color="#009900"><strong>COM1B0</strong></font></p></td>
+    <td><p align="center"><font color="#009900"><strong>FOC1A</strong></font></p></td>
+    <td><p align="center"><font color="#009900"><strong>FOC1B</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>WGM11</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>WGM10</strong></font></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><strong>InitialValue</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+  </tr>
+</table>
+<h3>COM1A1 and COM1A0 -</h3>
+<p>This are used to configure the action for the event when the timer has detected 
+  a &quot;match&quot;. As i told earlier the timer can be used to automatically 
+  set,clear or toggle the associated Output compare pin this feature can be configured 
+  from here. The table below shows the possible combinations.</p>
+<table width="494" border="1" cellpadding="1" cellspacing="1" bordercolor="#000000">
+  <tr bgcolor="#000000"> 
+    <td width="64"><p align="center"><strong><font color="#FFFFFF">COM1A1</font></strong></p></td>
+    <td width="64"><p align="center"><strong><font color="#FFFFFF">COM1A0</font></strong></p></td>
+    <td width="174"><p><strong><font color="#FFFFFF">Description</font></strong></p></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td><p align="center">0</p></td>
+    <td><p align="center">0</p></td>
+    <td><p>Normal Port Operation (The timer doesn't touches the PORT pins).</p></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td><p align="center">0</p></td>
+    <td><p align="center">1</p></td>
+    <td><p>Toggle OC1A Pin on match</p></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td><p align="center">1</p></td>
+    <td><p align="center">0</p></td>
+    <td><p>Clear OC1A on match - set level to low (GND)</p></td>
+  </tr>
+  <tr bgcolor="#CCCCCC"> 
+    <td><p align="center">1</p></td>
+    <td><p align="center">1</p></td>
+    <td><p>Set OC1A on match - set level to High(Vcc)</p></td>
+  </tr>
+</table>
+<p>The OC1A pin is the Pin15 on ATmega8 and Pin19 on ATmega16/32. As you may guess 
+  that we don't need any pin toggling or any thing for this project so we go for 
+  the first option i.e. <strong>Normal Port Operation </strong></p>
+<p><strong>As I have told you that the TIMER1 has two compare unit, the COM1B1/COM1B0 
+  are used exactly in same way but for the channel B.</strong></p>
+<h3>WGM11 and WGM10 -</h3>
+<p> These combined with WGM12 and WGM13 found in TCCR1B are used for selecting 
+  proper mode of operation. WGM= Waveform Generation Mode.</p>
+<h2><img src="http://www.extremeelectronics.co.in/avrtutorials/images/arrow.PNG" width="28" height="28">Timer/Counter1 
+  Control Register B (TCCR1B)</h2>
+<p>This register is also used for configuration. The Bits are.</p>
+<table width="640" border="1" cellpadding="1" cellspacing="1" bordercolor="#006600">
+  <tr> 
+    <td><p align="center"><strong>Bit</strong></p></td>
+    <td><p align="center"><strong>7</strong></p></td>
+    <td><p align="center"><strong>6</strong></p></td>
+    <td><p align="center"><strong>5</strong></p></td>
+    <td><p align="center"><strong>4</strong></p></td>
+    <td><p align="center"><strong>3</strong></p></td>
+    <td><p align="center"><strong>2</strong></p></td>
+    <td><p align="center"><strong>1</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><font color="#009900"><strong>Name</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900"><strong>ICNC1</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900"><strong>ICES1</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900">-</font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>WGM13</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>WGM12</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>CS12</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>CS11</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>CS10</strong></font></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><strong>InitialValue</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+  </tr>
+</table>
+<p>The four bits</p>
+<p>WGM13 - WGM12 - WGM11 - WGM10 are used to select the proper mode of operation. 
+  Please refer to the datasheet for complete combinations that can be used. We 
+  need the CTC mode i.e. clear timer on match so we set them as follows</p>
+<p>WGM13=0 </p>
+<p>WGM12=1 </p>
+<p>WGM11=0 </p>
+<p>WGM10=0</p>
+<p>This is the settings for CTC.</p>
+<h2>The CS12,CS11,CS10</h2>
+<p>These are used for selecting the prescalar value for generating clock for the 
+  timer. I have already discussed them on <font color="#FF0000">TIMER0 tutorial</font>. 
+  I will select the prescalar division factor as 64. As the crystal we are using 
+  is of 16MHz so dividing this by 64 we get the timer clock as </p>
+<p>F(timer)=16000000/64 = 250000Hz</p>
+<p>so timer will increment its value @ 250000Hz</p>
+<p>The setting for this is </p>
+<table width="640" border="1" cellpadding="1" cellspacing="1" bordercolor="#006600">
+  <tr> 
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>CS12</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>CS11</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>CS10</strong></font></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>1</strong></p></td>
+    <td><p align="center"><strong>1</strong></p></td>
+  </tr>
+</table>
+<p>So the final code we write is</p>
+<pre><strong>TCCR1B=(1&lt;&lt;WGM12)|(1&lt;&lt;CS11)|(1&lt;&lt;CS10);</strong></pre>
+<h2><img src="http://www.extremeelectronics.co.in/avrtutorials/images/arrow.PNG" width="28" height="28">TIMER 
+  Counter 1 (TCNT1)</h2>
+<p>TCNT1H (high byte) TCNT1L(low byte). This is the 16 Bit counter</p>
+<h2><img src="http://www.extremeelectronics.co.in/avrtutorials/images/arrow.PNG" width="28" height="28">Output 
+  Compare Register 1 A - OCR1A (OCR1AH,OCR1AL)</h2>
+<p>You load them with required value. As we need a time base of 1ms and our counter 
+  is running @ 250000Hz i.e. one increment take 1/250000 = 0.000004 Sec or 0.004 
+  ms. So we need 1ms/0.004 = 250 increments for 1ms. Therefore we set OC1A=250. 
+  In this way when timer value is 250 we will get an interrupt and the frequency 
+  of occurrence is 1ms and we will use this for incrementing a variable clock_millisecond.</p>
+<h2><img src="http://www.extremeelectronics.co.in/avrtutorials/images/arrow.PNG" width="28" height="28">Output 
+  Compare Register 1 B - OCR1A (OCR1BH,OCR1BL)</h2>
+<p>&nbsp;</p>
+<h2><img src="http://www.extremeelectronics.co.in/avrtutorials/images/arrow.PNG" width="28" height="28">Timer 
+  Counter Interrupt Mask (TIMSK) </h2>
+<p>This is the mask register used to selectively enable/disable interrupts. This 
+  register is related with the interrupts of timers (all timers TIMER0,TIMER1,TIMER2).</p>
+<table width="640" border="1" cellpadding="1" cellspacing="1" bordercolor="#006600">
+  <tr> 
+    <td><p align="center"><strong>Bit</strong></p></td>
+    <td><p align="center"><strong>7</strong></p></td>
+    <td><p align="center"><strong>6</strong></p></td>
+    <td><p align="center"><strong>5</strong></p></td>
+    <td><p align="center"><strong>4</strong></p></td>
+    <td><p align="center"><strong>3</strong></p></td>
+    <td><p align="center"><strong>2</strong></p></td>
+    <td><p align="center"><strong>1</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><font color="#009900"><strong>Name</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900"><strong>OCIE2</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900"><strong>TOIE2</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900">TICIE1</font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>OCIE1A</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>OCIE1B</strong></font></p></td>
+    <td bgcolor="#999999"><p align="center"><font color="#009900"><strong>TOIE1</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900"><strong>-</strong></font></p></td>
+    <td bgcolor="#FFFFFF"><p align="center"><font color="#009900"><strong>TOIE0</strong></font></p></td>
+  </tr>
+  <tr> 
+    <td><p align="center"><strong>InitialValue</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+    <td><p align="center"><strong>0</strong></p></td>
+  </tr>
+</table>
+<p>Of all these bits 5,4,3,2 are for TIMER1 and we are interested in the OCIE1A 
+  which is Output Compare Interrupt Enable 1 A. To enable this interrupt we write</p>
+<p>TIMSK|=(1&lt;&lt;OCIE1A);</p>
+<p>After enabling the interrupt we also need to enable interrupt globally by using 
+  the function</p>
+<p>sei();</p>
+<p>This function is part of AVR-GCC interrupt system and enables the interrupt 
+  globally. Actually this translate in one machine code so there is no function 
+  call overhead.</p>
+<p>&nbsp;</p>
+<p>So friends that's its for now ! The rest will be covered in latter tutorials. 
+  To get all the latest tutorials on your mailbox subscribe to my RSS feed via 
+  e-mail. </p>
+<p>And don't forget to post your comment !!! What you think about them and what 
+  you will like to see here. Or simply post any doubt you have about this tutorial. 
+</p>
+<p>Goodbye, and have fun !</p></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Friday, October 24th, 2008 at 6:07 pm						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-i/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-i/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">22 Responses to &#8220;Timers in Compare Mode &#8211; Part I&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-77">
+<div class="commentnumber">1</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/timers-in-compare-mode-part-ii/' rel='external nofollow' class='url'>Timers in Compare Mode - Part II | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] and welcome back to the discussion on the TIMERs in compare mode. In the last article we discussed the basics and the theory about using the timer in compare mode. Now its time to write [...]</p>
+<small class="commentmetadata"><a href="#comment-77" title="">October 25th, 2008 at 12:27 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-327">
+<div class="commentnumber">2</div>
+			<cite><a href='http://shyamkol.blogspot.com' rel='external nofollow' class='url'>Shyam</a> Says: </cite>
+						<br />
+
+
+
+<p>Can u help me out in coding ? </p>
+<p>I need a PWM signal of about 10-15 Khz with a duty cycle of say 30%.I just want to generate the signal and want it as output.I am using Atmega16.</p>
+<small class="commentmetadata"><a href="#comment-327" title="">November 16th, 2008 at 8:34 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-335">
+<div class="commentnumber">3</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hi,</p>
+<p>Ya I can help u. Do you need a constant duty cycle of 30%?<br />
+I will mail u the code in 2-3 days</p>
+<small class="commentmetadata"><a href="#comment-335" title="">November 16th, 2008 at 5:19 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-441">
+<div class="commentnumber">4</div>
+			<cite>Mircea Says: </cite>
+						<br />
+
+
+
+<p>Hi, very good job.<br />
+Thank&#8217;s for the tutorials, they are very helpful </p>
+<p>Is there any chance to have this one in a PDF version?</p>
+<small class="commentmetadata"><a href="#comment-441" title="">November 21st, 2008 at 3:42 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-446">
+<div class="commentnumber">5</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hi Mircea,</p>
+<p>Thanks!</p>
+<p>I will surely release them as pdf. I am quite busy this week. When I get time I will convert them to nice PDFs.</p>
+<small class="commentmetadata"><a href="#comment-446" title="">November 21st, 2008 at 11:47 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-577">
+<div class="commentnumber">6</div>
+			<cite>noufal Says: </cite>
+						<br />
+
+
+
+<p>hai.. , I’m just beginner of programming AVR and I have some problems. I’m working with AVR Studio 4 and writing a program for ATmega16 TIMER0 normal mode in assembly language..the code is<br />
+.equ TCCR0=$33<br />
+.equ TCNT0=$32<br />
+.equ TIFR=$38<br />
+.cseg<br />
+.org 0×00<br />
+JMP MAIN</p>
+<p>MAIN:<br />
+LDI R16,0X02<br />
+out TCCR0,R16<br />
+l1: SBIS TIFR,0<br />
+JMP L1<br />
+JMP MAIN</p>
+<p>when compiling it shows the error<br />
+D:\avr\timer.asm(13): error: Operand 1 out of range: 0×38<br />
+D:\avr assem\timer.asm(22): No EEPROM data, deleting D:\avr assem\timer.eep</p>
+<p>please help me to find the error…</p>
+<small class="commentmetadata"><a href="#comment-577" title="">November 27th, 2008 at 11:32 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-684">
+<div class="commentnumber">7</div>
+			<cite><a href='http://emxcore.com' rel='external nofollow' class='url'>kiran</a> Says: </cite>
+						<br />
+
+
+
+<p>Hi, its very useful to me.. i am new to this avr series..if its possible please provide good projects on avr also&#8230;</p>
+<small class="commentmetadata"><a href="#comment-684" title="">December 30th, 2008 at 7:59 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-686">
+<div class="commentnumber">8</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Kiran,</p>
+<p>Thanks!</p>
+<p>Ya, I will do provide good projects based on AVR MCUs soon. Till then enjoy the tutorials and for any doubt don&#8217;t hesitate to ask me.</p>
+<small class="commentmetadata"><a href="#comment-686" title="">December 30th, 2008 at 12:03 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-770">
+<div class="commentnumber">9</div>
+			<cite>tpike Says: </cite>
+						<br />
+
+
+
+<p>Just a spelling correction and compliment.  Wonderful series and great introduction.  Has helped me a lot in getting my head around this stuff.  Here is the minor spelling correction &#8220;In compare mode we load a resister called&#8221;</p>
+<small class="commentmetadata"><a href="#comment-770" title="">January 15th, 2009 at 2:20 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-789">
+<div class="commentnumber">10</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Tpike<br />
+ <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /><br />
+Thanks a lot for pointing out. I am correcting it right now !</p>
+<p>Enjoy !</p>
+<small class="commentmetadata"><a href="#comment-789" title="">January 15th, 2009 at 5:40 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-969">
+<div class="commentnumber">11</div>
+			<cite>prathyusha Says: </cite>
+						<br />
+
+
+
+<p>hi , I have some problem with&#8230; I’m working with AVR Studio 4 and writing a program for calculaing width of a pulse(square wave) using ATmega8 using timer/counters can u help me in writing the code.</p>
+<small class="commentmetadata"><a href="#comment-969" title="">February 3rd, 2009 at 4:55 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1193">
+<div class="commentnumber">12</div>
+			<cite>vishal Says: </cite>
+						<br />
+
+
+
+<p>hello sir,</p>
+<p>thanks for your help.<br />
+you have provided the timer 1 tutorial, to use timer in compare mode. it was fantastic explanation. i need help in using a timer in input capture mode.</p>
+<p>thank you.</p>
+<small class="commentmetadata"><a href="#comment-1193" title="">February 25th, 2009 at 7:28 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1194">
+<div class="commentnumber">13</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Vishal,</p>
+<p>Thanks!!! <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /><br />
+Timers in Input Capture Mode will be surly covered in later tutorials.</p>
+<p> <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-1194" title="">February 25th, 2009 at 7:40 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1332">
+<div class="commentnumber">14</div>
+			<cite>Vibish Says: </cite>
+						<br />
+
+
+
+<p>hai friends<br />
+    i want to write a program for capture mode for measuring the pulse width.can any one tell me the algorithm or the programing procedure.</p>
+<small class="commentmetadata"><a href="#comment-1332" title="">March 20th, 2009 at 11:20 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1479">
+<div class="commentnumber">15</div>
+			<cite>DeadMaN Says: </cite>
+						<br />
+
+
+
+<p>hello avinash,<br />
+need a c code to generate 2 synchronised (at the end) square wave pulses using atmega32 whose duty cycle can be varied simultaneously .(may be we can connect some analog potentiometer to change the duty cycle).</p>
+<small class="commentmetadata"><a href="#comment-1479" title="">April 18th, 2009 at 12:09 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1513">
+<div class="commentnumber">16</div>
+			<cite>chandan tiwary Says: </cite>
+						<br />
+
+
+
+<p>hi avinash,<br />
+chandan here.i did not get these lines upto 100% confidence.please illustrate them indetail.they were in ur tutoruals&#8230;timers in compare mode 1. </p>
+<p>After enabling the interrupt we also need to enable interrupt globally by using the function<br />
+sei();<br />
+This function is part of AVR-GCC interrupt system and enables the interrupt globally. Actually this translate<br />
+in one machine code so there is no function call overhead.</p>
+<p>regards<br />
+chandan<br />
+jaipur<br />
+9309234034</p>
+<small class="commentmetadata"><a href="#comment-1513" title="">April 22nd, 2009 at 11:51 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2240">
+<div class="commentnumber">17</div>
+			<cite>sukhvir singh Says: </cite>
+						<br />
+
+
+
+<p>great work , just read and implement !!</p>
+<small class="commentmetadata"><a href="#comment-2240" title="">July 29th, 2009 at 11:02 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2477">
+<div class="commentnumber">18</div>
+			<cite>Dollar Says: </cite>
+						<br />
+
+
+
+<p>You could also start by saying there are 3 kinds of Register:<br />
+01) Control Register-&gt; TCCR, TIMSK<br />
+02) Data Register-&gt; TCNT.<br />
+03) Flag Register-&gt;TIFR.</p>
+<p>and yor also could a simple example&#8230;<br />
+But overall it&#8217;s a good Tutorial&#8230;it helped me a lot..thanks for your kindness&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2477" title="">August 27th, 2009 at 7:21 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2609">
+<div class="commentnumber">19</div>
+			<cite>sanju Says: </cite>
+						<br />
+
+
+
+<p>A mistake</p>
+<p>There is a mistake in the paragraph discribing OCR1A.<br />
+In that para OC1A is written insted of OCR1A. Pls edit it&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2609" title="">September 7th, 2009 at 1:41 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2612">
+<div class="commentnumber">20</div>
+			<cite>Maferic Says: </cite>
+						<br />
+
+
+
+<p>I have a project to manipulate the squarewave signal. Based on your article can it combined with input capture timer (maybe must use 2(two) 16 bit timer as in Atmega 162) to manipulate the input signal and process it inside microcontroller and by using the other timer to generate the output signal using compare match method ? Maybe we use timer 1 as input capture and timer 3 as compara match.<br />
+But how the way to setup the parameter in timer 3 correlated with the parameter in timer 1 ?<br />
+Thanks.</p>
+<small class="commentmetadata"><a href="#comment-2612" title="">September 7th, 2009 at 4:38 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2828">
+<div class="commentnumber">21</div>
+			<cite>riya Says: </cite>
+						<br />
+
+
+
+<p>Can anyone please tell me what memory do they use in the following devices?<br />
+1)) the memory used in our cell phone’s address book.<br />
+2) the memory used in the executable code for a medical diagnostic machine.<br />
+3) the memory used in (not the executable code) used in run-time calculations for an in-flight entertainment system.<br />
+4) the memory used in program for a child’s toy (a robot).<br />
+regards,<br />
+riya</p>
+<small class="commentmetadata"><a href="#comment-2828" title="">October 9th, 2009 at 2:01 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2897">
+<div class="commentnumber">22</div>
+			<cite>riya Says: </cite>
+						<br />
+
+
+
+<p>Hey Avinash,<br />
+   Your AVR tutorial helps me a lot to understand the basic concepts. I am working on Atmega169. I need to initialize  Timer2 to use the 32.7 kHz crystal on the board. i need to 	cause Timer2 to generate an overflow interrupt every 10 millisec. I am not supposed to select compare match interrupt. For this do I need to initialise TCCR2A. if yes then what is the value of cs0, cs1, cs2. &amp; WGM20, WGM2. I cant use compare match then What abt COM2A1? Since i use 32.7 kHz crystal, how to select prescaler(CS0,CS1,CS2)?Can you help me?</p>
+<small class="commentmetadata"><a href="#comment-2897" title="">October 23rd, 2009 at 4:46 am</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="31" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-2/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=6' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/extreme_burner_pic_ad.jpg' alt='eXtreme Burner PIC' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

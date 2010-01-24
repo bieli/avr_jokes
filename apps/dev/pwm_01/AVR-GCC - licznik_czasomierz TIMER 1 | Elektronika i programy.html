@@ -1,0 +1,602 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="pl" xmlns="http://www.w3.org/1999/xhtml" lang="pl"><head>
+
+
+  <title>AVR-GCC - licznik/czasomierz TIMER 1 | Elektronika i programy</title>
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css" media="all">@import "/misc/drupal.css";</style>  <style type="text/css" media="all">@import "/themes/pushbutton/style.css";</style></head><body bgcolor="#ffffff">
+
+<div class="hide"><a href="#content" title="Przeskocz nawigację." accesskey="2">Przeskocz nawigację</a>.</div>
+
+<table id="primary-menu" summary="Navigation elements." width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    
+   <td id="site-info" width="20%">
+           <div class="site-name"><a href="http://avr.elektroda.eu/" title="Strona główna">Elektronika i programy</a></div>
+          </td>
+  </tr>
+</tbody></table>
+
+<table id="secondary-menu" summary="Navigation elements." width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td class="secondary-links" valign="middle" width="75%" align="center">
+      <a href="http://avr.elektroda.eu/?q=node/17" title="">AtmelPrg</a> | <a href="http://avr.elektroda.eu/?q=node/8" title="">AVR-GCC</a> | <a href="http://avr.elektroda.eu/?q=node/32" title="">Ciekawe linki</a> | <a href="http://avr.elektroda.eu/?q=node/4" title="">RKLibAVR</a> | <a href="http://avr.elektroda.eu/?q=node/5" title="">RKProg</a>    </td>
+    <td valign="middle" width="25%" align="center">
+          </td>
+  </tr>
+  <tr>
+    <td colspan="2"><div></div></td>
+  </tr>
+</tbody></table>
+
+<table id="content" width="100%" border="0" cellpadding="15" cellspacing="0">
+  <tbody><tr>
+        <td id="sidebar-left">
+      <div class="block block-block" id="block-block-5">
+  <div class="title"><h3>Szukaj</h3></div>
+  <div class="content"><script type="text/javascript"><!--
+google_ad_client = "pub-1037920752938166";
+google_ad_width = 120;
+google_ad_height = 60;
+google_ad_format = "120x60_as_rimg";
+google_cpa_choice = "CAAQ9debzgEaCLcHikR2VN3iKPO3mHQwAA";
+google_ad_channel = "";
+//-->
+</script>
+<script type="text/javascript" src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/show_ads.js">
+</script><script> window.google_render_ad(); </script><iframe name="google_ads_frame" src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/ads.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="120" frameborder="0" height="60"></iframe>
+<!-- SiteSearch Google -->
+<form method="get" action="http://www.google.pl/custom" target="_top">
+<table bgcolor="#fffaf0" border="0">
+<tbody><tr><td valign="top" align="left" height="32" nowrap="nowrap">
+<a href="http://www.google.com/">
+<img src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/Logo_25gry.gif" alt="Google" align="middle" border="0"></a>
+<br>
+<input name="domains" value="avr.elektroda.eu;atmel.com;programatory.com" type="hidden">
+<input name="q" size="20" maxlength="255" value="" type="text">
+</td></tr>
+<tr>
+<td nowrap="nowrap">
+<table>
+<tbody><tr>
+<td>
+<input name="sitesearch" value="" checked="checked" type="radio">
+<font size="-1" color="#000000">Web</font>
+</td>
+<td>
+<input name="sitesearch" value="avr.elektroda.eu" type="radio">
+<font size="-1" color="#000000">Ta strona</font>
+</td>
+</tr>
+<tr>
+<td>
+<input name="sitesearch" value="atmel.com" type="radio">
+<font size="-1" color="#000000">Atmel</font>
+</td>
+<td>
+<input name="sitesearch" value="programatory.net" type="radio">
+<font size="-1" color="#000000">Programatory</font>
+</td>
+</tr>
+</tbody></table>
+<input name="sa" value="Wyszukaj" type="submit">
+<input name="client" value="pub-1037920752938166" type="hidden">
+<input name="forid" value="1" type="hidden">
+<input name="ie" value="ISO-8859-2" type="hidden">
+<input name="oe" value="ISO-8859-2" type="hidden">
+<input name="cof" value="GALT:#804000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:804000;LC:804000;T:000000;GFNT:0066CC;GIMP:0066CC;FORID:1" type="hidden">
+<input name="hl" value="pl" type="hidden">
+</td></tr></tbody></table>
+</form>
+<!-- SiteSearch Google --></div>
+</div><div class="block block-user" id="block-user-1">
+  <div class="title"><h3>Nawigacja</h3></div>
+  <div class="content">
+<ul class="menu">
+<li class="expanded"><a href="http://avr.elektroda.eu/?q=node/8" title="AVR-GCC w praktyce...">AVR-GCC</a>
+<ul class="menu">
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/6" title="">Wstęp</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/24" title="">Źródła</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/15" title="">Biblioteka avr-libc</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/13" title="">EEPROM</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/14" title="">FLASH</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/11" title="">I/O binarne</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/29" title="">Komparator</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/7" title="">Kompilacja</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/10" title="">Kompilator</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/22" title="">Make</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/23" title="">Opcje</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/16" title="">Port szeregowy</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/20" title="">Programatory</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/25" title="">Przerwania</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/30" title="">Przetwornik A/D</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/28" title="">Sleep</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/19" title="">SRAM</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/26" title="">TIMER 0</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/39" title="" class="active">TIMER 1</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/42" title="">TIMER 2</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/27" title="">Watchdog</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/9" title="">WinAVR</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/21" title="">Zasoby</a></li>
+
+</ul>
+</li>
+<li class="collapsed"><a href="http://avr.elektroda.eu/?q=node/4" title="Uniwersalna biblioteka do AVR-GCC">RKlibAVR</a></li>
+<li class="collapsed"><a href="http://avr.elektroda.eu/?q=node/36" title="">Programatory</a></li>
+<li class="collapsed"><a href="http://avr.elektroda.eu/?q=node/38" title="">Inna twórczość</a></li>
+<li class="leaf"><a href="http://avr.elektroda.eu/?q=node/32" title="">Ciekawe linki</a></li>
+<li class="leaf"><a href="http://robkry.freepgs.com/_old/" title="Stara wersja strony...">Stara wersja</a></li>
+
+</ul>
+</div>
+</div><div class="block block-aggregator" id="block-aggregator-category-2">
+  <div class="title"><h3>Ze Świata</h3></div>
+  <div class="content"><div class="item-list"><ul><li><a href=""></a>
+</li><li><a href=""></a>
+</li><li><a href=""></a>
+</li><li><a href=""></a>
+</li><li><a href=""></a>
+</li></ul></div><div class="more-link"><a href="http://avr.elektroda.eu/?q=aggregator/categories/2" title="Przejrzyj ostatnie wiadomości w tej kategorii.">więcej</a></div></div>
+</div><div class="block block-block" id="block-block-1">
+  <div class="title"><h3>Partnerzy</h3></div>
+  <div class="content"><a href="http://www.nikomp.com.pl/" target="_blank"><img src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/baner12A.gif" alt="Sklep Elektroniczny NIKOMP" width="120" border="0" height="60"></a>
+<table><tbody><tr><td>
+<a href="http://www.cadsoft.de/"><img src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/cslogo.gif" alt="CadSoft Online" width="60" border="0" height="60"></a></td><td><a href="http://www.cadsoft.de/links.htm"><b>CADSOFT<br>EAGLE</b></a></td></tr></tbody></table>
+<a href="http://helion.pl/view/1381w"><img src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/helion8.gif" alt="Wydawnictwo Helion - literatura informatyczna" border="0"></a>
+</div>
+</div><div class="block block-user" id="block-user-0">
+  <div class="title"><h3>Logowanie</h3></div>
+  <div class="content"><form action="/?q=node/39&amp;destination=node%2F39" method="post" id="user-login-form">
+<div><div class="form-item">
+ <label for="edit-name">Nazwa użytkownika: <span class="form-required" title="Wypełnienie tego pola jest wymagane.">*</span></label>
+ <input maxlength="60" name="edit[name]" id="edit-name" size="15" value="" class="form-text required" type="text">
+</div>
+<div class="form-item">
+ <label for="edit-pass">Hasło: <span class="form-required" title="Wypełnienie tego pola jest wymagane.">*</span></label>
+ <input maxlength="" name="edit[pass]" id="edit-pass" size="15" class="form-text required" type="password">
+</div>
+<input name="op" value="Zaloguj" class="form-submit" type="submit">
+<div class="item-list"><ul><li><a href="http://avr.elektroda.eu/?q=user/register" title="Utwórz nowe konto użytkownika.">Utwórz nowe konto</a></li><li><a href="http://avr.elektroda.eu/?q=user/password" title="Poproś o przysłanie e-mailem nowego hasła.">Poproś o nowe hasło</a></li></ul></div><input name="edit[form_id]" id="edit-user-login-block" value="user_login_block" type="hidden">
+
+</div></form>
+</div>
+</div>    </td>
+    
+    <td valign="top">
+      
+      <div id="main">
+                  <div class="breadcrumb"><a href="http://avr.elektroda.eu/?q=node">Strona główna</a> » <a href="http://avr.elektroda.eu/?q=node/8" title="AVR-GCC w praktyce...">AVR-GCC</a></div>          <h1 class="title">AVR-GCC - licznik/czasomierz TIMER 1</h1>
+
+          
+        
+        
+        
+      <!-- start main content -->
+      <!-- begin content --><div class="node">
+        <span class="submitted">Robert Krysztof, pon, 2006-10-09 13:44</span>
+    <span class="taxonomy"></span>
+
+    <div class="content">
+
+<div style="border-width: 0px 0px 10px 10px; margin: 0px; padding: 0px; float: right;">
+
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-1037920752938166";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text_image";
+google_ad_channel = "";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_link = "804000";
+google_color_text = "000000";
+google_color_url = "804000";
+//--></script>
+<script type="text/javascript" src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/show_ads.js">
+</script><script> window.google_render_ad(); </script><iframe name="google_ads_frame" src="AVR-GCC%20-%20licznik_czasomierz%20TIMER%201%20%7C%20Elektronika%20i%20programy_pliki/ads_002.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" width="160" frameborder="0" height="600"></iframe>
+
+</div>
+
+	<p>Licznik/czasomierz 1 posiada 16 bitową organizację. Z tego
+względu można go użyć do zliczania większej ilości impulsów lub
+odmierzania dłuższych (lub dokładniejszych) okresów czasu. Zliczane
+wartości mieszczą się w zakresie od 0x0000 do 0xFFFF. Dostęp do nich
+jest możliwy przez dwa 8-bitowe rejestry. Oprócz swej funkcji
+podstawowej licznik 1 może być użyty w trybie<br>
+porównywania / przechwytywania (ang. compare / capture) oraz sterowania wyjściami z modulowaną szerokością impulsu (PWM). </p>
+<p><b>Rejestry licznika/czasomierza 1</b></p>
+<pre><b>Nazwa  | Funkcja                    | Uwagi</b>
+----------------------------------------------------------------------------------------------
+TCCR1A | Rejestr kontrolny A        |
+TCCR1B | Rejestr kontrolny B        |
+TCCR1L | Stan licznika L            | możliwy dostęp do całej zawartości licznika przez TCCR1
+TCCR1H | Stan licznika H            | j.w.
+OCR1AL | Porównywanie - rejestr A L | możliwy dostęp do całej zawartości rejestru przez OCR1A
+OCR1AH | Porównywanie - rejestr A H | j.w.
+OCR1BL | Porównywanie - rejestr B L | możliwy dostęp do całej zawartości rejestru przez OCR1B
+OCR1BH | Porównywanie - rejestr B H | j.w.
+ICR1L  | Przechwytywanie L          | możliwy dostęp do całej zawartości rejestru przez ICR1
+ICR1H  | Przechwytywanie H          | j.w.
+</pre><h3>Tryb licznika</h3>
+<p>W tym trybie są zliczane zmiany stanu na końcówce T1. Zmiany stanu
+na końcówce T1 są synchronizowane z częstotliwością zegarową CPU. Aby
+te zmiany były zauważone, minimalny odstęp czasu pomiędzy tymi zmianami
+musi być większy od okresu zegara CPU. Stan na wejściu T1 jest
+próbkowany w czasie narastającego zbocza wewnętrznego sygnału
+zegarowego CPU. Aby włączyć zliczanie impulsów należy ustawić
+odpowiednią kombinację bitów w rejestrze TCCR1B.</p>
+<p><b>Bity rejestru TCCR1B określające zliczanie impulsów zewnętrznych przez licznik 1</b></p>
+<pre><b>CS12 | CS11 | CS10 | Opis</b>
+------------------------------------------------------
+  1  |  1   |  0   | Opadające zbocze na końcówce T1
+  1  |  1   |  1   | Narastające zbocze na końcówce T1
+</pre><h3>Tryb czasomierza</h3><br>
+W tym trybie licznik jest taktowany wewnętrznym sygnałem zegarowym. Po
+każdym takcie wartość licznika jest zwiększana o jeden. Sygnał
+taktujący jest wynikiem podziału przez x w stosunku do zegara
+procesora. Dzielnik x może przyjąć jedną z wartości: 1, 8, 64, 256,
+1024. Np. x=1024 - licznik jest zwiększany o 1 po 1024 taktach zegara
+procesora. Współczynnik wstępnego podziału jest ustalany przez
+ustawianie odpowiednich bitów rejestru TCCR1B. <p><b>Bity rejestru TCCR1B określające częstotliwość wejściową czasomierza 1</b></p>
+<pre><b>CS12 | CS11 | CS10 | Częstotliwość</b>
+----------------------------------
+ 0   |  0   |  0   | 0
+ 0   |  0   |  1   | CLK
+ 0   |  1   |  0   | CLK/8
+ 0   |  1   |  1   | CLK/64
+ 1   |  0   |  0   | CLK/256
+ 1   |  0   |  1   | CLK/1024
+</pre><h4>Programy przykładowe</h4>
+<p>Naszym celem będzie napisanie programów, które pokażą w możliwie
+najprostszy sposób wykorzystanie licznika/czasomierza 1 do zliczania
+impulsów pochodzących z wewnętrznego preskalera. W obu przypadkach do
+komunikacji z użytkownikiem będą wykorzystane diody LED podłączone do
+portu B. Pierwszy przykład przedstawia wykorzystanie cyklicznego
+sprawdzania jego stanu (polling) natomiast drugi realizuje dokładnie to
+samo ale poprzez obsługę przerwania. </p>
+<pre class="cppcode"><span class="cpp02">// Testowanie timera 1 (polling)
+</span>
+<span class="cpp09">#include &lt;avr/io.h&gt;                </span><span class="cpp02">// dostęp do rejestrów
+</span>
+uint8_t led<span class="cpp10">;</span>
+uint8_t state<span class="cpp10">;</span>
+
+<span class="cpp05">int</span> main<span class="cpp10">(</span> <span class="cpp05">void</span> <span class="cpp10">)</span>
+<span class="cpp10">{</span>
+  DDRC <span class="cpp10">=</span> <span class="cpp04">0xFF</span><span class="cpp10">;</span> <span class="cpp02">// wszystkie linie PORTB jako wyjścia
+</span>  TCNT1 <span class="cpp10">=</span> <span class="cpp04">0xFF00</span><span class="cpp10">;</span> <span class="cpp02">// wartość początkowa T/C1
+</span>  TCCR1A <span class="cpp10">=</span> <span class="cpp04">0x00</span><span class="cpp10">;</span> <span class="cpp02">// T/C1 w trybie czasomierza
+</span>  TCCR1B <span class="cpp10">=</span> _BV<span class="cpp10">(</span>CS10<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>CS12<span class="cpp10">);</span> <span class="cpp02">// preskaler ck/1024
+</span>  <span class="cpp05">while</span><span class="cpp10">(</span><span class="cpp04">1</span><span class="cpp10">)</span>
+  <span class="cpp10">{</span>
+    <span class="cpp05">do</span> 
+      <span class="cpp02">// ta pętla sprawdza bit przepełnienia rejestrze TIFR
+</span>      state <span class="cpp10">=</span> inb<span class="cpp10">(</span>TIFR<span class="cpp10">)</span> <span class="cpp10">&amp;</span> _BV<span class="cpp10">(</span>TOV1<span class="cpp10">);</span>
+    <span class="cpp05">while</span> <span class="cpp10">(</span>state <span class="cpp10">!=</span> _BV<span class="cpp10">(</span>TOV1<span class="cpp10">));</span>
+
+    PORTC <span class="cpp10">=</span> <span class="cpp10">~</span>led<span class="cpp10">++;</span> <span class="cpp02">// wyslij licznik przepełnień na PORTB
+</span>
+    TCNT1 <span class="cpp10">=</span> <span class="cpp04">0xFF00</span><span class="cpp10">;</span> <span class="cpp02">// wartość początkowa T/C1
+</span>    
+    TIFR <span class="cpp10">=</span> _BV<span class="cpp10">(</span>TOV1<span class="cpp10">);</span> 
+        <span class="cpp02">// jeśli ustawimy bit TOV1 to
+</span>            <span class="cpp02">// ten bit zostanie skasowany
+</span>        <span class="cpp02">// przy następnym przepełnieniu licznika 1
+</span>  <span class="cpp10">}</span>
+<span class="cpp10">}</span>
+</pre><br>
+<pre class="cppcode"><span class="cpp02">// Testowanie timera 1 (przerwania)
+</span>
+<span class="cpp09">#include &lt;avr/io.h&gt;                </span><span class="cpp02">// dostęp do rejestrów
+</span><span class="cpp09">#include &lt;avr/interrupt.h&gt;        </span><span class="cpp02">// funkcje sei(), cli()
+</span><span class="cpp09">#include &lt;avr/signal.h&gt;                </span><span class="cpp02">// definicje SIGNAL, INTERRUPT
+</span>
+uint8_t led<span class="cpp10">;</span>
+
+SIGNAL <span class="cpp10">(</span>SIG_OVERFLOW1<span class="cpp10">)</span>
+<span class="cpp10">{</span>
+  PORTC <span class="cpp10">=</span> <span class="cpp10">~</span>led<span class="cpp10">++;</span>        <span class="cpp02">// wyświetl na LED-ach
+</span>  TCNT1 <span class="cpp10">=</span> <span class="cpp04">0xFF00</span><span class="cpp10">;</span>        <span class="cpp02">// przeładuj timer 1
+</span><span class="cpp10">}</span>
+
+<span class="cpp05">int</span> main<span class="cpp10">(</span><span class="cpp05">void</span><span class="cpp10">)</span>
+<span class="cpp10">{</span>
+  DDRC <span class="cpp10">=</span> <span class="cpp04">0xFF</span><span class="cpp10">;</span>                <span class="cpp02">// wszystkie linie PORTC jako wyjścia
+</span>  TIMSK <span class="cpp10">=</span> _BV<span class="cpp10">(</span>TOIE1<span class="cpp10">);</span>        <span class="cpp02">// włącz obsługę przerwań T/C1
+</span>  TCNT1 <span class="cpp10">=</span> <span class="cpp04">0xFF00</span><span class="cpp10">;</span>        <span class="cpp02">// wartość początkowa T/C1
+</span>  TCCR1A <span class="cpp10">=</span> <span class="cpp04">0x00</span><span class="cpp10">;</span>        <span class="cpp02">// włącz tryb czasomierza T/C1
+</span>  TCCR1B <span class="cpp10">=</span> _BV<span class="cpp10">(</span>CS10<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>CS12<span class="cpp10">);</span>
+                        <span class="cpp02">// preskaler ck/1024
+</span>  sei<span class="cpp10">();</span>                <span class="cpp02">// włącz obsługę przerwań
+</span>  <span class="cpp05">while</span><span class="cpp10">(</span><span class="cpp04">1</span><span class="cpp10">);</span>                <span class="cpp02">// pętla nieskończona
+</span><span class="cpp10">}</span>
+</pre><h3>Tryb porównywania</h3>
+<p>Licznik 1 wyposażony jest w funkcję porównywania jego zawartości z
+wartością zadaną. Do tego celu używa dwóch rejestrów OCR1A oraz OCR1B.
+Ich zawartość jest stale porównywana z zawartością licznika TCNT1.
+Pozytywny wynik porównania może wywołać wyzerowanie licznika TCNT1 lub
+zmianę stanu na końcówkach OC1A lub OC1B. Bity CS10, CS11 i CS12
+rejestru TCCR1B definiują przeskalowanie i źródło taktowania.</p>
+<p><b>Wybór trybu pracy wyjścia OC1A (bity rejestru TCCR1A</b></p>
+<pre><b>COM1A1 | COM1A0 | Opis</b>
+---------------------------------------------------------------
+   0   |    0   | Licznik 1 odłączony od końcówki OC1A
+   0   |    1   | Przełączanie stanu końcówki OC1A na przeciwny
+   1   |    0   | Zerowanie stanu końcówki OC1A
+   1   |    1   | Ustawianie stanu końcówki OC1A
+</pre><p>
+<b>Wybór trybu pracy wyjścia OC1B (bity rejestru TCCR1A)</b></p>
+<pre><b>COM1B1 | COM1B0 | Opis</b>
+---------------------------------------------------------------
+   0   |    0   | Licznik 1 odłączony od końcówki OC1B
+   0   |    1   | Przełączanie stanu końcówki OC1B na przeciwny
+   1   |    0   | Zerowanie stanu końcówki OC1B
+   1   |    1   | Ustawianie stanu końcówki OC1B
+</pre><h4>Program przykładowy</h4>
+<p>Naszym celem będzie napisanie programu, który pokaże nam zastosowanie trybu porównywania.<br>
+Będzie to generator przebiegu prostokątnego o regulowanej częstotliwości i wypełnieniu przebiegu.<br>
+Wyjściem generatora jest PB0. Częstotliwość reguluje się zwierając do masy linie PD3 lub PD4.<br>
+Wypełnienie regulujemy zwierając do masy linie PD5 lub PD6.</p>
+<pre class="cppcode"><span class="cpp02">// Testowanie timera 1 w trybie porównywania
+</span>
+<span class="cpp09">#include &lt;avr/io.h&gt;                </span><span class="cpp02">// dostęp do rejestrów
+</span><span class="cpp09">#include &lt;avr/interrupt.h&gt;        </span><span class="cpp02">// funkcje sei(), cli()
+</span><span class="cpp09">#include &lt;avr/signal.h&gt;                </span><span class="cpp02">// definicje SIGNAL, INTERRUPT
+</span>
+<span class="cpp05">volatile</span> uint16_t delay<span class="cpp10">;</span>  <span class="cpp02">// zmienna określająca częstotliwość
+</span><span class="cpp05">volatile</span> uint16_t compare<span class="cpp10">;</span><span class="cpp02">// zmienna określająca wypełnienie
+</span>
+SIGNAL <span class="cpp10">(</span>SIG_OUTPUT_COMPARE1A<span class="cpp10">)</span>        <span class="cpp02">// przerwanie od porównania
+</span><span class="cpp10">{</span>
+  cbi<span class="cpp10">(</span>PORTC<span class="cpp10">,</span>PB2<span class="cpp10">);</span>                <span class="cpp02">// zapal diodę na PC2
+</span><span class="cpp10">}</span>
+
+SIGNAL <span class="cpp10">(</span>SIG_OVERFLOW1<span class="cpp10">)</span>                <span class="cpp02">// przerwanie od przepełnienia
+</span><span class="cpp10">{</span>
+  TCNT1 <span class="cpp10">=</span> delay<span class="cpp10">;</span>                 <span class="cpp02">// przeładuj TIMER1
+</span>  sbi<span class="cpp10">(</span>PORTC<span class="cpp10">,</span>PC2<span class="cpp10">);</span>                <span class="cpp02">// zgaś diodę na PC2
+</span><span class="cpp10">}</span>
+
+<span class="cpp05">int</span> main<span class="cpp10">(</span><span class="cpp05">void</span><span class="cpp10">)</span>                        <span class="cpp02">// program główny
+</span><span class="cpp10">{</span>
+  DDRC <span class="cpp10">=</span> <span class="cpp04">0xFF</span><span class="cpp10">;</span>                        <span class="cpp02">// PORTC jako wyjścia dla LED
+</span>  PORTC <span class="cpp10">=</span> <span class="cpp04">0xFF</span><span class="cpp10">;</span>                        <span class="cpp02">// zgaś diody LED na PORTC
+</span>  DDRD <span class="cpp10">=</span> <span class="cpp04">0x00</span><span class="cpp10">;</span>                        <span class="cpp02">// PORTD jako wejścia dla przycisków
+</span>  PORTD <span class="cpp10">=</span> <span class="cpp04">0xFF</span><span class="cpp10">;</span>                        <span class="cpp02">// podciągaj wejścia PORTD
+</span>  delay <span class="cpp10">=</span> <span class="cpp04">0x0000</span><span class="cpp10">;</span>                <span class="cpp02">// domyślna wartość dla TIMERA1
+</span>  compare <span class="cpp10">=</span> <span class="cpp04">0x7FFF</span><span class="cpp10">;</span>                <span class="cpp02">// domyślna wartość dla porównania
+</span>  TIMSK <span class="cpp10">=</span> _BV<span class="cpp10">(</span>TOIE1<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>OCIE1A<span class="cpp10">);</span> 
+                                  <span class="cpp02">// włącz przerwania
+</span>                                  <span class="cpp02">// od przepełnienia i porównania TIMERA1
+</span>
+  TCNT1 <span class="cpp10">=</span> delay<span class="cpp10">;</span>                 <span class="cpp02">// zainicjuj TIMER1
+</span>  TCCR1A <span class="cpp10">=</span> <span class="cpp04">0x00</span><span class="cpp10">;</span>                 <span class="cpp02">// czasomierz 1 bez dodatków
+</span>  TCCR1B <span class="cpp10">=</span> _BV<span class="cpp10">(</span>CS00<span class="cpp10">);</span>                 <span class="cpp02">// taktowany F_CPU
+</span>  sei<span class="cpp10">();</span>                        <span class="cpp02">// włącz obsługę przerwań
+</span>  <span class="cpp05">while</span><span class="cpp10">(</span><span class="cpp04">1</span><span class="cpp10">)</span>
+  <span class="cpp10">{</span>
+    <span class="cpp05">if</span> <span class="cpp10">(</span>bit_is_clear<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD2<span class="cpp10">))</span>        <span class="cpp02">// jeżeli zwarto PD4 z masą
+</span>      delay<span class="cpp10">+=</span><span class="cpp04">0x80</span><span class="cpp10">;</span>                <span class="cpp02">// zwiększ delay o 128
+</span>    loop_until_bit_is_set<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD2<span class="cpp10">);</span>        
+                                    <span class="cpp02">// czekaj na zwolnienie PD4
+</span>                                     
+    <span class="cpp05">if</span> <span class="cpp10">(</span>bit_is_clear<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD3<span class="cpp10">))</span>        <span class="cpp02">// jeżeli zwarto PD3 z masą
+</span>      delay<span class="cpp10">-=</span><span class="cpp04">0x80</span><span class="cpp10">;</span>                <span class="cpp02">// zmniejsz delay o 128
+</span>    loop_until_bit_is_set<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD3<span class="cpp10">);</span>
+                                    <span class="cpp02">// czekaj na zwolnienie PD3
+</span>                                    
+    <span class="cpp05">if</span> <span class="cpp10">(</span>bit_is_clear<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD6<span class="cpp10">))</span>        <span class="cpp02">// jeżeli zwarto PD6 z masą
+</span>      compare<span class="cpp10">+=</span><span class="cpp04">0x80</span><span class="cpp10">;</span>                <span class="cpp02">// zwiększ compare o 128
+</span>    loop_until_bit_is_set<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD6<span class="cpp10">);</span>
+                                    <span class="cpp02">// czekaj na zwolnienie PD6
+</span>                                    
+    <span class="cpp05">if</span> <span class="cpp10">(</span>bit_is_clear<span class="cpp10">(</span>PINB<span class="cpp10">,</span>PB0<span class="cpp10">))</span>        <span class="cpp02">// jeżeli zwarto PB0 z masą
+</span>      compare<span class="cpp10">-=</span><span class="cpp04">0x80</span><span class="cpp10">;</span>                <span class="cpp02">// zmniejsz compare o 128
+</span>    loop_until_bit_is_set<span class="cpp10">(</span>PINB<span class="cpp10">,</span>PB0<span class="cpp10">);</span>
+                                    <span class="cpp02">// czekaj na zwolnienie PB0
+</span>
+<span class="cpp09">#ifdef __AVR_AT90S2313__        </span><span class="cpp02">// jeśli kompilujemy dla 2313
+</span>    OCR1 <span class="cpp10">=</span> compare<span class="cpp10">;</span>                <span class="cpp02">// wpisz compare do OCR1
+</span><span class="cpp09">#else                                </span><span class="cpp02">// w przeciwnym wypadku:
+</span>    OCR1A <span class="cpp10">=</span> compare<span class="cpp10">;</span>                <span class="cpp02">// wpisz compare do OCR1A
+</span><span class="cpp09">#endif
+</span>
+  <span class="cpp10">}</span>
+<span class="cpp10">}</span>
+</pre><h3>Tryb przechwytywania</h3>
+<p>Licznik 1 wyposażony jest w funkcję przechwytywania (ang. Catpure)
+jego chwilowej zawartości w specjalnym rejestrze jako reakcję na
+zdarzenie zewnętrzne. Kiedy zostanie wykryte narastające lub opadające
+zbocze sygnału (w zależności od stanu bitu ICES1 w rejestrze TCCR1B) na
+wejściu ICP (input capture), bieżąca wartość licznika zostaje
+przepisana do 16 bitowego rejestru ICR1 (ICR1L, ICR1H) oraz ustawia
+znacznik ICF1. Dodatkowo można uaktywnić funkcję eliminacji zakłóceń na
+wejściu ICP poprzez ustawienie bitu ICNC1 w rejestrze TCCR1B.
+Przechwytywanie wartości licznika / czasomierza 1 można również wywołać
+zmianą stanu na wyjściu wbudowanego w układ komparatora analogowego
+(ustawiony bit ACIC rejestru ACSR). Jest też możliwe wygenerowanie
+przerwania (SIG_INPUT_CAPTURE), jeżeli ustawiono bit TICIE1 w rejestrze
+TIMSK. Bardzo ważna jest kolejność odczytu ośmiobitowych części
+rejestru ICR1 - najpierw należy odczytać mniej znaczący bajt (ICR1L) a
+następnie bardziej znaczący (ICR1H). Można również odczytać całą 16
+bitową zawartość licznika poprzez przypisanie np. var=ICR1.</p>
+<h4>Program przykładowy</h4>
+<p>Naszym celem będzie napisanie programu, który przedstawi nam
+przechwytywanie zawartości licznika do specjalnego rejestru. W tym
+przykładzie urządzeniem wyjściowym będzie terminal podłączony do portu
+szeregowego mikrokontrolera. Wejście ICP mikrokontrolera należy
+podłączyć do zasilania przez rezystor 10k. W przypadku gdy używamy
+mikrokontrolera AT90S2313 można ww. rezystora nie stosować wymuszając
+programowo "podciągnięcie" wejścia ICP (końcówka PD6) do zasilania np.
+za pomocą wstawienia w odpowiedniej instrukcji na początku funkcji
+main() np. sbi(PORTD,PD6). Wejście ICP należy zwierać co jakiś czas z
+masą, co pozwoli zaobserwować przechwytywanie zawartości rejestru TCNT1
+w rejestrze ICR1. </p>
+<pre class="cppcode"><span class="cpp02">// Testowanie licznika 1 (przechwytywanie)
+</span>
+<span class="cpp09">#include &lt;avr/io.h&gt;                </span><span class="cpp02">// dostęp do rejestrów
+</span><span class="cpp09">#include &lt;avr/interrupt.h&gt;        </span><span class="cpp02">// funkcje sei(), cli()
+</span><span class="cpp09">#include &lt;avr/signal.h&gt;                </span><span class="cpp02">// definicje SIGNAL, INTERRUPT
+</span><span class="cpp09">#include "uart.h"                </span><span class="cpp02">// obsługa portu szeregowego
+</span>
+prog_char NEWLINE<span class="cpp10">[]</span> <span class="cpp10">=</span> <span class="cpp10">{</span><span class="cpp07">'\n'</span><span class="cpp10">,</span><span class="cpp07">'\r'</span><span class="cpp10">,</span><span class="cpp04">0</span><span class="cpp10">};</span> 
+        <span class="cpp02">// tablica zawiarająca znaki nowej linii
+</span>prog_char CLEAR<span class="cpp10">[]</span> <span class="cpp10">=</span> <span class="cpp10">{</span><span class="cpp04">27</span><span class="cpp10">,</span><span class="cpp07">'['</span><span class="cpp10">,</span><span class="cpp07">'H'</span><span class="cpp10">,</span><span class="cpp04">27</span><span class="cpp10">,</span><span class="cpp07">'['</span><span class="cpp10">,</span><span class="cpp07">'2'</span><span class="cpp10">,</span><span class="cpp07">'J'</span><span class="cpp10">,</span><span class="cpp04">0</span><span class="cpp10">};</span>
+        <span class="cpp02">// j.w. ale czyszczącza ekran terminala
+</span>prog_char HOME<span class="cpp10">[]</span> <span class="cpp10">=</span> <span class="cpp10">{</span><span class="cpp04">27</span><span class="cpp10">,</span><span class="cpp07">'['</span><span class="cpp10">,</span><span class="cpp07">'H'</span><span class="cpp10">,</span><span class="cpp04">0</span><span class="cpp10">};</span>
+        <span class="cpp02">// j.w. ale przestawiająca kursor na początek
+</span>prog_char SPACE<span class="cpp10">[]</span> <span class="cpp10">=</span> <span class="cpp10">{</span><span class="cpp07">' '</span><span class="cpp10">,</span><span class="cpp07">' '</span><span class="cpp10">,</span><span class="cpp07">' '</span><span class="cpp10">,</span><span class="cpp04">0</span><span class="cpp10">};</span>
+
+<span class="cpp02">// funkcja używana do wypisywania zmiennych
+</span><span class="cpp05">void</span> PRINT_VALUE<span class="cpp10">(</span><span class="cpp05">const</span> <span class="cpp05">char</span> <span class="cpp10">*</span>s<span class="cpp10">,</span> <span class="cpp05">int</span> v<span class="cpp10">)</span> 
+<span class="cpp10">{</span>
+  UART_putstr_P<span class="cpp10">(</span>s<span class="cpp10">);</span>                <span class="cpp02">// wyświetl tekst s z pamięci programu
+</span>  UART_putint<span class="cpp10">(</span>v<span class="cpp10">,</span><span class="cpp04">16</span><span class="cpp10">);</span>                <span class="cpp02">// wyświetl wartość v
+</span>  UART_putstr_P<span class="cpp10">(</span>SPACE<span class="cpp10">);</span>                <span class="cpp02">// dopisz spacje na końcu linii
+</span>  UART_putstr_P<span class="cpp10">(</span>NEWLINE<span class="cpp10">);</span>        <span class="cpp02">// dopisz znaki końca wiersza
+</span><span class="cpp10">}</span>
+
+<span class="cpp05">int</span> main<span class="cpp10">(</span><span class="cpp05">void</span><span class="cpp10">)</span>
+<span class="cpp10">{</span>
+  UART_init<span class="cpp10">();</span>                <span class="cpp02">// inicjalizacja portu szeregowego 
+</span>  TCCR1B <span class="cpp10">=</span> _BV<span class="cpp10">(</span>ICNC1<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>CS10<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>CS12<span class="cpp10">);</span> 
+          <span class="cpp02">// opadające zbocze i filtracja zakłóceń na ICP
+</span>          <span class="cpp02">// taktowanie T1 CK/1024
+</span>
+  UART_putstr_P<span class="cpp10">(</span>CLEAR<span class="cpp10">);</span>
+
+  <span class="cpp05">while</span><span class="cpp10">(</span><span class="cpp04">1</span><span class="cpp10">)</span>                <span class="cpp02">// pętla nieskończona
+</span>  <span class="cpp10">{</span>
+    UART_putstr_P<span class="cpp10">(</span>HOME<span class="cpp10">);</span>
+
+    PRINT_VALUE<span class="cpp10">(</span>PSTR<span class="cpp10">(</span><span class="cpp06">"TCNT1 = 0x"</span><span class="cpp10">),</span>TCNT1<span class="cpp10">);</span>
+                        <span class="cpp02">// TCNT1 na UART
+</span>    PRINT_VALUE<span class="cpp10">(</span>PSTR<span class="cpp10">(</span><span class="cpp06">"ICR1  = 0x"</span><span class="cpp10">),</span>ICR1<span class="cpp10">);</span>
+                        <span class="cpp02">// ICR1 na UART
+</span>  <span class="cpp10">}</span>
+<span class="cpp10">}</span>
+</pre><h3>Tryb PWM - modulowana szerokość impulsu</h3>
+<p>Kiedy zostanie wybrany tryb pracy licznika jako PWM (ang. Pulse
+Width Modulation) czyli modulacja szerokości impulsów. Czasomierz 1
+może być używany jako 8, 9 lub 10 bitowy samobieżny modulator PWM. Tryb
+PWM ustawiany jest przez ustawianie bitów PWM10 i PWM11 znajdujących
+się w rejestrze TCCR1A. </p>
+<p><b>Tryby pracy PWM (bity rejestru TCCR1A)</b></p>
+<pre><b>PWM11 | PWM10 | Opis</b>
+  0   |   0   | Wyłączony PWM
+  0   |   1   | 8 bitowy PWM
+  1   |   0   | 9 bitowy PWM
+  1   |   1   | 10 bitowy PWM
+</pre><p>
+Licznik może zliczać od 0x0000 do wybranej granicy (8 bitowy - 0x00FF,
+9 bitowy - 0x01FF, 10 bitowy - 0x03FF), kiedy ją przekroczy liczy z
+powrotem od zera i powtarza ten cykl w nieskończoność. Kiedy wartość
+licznika zrówna się z wartością rejestru porównującego (OCR1A, OCR1B)
+daje następujący efekt na wyjściach OC1A i OC1B w zależności od
+ustawień jak w tabeli: </p>
+<p><b>Praca wyjścia PWM (bity rejestru TCCR1A)</b></p>
+<pre><b>COM1x1 | COM1x0 | Efekt na OC1x</b>
+----------------------------------------------------------
+  0    |   0    | brak
+  0    |   1    | brak
+  1    |   0    | Wyzerowany przy zrównaniu, liczy w górę,
+       |        | ustawiony przy zrównaniu, liczy w dół
+  1    |   1    | Wyzerowany przy zrównaniu, liczy w dół,
+       |        | ustawiony przy zrównaniu, liczy w górę
+</pre><p>Gdzie: x to A lub B</p>
+<h4>Program przykładowy</h4>
+<p>Naszym celem będzie napisanie programu, który pokaże działanie
+wyjścia PWM. Urządzeniem wyjściowym będzie dioda LED wraz z rezystorem
+470 om podłączona między końcówkę OC1A a zasilanie.<br>
+Sterowanie programem umożliwiają dwa przyciski podłączone między końcówki PD2 i PD3 a masę.</p>
+<pre class="cppcode"><span class="cpp02">// Testowanie timera 1 w trybie samobieżnego PWM
+</span>
+<span class="cpp09">#include &lt;avr/io.h&gt;                </span><span class="cpp02">// dostęp do rejestrów
+</span><span class="cpp09">#include &lt;avr/interrupt.h&gt;        </span><span class="cpp02">// funkcje sei(), cli()
+</span><span class="cpp09">#include &lt;avr/signal.h&gt;                </span><span class="cpp02">// definicje SIGNAL, INTERRUPT
+</span>
+<span class="cpp09">#if defined(__AVR_AT90S4414__) || defined(__AVR_AT90S8515__) || \
+</span>    defined<span class="cpp10">(</span>__AVR_AT90S4434__<span class="cpp10">)</span> <span class="cpp10">||</span> defined<span class="cpp10">(</span>__AVR_AT90S8535__<span class="cpp10">)</span> <span class="cpp10">||</span> \
+    defined<span class="cpp10">(</span>__AVR_ATmega163__<span class="cpp10">)</span> <span class="cpp10">||</span> defined<span class="cpp10">(</span>__AVR_ATmega16__<span class="cpp10">)</span>
+<span class="cpp09">#define PWM_out(value)        OCR1A=value
+#endif
+</span>
+<span class="cpp09">#ifdef __AVR_AT90S2313__
+#define PWM_out(value)        OCR1=value
+#endif
+</span>
+uint16_t pwm<span class="cpp10">=</span><span class="cpp04">512</span><span class="cpp10">;</span>                <span class="cpp02">// zmienna zawiarająca wartość wypełnienia
+</span>
+<span class="cpp05">void</span> delay<span class="cpp10">(</span><span class="cpp05">void</span><span class="cpp10">)</span>                <span class="cpp02">// prosta pętla opóźniająca
+</span><span class="cpp10">{</span>
+  <span class="cpp05">unsigned</span> <span class="cpp05">int</span> i<span class="cpp10">;</span>
+  <span class="cpp05">for</span><span class="cpp10">(</span>i<span class="cpp10">=</span><span class="cpp04">0</span><span class="cpp10">;</span>i<span class="cpp10">&lt;</span><span class="cpp04">50000</span><span class="cpp10">;</span>i<span class="cpp10">++);</span>
+<span class="cpp10">}</span>
+
+<span class="cpp05">int</span> main<span class="cpp10">(</span><span class="cpp05">void</span><span class="cpp10">)</span>                        <span class="cpp02">// program główny
+</span><span class="cpp10">{</span>
+  DDRD <span class="cpp10">=</span> <span class="cpp04">0x00</span><span class="cpp10">;</span>                <span class="cpp02">// PORTD jako wejścia dla przycisków
+</span>  PORTD <span class="cpp10">=</span> <span class="cpp04">0xFF</span><span class="cpp10">;</span>                <span class="cpp02">// podciągaj wejścia PORTD
+</span>
+<span class="cpp09">#if defined(__AVR_AT90S4414__) || defined(__AVR_AT90S8515__) || \
+</span>    defined<span class="cpp10">(</span>__AVR_AT90S4434__<span class="cpp10">)</span> <span class="cpp10">||</span> defined<span class="cpp10">(</span>__AVR_AT90S8535__<span class="cpp10">)</span> <span class="cpp10">||</span> \
+    defined<span class="cpp10">(</span>__AVR_ATmega163__<span class="cpp10">)</span> <span class="cpp10">||</span> defined<span class="cpp10">(</span>__AVR_ATmega16__<span class="cpp10">)</span>
+  sbi<span class="cpp10">(</span>DDRD<span class="cpp10">,</span>PD5<span class="cpp10">);</span>                 <span class="cpp02">// ustawienie kierunku wyjscia PWM
+</span><span class="cpp09">#endif
+#ifdef __AVR_AT90S2313__
+</span>  sbi<span class="cpp10">(</span>DDRB<span class="cpp10">,</span>PB3<span class="cpp10">);</span>                 <span class="cpp02">// ustawienie kierunku wyjscia PWM
+</span><span class="cpp09">#endif
+</span>
+  TCCR1A <span class="cpp10">=</span> _BV<span class="cpp10">(</span>COM1A1<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>COM1A0<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>PWM10<span class="cpp10">)|</span>_BV<span class="cpp10">(</span>PWM11<span class="cpp10">);</span>
+                                  <span class="cpp02">// czasomierz 1 w trybie 10 bitowego PWM
+</span>  TCCR1B <span class="cpp10">=</span> _BV<span class="cpp10">(</span>CS00<span class="cpp10">);</span>                 <span class="cpp02">// czasomierz 1 taktowany F_CPU
+</span>  
+  pwm<span class="cpp10">=</span><span class="cpp04">512</span><span class="cpp10">;</span>                        <span class="cpp02">// przypisz wartość początkową PWM
+</span>  
+  <span class="cpp05">while</span><span class="cpp10">(</span><span class="cpp04">1</span><span class="cpp10">)</span>                        <span class="cpp02">// pętla nieskończona
+</span>  <span class="cpp10">{</span>
+    PWM_out<span class="cpp10">(</span>pwm<span class="cpp10">);</span>                <span class="cpp02">// wpisz pwm do OCR1
+</span>
+    <span class="cpp05">if</span> <span class="cpp10">(</span>bit_is_clear<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD3<span class="cpp10">))</span><span class="cpp02">// jeżeli zwarto PD3 z masą
+</span>    <span class="cpp10">{</span>
+      delay<span class="cpp10">();</span>                        <span class="cpp02">// czekaj chwilę
+</span>      <span class="cpp05">if</span> <span class="cpp10">(++</span>pwm<span class="cpp10">==</span><span class="cpp04">1024</span><span class="cpp10">)</span> pwm<span class="cpp10">=</span><span class="cpp04">1023</span><span class="cpp10">;</span><span class="cpp02">// zwiększ i ogranicz pwm
+</span>    <span class="cpp10">}</span>
+                                    
+    <span class="cpp05">if</span> <span class="cpp10">(</span>bit_is_clear<span class="cpp10">(</span>PIND<span class="cpp10">,</span>PD2<span class="cpp10">))</span><span class="cpp02">// jeżeli zwarto PD2 z masą
+</span>    <span class="cpp10">{</span>
+      delay<span class="cpp10">();</span>                        <span class="cpp02">// czekaj chwilę
+</span>      <span class="cpp05">if</span> <span class="cpp10">(--</span>pwm<span class="cpp10">==</span><span class="cpp04">0xFFFF</span><span class="cpp10">)</span> pwm<span class="cpp10">=</span><span class="cpp04">0</span><span class="cpp10">;</span>        <span class="cpp02">// zmniejsz i ogranicz pwm
+</span>    <span class="cpp10">}</span>
+  <span class="cpp10">}</span>
+<span class="cpp10">}</span>
+</pre><br>
+    </div>
+
+        <div class="links">» 23493 odsłony</div>
+    </div>
+<!-- end content -->      <!-- end main content -->
+
+      </div><!-- main -->
+    </td>
+      </tr>
+</tbody></table>
+
+<table id="footer-menu" summary="Navigation elements." width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tbody><tr>
+    <td valign="middle" align="center">
+      <div class="secondary-links">
+        <a href="http://avr.elektroda.eu/?q=node/17" title="">AtmelPrg</a> | <a href="http://avr.elektroda.eu/?q=node/8" title="">AVR-GCC</a> | <a href="http://avr.elektroda.eu/?q=node/32" title="">Ciekawe linki</a> | <a href="http://avr.elektroda.eu/?q=node/4" title="">RKLibAVR</a> | <a href="http://avr.elektroda.eu/?q=node/5" title="">RKProg</a>      </div>
+    </td>
+  </tr>
+</tbody></table>
+
+<div id="footer-message">
+    <p><a href="mailto:robert%20%28kropka%29%20krysztof%20%28malpa%29%20wp%20%28kropka%29%20pl?subject=Dotyczy%20strony%20Elektronika%20i%20programy">(C) 1999-2006 Robert Krysztof</a> - Wszelkie prawa zastrzeżone. Strona znajduje się na serwerze <a href="http://www.elektroda.pl/">elektroda.pl</a>
+
+</p>
+</div>
+</body></html>

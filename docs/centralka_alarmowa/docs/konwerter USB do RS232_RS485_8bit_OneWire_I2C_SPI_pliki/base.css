@@ -1,0 +1,165 @@
+/** STANDARDOWY TEKST I TLO **/
+p {
+	text-align:justify ;
+	text-indent: 5%;
+}
+p.noindent {
+	text-indent: 0;
+}
+body {
+	background-color: #f0f8ff ;
+}
+
+/** WYROWNANIA **/
+*.center {
+	text-align: center ;
+}
+table.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+img.right {
+	float: right ;
+	padding: 5px
+}
+img.left {
+	float: left ;
+	padding: 5px
+}
+
+/** OBRAZKI **/
+img {
+	border: 0px none ;
+}
+
+/** ZNACZNIKI LOGICZNE **/
+dfn, cite, var, samp, blockquote {
+	font-style: italic ;
+}
+em {
+	font-weight: bold ;
+}
+
+/** LINKI **/
+a.int, span.int {
+	/* text-decoration:none ; */
+	color: blue ;
+}
+a.Wikipedia, span.Wikipedia {
+	/* text-decoration:none ; */
+	color: green ;
+}
+a.ext_doc, a.ext_doc_site, span.doc {
+	/* text-decoration:none ; */
+	color: teal ;
+}
+a.ext, a.ext_homepage, span.ext {
+	/* text-decoration:none ; */
+	color: navy ;
+}
+a[class]:visited, span.visited {
+	/* text-decoration:none ; */
+	background-color: #D6D6D6 ;
+}
+a[class]:focus, a[class]:hover {
+	text-decoration:underline ;
+	color: red ;
+}
+
+/** AKAPITY SPECJALNE **/
+p.download , a.download {
+	font-size : large ;
+	font-weight : bold ;
+	text-align: center ;
+	text-indent: 0;
+}
+p.fotter {
+	font-size: xx-small ;
+	text-indent: 0;
+}
+p.menu_path {
+	font-size: small ;
+	font-weight : bold ;
+	text-align: center ;
+	text-indent: 0;
+}
+p.menu_subsecttion {
+	font-weight: bold ;
+	text-align: center ;
+	text-indent: 0;
+}
+p.menu_link, p.menu_link_art, p.menu_link_submenu {
+	font-weight: bold ;
+	text-align: left;
+	text-indent: 0;
+}
+p.extra_menu_link {
+	font-weight: bold ;
+	font-style: italic ;
+	text-align: left;
+	text-indent: 0;
+}
+p.menu_link_section {
+	font-size: large ;
+	font-weight: bold ;
+	text-align: left;
+	text-indent: 0;
+}
+p.art_menu {
+	font-style: italic ;
+	font-size: small ;
+	text-align: center ;
+	text-indent: 0;
+}
+p.art_menu_printable {
+	font-size: x-small ;
+	text-align: left;
+	text-indent: 0;
+}
+
+form.search {
+	background-color: #e3e3e3 ;
+}
+td.menu {
+	width: 20% ;
+}
+
+/** DLA WYDRUKU - LINKI **/
+@media print {
+	body {
+		background-color: white ;
+	}
+	
+	a[class] {
+		color: black ;
+		text-decoration: none ;
+	}
+	
+	a.ext_doc:after, a.ext_doc_site:after, a.Wikipedia:after, a.ext:after, a.ext_homepage:after   {
+		font-style: italic ;
+		content: " [" attr(href) "]" ;
+	}
+	
+	a.int:after {
+		font-style: italic ;
+		content: " [http://www.opcode.eu.org" attr(href) "]" ;
+	}
+	
+	a:visited {
+		background-color: #FFFFFF ;
+	}
+	
+	td.menu, .noprint {
+		display: none ;
+		visibility: hidden ;
+	}
+	
+	p.art_menu {
+		display: none ;
+		visibility: hidden ;
+	}
+	
+	pre {
+		white-space: pre-wrap ;
+	}
+}

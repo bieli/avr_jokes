@@ -1,0 +1,230 @@
+--- avrdude-5.0-BETA-withpatch/stk500v2.c_orig	2005-09-18 20:31:39.000000000 +0200
++++ avrdude-5.0-BETA-withpatch/stk500v2.c	2005-10-02 19:50:05.000000000 +0200
+@@ -18,7 +18,7 @@
+  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  */
+ 
+-/* $Id: stk500v2.c,v 1.3 2005/05/11 17:09:22 joerg_wunsch Exp $ */
++/* $Id: stk500v2.c,v 1.8 2005/09/16 21:23:14 bdean Exp $ */
+ /* Based on Id: stk500.c,v 1.46 2004/12/22 01:52:45 bdean Exp */
+ 
+ /*
+@@ -155,12 +155,12 @@
+         }
+         break;
+       case sSIZE1:
+-        DEBUGRECV("hoping for size MSB\n");
++        DEBUGRECV("hoping for size LSB\n");
+         msglen = c*256;
+         state = sSIZE2;
+         break;
+       case sSIZE2:
+-        DEBUGRECV("hoping for size LSB...");
++        DEBUGRECV("hoping for size MSB...");
+         msglen += c;
+         DEBUG(" msg is %d bytes\n",msglen);
+         state = sTOKEN;
+@@ -171,10 +171,9 @@
+         break;
+       case sDATA:
+         if (curlen < maxsize) {
+-        DEBUG("d=0x%x,",c);
+           msg[curlen] = c;
+         } else {
+-          fprintf(stderr, "%s: stk500v2_recv(): buffer too small, received %d byte into %d byte buffer\n",
++          fprintf(stderr, "%s: stk500v2_recv(): buffer too small, received %d byte into %zd byte buffer\n",
+                   progname,curlen,maxsize);
+           return -2;
+         }
+@@ -238,7 +237,7 @@
+ 
+   // if we got bytes returned, check to see what came back
+   if (status > 0) {
+-    if (resp[0] == STATUS_CMD_OK) {
++    if ((resp[0] == CMD_SIGN_ON) && (resp[1] == STATUS_CMD_OK)) {
+       // success!
+       return 0;
+     } else {
+@@ -272,7 +271,7 @@
+   return 0;
+ }
+ 
+-static int stk500v2_command(PROGRAMMER * pgm, char * buf, size_t len, size_t maxlen) {
++static int stk500v2_command(PROGRAMMER * pgm, unsigned char * buf, size_t len, size_t maxlen) {
+   int i;
+   int tries = 0;
+   int status;
+@@ -292,7 +291,7 @@
+ 
+   // if we got a successful readback, return
+   if (status > 0) {
+-    DEBUG(" status is = %d\n",status);
++    DEBUG(" = %d\n",status);
+     return status;
+   }
+ 
+@@ -496,11 +495,13 @@
+ static int stk500v2_paged_write(PROGRAMMER * pgm, AVRPART * p, AVRMEM * m, 
+                               int page_size, int n_bytes)
+ {
+-  int addr, block_size;
++  int addr, block_size, last_addr;
++  int a_div=1;
+   unsigned char commandbuf[10];
+   unsigned char buf[266];
+   unsigned char cmds[4];
+   int result;
++  OPCODE * rop, * wop;
+ 
+   DEBUG("STK500V2: stk500v2_paged_write(..,%s,%d,%d)\n",m->desc,page_size,n_bytes);
+ 
+@@ -508,15 +509,25 @@
+ 
+   // determine which command is to be used
+   if (strcmp(m->desc, "flash") == 0) {
++    a_div=2;
+     commandbuf[0] = CMD_PROGRAM_FLASH_ISP;
+   } else if (strcmp(m->desc, "eeprom") == 0) {
+     commandbuf[0] = CMD_PROGRAM_EEPROM_ISP;
+   }
+   commandbuf[4] = m->delay;
+ 
++  if (a_div == 1) {
++    wop = m->op[AVR_OP_WRITE];
++    rop = m->op[AVR_OP_READ];
++  }
++  else {
++    wop = m->op[AVR_OP_WRITE_LO];
++    rop = m->op[AVR_OP_READ_LO];
++  }
++
+   // if the memory is paged, load the appropriate commands into the buffer
+   if (m->mode & 0x01) {
+-    commandbuf[3] = m->mode | 0x80;		// yes, write the stupid page to flash
++    commandbuf[3] = m->mode | 0x80;		// yes, write the page to flash
+ 
+     if (m->op[AVR_OP_LOADPAGE_LO] == NULL) {
+       fprintf(stderr, "%s: stk500v2_paged_write: loadpage instruction not defined for part \"%s\"\n",
+@@ -535,31 +546,33 @@
+     commandbuf[6] = cmds[0];
+ 
+   // otherwise, we need to load different commands in
+-  } else {
+-    commandbuf[3] = m->mode | 0x80;		// yes, write the stupid words to flash
++  } 
++  else {
++    commandbuf[3] = m->mode | 0x80;		// yes, write the words to flash
+ 
+-    if (m->op[AVR_OP_WRITE_LO] == NULL) {
++    if (wop == NULL) {
+       fprintf(stderr, "%s: stk500v2_paged_write: write instruction not defined for part \"%s\"\n",
+               progname, p->desc);
+       return -1;
+     }
+-    avr_set_bits(m->op[AVR_OP_WRITE_LO], cmds);
+-    commandbuf[6] = cmds[0];
++    avr_set_bits(wop, cmds);
++    commandbuf[5] = cmds[0];
++    commandbuf[6] = 0;
+   }
+ 
+   // the read command is common to both methods
+-  if (m->op[AVR_OP_READ_LO] == NULL) {
++  if (rop == NULL) {
+     fprintf(stderr, "%s: stk500v2_paged_write: read instruction not defined for part \"%s\"\n",
+             progname, p->desc);
+     return -1;
+   }
+-  avr_set_bits(m->op[AVR_OP_READ_LO], cmds);
++  avr_set_bits(rop, cmds);
+   commandbuf[7] = cmds[0];
+ 
+   commandbuf[8] = m->readback[0];
+   commandbuf[9] = m->readback[1];
+ 
+-  stk500v2_loadaddr(pgm, 0);
++  last_addr=-1;
+ 
+   for (addr=0; addr < n_bytes; addr += page_size) {
+     report_progress(addr,n_bytes,NULL);
+@@ -568,13 +581,25 @@
+       block_size = n_bytes - addr;
+     else
+       block_size = page_size;
++
+     DEBUG("block_size at addr %d is %d\n",addr,block_size);
+ 
++    if(commandbuf[0] == CMD_PROGRAM_FLASH_ISP){
++      if (stk500v2_is_page_empty(addr, block_size, m->buf)) {
++          continue;
++      }
++    }
++
+     memcpy(buf,commandbuf,sizeof(commandbuf));
+ 
+     buf[1] = block_size >> 8;
+     buf[2] = block_size & 0xff;
+ 
++    if((last_addr==-1)||(last_addr+block_size != addr)){
++      stk500v2_loadaddr(pgm, addr/a_div);
++    }
++    last_addr=addr;
++
+     memcpy(buf+10,m->buf+addr, block_size);
+ 
+     result = stk500v2_command(pgm,buf,block_size+10, sizeof(buf));
+@@ -610,26 +635,31 @@
+   unsigned char commandbuf[4];
+   unsigned char buf[275];	// max buffer size for stk500v2 at this point
+   unsigned char cmds[4];
+-  int result, i;
++  int result;
++  OPCODE * rop;
+ 
+   DEBUG("STK500V2: stk500v2_paged_load(..,%s,%d,%d)\n",m->desc,page_size,n_bytes);
+ 
+   page_size = m->readsize;
+ 
++  rop = m->op[AVR_OP_READ];
++
+   // determine which command is to be used
+   if (strcmp(m->desc, "flash") == 0) {
+     commandbuf[0] = CMD_READ_FLASH_ISP;
+-  } else if (strcmp(m->desc, "eeprom") == 0) {
++    rop = m->op[AVR_OP_READ_LO];
++  } 
++  else if (strcmp(m->desc, "eeprom") == 0) {
+     commandbuf[0] = CMD_READ_EEPROM_ISP;
+   }
+ 
+   // the read command is common to both methods
+-  if (m->op[AVR_OP_READ_LO] == NULL) {
+-    fprintf(stderr, "%s: stk500v2_paged_write: read instruction not defined for part \"%s\"\n",
++  if (rop == NULL) {
++    fprintf(stderr, "%s: stk500v2_paged_load: read instruction not defined for part \"%s\"\n",
+             progname, p->desc);
+     return -1;
+   }
+-  avr_set_bits(m->op[AVR_OP_READ_LO], cmds);
++  avr_set_bits(rop, cmds);
+   commandbuf[3] = cmds[0];
+ 
+   stk500v2_loadaddr(pgm, 0);
+@@ -650,7 +680,7 @@
+ 
+     result = stk500v2_command(pgm,buf,4,sizeof(buf));
+     if (buf[1] != STATUS_CMD_OK) {
+-      fprintf(stderr,"%s: stk500v2_paged_write: read command failed with %d\n",
++      fprintf(stderr,"%s: stk500v2_paged_load: read command failed with %d\n",
+               progname,buf[1]);
+       return -1;
+     }
+@@ -664,7 +694,7 @@
+     memcpy(&m->buf[addr], &buf[2], block_size);
+   }
+ 
+-  return 0;
++  return n_bytes;
+ }
+ 
+ 

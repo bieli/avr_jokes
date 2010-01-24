@@ -1,0 +1,1073 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>AVR Project &#8211; Digital Stop Watch with ATmega8 | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; AVR Project &#8211; Digital Stop Watch with ATmega8 Comments Feed" href="http://extremeelectronics.co.in/avr-projects/avr-project-digital-stop-watch-with-atmega8/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='PIC Development Board &#8211; Expansion of Board' href='http://extremeelectronics.co.in/pic-development-board/pic-development-board-expansion-of-board/' />
+<link rel='next' title='RF Communication Between Microcontrollers &#8211; Part I' href='http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,394] -->
+<meta name="description" content="Hello Friends, In this tutorial we will make a &quot;Digital Stop Watch&quot; using an AVR ATmega8 Microcontroller. This will help you learn many concepts" />
+<meta name="keywords" content="avr projects" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-237">
+<div class="date"> Jul-4th-2009 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-projects/avr-project-digital-stop-watch-with-atmega8/" rel="bookmark" title="Permanent Link: AVR Project &#8211; Digital Stop Watch with ATmega8">AVR Project &#8211; Digital Stop Watch with ATmega8</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>Hello Friends,</p>
+<p>In this tutorial we will make a <strong>&quot;Digital Stop Watch&quot;</strong> 
+  using an AVR ATmega8 Microcontroller. This will help you learn many concepts 
+  like</p>
+<ol>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/multiplexed-seven-segment-displays-part-ii/">Multiplexed 
+    Seven Segment Display Interfacing</a></li>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/">Using 
+    AVR Timers</a></li>
+  <li>Using Interrupts</li>
+  <li>And many others too.</li>
+</ol>
+<p>The code is written in C language for avr-gcc (WinAVR) .</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://extremeelectronics.co.in/avrprojects/Images/Digital_Stop_Watch.jpg" alt="digital stop watch using avr atmega8 and seven segment displays" width="500" height="375"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig.: Digital Stop Watch Prototype</h3></td>
+  </tr>
+</table>
+<h2>Steps to Build the &quot;Digital Stop Watch&quot; using AVR ATmega8 MCU</h2>
+<ol>
+  <li>Make the circuit according to the schematic on general purpose PCB or a 
+    <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=26&products_id=35">BreadBoard</a>. 
+  </li>
+  <li>Make a project in AVR Studio and add a new file to the project. Copy/paste 
+    the &quot;c&quot; code. Set optimization as &quot;o2&quot; and CPU frequency 
+    as 16000000Hz. Save and Build the project. You will get a HEX file.</li>
+  <li>Burn this HEX file to an <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=22&products_id=29">ATmega8</a> 
+    MCU using a tool such as <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=21&products_id=28">eXtreme 
+    Burner AVR</a>.</li>
+  <li>Set High Fuse = C9(Hex) Low Fuse = FF(Hex). How to do this depends on you 
+    programmer software.</li>
+</ol>
+<p>I have use a <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=23&products_id=36">xBoard 
+  MINI development board</a> for fast and easy prototyping. The Displays+Transistors+Key 
+  are on the Veroboard while the Core CPU unit + power supply is in the <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=23&products_id=36">xBoard 
+  MINI</a>. It can be programmed &quot;In System&quot; over USB Port using <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=21&products_id=28">eXtreme 
+  Burner - AVR software</a> toolkit.</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://extremeelectronics.co.in/avrprojects/Images/Digital_Stop_Watch2.jpg" alt="digital stop watch circuit" width="500" height="375"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig.: Digital Stop Watch made using xBoard MINI</h3></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<h2>How to Use the &quot;Digital Stop Watch&quot;</h2>
+<p>When initially powered up the Stop watch is in &quot;STOP&quot; condition. 
+  This is indicated by a blinking display. The count is 00:00 initially. Press 
+  &quot;START&quot; to start the watch. The blinking will now stop and the display 
+  will be fully on. It will start counting and MIN:SEC is displayed. The stop 
+  watch can be halted at any time by pressing &quot;HALT&quot; key. In halt state 
+  the counting freezes and the display starts blinking. You can press &quot;START' 
+  key again to resume counting from there. The &quot;RESET&quot; key is used to 
+  reset the clock to 00:00 i.e. 0 minute and 0 sec.</p>
+<h2>Digital Stop Watch Schematic</h2>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><a title ="Click To Enlarge ..." href="http://extremeelectronics.co.in/avrprojects/Images/digitalstopwatch.gif"><img src="http://extremeelectronics.co.in/avrprojects/Images/AVR_Digital_Stop_Watch_Schematic.gif" width="500" height="351" border="0"></a></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig.: Digital Stop Watch Schematic</h3></td>
+  </tr>
+</table>
+<h2>Digital Stop Watch C Source Code.</h2>
+
+<pre><code><font color="#000000">
+<font color="#000080"><i>/*</i></font>
+
+<font color="#000080"><i>Description:   An AVR ATmega8 based Digital Stop Watch</i></font>
+
+<font color="#000080"><i>            Project.</i></font>
+<font color="#000080"><i>________________________________________________________</i></font>
+
+<font color="#000080"><i>Author:  Avinash Gupta</i></font>
+<font color="#000080"><i>Date: 04 July 09</i></font>
+<font color="#000080"><i>Web      www.eXtremeElectronics.co.in</i></font>
+
+<font color="#000080"><i>   </i></font>
+<font color="#000080"><i>*/</i></font>
+
+<font color="#008000">#include &lt;avr/io.h&gt;</font>
+<font color="#008000">#include &lt;avr/interrupt.h&gt;</font>
+<font color="#008000">#include &lt;util/delay_basic.h&gt;</font>
+
+<font color="#008000">#define true 1</font>
+<font color="#008000">#define false 0</font>
+
+<font color="#008000">#define SEVEN_SEGMENT_PORT PORTD</font>
+
+<font color="#008000">#define SEVEN_SEGMENT_DDR DDRD</font>
+
+<b>volatile</b> uint8_t digits[<font color="#ff0080">4</font>];
+
+<font color="#000080"><i>//Global variable for the clock system</i></font>
+<b>volatile unsigned int</b>   clock_millisecond=<font color="#ff0080">0</font>;
+<b>volatile unsigned char</b>  clock_second=<font color="#ff0080">0</font>;
+
+<b>volatile unsigned char</b>  clock_minute=<font color="#ff0080">0</font>;
+<b>volatile unsigned char</b>  clock_hour=<font color="#ff0080">0</font>;
+
+<font color="#000080"><i>//Display hiding system</i></font>
+uint8_t hide_display = <b>false</b>;
+
+<font color="#000080"><i>//Blinking system</i></font>
+
+uint8_t blink_display = <b>true</b>;
+
+
+
+<b>void</b> SevenSegment(uint8_t n,uint8_t dp)
+{
+<font color="#000080"><i>/*</i></font>
+<font color="#000080"><i>This function writes a digits given by n to the display</i></font>
+<font color="#000080"><i>the decimal point is displayed if dp=1</i></font>
+
+<font color="#000080"><i>Note:</i></font>
+<font color="#000080"><i>n must be less than 9</i></font>
+
+<font color="#000080"><i>*/</i></font>
+   <b>if</b>(n&lt;<font color="#ff0080">11</font>)
+   {
+      <b>switch</b> (n)
+      {
+         <b>case</b> <font color="#ff0080">0</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b00000011</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">1</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b10011111</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">2</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b00100101</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">3</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b00001101</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">4</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b10011001</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">5</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b01001001</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">6</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b01000001</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">7</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b00011111</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">8</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b00000001</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">9</font>:
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b00001001</font>;
+         <b>break</b>;
+
+         <b>case</b> <font color="#ff0080">10</font>:
+         <font color="#000080"><i>//A BLANK DISPLAY</i></font>
+
+         SEVEN_SEGMENT_PORT=<font color="#ff0080">0b11111111</font>;
+         <b>break</b>;
+
+      }
+      <b>if</b>(dp)
+      {
+         <font color="#000080"><i>//if decimal point should be displayed</i></font>
+         <font color="#000080"><i>//make 0th bit Low</i></font>
+         SEVEN_SEGMENT_PORT&amp;=<font color="#ff0080">0b11111110</font>;
+      }
+   }
+   <b>else</b>
+
+   {
+      <font color="#000080"><i>//This symbol on display tells that n was greater than 10</i></font>
+      <font color="#000080"><i>//so display can't handle it</i></font>
+      SEVEN_SEGMENT_PORT=<font color="#ff0080">0b11111101</font>;
+   }
+}
+
+<b>void</b> Wait()
+{
+   uint8_t i;
+   <b>for</b>(i=<font color="#ff0080">0</font>;i&lt;<font color="#ff0080">10</font>;i++)
+   {
+      _delay_loop_2(<font color="#ff0080">0</font>);
+   }
+}
+
+
+<b>void</b> Print(uint16_t num)
+{
+   <font color="#000080"><i>/* </i></font>
+<font color="#000080"><i>   </i></font>
+<font color="#000080"><i>   This function breaks apart a given integer into separete digits</i></font>
+<font color="#000080"><i>   and writes them to the display array i.e. digits[]</i></font>
+<font color="#000080"><i>   </i></font>
+<font color="#000080"><i>   */</i></font>
+
+   uint8_t i=<font color="#ff0080">0</font>;
+   uint8_t j;
+   <b>if</b>(num&gt;<font color="#ff0080">9999</font>) <b>return</b>;
+
+
+   <b>while</b>(num)
+   {
+      digits[i]=num%<font color="#ff0080">10</font>;
+      i++;
+
+      num=num/<font color="#ff0080">10</font>;
+   }
+
+   <font color="#000080"><i>//Fill with leading 0s</i></font>
+
+   <b>for</b>(j=i;j&lt;<font color="#ff0080">4</font>;j++) digits[j]=<font color="#ff0080">0</font>;
+}
+
+
+
+
+<b>void</b> main()
+{
+   uint16_t i;
+
+   <font color="#000080"><i>// Prescaler = FCPU/1024</i></font>
+   TCCR0|=(<font color="#ff0080">1</font>&lt;&lt;CS02);
+
+   <font color="#000080"><i>//Enable Overflow Interrupt Enable</i></font>
+
+   TIMSK|=(<font color="#ff0080">1</font>&lt;&lt;TOIE0);
+
+   <font color="#000080"><i>//Initialize Counter</i></font>
+   TCNT0=<font color="#ff0080">0</font>;
+
+   <font color="#000080"><i>//Port c[3,2,1,0] as out put</i></font>
+   DDRC|=<font color="#ff0080">0b00001111</font>;
+
+   PORTC=<font color="#ff0080">0b00001110</font>;
+
+   <font color="#000080"><i>//Port D</i></font>
+
+   SEVEN_SEGMENT_DDR=<font color="#ff0080">0XFF</font>;
+
+   <font color="#000080"><i>//Turn off all segments</i></font>
+   SEVEN_SEGMENT_PORT=<font color="#ff0080">0XFF</font>;
+
+   <font color="#000080"><i>//Set up the timer1 as described in the</i></font>
+      <font color="#000080"><i>//tutorial</i></font>
+      <font color="#000080"><i>//TCCR1B=(1&lt;&lt;WGM12)|(1&lt;&lt;CS11)|(1&lt;&lt;CS10);</i></font>
+
+   <font color="#000080"><i>//initailly stop the timer by setting clock source =000</i></font>
+   TCCR1B&amp;=(~((<font color="#ff0080">1</font>&lt;&lt;CS12)|(<font color="#ff0080">1</font>&lt;&lt;CS11)|(<font color="#ff0080">1</font>&lt;&lt;CS10)));
+      OCR1A=<font color="#ff0080">250</font>;
+
+      <font color="#000080"><i>//Enable the Output Compare A interrupt</i></font>
+      TIMSK|=(<font color="#ff0080">1</font>&lt;&lt;OCIE1A);
+
+      <font color="#000080"><i>//Enable interrupts globally</i></font>
+
+      sei();
+
+      <font color="#000080"><i>//Continuasly display the time</i></font>
+      <b>while</b>(<font color="#ff0080">1</font>)
+      {
+         <b>int</b> disp;
+      disp=(clock_hour*<font color="#ff0080">100</font>)+clock_minute;
+      <font color="#000080"><i>//disp=(clock_minute*100)+clock_second;</i></font>
+
+      Print(disp);
+
+      <b>if</b>(!(PINB &amp; (<font color="#ff0080">1</font>&lt;&lt;PB2)))
+      {
+         <font color="#000080"><i>//RESET PRESSED</i></font>
+         clock_millisecond=<font color="#ff0080">0</font>;
+         clock_second=<font color="#ff0080">0</font>;
+         clock_minute=<font color="#ff0080">0</font>;
+         clock_hour=<font color="#ff0080">0</font>;
+      }
+
+      <b>if</b>(!(PINB &amp; (<font color="#ff0080">1</font>&lt;&lt;PB1)))
+      {
+         <font color="#000080"><i>//halt pressed</i></font>
+
+         <font color="#000080"><i>//stop the timer </i></font>
+         TCCR1B&amp;=(~((<font color="#ff0080">1</font>&lt;&lt;CS12)|(<font color="#ff0080">1</font>&lt;&lt;CS11)|(<font color="#ff0080">1</font>&lt;&lt;CS10)));
+
+         <font color="#000080"><i>//Start blinking the display</i></font>
+         blink_display=<b>true</b>;
+      }
+
+      <b>if</b>(!(PINB &amp; (<font color="#ff0080">1</font>&lt;&lt;PB0)))
+      {
+         <font color="#000080"><i>//start pressed</i></font>
+
+         <font color="#000080"><i>//start the timer </i></font>
+         <font color="#000080"><i>//Set up the timer1 as described in the</i></font>
+            <font color="#000080"><i>//tutorial</i></font>
+            TCCR1B=(<font color="#ff0080">1</font>&lt;&lt;WGM12)|(<font color="#ff0080">1</font>&lt;&lt;CS11)|(<font color="#ff0080">1</font>&lt;&lt;CS10);
+
+         <font color="#000080"><i>//Stop blinking the display</i></font>
+
+         blink_display=<b>false</b>;
+
+         <font color="#000080"><i>//Show the display</i></font>
+         hide_display=<b>false</b>;
+      }
+
+         _delay_loop_2(<font color="#ff0080">0</font>);
+      _delay_loop_2(<font color="#ff0080">0</font>);
+
+      }
+
+
+}
+
+ISR(TIMER0_OVF_vect)
+{
+
+
+   <font color="#000080"><i>/*</i></font>
+
+<font color="#000080"><i>   This interrup service routine (ISR)</i></font>
+<font color="#000080"><i>   Updates the displays</i></font>
+
+<font color="#000080"><i>   */</i></font>
+   <b>static</b> uint8_t i=<font color="#ff0080">0</font>;
+
+   <b>if</b>(i==<font color="#ff0080">3</font>)
+   {
+      <font color="#000080"><i>//If on last display then come</i></font>
+
+      <font color="#000080"><i>//back to first.</i></font>
+      i=<font color="#ff0080">0</font>;
+   }
+   <b>else</b>
+   {
+      <font color="#000080"><i>//Goto Next display</i></font>
+      i++;
+   }
+
+   <font color="#000080"><i>//Acivate a display according to i</i></font>
+
+   PORTC=~(<font color="#ff0080">1</font>&lt;&lt;i);
+
+   <b>if</b>(hide_display)
+   {
+      <font color="#000080"><i>//Show a blank display</i></font>
+      SevenSegment(<font color="#ff0080">10</font>,<font color="#ff0080">0</font>);
+
+   }
+   <b>else</b>
+   {
+      <font color="#000080"><i>//Write the digit[i] in the ith display.</i></font>
+
+      SevenSegment(digits[i],<font color="#ff0080">0</font>);
+   }
+
+   <font color="#000080"><i>//Handle blinking</i></font>
+
+   <b>if</b>(!blink_display) <b>return</b>;
+
+   <b>static</b> uint8_t blink_counter=<font color="#ff0080">0</font>;
+
+   blink_counter++;
+   <b>if</b>(blink_counter == <font color="#ff0080">16</font>)
+   {
+      blink_counter =<font color="#ff0080">0</font>;
+
+      hide_display=!hide_display;
+   }
+
+}
+
+
+<font color="#000080"><i>//The output compate interrupt handler</i></font>
+<font color="#000080"><i>//We set up the timer in such a way that</i></font>
+<font color="#000080"><i>//this ISR is called exactly at 1ms interval</i></font>
+ISR(TIMER1_COMPA_vect)
+{
+      clock_millisecond++;
+      <b>if</b>(clock_millisecond==<font color="#ff0080">1000</font>)
+      {
+      clock_second++;
+         clock_millisecond=<font color="#ff0080">0</font>;
+         <b>if</b>(clock_second==<font color="#ff0080">60</font>)
+         {
+            clock_minute++;
+            clock_second=<font color="#ff0080">0</font>;
+         }
+      <b>if</b>(clock_minute==<font color="#ff0080">60</font>)
+      {
+         clock_hour++;
+         clock_minute=<font color="#ff0080">0</font>;
+      }
+      }
+}
+
+</font>
+</code></pre>
+
+
+<h2>Downloads</h2>
+<ol>
+  <li><a href="http://extremeelectronics.co.in/avrprojects/Images/DigitalStopWatch.pdf">Schematic</a> 
+    in PDF format.</li>
+  <li><a href="http://extremeelectronics.co.in/avrprojects/Images/digitalstopwatch.gif">Schematic</a> 
+    in GIF format.</li>
+  <li><a href="http://extremeelectronics.co.in/avrprojects/Codes/StopWatch/StopWatch.c">C Source Code</a></li>
+  <li><a href="http://extremeelectronics.co.in/avrprojects/Codes/StopWatch/StopWatch_ATmega8_16MHz_MIN_SEC.hex">HEX 
+    Code</a> ready to burn</li>
+  <li><a href="http://extremeelectronics.co.in/avrprojects/Codes/StopWatch/StopWatch.zip">AVR 
+    Studio Project</a> as ZIP file</li>
+</ol>
+
+<h2>Project Video</h2><br/>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/MyyBXNtxsdk&hl=en&fs=1&"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/MyyBXNtxsdk&hl=en&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Saturday, July 4th, 2009 at 9:40 am						and is filed under <a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts in AVR Projects" rel="category tag">AVR Projects</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-projects/avr-project-digital-stop-watch-with-atmega8/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-projects/avr-project-digital-stop-watch-with-atmega8/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">6 Responses to &#8220;AVR Project &#8211; Digital Stop Watch with ATmega8&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-2041">
+<div class="commentnumber">1</div>
+			<cite>Ankit Says: </cite>
+						<br />
+
+
+
+<p>Very good project for beginner.<br />
+Please put a tutorial/project on mmc interfacing with atmega 16/32 on you website.</p>
+<small class="commentmetadata"><a href="#comment-2041" title="">July 4th, 2009 at 8:00 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2044">
+<div class="commentnumber">2</div>
+			<cite><a href='http://robolabz.multiply.com' rel='external nofollow' class='url'>Ashutosh</a> Says: </cite>
+						<br />
+
+
+
+<p>Your programs are tough to understand for the beginners as it contains many complex terms please make them less complex as you can.<br />
+        I am not criticizing your work, you did very good job but the terms like uint8_t and functions makes a lot of maggi in mind so please demontrate them clearly.</p>
+<small class="commentmetadata"><a href="#comment-2044" title="">July 5th, 2009 at 12:54 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2049">
+<div class="commentnumber">3</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Ashutosh,</p>
+<p>uint8_t is <strong>&#8220;UNSIGNED 8 BIT INTEGER&#8221;</strong> and its a typedef for <strong>unsigned char</strong></p>
+<p>Now don&#8217;t ask whats a typedef or why instead of unsigned char we are writing uint8_t.</p>
+<p>Also uint8_t (and its many other varrients like UINT8,UINT16,UINT32) is as common in C/C++ programming (including libraries such as Windows API, gnome gtk/gtk+, MFC etc) as &#8220;if&#8221; statement or &#8220;while&#8221; loop in ANY PROGRAMMING LANGUAGE.</p>
+<p>One thing I notice in novice is that they try to make &#8220;C&#8221; programming more &#8220;Amateurish&#8221; than &#8220;Professional&#8221; . &#8220;C/C++&#8221; is a very &#8220;Professional&#8221; language and its features are somewhat &#8220;confusing&#8221; if seen from a Amateurs perspective. If you don&#8217;t like it switch to &#8220;BASIC&#8221;</p>
+<small class="commentmetadata"><a href="#comment-2049" title="">July 5th, 2009 at 5:53 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2253">
+<div class="commentnumber">4</div>
+			<cite>Vinod Says: </cite>
+						<br />
+
+
+
+<p>Progran written is very good for beginners , i like the way u have explained , it is really good, expect lot of more projects from you</p>
+<small class="commentmetadata"><a href="#comment-2253" title="">July 31st, 2009 at 1:19 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2940">
+<div class="commentnumber">5</div>
+			<cite>kiloWATT Says: </cite>
+						<br />
+
+
+
+<p>hi,<br />
+very nice project at first.<br />
+i wanted to ask about a fuses. do i have to write &#8220;C9(Hex)&#8221; or just &#8220;C9&#8243; in a high fuse field?</p>
+<p>thanks.</p>
+<small class="commentmetadata"><a href="#comment-2940" title="">October 29th, 2009 at 3:56 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3193">
+<div class="commentnumber">6</div>
+			<cite>eng Says: </cite>
+						<br />
+
+
+
+<p>how to  do this with lcd</p>
+<small class="commentmetadata"><a href="#comment-3193" title="">December 13th, 2009 at 9:41 pm</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="237" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-1/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=2' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/Burner51-Add.jpg' alt='eXtremeBurner51' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

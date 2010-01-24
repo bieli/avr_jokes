@@ -1,0 +1,1593 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Easy 24C I2C Serial EEPROM Interfacing with AVR Microcontrollers | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; Easy 24C I2C Serial EEPROM Interfacing with AVR Microcontrollers Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/easy-24c-i2c-serial-eeprom-interfacing-with-avr-microcontrollers/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='Tutorial 0 &#8211; Getting Started with Microchip PIC Microcontrollers.' href='http://extremeelectronics.co.in/microchip-pic-tutorials/tutorial-0-getting-started-with-microchip-pic-microcontrollers/' />
+<link rel='next' title='Making a Simple PIC Programmer.' href='http://extremeelectronics.co.in/microchip-pic-tutorials/making-a-simple-pic-programmer/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,407] -->
+<meta name="description" content="Easy to use i2c eeprom interfacing routines for AVR microcontrollers." />
+<meta name="keywords" content="i2c,serial eeprom,24c,24c64,24c1024,24c32,spi eeprom,i2c eeprom,avr,atmega32,atmega8,atmega16,avr-gcc,avr studio,winavr,avr gcc,avr tutorials,code libraries,code snippets" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-162">
+<div class="date"> Mar-20th-2009 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/easy-24c-i2c-serial-eeprom-interfacing-with-avr-microcontrollers/" rel="bookmark" title="Permanent Link: Easy 24C I2C Serial EEPROM Interfacing with AVR Microcontrollers">Easy 24C I2C Serial EEPROM Interfacing with AVR Microcontrollers</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>In this turorial we will see how we can easily interface a 24C series serial 
+  EEPROM with AVR microcontrollers.</p>
+<h2>What is an EEPROM?</h2>
+<p>An EEPROM is kinds of novalatile memory, that means it is used for storing 
+  digital data permanently without any power suply. EEPROM stands for Electrically 
+  Erasable Programmable Read Only Memory. The advantage of these kind of ROMs 
+  is that they can be erased Electrically to make them ready for storing new data. 
+  Compare this with a CD R disks they can be recorded only once. A small amount 
+  of EEPROM is also available internally on the AVR chips. So if the volume of 
+  data you want to store is small (say few user names and password) then you can 
+  use it. The internal eeprom makes design small and simple.</p>
+<p>But if the amount of data you want to store is large, say in order of few tens 
+  of kilobytes then you have to interface a External EEPROM chip with your AVR 
+  MCU. You can store pictures, sound and long texts in these eeproms. </p>
+<p>Their are many kinds of EEPROM chip available from many manufactures. One very 
+  common family is 24C series serial EEPROMs. They are available upto 128KB in 
+  size. They uses I2C interface with host controller (MCU) which is a very popular 
+  serial communication standard. I will write more indept tutorial on I2C in comming 
+  days and in this tutorial I will give you easy to use function that you can 
+  use without any knowledge of I2C interface.</p>
+<p>In this tutorial we will be using 24C64 EEPROM chip which has 8192 bytes = 
+  8 KB = 8x1024 bytes of data storage.</p>
+<p>The chip has storage location which have their unique address ranging from 
+  0-8191. Consider these as storage cells so while storing and retriving data 
+  you have to tell the chip which cell location you want to read.</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/eeprom_cell_view.gif" alt="Storage Cells inside the 24C64 EEPROM Chip" width="484" height="189"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig. : Storage Cells inside the 24C64 EEPROM Chip.</h3></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>For exaple if you read location 0003 you will get 99 (see image above). Note 
+  each cell can store 8BITs of data so range you can store is 0-255 (-128 to +127). 
+  So if you want to store bigget data like int you have to store them in two cells.</p>
+<h2>Hardware Setup</h2>
+<p>Connect your ATmega32 with 24C64 chip as shown in the circuit diagram. You 
+  can use any <a href="http://xboard.extremeelectronics.co.in">avr development 
+  board</a> for the purpose or assemble the whole circuit in a Breadboard or Veroboard.</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><a title="Click To Enlarge ..." href="http://www.extremeelectronics.co.in/avrtutorials/images/24c64_schematic_avr.gif" target="_blank"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/24c64_schematic_avr_thumb.gif" alt="interfacing avr mcu with 24c serial eeprom" width="400" height="301" border="0"></a></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig. : Circuit Setup for 24C64.</h3></td>
+  </tr>
+</table>
+<h2>Software Setup</h2>
+<p>Download and add the following files to your AVR Studio project. Now you can 
+  use the following functions for EEPROM interfacing.</p>
+<ul>
+  <li>24c64.h</li>
+  <li>24c64.c</li>
+</ul>
+<p><a href="http://www.extremeelectronics.co.in/avrtutorials/download/24c64_atmega32.zip">Download 
+  Here.</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr>
+    <td bgcolor="#000000"><strong><font color="#FFFFFF">EEOpen()</font></strong></td>
+  </tr>
+  <tr>
+    <td><p><strong>Arguments -</strong> None</p>
+      <p><strong>Returns -</strong> Nothing</p>
+      <p><strong>Description:</strong> This function should be called before any 
+        read/write operation. This functions initialize the communication channel.</p>
+</td>
+  </tr>
+</table>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td bgcolor="#000000"><strong><font color="#FFFFFF">EEWriteByte(unsigned int 
+      address,uint8_t data)</font></strong></td>
+  </tr>
+  <tr> 
+    <td><p><strong>Arguments</strong></p>
+      <ul>
+        <li><strong>address :</strong> where you want to store data. The address 
+          must be within the range of EEPROM chip used.</li>
+        <li><strong>data :</strong> 8 bit data you want to store at the address 
+          given.</li>
+      </ul>
+      <p><strong>Returns</strong></p>
+      <ul>
+        <li>1 on success</li>
+        <li>0 on failure</li>
+      </ul>
+      <p><strong>Description:</strong> Use this function to store a 8bit value 
+        in any EEPROM storage cell.</p>
+</td>
+  </tr>
+</table>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td bgcolor="#000000"><strong><font color="#FFFFFF">EEReadByte(unsigned int 
+      address)</font></strong></td>
+  </tr>
+  <tr> 
+    <td><p><strong>Arguments</strong></p>
+      <ul>
+        <li><strong>address :</strong> from where you want to read data. The address 
+          must be within the range of EEPROM chip used.</li>
+      </ul>
+      <p><strong>Returns</strong></p>
+      <ul>
+        <li> The value stored in the specified EEPROM storage cell.</li>
+      </ul>
+      <p><strong>Description:</strong> Use this function to read a 8bit value 
+        from any EEPROM storage cell.</p>
+</td>
+  </tr>
+</table>
+<h2>Sample Program.</h2>
+<p>The following sample program demonstrate the use of external EEPROM interfaing 
+  functions. The program makes use of the <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/">LCD 
+  library for AVRs</a> to display information in a 16x2 LCD display. The program 
+  first writes 8Kbytes of data to a 24c64 eeprom to fill the whole eeprom with 
+  '7' and then it reads back to see if all the location has 7. If the condition 
+  is met the screen shows &quot;Write Successfull&quot; message.</p>
+<p>I have used my <a href="http://xboard.extremeelectronics.co.in">xBoard - An Advance 
+  ATmega32 development board</a> to test the routines. You can use any devboard 
+  with ATmega16 or ATmega32 MCUs. The 24C64 was mounted on a Breadboard.</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/24c64_setup.jpg" alt="using 24c eeprom with avr  atmega32 chip" width="335" height="384"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig. : 24C64 Serial EEProm Interface with ATmega32.</h3></td>
+  </tr>
+</table>
+<p>The 5v,GND,SDA,SCL were connected to the xBoard development board.</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/24c64_setup_xboard.jpg" alt="xboard with serial eeprom 24c" width="500" height="375"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig. : xBoard with MCU ATmega32.</h3></td>
+  </tr>
+</table>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/24c64_lcd_output.jpg" alt="output of 24c64 test program" width="400" height="202"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig. : Output of 24C64 test program.</h3></td>
+  </tr>
+</table>
+
+<pre><code><font color="#000000">
+<font color="#000080"><i>/*</i></font>
+
+<font color="#000080"><i>A sample program to test the Extrenal EEPROM interfacing</i></font>
+
+<font color="#000080"><i>routines. The program fills the whole EEPROM with 7 and </i></font>
+<font color="#000080"><i>then reads the whole EEPROM memory to see if all of them</i></font>
+<font color="#000080"><i>contains 7.</i></font>
+
+<font color="#000080"><i>This helps in quick testing of you hardware /software before</i></font>
+<font color="#000080"><i>using these routines in your own programs.</i></font>
+
+<font color="#000080"><i>The target for this program is ATmega8, ATmega16, or ATmega32</i></font>
+<font color="#000080"><i>running at 16MHz. If you use slower crystal the program will</i></font>
+<font color="#000080"><i>simply run slow but without any problems.</i></font>
+
+<font color="#000080"><i>This program also makes use of eXtreme Electronics 16x2 LCD</i></font>
+<font color="#000080"><i>Interfacing routines. See the related page for more info</i></font>
+
+<font color="#000080"><i>Author : Avinash Gupta</i></font>
+<font color="#000080"><i>Date : 16 March 2009</i></font>
+<font color="#000080"><i>Mail : me@avinashgupta.com</i></font>
+<font color="#000080"><i>Web : www.eXtremeElectronics.co.in</i></font>
+
+<font color="#000080"><i>NOTE: IF YOU USE THIS LIBRARY IN YOUR PROGRAMS AND FINDS </i></font>
+
+<font color="#000080"><i>IT USEFUL PLEASE MENTION US IN CREDIT AND RECOMEND OTHERS.</i></font>
+
+
+<font color="#000080"><i>*/</i></font>
+
+<font color="#008000">#include &lt;avr/io.h&gt;</font>
+<font color="#008000">#include &quot;util/delay.h&quot;</font>
+
+<font color="#008000">#include &quot;24c64.h&quot;</font>
+
+<font color="#008000">#include &quot;lcd.h&quot;</font>
+
+
+<font color="#000080"><i>/**********************************</i></font>
+
+<font color="#000080"><i>A simple delay routine to wait </i></font>
+<font color="#000080"><i>between messages given to user</i></font>
+<font color="#000080"><i>so that he/she gets time to read them</i></font>
+
+<font color="#000080"><i>***********************************/</i></font>
+
+<b>void</b> Wait()
+{
+   uint8_t i;
+
+   <b>for</b>(i=<font color="#ff0080">0</font>;i&lt;<font color="#ff0080">100</font>;i++)
+      _delay_loop_2(<font color="#ff0080">0</font>);
+}
+
+<b>void</b> main()
+{
+   <font color="#000080"><i>//Varriables</i></font>
+   uint8_t failed;
+   <b>unsigned int</b> address;
+
+   <font color="#000080"><i>//Initialize LCD</i></font>
+
+   LCDInit(LS_BLINK);
+
+   <font color="#000080"><i>//Init EEPROM</i></font>
+   EEOpen();
+
+   _delay_loop_2(<font color="#ff0080">0</font>);
+
+   LCDClear();
+   LCDWriteString(<font color="#0000ff">&quot;External EEPROM&quot;</font>);
+   LCDWriteStringXY(<font color="#ff0080">0</font>,<font color="#ff0080">1</font>,<font color="#0000ff">&quot;Test&quot;</font>);
+
+   Wait();
+
+   LCDClear();
+   LCDWriteString(<font color="#0000ff">&quot;Writting...&quot;</font>);
+
+   <font color="#000080"><i>//Fill whole eeprom 8KB (8192 bytes)</i></font>
+
+   <font color="#000080"><i>//with number 7</i></font>
+   failed=<font color="#ff0080">0</font>;
+   <b>for</b>(address=<font color="#ff0080">0</font>;address&lt;<font color="#ff0080">8192</font>;address++)
+   {
+      <b>if</b>(EEWriteByte(address,<font color="#ff0080">7</font>)==<font color="#ff0080">0</font>)
+      {
+         <font color="#000080"><i>//Write Failed</i></font>
+
+         LCDClear();
+         LCDWriteString(<font color="#0000ff">&quot;Write Failed !&quot;</font>);
+         LCDWriteStringXY(<font color="#ff0080">0</font>,<font color="#ff0080">1</font>,<font color="#0000ff">&quot;Addess = &quot;</font>);
+         LCDWriteInt(address,<font color="#ff0080">4</font>);
+         failed=<font color="#ff0080">1</font>;
+         Wait();
+         <b>break</b>;
+      }
+   }
+
+   LCDClear();
+
+   <b>if</b>(!failed)
+      LCDWriteString(<font color="#0000ff">&quot;Written 8192bytes&quot;</font>);
+
+   Wait();
+
+   LCDClear();
+   LCDWriteString(<font color="#0000ff">&quot;Verifying ...&quot;</font>);
+
+   <font color="#000080"><i>//Check if every location in EEPROM has </i></font>
+
+   <font color="#000080"><i>//number 7 stored</i></font>
+   failed=<font color="#ff0080">0</font>;
+   <b>for</b>(address=<font color="#ff0080">0</font>;address&lt;<font color="#ff0080">8192</font>;address++)
+   {
+      <b>if</b>(EEReadByte(address)!=<font color="#ff0080">7</font>)
+      {
+         <font color="#000080"><i>//Failed !</i></font>
+
+         LCDClear();
+         LCDWriteString(<font color="#0000ff">&quot;Verify Failed&quot;</font>);
+         LCDWriteStringXY(<font color="#ff0080">0</font>,<font color="#ff0080">1</font>,<font color="#0000ff">&quot;Addess = &quot;</font>);
+         LCDWriteInt(address,<font color="#ff0080">4</font>);
+         failed=<font color="#ff0080">1</font>;
+         Wait();
+         <b>break</b>;
+      }
+   }
+
+   <b>if</b>(!failed)
+   {
+      <font color="#000080"><i>//We have Done it !!!</i></font>
+
+      LCDClear();
+      LCDWriteString(<font color="#0000ff">&quot;Write Success !&quot;</font>);
+   }
+
+   <b>while</b>(<font color="#ff0080">1</font>);
+
+}
+</font>
+</code></pre>
+
+<br>
+
+<h2>Note On Installing 16x2 LCD Module.</h2>
+<p>The LCD Module can be easily installed with AVR ATmega32 as the sample program 
+  supports it. The connection is simple. Connect the LCD to your ATmega32 as shown 
+  below. For Finding out location of PINs such as PC7,PC6,PB4 etc see the ATmega32 
+  datasheet. The LCD must be installed to see the output of the program. After 
+  powering on the circuit please adjust the 10K POT until the display is clearly 
+  visible.</p>
+<p>I strongly recommend you to see the <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/">LCD 
+  Interfacing Tutorial</a> and Setup and run some LCD demo code to be sure that 
+  LCD is working correctly.</p>
+<table width="90%" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/lcd_interface_atmega32.gif" alt="16x2 lcd interface with atmega32" width="416" height="393"></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig. : LCD Interface with ATmega32.</h3></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>Downloads</h2>
+<p><a href="http://www.extremeelectronics.co.in/avrtutorials/download/24c64_atmega32.zip">All 
+  the required files for 24C eeprom interfacing with AVR MCUs.</a></p></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Friday, March 20th, 2009 at 1:19 pm						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>,  <a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts in Code Libraries" rel="category tag">Code Libraries</a>,  <a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts in Code Snippets" rel="category tag">Code Snippets</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/easy-24c-i2c-serial-eeprom-interfacing-with-avr-microcontrollers/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/easy-24c-i2c-serial-eeprom-interfacing-with-avr-microcontrollers/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">45 Responses to &#8220;Easy 24C I2C Serial EEPROM Interfacing with AVR Microcontrollers&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-1328">
+<div class="commentnumber">1</div>
+			<cite>Fortune Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,</p>
+<p>I am thinking of ATMega16 to use for sending data to a transmitter for testing purposes. Should I use EEPROM to store the data to be sent or can I just directly write the data in program and it randomly stores and sends it? And is there an easy way to do it for big data (for ex. with arrays) or should I do it byte by byte?</p>
+<small class="commentmetadata"><a href="#comment-1328" title="">March 20th, 2009 at 5:25 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1329">
+<div class="commentnumber">2</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Fortune,<br />
+ <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<p>You can use a EEPROM such as 24C64 (8Kbytes) or 24C1024 (128Kbytes) to store that data. Read them byte by byte in loop and transmit. I think 128K byte of data would be enough.</p>
+<small class="commentmetadata"><a href="#comment-1329" title="">March 20th, 2009 at 6:40 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1334">
+<div class="commentnumber">3</div>
+			<cite>mozard Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,<br />
+Thank you very much.I really appreciate your effort and help!</p>
+<small class="commentmetadata"><a href="#comment-1334" title="">March 21st, 2009 at 4:44 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1343">
+<div class="commentnumber">4</div>
+			<cite>Anthony Says: </cite>
+						<br />
+
+
+
+<p>Hi look your email to see my lib</p>
+<small class="commentmetadata"><a href="#comment-1343" title="">March 22nd, 2009 at 3:18 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1360">
+<div class="commentnumber">5</div>
+			<cite>Andy Says: </cite>
+						<br />
+
+
+
+<p>Waht about if you don&#8217;t have SCL SDA Port, for example<br />
+if We need maybe PB5 and PB6 (without TWI register)?</p>
+<p>best regard and thanks for nice work</p>
+<small class="commentmetadata"><a href="#comment-1360" title="">March 23rd, 2009 at 4:48 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1363">
+<div class="commentnumber">6</div>
+			<cite>Fortune Says: </cite>
+						<br />
+
+
+
+<p>I just need to output 256bytes. I need to output them serially. I have just thought to write it in the program in a loop using if the corresponding bit is 1</p>
+<p>if(data[i]&amp;(1&lt;&lt;n)) //n is the current bit # in progress<br />
+PORTA|=(1&lt;&lt;output);//output is the pin used for serial comm.</p>
+<p>is this correct and enough? do I need a delay between every bit/byte? and what will be the baud rate(ATMega16) as default if i dont do any init.? (I want Baud ca. 1Kbit/s)</p>
+<small class="commentmetadata"><a href="#comment-1363" title="">March 23rd, 2009 at 8:33 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1366">
+<div class="commentnumber">7</div>
+			<cite>mozard Says: </cite>
+						<br />
+
+
+
+<p>Hi,<br />
+What is the value of the resistors connected to the 24c64.It<br />
+says 4k7.What does that mean?</p>
+<small class="commentmetadata"><a href="#comment-1366" title="">March 24th, 2009 at 4:07 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1368">
+<div class="commentnumber">8</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Fortune,</p>
+<p>You have a lots of confusion. First you are manualy sending just bit by bit to a port. In that way you cannot do RS232 communication. No device (such a PC) will be able to make anything out of that varrying voltage on a PIN.</p>
+<p>Their is a STANDARD for RS232 communication.</p>
+<p>You are talking about BAUD rate and you are NOT AT ALL USING THE USART. The baud rate is assosiated with USART.</p>
+<p>and 1Kbit/s is not a standrad baud rate.</p>
+<p>PLEASE GO THROUGH THE SUBJECT BEFORE ASKING. </p>
+<p>SEE<br />
+<a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-basics/" rel="nofollow">http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-basics/</a></p>
+<small class="commentmetadata"><a href="#comment-1368" title="">March 24th, 2009 at 6:57 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1369">
+<div class="commentnumber">9</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Mozard<br />
+4k7 = 4.7k = 4.7 Kilo Ohms = 4700 Ohms</p>
+<p>Got it</p>
+<p>its just a standard way in commercial electronics!!!</p>
+<p>Remember that from now.</p>
+<small class="commentmetadata"><a href="#comment-1369" title="">March 24th, 2009 at 6:59 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1373">
+<div class="commentnumber">10</div>
+			<cite>Fortune Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash again <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> ,</p>
+<p>first of all I dont want to send the data using RS232 but via a normal port like portA. I said serial comm. technically while I will send them bit by bit using just one pin of a port.<br />
+I may have used the baud rate wrong but I wonder to know in what freq. I output the bits in the Port? As I know default freq. of ATMega16 is 1Mhz, but my output freq. will be less than 1MBit/s while one output op. takes more cycles than 1???<br />
+Sorry for putting on too much confusion..</p>
+<small class="commentmetadata"><a href="#comment-1373" title="">March 24th, 2009 at 3:28 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1375">
+<div class="commentnumber">11</div>
+			<cite>mozard Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,<br />
+I am trying to read data from a file and then store the data in the 24C64.Do you have any idea how this could be implemented? I am trying to use fopen for file reading, but it is not working.Any help would be appreciated.Thank you..:)</p>
+<small class="commentmetadata"><a href="#comment-1375" title="">March 25th, 2009 at 1:11 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1381">
+<div class="commentnumber">12</div>
+			<cite>Nikhil Says: </cite>
+						<br />
+
+
+
+<p>Hi everyone,</p>
+<p>I need some help with I2C protocols. I want to store my program in an external I2C Memory AT24C512, and execute the program from there.</p>
+<p>But i am clueless on how to go about, i know about the i2c read and write cycles</p>
+<small class="commentmetadata"><a href="#comment-1381" title="">March 25th, 2009 at 6:51 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1387">
+<div class="commentnumber">13</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>AVR MCU does not support execution from external memory.</p>
+<p>One way you can go is to write a bootloader that first loads the program form external memory to internal flash then start execution. See datasheets</p>
+<small class="commentmetadata"><a href="#comment-1387" title="">March 26th, 2009 at 10:24 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1389">
+<div class="commentnumber">14</div>
+			<cite>nikhil Says: </cite>
+						<br />
+
+
+
+<p>actually i am working with 8052. can you give me some suggestion for i2c interface with 8052.<br />
+thank u</p>
+<small class="commentmetadata"><a href="#comment-1389" title="">March 26th, 2009 at 2:34 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1451">
+<div class="commentnumber">15</div>
+			<cite>Romil Gupta Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash, I saw your code you are doing interfacing LCD with Atmega32. Was wondering if you help me to get started with Interfacing EEPROM(25AA1024 I/P ) and Real Time Clock (DS1305) with ATmega32 using 3-wire SPI. I did all the wiring on breadboard let me know if you want to know which pins i am using.<br />
+      Thanks<br />
+cheers,<br />
+Romil</p>
+<small class="commentmetadata"><a href="#comment-1451" title="">April 13th, 2009 at 12:29 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1523">
+<div class="commentnumber">16</div>
+			<cite>basma Says: </cite>
+						<br />
+
+
+
+<p>hi<br />
+iusing eeprom in rfid project with 1mb (sst25f016b)interfacing to atmega32using spi and ineed ur help to start cod</p>
+<small class="commentmetadata"><a href="#comment-1523" title="">April 24th, 2009 at 8:45 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1569">
+<div class="commentnumber">17</div>
+			<cite>Kapil Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash,<br />
+There is very valuable notes on AVR microcontroller. I started with ATMEGA8 and I connect it with external crystal oscillator, of 8 MHz, but I think it is work on internal oscillator. I search for that then i found that thee is a fuse bit, please tell me about fuse bit ant how can i programme fuse bit. At present i use AT-PROG ( Parallel port, with two resistors directly connected to IC).<br />
+Thanks<br />
+Kapil</p>
+<small class="commentmetadata"><a href="#comment-1569" title="">May 2nd, 2009 at 11:17 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1576">
+<div class="commentnumber">18</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Fuse byte info here<br />
+<a href="http://forum.extremeelectronics.co.in/viewtopic.php?f=2&#038;t=24" rel="nofollow">http://forum.extremeelectronics.co.in/viewtopic.php?f=2&#038;t=24</a></p>
+<small class="commentmetadata"><a href="#comment-1576" title="">May 2nd, 2009 at 4:19 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2013">
+<div class="commentnumber">19</div>
+			<cite>sridhar Says: </cite>
+						<br />
+
+
+
+<p>hi, i am trying to interface atmega 16 with at8052, where 8052 is the master which is connected with RTC(DS1703) ATmega16 is a slave i am not able to interface ATmega16 with AT8052, there is some problem in slave coding, please can you help me in coding of ATmega 16 as a slave mode ,</p>
+<small class="commentmetadata"><a href="#comment-2013" title="">July 1st, 2009 at 8:28 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2292">
+<div class="commentnumber">20</div>
+			<cite><a href='http://www.electroons.com' rel='external nofollow' class='url'>deveshsamaiya</a> Says: </cite>
+						<br />
+
+
+
+<p>hi avinash..<br />
+I am using 24C04. I modify address limit as 4096. I am using your I2C library with ATmega32. My program is running upto lcdstring(&#8221;Writting&#8230;&#8221;). But its not running or somewaht else after this. I didnt used 4K7 pullups are they very necessary. Plz Clarify</p>
+<small class="commentmetadata"><a href="#comment-2292" title="">August 3rd, 2009 at 2:11 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2293">
+<div class="commentnumber">21</div>
+			<cite><a href='http://www.electroons.com' rel='external nofollow' class='url'>deveshsamaiya</a> Says: </cite>
+						<br />
+
+
+
+<p>hi&#8230;<br />
+What should be the DDR values for PORTC as we are using SCL &amp; SDA.</p>
+<small class="commentmetadata"><a href="#comment-2293" title="">August 3rd, 2009 at 2:15 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2297">
+<div class="commentnumber">22</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Devesh<br />
+Yes in I2C pullups are required. Without it it won&#8217;t work</p>
+<small class="commentmetadata"><a href="#comment-2297" title="">August 3rd, 2009 at 6:51 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2332">
+<div class="commentnumber">23</div>
+			<cite>luis Says: </cite>
+						<br />
+
+
+
+<p>It didn&#8217;t work with proteus <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_sad.gif' alt=':(' class='wp-smiley' /><br />
+anyone knows why???<br />
+It gets stuck in the command writting&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2332" title="">August 11th, 2009 at 6:05 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2333">
+<div class="commentnumber">24</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>In proteus u have to remove two pull up resistors (4.7K)</p>
+<p>but in real case use them</p>
+<small class="commentmetadata"><a href="#comment-2333" title="">August 11th, 2009 at 8:18 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2337">
+<div class="commentnumber">25</div>
+			<cite>luis Says: </cite>
+						<br />
+
+
+
+<p>thanks Avinash,<br />
+I already tried that,<br />
+but even so, it didnt work <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_sad.gif' alt=':(' class='wp-smiley' /><br />
+can you help me on this&#8230;</p>
+<small class="commentmetadata"><a href="#comment-2337" title="">August 11th, 2009 at 1:54 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2374">
+<div class="commentnumber">26</div>
+			<cite>deveshsamaiya Says: </cite>
+						<br />
+
+
+
+<p>hi avinash..<br />
+I am using AT24C04 what kind of modification i should do in your code to make it compatuble to 24C04.</p>
+<small class="commentmetadata"><a href="#comment-2374" title="">August 17th, 2009 at 8:43 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2377">
+<div class="commentnumber">27</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Devesh,</p>
+<p>Use without any modification</p>
+<small class="commentmetadata"><a href="#comment-2377" title="">August 18th, 2009 at 7:59 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2623">
+<div class="commentnumber">28</div>
+			<cite>kushal Says: </cite>
+						<br />
+
+
+
+<p>hi avinash,</p>
+<p>thats a good tutorial</p>
+<p>i want to interface atmega 16 with eeprom, but only on avr studio first, also i need to store 120K data on it, can u help me in it, as in which eeprom better, which ports of eeprom connected to scl,sda for i2c and more</p>
+<small class="commentmetadata"><a href="#comment-2623" title="">September 8th, 2009 at 1:08 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2638">
+<div class="commentnumber">29</div>
+			<cite>qman Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,</p>
+<p>I have a couple of questions</p>
+<p>1) I want to transmit data bit by bit to flash memory and store it in an empty array. I already have used your tutorial on RS232 and I have got data transmitting. </p>
+<p>But I can&#8217;t get it to store in the appropriate array. Should I use a buffer, like in EEPROM or something or should I store it directly.</p>
+<p>The transmission rate is not a problem for the project im using it for.</p>
+<p>Thanks</p>
+<small class="commentmetadata"><a href="#comment-2638" title="">September 9th, 2009 at 5:26 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2671">
+<div class="commentnumber">30</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Kushal<br />
+use 24C1024 EEPROM it has a capacity of 128KB</strong></p>
+<small class="commentmetadata"><a href="#comment-2671" title="">September 12th, 2009 at 8:35 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2673">
+<div class="commentnumber">31</div>
+			<cite><a href='http://logix.cz/michal' rel='external nofollow' class='url'>Michal</a> Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,</p>
+<p>Wikipedia says in their I2C overview that each slave on the I2C bus has an address and in turn there could be multiple slaves connected to the bus. How do I set or learn the address of the 24Cxxx chip? And how to connect if I want to have more than one of these eeproms attached? How do I address them?</p>
+<p>Thanks</p>
+<small class="commentmetadata"><a href="#comment-2673" title="">September 12th, 2009 at 6:23 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2679">
+<div class="commentnumber">32</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Michal,</p>
+<p><strong>Very good question. Yes thats the beauty of I2C bus. Each slave on it have a unique address, thus many slaves can be connected in parallel in same bus lines.  the address in I2C bus is 7 bit (the last bit is Read/Write select bit) so as many as 128 I2C slave can be connected in i2c bus.The 24C series has the address in form of [MSB]1,0,1,0,A1,A2,A3[LSB] where A1,A2,A3 can be set to proper state by using 3 pins on the chip. So as many as 8 24C eeprom can be connected in a bus. </p>
+<p>In the above example I have not connected A1,A2,A3 (this means the are 0, 0, 0) to keep it simple.<em> For more details see data sheet</em>.</strong></p>
+<small class="commentmetadata"><a href="#comment-2679" title="">September 13th, 2009 at 8:18 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2944">
+<div class="commentnumber">33</div>
+			<cite>mohamed Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash<br />
+very good effort ,i want to make one master(atmega32)read &amp; write with 3 slaves (atmega32), how can i send and recieve data from them.</p>
+<small class="commentmetadata"><a href="#comment-2944" title="">October 30th, 2009 at 6:00 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2945">
+<div class="commentnumber">34</div>
+			<cite>sridhar Says: </cite>
+						<br />
+
+
+
+<p>Dear sir, if possible please provide tutorial on interfacing micro Controller, with other micro controller using I2C/ twi,</p>
+<small class="commentmetadata"><a href="#comment-2945" title="">October 30th, 2009 at 11:41 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2950">
+<div class="commentnumber">35</div>
+			<cite><a href='http://logix.net.nz' rel='external nofollow' class='url'>Michal</a> Says: </cite>
+						<br />
+
+
+
+<p>@sridhar &#8211; what you probably need is a multi-master i2c setup where each MCU can asynchronously send data to any other i2c device on the bus. Google for &#8220;i2c multi-master&#8221; and you&#8217;ll get a number of useful links.</p>
+<p>@mohamed &#8211; do you mean 3 ICs writing into the eeprom and one IC reading it? In that case you&#8217;ll probably need multi-master as well. </p>
+<p>Both of you guys could get away with just one bus master but then the setup would need an interrupt line from each slave, alerting the master that there are data to be processed. The master will then issue a read command to the slave, fetch the data and process. It really depends on what you&#8217;re trying to achieve. Whether to choose single-master or multi-master depends on circumstances.</p>
+<small class="commentmetadata"><a href="#comment-2950" title="">October 31st, 2009 at 4:23 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2951">
+<div class="commentnumber">36</div>
+			<cite>mohamed Says: </cite>
+						<br />
+
+
+
+<p>i make wide search but i didnt find interfacing two avr ,i find avr with another devices such as eprom,could u Nominate me web site</p>
+<small class="commentmetadata"><a href="#comment-2951" title="">October 31st, 2009 at 6:28 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2952">
+<div class="commentnumber">37</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Michal</p>
+<p><strong>Thanks for helping out Sridhar <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </strong></p>
+<small class="commentmetadata"><a href="#comment-2952" title="">October 31st, 2009 at 8:14 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2953">
+<div class="commentnumber">38</div>
+			<cite>sridhar Says: </cite>
+						<br />
+
+
+
+<p>thank you 4 all for helping out,<br />
+here i am using single-master, i.e one master need to read multi slave, but all the slave is of same Atmega 8 as well as master,<br />
+ya, iam trying on google but links are not helping out much.,<br />
+if any one tried the same please help me out.</p>
+<small class="commentmetadata"><a href="#comment-2953" title="">October 31st, 2009 at 9:59 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2954">
+<div class="commentnumber">39</div>
+			<cite>mohamed Says: </cite>
+						<br />
+
+
+
+<p>thank you for ur caring,<br />
+what i want to do is only one master(atmega32)read &amp; write with 3 slaves (atmega32)</p>
+<small class="commentmetadata"><a href="#comment-2954" title="">October 31st, 2009 at 10:11 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3044">
+<div class="commentnumber">40</div>
+			<cite>mohamed Says: </cite>
+						<br />
+
+
+
+<p>hey guys where r u???????</p>
+<small class="commentmetadata"><a href="#comment-3044" title="">November 18th, 2009 at 9:38 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3123">
+<div class="commentnumber">41</div>
+			<cite>washu Says: </cite>
+						<br />
+
+
+
+<p>If we says A1,A2,A3 are used to unique address makeing:</p>
+<p>1. only in 24c01,24c02 -&gt; 8 IC&#8217;s<br />
+2. 24c04 has two pages switched by  A3 -&gt; 4 IC&#8217;s<br />
+(simply you can without changing code change 1*24c04 into 2*24c02)<br />
+3. and go on&#8230;.</p>
+<small class="commentmetadata"><a href="#comment-3123" title="">December 2nd, 2009 at 7:29 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3318">
+<div class="commentnumber">42</div>
+			<cite>ali Says: </cite>
+						<br />
+
+
+
+<p>thank you for your web.but i dont know how to connect thw wire to real lcd.because in real lcd we have 16 socket.but in diagram lcd we have 14.please help me.thank</p>
+<small class="commentmetadata"><a href="#comment-3318" title="">January 3rd, 2010 at 3:30 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3323">
+<div class="commentnumber">43</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Ali</p>
+<p>The PCB of the LCD has the PIN names. From that you can clearly see that the last two pins 15 and 16 are connected to the LED backlight !!!</strong></p>
+<small class="commentmetadata"><a href="#comment-3323" title="">January 3rd, 2010 at 9:13 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3362">
+<div class="commentnumber">44</div>
+			<cite>hinduja Says: </cite>
+						<br />
+
+
+
+<p>hi avinash<br />
+amazing tuts !!!!!!!<br />
+i want to store a set of words in eeprom . as per your file it enables the storage of only int datatypes. can i store strings by just changing the datatype of the argument in the functions. or shld i make anyother change</p>
+<small class="commentmetadata"><a href="#comment-3362" title="">January 8th, 2010 at 10:53 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3367">
+<div class="commentnumber">45</div>
+			<cite>sridhar Says: </cite>
+						<br />
+
+
+
+<p>Dear sir,<br />
+I am using AVR micro controller, atmega 16, in need to communicate TWi interface with other micro controller,<br />
+I am using code vision for the complier.<br />
+I tried the code which is given in atmel application 311,312, etc but it was not working may be I could not properly analyze,<br />
+So, I built the RTC interface for DS1307 it was working with the Code vision in built library , so I have taken only the read format of the RTC and I tried to implement the slave,<br />
+With<br />
+START();<br />
+Write address();<br />
+Start();<br />
+Write location();<br />
+data=read data();<br />
+Return data;<br />
+By this code I was able to get data from the RTC,<br />
+So I thought to go with reverse engineering/programming to send a data to the master as the slave microcontroller need to act as RTC for only this particular code, but still it is not working,<br />
+Please if u have any such general implication of the i2c master and slave code please help me,</p>
+<small class="commentmetadata"><a href="#comment-3367" title="">January 9th, 2010 at 11:07 am</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="162" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-2/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=6' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/extreme_burner_pic_ad.jpg' alt='eXtreme Burner PIC' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

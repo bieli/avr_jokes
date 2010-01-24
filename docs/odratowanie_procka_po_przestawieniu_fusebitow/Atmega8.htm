@@ -1,0 +1,337 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+ <body bgcolor="#AFEEEE">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+<meta http-equiv=Content-Type content="text/html; charset=windows-1250">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./Atmega8_pliki/filelist.xml">
+<title>Atmega8, jak go zaprogramować</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>PPP</o:Author>
+  <o:LastAuthor>PPP</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>94</o:TotalTime>
+  <o:Created>2006-01-15T12:08:00Z</o:Created>
+  <o:LastSaved>2006-01-15T12:08:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>599</o:Words>
+  <o:Characters>3417</o:Characters>
+  <o:Lines>28</o:Lines>
+  <o:Paragraphs>6</o:Paragraphs>
+  <o:CharactersWithSpaces>4196</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:HyphenationZone>21</w:HyphenationZone>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Standardowy;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:0pt;
+	font-weight:normal;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:1511867336;
+	mso-list-type:hybrid;
+	mso-list-template-ids:573186034 68485135 -77269308 68485147 68485135 68485145 68485147 68485135 68485145 68485147;}
+@list l0:level1
+	{mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+</head>
+
+<body lang=PL style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<h2>Atmega8, jak go zaprogramować</h2>
+
+<p class=MsoNormal><span style='font-size:16.0pt;mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+   <h3>
+<ol style='margin-top:0cm' start=1 type=1>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>W komputerze mamy
+     zainstalowany program Bascom AVR.. Na ekranie mamy skrót do tego programu.
+     <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Klik prawym klawiszem
+     myszy na puste miejsce na ekranie. Wybieramy Nowy Folder,<span
+     style="mso-spacerun: yes">  </span>klik na Folder.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Na pulpicie mamy nowy
+     folder. Klik na niego prawym klawiszem, zmieniamy nazwę, np.
+     ProgramyBascom.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Wracamy do pkt 1. Klik
+     2X na skrót Bascom AVR.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Otworzyło się okno
+     Bascom-AVR IDE. Tu będziemy pisać program.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>W pasku menu (u góry)
+     klik na File, Save As... .Otworzyło się okienko Zapisywanie jako. W pasku
+     Zapisz w: umieszczamy folder, który utworzyliśmy na pulpicie. Na dole, w
+     pasku Nazwa pliku nadajemy nazwę, np. Licznik.bas.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Teraz piszemy program.
+     Na samym początku napiszmy sobie<span style="mso-spacerun: yes"> 
+     </span>informację, co to za program, czego dotyczy (przydaje się bardzo
+     później) zaczynając zdanie od apostrofu (kompilator tego nie widzi).<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Do gniazda drukarkowego
+     mamy podłączony (wcześniej) kabel, który z kolei dołączony jest do płytki
+     z procesorem Atmega8, czyli do: Reset, SCK, MISO, MOSI. Płytka dołączona
+     jest do +5V. Jeśli ma być dołączony również Lcd, to należy go oczywiście
+     wcześniej skonfigurować. Pamiętaj o dokładnym skonfigurowniu portów do
+     których będzie dołączony Lcd..<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Wracamy do pkt 7.
+     Nadeszła chwila, aby sprawdzić część napisanego programu. Kompilujemy go,
+     naciskając klawisz F7. Na ekranie widzimy przebieg kompilacji. Jeśli
+     popełniliśmy błąd, na dole ekranu pojawi się komunikat o błędzie.
+     Następnie naciskamy F4. Na ekranie widzimy proces zapisu do pamięci
+     procesora. Jeśli będzie komunikat o błędnym wpisie, F4 ponownie.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Jeśli w tym momencie
+     macie wątpliwość jakim programatorem to wszystko robić, to przypominam, że
+     chodzi o programator (odpowiednik Stk200/Stk300), którego opis jest na
+     mojej stronie internetowej.<o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Teraz dochodzimy do
+     momentu, w którym może wystąpić problem Fuse bitów. Jeśli na ekranie
+     pojawił się komunikat, że kompilator nie może rozpoznać procesora, to może
+     być to spowodowane:<o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l0 level2 lfo1;
+tab-stops:list 72.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>brakiem
+zasilania płytki z procesorem,<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l0 level2 lfo1;
+tab-stops:list 72.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>błędnym
+zadeklarowaniem nazwy procesora. Jak to zrobić: w Menu klik na Options, Programer,
+Compiler i w okienku Chip ustawiamy prawidłową nazwę procesora i Ok.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l0 level2 lfo1;
+tab-stops:list 72.0pt'><![if !supportLists]><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>błądnym
+ustawieniem Fuse bitu (jeśli przypadkowo go zmieniono). Nowy procesor, kupiony
+w sklepie ma ustawione Fuse bity tak, że można go od razu programować. Należy
+tylko pamiętać, że będzie taktowany wewnętrznym generatorem RC o częstotliwości
+1MHz.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><span
+style="mso-spacerun: yes">         </span>12. Zmieniamy częstotliwość
+generatora wewnętrznego. Gdzie są te Fuse bity?. U góry ekranu mamy<span
+style="mso-spacerun: yes">                          </span><o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><span
+style="mso-spacerun: yes">               </span>mamy pasek narzędziowy. Szukamy
+(kursorem) zielonej ikonki, która ma nazwę Run programer(F4), <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">        </span>klik,
+wybieramy Manual program. Otwiera się okno pokazujące stan pamięci FlashROM,
+EEPROM i<span style="mso-spacerun: yes">  </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span lang=EN-US
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;mso-ansi-language:EN-US'><span
+style="mso-spacerun: yes">        </span>Lock and Fuse Bits. </span><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>U góry w okienku Chip musi
+być M8. Klik na FlashROM i następnie na Lock and<span style="mso-spacerun:
+yes">   </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">        </span>Fuse
+Bits. Widzimy już wszystkie Fuse bity. Klik na linijkę FusebitA987, po prawej
+stronie tej linijki.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">        </span>mamy
+strzałkę wyboru. Jeśli obok napisu Fusebit jest liczba 0001, to jest
+zaprogramowany wewnętrzny <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       
+</span>oscylator RC 1MHz. Do wyboru mamy cztery częstotliwości tego generatora,
+0001, 0010, 0011, 0100. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       
+</span>Przypominam, że liczby te w kodzie BCD oznaczają kolejno: 1, 2, 3. Jeśli
+chcemy zmienić <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       
+</span>częstotliwość na wyższą, to zaznaczamy odpowiednią liczbę i zatwierdzamy
+to przyciskiem z prawej <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">      
+</span>strony<span style="mso-spacerun: yes">  </span>o nazwie WriteFS. <o:p></o:p></span></p>
+
+<ol style='margin-top:0cm' start=13 type=1>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo1;tab-stops:list 36.0pt'><span
+     style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>Zdarza się, że po
+     ustawieniu jakiegoś bitu i próbie ponownego programowania procesora,
+     mamy<span style="mso-spacerun: yes">   </span><o:p></o:p></span></li>
+</ol>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">      
+</span>komunikat, że kompilator nie rozpoznaje procesora. Aby teraz cofnąć to
+błędne ustawienie bitu należy <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">      
+</span>uruchomić procesor przy pomocy zewnętrznego generatora. Zewnętrznym
+generatorem może być inny <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">      
+</span>procesor na płytce, np. 90S2313. Łączymy więc Prtb.6 Atmegi8 z nóżką X1
+lub X2 90S2313.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       </span>Masy
+obydwu płytek połączone, zasilanie +5V włączone. Teraz otwieramy Fuse bity i
+zmieniamy<span style="mso-spacerun: yes">   </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">      
+</span>feralne ustawienie. Jeśli wszystko przebiegło pomyślnie, procesor jest
+gotów do dalszego <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">      
+</span>programowania. Jeśli nie odpowiada nam praca procesora na wewnętrznym
+oscylatorze z powodu np. <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       </span>zbyt
+niskiej częstotliwości, to możemy przejść na oscylację kwarcową. Dołączamy
+wówczas kwarc i <o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       </span>dwa
+kondensatory do procesora, a następnie przystępujemy do ustawienia Fuse bitu.
+Otwieramy okno z<span style="mso-spacerun: yes">            </span><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><span style="mso-spacerun: yes">       </span>Fuse
+bitami i ustawiamy Fusebit A987 na 1101:1101 internal osc. i WriteFS. Kwarc
+jest ustawiony.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:18.0pt'><span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt'>
+<span style="mso-spacerun:
+yes">  </span><o:p></o:p></span></p>
+<br>14. Teraz opiszę jak ustawić Fusebity.<br>
+Przypominam, że każde ustawienie zatwierdzimy przyciskiem wirtualnym po prawej stronie o nazwie WriteFS. 
+A więc szukamy linijki o nazwie (gdzie jest ta linijka szukaj w tekście powyżej) Fusebit A987, zaznaczamy ją kursorem
+i naciskamy przycisk wyboru, który pojawił się po prawej stronie tej linijki.<br>
+Fusebity.<br>
+1. 0000 = częstotliwość z zewnętrznego generatora, <br>
+2. 0001 = oscylator w wewnątrz procesora o częstotliwości 1MHz,<br>
+3. 0010 = wewnętrzny oscylator 2MHz,<br>
+4. 0011 = wewnętrzny oscylator 4MHz,<br>
+5. 0100 = wewnętrzny oscylator 8MHz,<br>
+6. 0101 = zewnętrzny oscylator RC 1MHz,<br>
+7. 0110 = zewnętrzny oscylator RC 2MHz,<br>
+8. 0111 = zewnętrzny oscylator RC 4MHz,<br>
+9. 1000 = zewnętrzny oscylator RC 8MHz,<br>
+10. 1001 = zewnętrzny kwarc z kondensatorami 2MHz,<br>
+11. 1010 = zewnętrzny kwarc z kondensatorami 2-4MHz,<br>
+12. 1011 = zewnętrzny kwarc z kondensatorami 4-6MHz,<br>
+13. 1100 = zewnętrzny kwarc z kondensatorami 6-8MHz,<br>
+14. 1101 = zewnętrzny kwarc z kondensatorami 8-10MHz,<br>
+15. 1110 = zewnętrzny kwarc z kondensatorami 10-16MHz.<br>
+<br>
+Z ustawień Fusebitów wynika, że jeśli nie chcemy częstotliwości oscylatora powyżej 8MHz, to możemy nie stosować zewnętrznego kwarcu.
+Wystarczy ustawić oscylator wewnętrzny. Stosując kwarc zewnętrzy ustawiamy jedną z pozycji zawartej pomiędzy 10 a 15.
+                                             
+ </h3>
+ <br>
+ <h3>
+ Poniższe zdjęcie pokazuje doświadczalny sposób programowania procesora na swojej płytce
+  współpracującej z innymi częściami elektronicznymi tworzącymi przyszły układ elektroniczny.
+  Taki sposób pozwala na dobór elementów i ich wartości oraz sporządzenie dokładnego schematu
+  urządzenia. Szybkie lutowanie (na cynowanych blaszkach) pozwala rozbudowywać układ, zmieniać
+  koncepcję, a także pisać i zmieniać program procesora. Wygląda to nie ciekawie, ale bardzo ułatwia
+  pracę. Polecam.
+   <br> <br>
+ <IMG SRC="../ProgramyBMP/DSC01347.JPG" BORDER="0" Width="980" Height="680">
+  <br> <br>
+  <IMG SRC="../ProgramyBMP/DSC01349.JPG" BORDER="0" Width="980" Height="680">
+   <br> <br>
+  A, to płytka do programowania Atmegi. </h3>
+ <IMG SRC="../ProgramyBMP/M8.JPG" BORDER="0" Width="980" Height="680">
+    <br><br>
+    <B>Poniżej mamy generator kwarcowy do uruchamiania zdechłego Atmega8.</B>
+     <IMG SRC="../ProgramyBMP/Generator4MHz.PNG" BORDER="0" Width="961" Height="640"> <br><br>
+    <h2>Jedno z wyjść generatora (wy1,2 lub 3) dołączamy do Portb.6 Atmega8, masy złączone razem, włączamy zasilanie i poprawiamy źle nastawiony Fusebit. Przywróciliśmy procesor do życia. </h2><br><br>
+    <IMG SRC="../ProgramyBMP/Gen4MHz.JPG" BORDER="0" Width="680" Height="480">
+     <IMG SRC="../ProgramyBMP/1Gen4MHz.JPG" BORDER="0" Width="680" Height="480">
+
+
+</div>
+
+</body>
+
+</html>

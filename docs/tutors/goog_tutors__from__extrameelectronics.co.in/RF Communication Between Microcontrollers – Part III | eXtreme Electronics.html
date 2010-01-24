@@ -1,0 +1,882 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>RF Communication Between Microcontrollers – Part III | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; RF Communication Between Microcontrollers – Part III Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='Interfacing DS1307 RTC Chip with AVR Microcontroller' href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,397] -->
+<meta name="description" content="Learn how to establish a RF Communication link between two Microcontrollers to send and receive data without wires ! We will use Atmel AVR ATmega16 MCUs and Low Cost ASK RF modules." />
+<meta name="keywords" content="rf module,ask rf module,atmel,avr,atmega16,atmega32, avr-gcc,c code,tutorial,rf module tutorial,remote,rs232,usart,wireless communication,avr tutorials,rf" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-281">
+<div class="date"> Jan-17th-2010 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" rel="bookmark" title="Permanent Link: RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>Welcome to the 3rd part of RF Communication tutorial. In the last two parts 
+  I have introduced the basics of RF Communication.</p>
+<ul>
+  <li><a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/">RF 
+    Communication Between Microcontrollers &#8211; Part I</a> : Introduction to 
+    RF Communication and Modules.</li>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/">RF 
+    Communication Between Microcontrollers &#8211; Part II </a>: Algorithm and 
+    general description of data transfer.</li>
+</ul>
+<p>Part III will be covering mostly the practical part, i.e. we will build a complete 
+  &amp; working data transfer system. Here you will get circuit and program to 
+  implement the solution. The application is very simple in this case, just to 
+  transfer a byte of data from Tx station to the Rx station. Once you implement 
+  it and get it working you will have enough information and experience to make 
+  other RF based projects.</p>
+<p>I request all users to follows the instruction exactly as given (unless they 
+  are smart enough to know what they are doing). The most important thing in this 
+  article is timing of the MCU, so </p>
+<ul>
+  <li>Use the exact frequency crystals as used in the designs.</li>
+  <li>Write High Fuse = <strong>C9</strong> (HEX Value) and Low Fuse <strong>FF 
+    </strong>(HEX Value) to enable external crystal.</li>
+</ul>
+<h2>Hardware</h2>
+<p>We will have two units. One is Tx (Transmitter) and Other is Rx (Receiver). 
+  Both units are based around ATmega16 MCU(you can use ATmega32 also) on external 
+  16MHz crystal. On the Tx unit PORTC will act as input. While in Rx unit it will 
+  act as output. The value at PORTC of TX unit is constantly sent over the air 
+  to the RX unit where it is latched on its PORTC. That means whatever value you 
+  put in the PORTC of Tx station is available on PORTC of Rx station (8bits or 
+  1 byte). We will connect 8 <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=24_33&products_id=88">micro 
+  switches</a> on the PORTC of Tx station and 8 <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=24_41&products_id=90">leds</a> 
+  on the PORTC of Rx station. For testing you can press keys on the Tx side and 
+  corresponding LED on the Rx side will glow. Simple!</p>
+<p>You can then use the same techniques of sending/receiving data in any other 
+  application, like SWARM robotics.</p>
+<table width="95%" border="0" cellspacing="1" cellpadding="8">
+  <tr> 
+    <td><div align="center"><a href="http://extremeelectronics.co.in/avrtutorials/images/RF_Tx.gif"><img src="http://extremeelectronics.co.in/avrtutorials/images/RF_Tx_Thumb.gif" alt="RF Module Interface with AVR ATmega" width="500" height="426" border="0"></a></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"> 
+        <h3>RF Module Tx + AVR ATmega16</h3>
+      </div></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table width="95%" border="0" cellspacing="1" cellpadding="8">
+  <tr> 
+    <td><div align="center"><a href="http://extremeelectronics.co.in/avrtutorials/images/RF_Rx.gif"><img src="http://extremeelectronics.co.in/avrtutorials/images/RF_Rx_Thumb.gif" alt="AVR Atmega interface with RF Module" width="500" height="398" border="0"></a></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"> 
+        <h3>RF Module Rx + AVR ATmega16</h3>
+      </div></td>
+  </tr>
+</table>
+<p>The above two schematic gives detailed connection of AVR <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=22&products_id=30">ATmega16</a> 
+  (or <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=22&products_id=31">ATmega32</a>) 
+  MCU with RF Modules. </p>
+<p><strong>Note About the Schematic</strong></p>
+<ol>
+  <li>Power PINs of MCU are not shown but must be connected properly.</li>
+  <li>BC548(NPN) transistor and two 4.7K resistor forms a very simple <a href="http://en.wikipedia.org/wiki/Inverter_(logic_gate)">NOT 
+    gate(inverter)</a>. This is because in <a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-basics/">RS232 
+    communication</a> the &quot;idle&quot; state is HIGH to make idle state LOW 
+    we have use the inverter.</li>
+  <li>You can use a <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=23&products_id=98">low 
+    cost ready made avr development board</a> for quick and easy experimentation.(like 
+    <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=23&products_id=98">this 
+    one</a>). It has inbuilt power supply, crystal, reset circuit and ISP port(and 
+    much more) Only you have to connect the transistor and RF modules that's it! 
+    You can easily program the MCU by using <a href="http://shop.extremeelectronics.co.in/product_info.php?cPath=21&products_id=28">USB 
+    AVR Programmer</a>.</li>
+</ol>
+<table width="95%" border="0" cellspacing="1" cellpadding="8">
+  <tr> 
+    <td><div align="center"><a href="http://extremeelectronics.co.in/avrtutorials/images/RFCommSetup.jpg"><img src="http://extremeelectronics.co.in/avrtutorials/images/RFCommSetup.jpg" alt="AVR ATmega16 RF module circuit" width="515" height="420" border="0"></a></div></td>
+  </tr>
+  <tr> 
+    <td><div align="center"> 
+        <h3>RF Communication Test</h3>
+      </div></td>
+  </tr>
+</table>
+<h2>Software</h2>
+<p>The software is written in C language and compiled using the open source compiler 
+  avr-gcc. For project management AVR Studio was used. I have used my fully buffered, 
+  interrupt driven USART library for usart related job. The library comes in two 
+  files.</p>
+<ul>
+  <li>USART.c</li>
+  <li>USART.h</li>
+</ul>
+<p>These files must be copied to the current project folder and added to AVR Studio 
+  Project. How to add a file to avr studio project is given <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/">here</a>.</p>
+<p>Some important functions of USART library are as follows</p>
+<p><strong>USARTInit();</strong></p>
+<blockquote>
+  <p>Initializes the USART of AVR MCU. The parameter is the UBRR value. What is 
+    UBRR? Its not the topic of this article! I assume that you know about the 
+    Basics of RS232 communication and have knowledge of USART. Don't worry much 
+    if you don't know that. Just leave this article and read the following articles</p>
+  <ul>
+    <li><a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-basics/">RS232 
+      Communication - The Basics</a></li>
+    <li><a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">Using 
+      the USART of AVR Microcontrollers.</a></li>
+    <li><a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers-reading-and-writing-data/">Using 
+      the USART of AVR Microcontrollers : Reading and Writing Data</a></li>
+  </ul>
+</blockquote>
+<p><strong>UWriteData();</strong></p>
+<blockquote>
+  <p>This function sends a byte of data over the Tx channel. </p>
+</blockquote>
+<p><strong>UDataAvailable()</strong></p>
+<blockquote>
+  <p>Returns the number of byte of data currently waiting in the fifo queue.</p>
+</blockquote>
+<p><strong>UReadData()</strong></p>
+<blockquote>
+  <p>Reads and returns a byte of data from the buffer.</p>
+</blockquote>
+<p align="center"><strong>Complete Listing of Tx.c</strong></p>
+
+
+<pre><code><font color="#000000">
+<font color="#008000">#include &lt;avr/io.h&gt;</font>
+<font color="#008000">#include &lt;util/delay.h&gt;</font>
+
+<font color="#008000">#include &quot;usart.h&quot;</font>
+
+<b>void</b> main()
+{
+   <font color="#000080"><i>//Initialize the USART with Baud rate = 2400bps</i></font>
+   USARTInit(<font color="#ff0080">416</font>);
+
+   <font color="#000080"><i>//Enable Internal Pullups on PORTC</i></font>
+   PORTC=<font color="#ff0080">0xFF</font>;
+
+   <font color="#000080"><i>/* </i></font>
+
+<font color="#000080"><i>   Keep transmitting the Value of Local PORTC</i></font>
+<font color="#000080"><i>   to the Remote Station.</i></font>
+
+<font color="#000080"><i>   On Remote RX station the Value of PORTC</i></font>
+<font color="#000080"><i>   sent on AIR will be latched on its local PORTC</i></font>
+<font color="#000080"><i>   */</i></font>
+
+   uint8_t data;
+   <b>while</b>(<font color="#ff0080">1</font>)
+   {
+      data=PINC;
+
+      <font color="#000080"><i>/* </i></font>
+<font color="#000080"><i>      Now send a Packet</i></font>
+<font color="#000080"><i>      Packet Format is AA&lt;data&gt;&lt;data inverse&gt;Z</i></font>
+
+<font color="#000080"><i>      total Packet size if 5 bytes.</i></font>
+<font color="#000080"><i>      */</i></font>
+
+      <font color="#000080"><i>//Stabilize the Tx Module By Sending JUNK data</i></font>
+      UWriteData(<font color="#ff8000">'J'</font>);  <font color="#000080"><i>//J for junk</i></font>
+
+      <font color="#000080"><i>//Send 'A'</i></font>
+      UWriteData(<font color="#ff8000">'A'</font>);
+
+      <font color="#000080"><i>//Send Another 'A'</i></font>
+      UWriteData(<font color="#ff8000">'A'</font>);
+
+      <font color="#000080"><i>//Send the data;</i></font>
+      UWriteData(data);
+
+      <font color="#000080"><i>//Send inverse of data for error detection purpose</i></font>
+
+      UWriteData(~data);
+
+      <font color="#000080"><i>//End the packet by writing 'Z'</i></font>
+      UWriteData(<font color="#ff8000">'Z'</font>);
+
+      <font color="#000080"><i>//Wait for some time</i></font>
+      _delay_loop_2(<font color="#ff0080">0</font>);
+      _delay_loop_2(<font color="#ff0080">0</font>);
+      _delay_loop_2(<font color="#ff0080">0</font>);
+      _delay_loop_2(<font color="#ff0080">0</font>);
+   }
+}
+
+</font>
+</code></pre>
+<div align="center">
+  <p><strong>Complete Listing of Rx.c </strong></p>  
+</div>
+
+
+<pre><code><font color="#000000">
+<font color="#008000">#include &lt;avr/io.h&gt;</font>
+
+<font color="#008000">#include &quot;usart.h&quot;</font>
+
+<b>void</b> main()
+{
+
+   uint8_t i; <font color="#000080"><i>//Clasical loop varriable</i></font>
+
+   uint8_t packet[<font color="#ff0080">5</font>],data=<font color="#ff0080">0</font>;
+
+   DDRC|=<font color="#ff0080">0xFF</font>; <font color="#000080"><i>//All Output</i></font>
+
+   <font color="#000080"><i>//Initialize the USART with Baud rate = 2400bps</i></font>
+   USARTInit(<font color="#ff0080">416</font>);
+
+   <font color="#000080"><i>/*</i></font>
+<font color="#000080"><i>   Get data from the remote Tx Station</i></font>
+<font color="#000080"><i>   The data is the value of PORTC on Remote Tx Board</i></font>
+<font color="#000080"><i>   So we will copy it to the PORTC of this board.</i></font>
+
+<font color="#000080"><i>   */</i></font>
+
+   <b>while</b>(<font color="#ff0080">1</font>)
+   {
+      <font color="#000080"><i>//Wait for a packet</i></font>
+      <b>while</b>(!UDataAvailable());
+      <b>if</b>(UReadData()!=<font color="#ff8000">'A'</font>) <b>continue</b>;
+      <b>while</b>(!UDataAvailable());
+      <b>if</b>(UReadData()!=<font color="#ff8000">'A'</font>) <b>continue</b>;
+
+      <b>while</b>(UDataAvailable()!=<font color="#ff0080">3</font>);
+
+      <font color="#000080"><i>//Get the packet</i></font>
+
+      <b>for</b>(i=<font color="#ff0080">2</font>;i&lt;<font color="#ff0080">5</font>;i++)
+      {
+         packet[i]=UReadData();
+      }
+
+      <font color="#000080"><i>//Is it ok?</i></font>
+      <b>if</b>(packet[<font color="#ff0080">2</font>]!=((uint8_t)~packet[<font color="#ff0080">3</font>])) <b>continue</b>;
+
+      <b>if</b>(packet[<font color="#ff0080">4</font>]!=<font color="#ff8000">'Z'</font>) <b>continue</b>;
+
+      <font color="#000080"><i>//The packet is ok</i></font>
+
+      data=packet[<font color="#ff0080">2</font>];
+
+      <font color="#000080"><i>//Now we have data put it to PORTC</i></font>
+      PORTC=data;
+   }
+
+
+}
+</font>
+</code></pre>
+<h2>Downloads </h2>
+<ul>
+  <li><a href="http://extremeelectronics.co.in/avrtutorials/download/Tx.zip">Complete 
+    AVR Studio Project for Tx</a></li>
+  <li><a href="http://extremeelectronics.co.in/avrtutorials/download/Rx.zip">Complete 
+    AVR Studio Project for Rx</a></li>
+  <li><a href="http://extremeelectronics.co.in/avrtutorials/download/Rx.hex">HEX 
+    File for Tx</a></li>
+  <li><a href="http://extremeelectronics.co.in/avrtutorials/download/Tx.hex">HEX 
+    File for Rx</a></li>
+</ul>
+<h2>Videos</h2>
+<p>Comming soon !</p>
+<p>&nbsp;</p></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Sunday, January 17th, 2010 at 11:47 am						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>,  <a href="http://extremeelectronics.co.in/category/rf/" title="View all posts in RF" rel="category tag">RF</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">4 Responses to &#8220;RF Communication Between Microcontrollers – Part III&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-3402">
+<div class="commentnumber">1</div>
+			<cite>bittusrk Says: </cite>
+						<br />
+
+
+
+<p>is it really necessary to invert the data?</p>
+<small class="commentmetadata"><a href="#comment-3402" title="">January 17th, 2010 at 5:08 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3403">
+<div class="commentnumber">2</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Bittusrk,</p>
+<p>As I said before starting the article <strong>&#8220;Do as I say&#8221;</strong> or interpret the results your self. If it was not necessary then why would I have done it ?</p>
+<p>I did lots of experiment before posting this article and I posted the setup which performed the best. If you are in the mood of re-inventing the wheels then you are most welcomed to waste your time!</p>
+<small class="commentmetadata"><a href="#comment-3403" title="">January 17th, 2010 at 5:48 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3407">
+<div class="commentnumber">3</div>
+			<cite><a href='http://avrmicrocontrollers.com/' rel='external nofollow' class='url'>AVR Micro</a> Says: </cite>
+						<br />
+
+
+
+<p>Nice project!</p>
+<p>I am just about starting a similar RF project.</p>
+<small class="commentmetadata"><a href="#comment-3407" title="">January 17th, 2010 at 8:20 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3408">
+<div class="commentnumber">4</div>
+			<cite>bittusrk Says: </cite>
+						<br />
+
+
+
+<p>@Avinash</p>
+<p>Cool down! My fault. Sorry</p>
+<small class="commentmetadata"><a href="#comment-3408" title="">January 17th, 2010 at 8:53 pm</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="281" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-3/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=9' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/xboard_mini_v2.jpg' alt='xBoard MINI v2.0' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

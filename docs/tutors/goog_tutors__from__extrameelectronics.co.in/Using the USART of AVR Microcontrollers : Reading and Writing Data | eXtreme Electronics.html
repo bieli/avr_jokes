@@ -1,0 +1,1308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Using the USART of AVR Microcontrollers : Reading and Writing Data | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; Using the USART of AVR Microcontrollers : Reading and Writing Data Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers-reading-and-writing-data/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='Merry Christmas' href='http://extremeelectronics.co.in/avr-tutorials/merry-christmas/' />
+<link rel='next' title='eXtreme Burner 51 : USB Programmer for AT89S Series Microcontrollers' href='http://extremeelectronics.co.in/tools/extreme-burner-51-usb-programmer-for-at89s-series-microcontrollers/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,409] -->
+<meta name="description" content="Till now we have seen the basics of RS232 communication, the function of level converter and the internal USART of AVR micro. After understanding the USART" />
+<meta name="keywords" content="atmega,atmega16,atmega32,atmega8,avr,hyperterminal,rs232,usart,avr tutorials,code libraries" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-108">
+<div class="date"> Dec-29th-2008 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers-reading-and-writing-data/" rel="bookmark" title="Permanent Link: Using the USART of AVR Microcontrollers : Reading and Writing Data">Using the USART of AVR Microcontrollers : Reading and Writing Data</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p><p>Till now we have seen the basics of RS232 communication, the function of level 
+  converter and the internal USART of AVR micro. After understanding the USART 
+  of AVR we have also written a easy to use <a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">function</a> 
+  to initialize the USART. That was the first step to use RS232. Now we will see 
+  how we can actually send/receive data via rs232. As this tutorial is intended 
+  for those who are never used USART we will keep the things simple so as to just 
+  concentrate on the &quot;USART&quot; part. Of course after you are comfortable 
+  with usart you can make it more usable my using interrupt driven mechanism rather 
+  than &quot;polling&quot; the usart.</p>
+<p>So lets get started! In this section we will make two functions :-</p>
+<ul>
+  <li>USARTReadChar() : To read the data (char) from the USART buffer.</li>
+  <li>USARTWriteChar(): To write a given data (char) to the USART.</li>
+</ul>
+<p>This two functions will demonstrate the use of USART in the most basic and 
+  simplest way. After that you can easily write functions that can write strings 
+  to USART.</p>
+<h2>Reading From The USART : USARTReadChar() Function.</h2>
+<p>This function will help you read data from the USART. For example if you use 
+  your PC to send data to your micro the data is automatically received by the 
+  USART of AVR and put in a buffer and bit in a register (UCSRA) is also set to 
+  indicate that data is available in buffer. Its now your duty to read this data 
+  from the register and process it, otherwise if new data comes in the previous 
+  one will be lost. So the funda is that wait until the RXC bit (bit no 7) in 
+  UCSRA is SET and then read the UDR register of the USART. </p>
+<p>(<a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">See 
+  the full description of USART registers</a>)</p>
+<pre><code><font color="#000000">
+<b>char</b> USARTReadChar()
+{
+   <font color="#000080"><i>//Wait untill a data is available</i></font>
+
+   <b>while</b>(!(UCSRA &amp; (<font color="#ff0080">1</font>&lt;&lt;RXC)))
+   {
+      <font color="#000080"><i>//Do nothing</i></font>
+   }
+
+   <font color="#000080"><i>//Now USART has got data from host</i></font>
+   <font color="#000080"><i>//and is available is buffer</i></font>
+
+   <b>return</b> UDR;
+}
+</font>
+</code></pre>
+<h2>Writing to USART : USARTWriteChar()</h2>
+<p>This function will help you write a given character data to the USART. Actually 
+  we write to the buffer of USART and the rest is done by USART, that means it 
+  automatically sends the data over RS232 line. One thing we need to keep in mind 
+  is that before writing to USART buffer we must first check that the buffer is 
+  free or not. It its not we simply wait until it is free. If its not free it 
+  means that USART is still busy sending some other data and once it finishes 
+  it will take the new data from buffer and start sending it.</p>
+<p>Please not that the data held in the buffer is not the current data which the 
+  USART is busy sending. USART reads data from the buffer to its shift register 
+  which it starts sending and thus the buffer is free for your data. Every time 
+  the USART gets it data from buffer and thus making it empty it notifies this 
+  to the CPU by telling &quot;<strong><font color="#990000">U</font></strong>SART 
+  <strong><font color="#990000">D</font></strong>ata <strong><font color="#990000">R</font></strong>egister 
+  Ran <font color="#990000"><strong>E</strong></font>mpty&quot; (UDRE) . It does 
+  so by setting a bit (UDRE bit no 5) in UCSRA register.</p>
+<p>So in our function we first wait until this bit is set (by the USART ), once 
+  this is set we are sure that buffer is empty and we can write new data to it.</p>
+  
+<p>(<a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">See 
+  the full description of USART registers</a>)</p>
+<pre><code><font color="#000000">
+<b>void</b> USARTWriteChar(<b>char</b> data)
+{
+   <font color="#000080"><i>//Wait until the transmitter is ready</i></font>
+
+   <b>while</b>(!(UCSRA &amp; (<font color="#ff0080">1</font>&lt;&lt;UDRE)))
+   {
+      <font color="#000080"><i>//Do nothing</i></font>
+   }
+
+   <font color="#000080"><i>//Now write the data to USART buffer</i></font>
+
+   UDR=data;
+}
+
+</font>
+</code></pre>
+
+<h4><font color="#0066FF">Note: </font> Actually their are two separate buffers, 
+  one for transmitter and one for receiver. But they share common address. The 
+  trick is that all &quot;writes&quot; goes to the Transmitter's buffer while 
+  any &quot;read&quot; you performs comes from the receiver's buffer.</h4>
+<h4>That means if we read UDR we are reading from receivers buffer and when we 
+  are writing to UDR we are writting to transmitters buffer.</h4>
+<p>UDR=some_data; //Goes to transmitter</p>
+<p>some_data=UDR; //Data comes from receiver</p>
+<p>(<a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">See 
+  the full description of USART registers</a>)</p>
+<h2>Sample program to use AVR USART</h2>
+<p>The following program makes use of the two functions we developed. This program 
+  simply waits for data to become available and then echoes it back via transmitter 
+  but with little modification. For example if you send &quot;A&quot; to it, it 
+  will send you back &quot;[A]&quot; that is input data but surrounded by square 
+  bracket. This program is enough to test the USART yet easy to understand.</p>
+<pre><code><font color="#000000">
+<font color="#000080"><i>/*</i></font>
+
+<font color="#000080"><i>A simple program to demonstrate the use of USART of AVR micro</i></font>
+
+<font color="#000080"><i>*************************************************************</i></font>
+
+<font color="#000080"><i>See: www.eXtremeElectronics.co.in for more info</i></font>
+
+<font color="#000080"><i>Author : Avinash Gupta</i></font>
+<font color="#000080"><i>E-Mail: me@avinashgupta.com</i></font>
+<font color="#000080"><i>Date : 29 Dec 2008</i></font>
+
+<font color="#000080"><i>Hardware:</i></font>
+<font color="#000080"><i>   ATmega8 @ 16MHz</i></font>
+
+<font color="#000080"><i>   Suitable level converter on RX/TX line</i></font>
+<font color="#000080"><i>   Connected to PC via RS232</i></font>
+<font color="#000080"><i>   PC Software :  Hyper terminal @ 19200 baud</i></font>
+<font color="#000080"><i>               No Parity,1 Stop Bit,</i></font>
+<font color="#000080"><i>               Flow Control = NONE</i></font>
+
+<font color="#000080"><i>*/</i></font>
+
+<font color="#008000">#include &lt;avr/io.h&gt;</font>
+<font color="#008000">#include &lt;inttypes.h&gt;</font>
+
+<font color="#000080"><i>//This function is used to initialize the USART</i></font>
+<font color="#000080"><i>//at a given UBRR value</i></font>
+<b>void</b> USARTInit(uint16_t ubrr_value)
+{
+
+   <font color="#000080"><i>//Set Baud rate</i></font>
+
+   UBRRL = ubrr_value;
+   UBRRH = (ubrr_value&gt;&gt;<font color="#ff0080">8</font>);
+
+   <font color="#000080"><i>/*Set Frame Format</i></font>
+
+
+<font color="#000080"><i>   &gt;&gt; Asynchronous mode</i></font>
+<font color="#000080"><i>   &gt;&gt; No Parity</i></font>
+<font color="#000080"><i>   &gt;&gt; 1 StopBit</i></font>
+
+<font color="#000080"><i>   &gt;&gt; char size 8</i></font>
+
+<font color="#000080"><i>   */</i></font>
+
+   UCSRC=(<font color="#ff0080">1</font>&lt;&lt;URSEL)|(<font color="#ff0080">3</font>&lt;&lt;UCSZ0);
+
+
+   <font color="#000080"><i>//Enable The receiver and transmitter</i></font>
+
+   UCSRB=(<font color="#ff0080">1</font>&lt;&lt;RXEN)|(<font color="#ff0080">1</font>&lt;&lt;TXEN);
+
+
+}
+
+
+<font color="#000080"><i>//This function is used to read the available data</i></font>
+<font color="#000080"><i>//from USART. This function will wait untill data is</i></font>
+<font color="#000080"><i>//available.</i></font>
+<b>char</b> USARTReadChar()
+{
+   <font color="#000080"><i>//Wait untill a data is available</i></font>
+
+   <b>while</b>(!(UCSRA &amp; (<font color="#ff0080">1</font>&lt;&lt;RXC)))
+   {
+      <font color="#000080"><i>//Do nothing</i></font>
+   }
+
+   <font color="#000080"><i>//Now USART has got data from host</i></font>
+   <font color="#000080"><i>//and is available is buffer</i></font>
+
+   <b>return</b> UDR;
+}
+
+
+<font color="#000080"><i>//This fuction writes the given &quot;data&quot; to</i></font>
+<font color="#000080"><i>//the USART which then transmit it via TX line</i></font>
+<b>void</b> USARTWriteChar(<b>char</b> data)
+{
+   <font color="#000080"><i>//Wait untill the transmitter is ready</i></font>
+
+   <b>while</b>(!(UCSRA &amp; (<font color="#ff0080">1</font>&lt;&lt;UDRE)))
+   {
+      <font color="#000080"><i>//Do nothing</i></font>
+   }
+
+   <font color="#000080"><i>//Now write the data to USART buffer</i></font>
+
+   UDR=data;
+}
+
+<b>void</b> main()
+{
+   <font color="#000080"><i>//This DEMO program will demonstrate the use of simple</i></font>
+
+   <font color="#000080"><i>//function for using the USART for data communication</i></font>
+
+   <font color="#000080"><i>//Varriable Declaration</i></font>
+   <b>char</b> data;
+
+   <font color="#000080"><i>/*First Initialize the USART with baud rate = 19200bps</i></font>
+<font color="#000080"><i>   </i></font>
+<font color="#000080"><i>   for Baud rate = 19200bps</i></font>
+
+<font color="#000080"><i>   UBRR value = 51</i></font>
+
+<font color="#000080"><i>   */</i></font>
+
+   USARTInit(<font color="#ff0080">51</font>);    <font color="#000080"><i>//UBRR = 51</i></font>
+
+   <font color="#000080"><i>//Loop forever</i></font>
+
+   <b>while</b>(<font color="#ff0080">1</font>)
+   {
+      <font color="#000080"><i>//Read data</i></font>
+      data=USARTReadChar();
+
+      <font color="#000080"><i>/* Now send the same data but but surround it in</i></font>
+<font color="#000080"><i>      square bracket. For example if user sent 'a' our</i></font>
+<font color="#000080"><i>      system will echo back '[a]'.</i></font>
+
+<font color="#000080"><i>      */</i></font>
+
+      USARTWriteChar(<font color="#ff8000">'['</font>);
+      USARTWriteChar(data);
+      USARTWriteChar(<font color="#ff8000">']'</font>);
+
+   }
+}
+</font>
+</code></pre>
+<p><a href="http://extremeelectronics.co.in/avrtutorials/code/usart_demo.c">Download 
+  Sample Program</a></p>
+<h2>Running the USART Demo</h2>
+<p>You can run the above program in a ATmega8, ATmega16, ATmega32 cpu running 
+  at 16MHz without any modification. If you are using different clock frequency 
+  you have to change the UBRR value that we are passing to USARTInit() function. 
+  See <a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">previous 
+  tutorial</a> for calculating UBRR value. The MCU should be connected to PC using 
+  a <a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-level-conversion/">RS232 
+  level convertor</a>. In PC you can run hyper terminal to send/receive data via 
+  usart. Start hyper terminal and press keys on your keyboard. The keys you press 
+  will be sent via PC's serial port to the AVR micro where our program will echo 
+  it back but with surrounded brackets. The data sent by the MCU will be received 
+  by the PC's serial port and will be displayed by the Hyper terminal.</p>
+<h2>See Also</h2>
+<ul>
+  <li><a href="http://extremeelectronics.co.in/hardwares/home-made-avr-devboard/">Home 
+    Made AVR devboard</a> - To experiment with AVR micros first make this.</li>
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-level-conversion/">Making 
+    a RS232 level convertor. </a></li>
+  <li>RS232 / USART related
+    <ul>
+      <li><a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-basics/">RS232 
+        Basics</a></li>
+      <li><a href="http://extremeelectronics.co.in/avr-tutorials/rs232-communication-the-level-conversion/">Level 
+        Conversion</a></li>
+      <li><a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers/">AVRs 
+        Inbuilt USART description.</a></li>
+    </ul>
+  </li>
+</ul></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Monday, December 29th, 2008 at 11:52 am						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>,  <a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts in Code Libraries" rel="category tag">Code Libraries</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers-reading-and-writing-data/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/using-the-usart-of-avr-microcontrollers-reading-and-writing-data/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">30 Responses to &#8220;Using the USART of AVR Microcontrollers : Reading and Writing Data&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-697">
+<div class="commentnumber">1</div>
+			<cite>raghu Says: </cite>
+						<br />
+
+
+
+<p>hey can u provide us da example of a line tracer &#8230;&#8230;&#8230; jus da  program part dude . &#8230;&#8230;&#8230;&#8230;</p>
+<small class="commentmetadata"><a href="#comment-697" title="">January 7th, 2009 at 6:44 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-699">
+<div class="commentnumber">2</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Raghu</p>
+<p>That will require the knowledge abt the underlying robot hardware like sensor position and number etc &#8230;</p>
+<small class="commentmetadata"><a href="#comment-699" title="">January 9th, 2009 at 8:53 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1158">
+<div class="commentnumber">3</div>
+			<cite>percy villegas t Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash </p>
+<p>I can send data from my Pc “C#” to Usart ”Atmega32” with RS232 line, it work without problem.</p>
+<p>Now I will send the information without RS232 line, I want send the information with Bluetooth. I need a Transmitter and receiver can you recommend me some who is easy to use?</p>
+<p>Why you don’t program in CodeVisionAVR it is much easy? And the program is gratis but you must also use AVR Studio for simulation. But write code is much easy with CodeVisionAVR. </p>
+<p>Thanks for all your help!!!!</p>
+<p>Percy Villegas.</p>
+<small class="commentmetadata"><a href="#comment-1158" title="">February 18th, 2009 at 4:18 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1228">
+<div class="commentnumber">4</div>
+			<cite>newman Says: </cite>
+						<br />
+
+
+
+<p>hi use this code for intrnal oscilator atmega8 8Mhz baud rate 9600. what all must i change? UBRR=51 ? or what change in software AVR Studio</p>
+<small class="commentmetadata"><a href="#comment-1228" title="">March 5th, 2009 at 6:25 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1251">
+<div class="commentnumber">5</div>
+			<cite>Ritesh Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash,</p>
+<p>you have used  UCSRB=(1&lt;&lt;RXEN)|(1&lt;&lt;TXEN); for no interrupt , what should we use if there is a interrupt</p>
+<small class="commentmetadata"><a href="#comment-1251" title="">March 9th, 2009 at 4:28 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1252">
+<div class="commentnumber">6</div>
+			<cite>Ritesh Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash,</p>
+<p>you have used  UCSRB=(1&lt;&lt;RXEN)|(1&lt;&lt;TXEN); for no interrupt , what should we use if there is a interrupt, Can you plz help me</p>
+<small class="commentmetadata"><a href="#comment-1252" title="">March 9th, 2009 at 4:29 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1294">
+<div class="commentnumber">7</div>
+			<cite>Ritesh Says: </cite>
+						<br />
+
+
+
+<p>hello avinash,</p>
+<p>there is a program in your tutorial which counts from 0-999 .i want to interface RS232 in the program (USART) so that I can see the increment from 0 to 999 in hyperterminal . I tried to combined your USART program with that but unscessful&#8230;.<br />
+can you please help me out </p>
+<p>thanking you<br />
+ritesh kumar</p>
+<small class="commentmetadata"><a href="#comment-1294" title="">March 16th, 2009 at 7:05 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1295">
+<div class="commentnumber">8</div>
+			<cite>Nils Says: </cite>
+						<br />
+
+
+
+<p>Hello,</p>
+<p>Does anyone has this kind of program for a AVR STK128 board with an ATmega128.</p>
+<p>greetz</p>
+<small class="commentmetadata"><a href="#comment-1295" title="">March 16th, 2009 at 7:15 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1413">
+<div class="commentnumber">9</div>
+			<cite>teja Says: </cite>
+						<br />
+
+
+
+<p>hello avinash<br />
+nice job avinash, this is the best avr beginers forum i found on internet.<br />
+i have a problem with with an usart implementation.<br />
+i tried implementing an usart code for a quizbuzzer system (used 8mhz internal clk so i used USARTInit(25);  ).The hyperterminal displayed junk values(like &#8220;..[ &#8220;) instead of the chars &#8220;1&#8243; &#8220;2&#8243; or &#8220;3&#8243;,when i used ur functions.<br />
+i even implemented the code given above, but the heyperterminal wasn&#8217;t accepting any input or displaying any output.<br />
+what could be the fault in this case?<br />
+is there a  way i can rectify it?<br />
+i used a pc with vista installed in it and i used a hyperterminal 6.3 version downloaded from the internet(since i couldn&#8217;t find hyperterminal on vista)<br />
+thanks<br />
+teja</p>
+<small class="commentmetadata"><a href="#comment-1413" title="">March 31st, 2009 at 11:27 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1424">
+<div class="commentnumber">10</div>
+			<cite><a href='http://villegastello.weebly.com/' rel='external nofollow' class='url'>percy</a> Says: </cite>
+						<br />
+
+
+
+<p>Hello AVANISH<br />
+Now you can see what I have do with atmega_32 in the factory Talaris “Teller Cash Dispenser” there we regulate a motor. All the code is do in CodeVisionAVR.  You can se the code and one video (10 minutes) about the project here.</p>
+<p><a href="http://villegastello.weebly.com/talaris_motorreglering.html" rel="nofollow">http://villegastello.weebly.com/talaris_motorreglering.html</a></p>
+<p> <a href="http://video.google.com/videoplaydocid=2332502783057173830" rel="nofollow">http://video.google.com/videoplaydocid=2332502783057173830</a></p>
+<p>Why you don’t program in CodeVisionAVR? It is easier you know.</p>
+<p>thanks</p>
+<p>Percy Villegas</p>
+<small class="commentmetadata"><a href="#comment-1424" title="">April 6th, 2009 at 12:18 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1746">
+<div class="commentnumber">11</div>
+			<cite>rajat Says: </cite>
+						<br />
+
+
+
+<p>hi avinash<br />
+I burned your code on to my atmega16(4 Mhz external) and 4800 baud using avr burnomat with the settings as fuse&gt;&gt;clock options&gt;&gt;external clock&gt;&gt; ceramic,  3 &#8211; 8Mhz. however the hyperterminal shows some garbage value whenever i type character&#8230;.can you help</p>
+<small class="commentmetadata"><a href="#comment-1746" title="">May 22nd, 2009 at 3:46 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1815">
+<div class="commentnumber">12</div>
+			<cite>fabelizer Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash!</p>
+<p>Nice Tutorials!</p>
+<p>I just tried to build the code in AVR Studio 4, and have a couple of errors due to URSEL. Below is the message screen:</p>
+<p>Build started 31.5.2009 at 22:47:50<br />
+avr-gcc  -mmcu=attiny2313 -Wall -gdwarf-2 -Os -std=gnu99 -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums -MD -MP -MT RS232.o -MF dep/RS232.o.d  -c  ../RS232.c<br />
+../RS232.c: In function &#8216;USARTInit&#8217;:<br />
+../RS232.c:49: error: &#8216;URSEL&#8217; undeclared (first use in this function)<br />
+../RS232.c:49: error: (Each undeclared identifier is reported only once<br />
+../RS232.c:49: error: for each function it appears in.)<br />
+../RS232.c: At top level:<br />
+../RS232.c:95: warning: return type of &#8216;main&#8217; is not &#8216;int&#8217;<br />
+make: *** [RS232.o] Error 1<br />
+Build failed with 3 errors and 1 warnings&#8230;</p>
+<p>Am I missing a library? I never used &#8216;C&#8217; before, and barely no anything about assembler&#8230;.but learning!</p>
+<p>Thanks for all your great work!!!!<br />
+-fab</p>
+<small class="commentmetadata"><a href="#comment-1815" title="">June 1st, 2009 at 8:19 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1816">
+<div class="commentnumber">13</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@fabelizer </p>
+<p>try compiling for ATmega8</p>
+<small class="commentmetadata"><a href="#comment-1816" title="">June 1st, 2009 at 9:58 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1818">
+<div class="commentnumber">14</div>
+			<cite>fabelizer Says: </cite>
+						<br />
+
+
+
+<p>Will try it. I did go to the tiny3213 data sheet and found there was no such designation. Didn&#8217;t have time to check the megas though. I do think that will solve it. Thanks!<br />
+-fab</p>
+<small class="commentmetadata"><a href="#comment-1818" title="">June 1st, 2009 at 4:55 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1883">
+<div class="commentnumber">15</div>
+			<cite>gulab Says: </cite>
+						<br />
+
+
+
+<p>why 8051 uses standard baud rate of 9600bps????? reply to my mail</p>
+<small class="commentmetadata"><a href="#comment-1883" title="">June 13th, 2009 at 12:25 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2026">
+<div class="commentnumber">16</div>
+			<cite>luca Says: </cite>
+						<br />
+
+
+
+<p>Hi! all&#8230;<br />
+I copied the source code into avr studio and build it with WinAvr..but the program doesn&#8217;t work&#8230;can somebody send the .hex file to <a href="mailto:romandini.luca@libero.it">romandini.luca@libero.it</a>?? it is so urgent..<br />
+P.S. I&#8217;m using an atmega8 4MHz external clock 9600 boud..</p>
+<small class="commentmetadata"><a href="#comment-2026" title="">July 2nd, 2009 at 10:46 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2027">
+<div class="commentnumber">17</div>
+			<cite>luca Says: </cite>
+						<br />
+
+
+
+<p>Thanks for help!!!</p>
+<small class="commentmetadata"><a href="#comment-2027" title="">July 2nd, 2009 at 10:46 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2096">
+<div class="commentnumber">18</div>
+			<cite>Jeff Says: </cite>
+						<br />
+
+
+
+<p>Hi!<br />
+Any plans to post something using interrupt-driven USART routines?</p>
+<small class="commentmetadata"><a href="#comment-2096" title="">July 13th, 2009 at 6:13 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2099">
+<div class="commentnumber">19</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Jeff</p>
+<p>I have the routines ready but I have to create documentation so that I can post it here.</p>
+<small class="commentmetadata"><a href="#comment-2099" title="">July 13th, 2009 at 8:18 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2335">
+<div class="commentnumber">20</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/' rel='external nofollow' class='url'>RF Communication Between Microcontrollers - Part II | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] introduction. You should also be familiar with RS232 communication. If you are new to it please see RS232 Serial Communication Tutorial. I also recommend using wireless link only after you have successfully tried wired RS232 [...]</p>
+<small class="commentmetadata"><a href="#comment-2335" title="">August 11th, 2009 at 12:02 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2340">
+<div class="commentnumber">21</div>
+			<cite>Siddharth Dev Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash,</p>
+<p>Again a great tutorial!! But &#8220;download a pdf version&#8221; tab is missing now..</p>
+<small class="commentmetadata"><a href="#comment-2340" title="">August 11th, 2009 at 5:45 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2347">
+<div class="commentnumber">22</div>
+			<cite><a href='http://afperez.info' rel='external nofollow' class='url'>Amaury</a> Says: </cite>
+						<br />
+
+
+
+<p>Thank you for this tutorial it was really help full I used it in an atmega32p with small tweeks to enable dual USART communications at two different speeds. Interrupt driven usart routines will be also very helpful!. Xon/Xoff  flow control is something that it been driving me nuts!, do you know where can i get a sample code? or where can i get a better idea of how to implement it?</p>
+<small class="commentmetadata"><a href="#comment-2347" title="">August 12th, 2009 at 8:06 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2741">
+<div class="commentnumber">23</div>
+			<cite>mitul tailor Says: </cite>
+						<br />
+
+
+
+<p>i have tried to communicate my bot with pc through uart. i m using avr atmega8.but i m unable to transmit or receive the data. m using 16Mhz crystal.pls rply</p>
+<small class="commentmetadata"><a href="#comment-2741" title="">September 20th, 2009 at 12:33 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2923">
+<div class="commentnumber">24</div>
+			<cite><a href='http://no' rel='external nofollow' class='url'>pran</a> Says: </cite>
+						<br />
+
+
+
+<p>hi,</p>
+<p>Thank u very much for all the tuts.I tried the above said program but when ever I type a letter in hyperteminal I only get a bunch of 9 C&#8217;s<br />
+I dont understand.max232 cirkt is working.I looped it back and saw that working.<br />
+Please reply to me as soon as possible.Your solution is worth to me.</p>
+<small class="commentmetadata"><a href="#comment-2923" title="">October 24th, 2009 at 6:07 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2962">
+<div class="commentnumber">25</div>
+			<cite>jig Says: </cite>
+						<br />
+
+
+
+<p>hi, really excellent beginner&#8217;s tutorial. </p>
+<p>Thanks for the job boss.</p>
+<small class="commentmetadata"><a href="#comment-2962" title="">November 2nd, 2009 at 1:15 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2963">
+<div class="commentnumber">26</div>
+			<cite>Ray Says: </cite>
+						<br />
+
+
+
+<p>How do i test serial communication using windows vista (no hyperterminal with vista).</p>
+<p>regards,</p>
+<p>Ray</p>
+<small class="commentmetadata"><a href="#comment-2963" title="">November 2nd, 2009 at 7:02 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3094">
+<div class="commentnumber">27</div>
+			<cite>rakesh Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash<br />
+today i compile the code given by you in usart_demo.c but when i press f it give fþ6-<br />
+and with other like that<br />
+c &gt;&gt; f&amp;-<br />
+g &gt;&gt; æf</p>
+<p>can you tell me what is wrong here</p>
+<small class="commentmetadata"><a href="#comment-3094" title="">November 29th, 2009 at 1:55 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3095">
+<div class="commentnumber">28</div>
+			<cite>rakesh Says: </cite>
+						<br />
+
+
+
+<p>now i change MCU freqency to 12MHz,still error is same but echo back in other symbol.<br />
+what freqency should i used for propare work of this module<br />
+Thanks</p>
+<small class="commentmetadata"><a href="#comment-3095" title="">November 29th, 2009 at 2:06 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3096">
+<div class="commentnumber">29</div>
+			<cite>Blimey Says: </cite>
+						<br />
+
+
+
+<p>If you have Vista and need a terminal google PuttY&#8230; a helpfull tool..</p>
+<p>Skåååll</p>
+<p>Blim</p>
+<small class="commentmetadata"><a href="#comment-3096" title="">November 29th, 2009 at 5:44 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3097">
+<div class="commentnumber">30</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Rakesh </p>
+<p>WHY DON&#8217;T U USE THE FREQ THAT THE PROGRAM IS DEVELOPED FOR ???????????</p>
+<p>IT IS CLEARLY WRITTEN IN THE PROGRAM.</p>
+<p>WHY ARE U DISTURBING OTHER WITH YOUR VERY SILLY MISTAKE ???</p>
+<small class="commentmetadata"><a href="#comment-3097" title="">November 29th, 2009 at 8:39 am</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="108" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-2/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=6' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/extreme_burner_pic_ad.jpg' alt='eXtreme Burner PIC' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

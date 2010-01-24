@@ -1,0 +1,210 @@
+
+led_pwm_1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000f6  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000003  00800060  000000f6  0000016a  2**0
+                  ALLOC
+  2 .stab         00000798  00000000  00000000  0000016c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      000006db  00000000  00000000  00000904  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0a c0       	rjmp	.+20     	; 0x16 <__ctors_end>
+   2:	23 c0       	rjmp	.+70     	; 0x4a <__bad_interrupt>
+   4:	22 c0       	rjmp	.+68     	; 0x4a <__bad_interrupt>
+   6:	21 c0       	rjmp	.+66     	; 0x4a <__bad_interrupt>
+   8:	20 c0       	rjmp	.+64     	; 0x4a <__bad_interrupt>
+   a:	20 c0       	rjmp	.+64     	; 0x4c <__vector_5>
+   c:	1e c0       	rjmp	.+60     	; 0x4a <__bad_interrupt>
+   e:	1d c0       	rjmp	.+58     	; 0x4a <__bad_interrupt>
+  10:	1c c0       	rjmp	.+56     	; 0x4a <__bad_interrupt>
+  12:	1b c0       	rjmp	.+54     	; 0x4a <__bad_interrupt>
+  14:	1a c0       	rjmp	.+52     	; 0x4a <__bad_interrupt>
+
+00000016 <__ctors_end>:
+  16:	11 24       	eor	r1, r1
+  18:	1f be       	out	0x3f, r1	; 63
+  1a:	cf ed       	ldi	r28, 0xDF	; 223
+  1c:	cd bf       	out	0x3d, r28	; 61
+
+0000001e <__do_copy_data>:
+  1e:	10 e0       	ldi	r17, 0x00	; 0
+  20:	a0 e6       	ldi	r26, 0x60	; 96
+  22:	b0 e0       	ldi	r27, 0x00	; 0
+  24:	e6 ef       	ldi	r30, 0xF6	; 246
+  26:	f0 e0       	ldi	r31, 0x00	; 0
+  28:	03 c0       	rjmp	.+6      	; 0x30 <.do_copy_data_start>
+
+0000002a <.do_copy_data_loop>:
+  2a:	c8 95       	lpm
+  2c:	31 96       	adiw	r30, 0x01	; 1
+  2e:	0d 92       	st	X+, r0
+
+00000030 <.do_copy_data_start>:
+  30:	a0 36       	cpi	r26, 0x60	; 96
+  32:	b1 07       	cpc	r27, r17
+  34:	d1 f7       	brne	.-12     	; 0x2a <.do_copy_data_loop>
+
+00000036 <__do_clear_bss>:
+  36:	10 e0       	ldi	r17, 0x00	; 0
+  38:	a0 e6       	ldi	r26, 0x60	; 96
+  3a:	b0 e0       	ldi	r27, 0x00	; 0
+  3c:	01 c0       	rjmp	.+2      	; 0x40 <.do_clear_bss_start>
+
+0000003e <.do_clear_bss_loop>:
+  3e:	1d 92       	st	X+, r1
+
+00000040 <.do_clear_bss_start>:
+  40:	a3 36       	cpi	r26, 0x63	; 99
+  42:	b1 07       	cpc	r27, r17
+  44:	e1 f7       	brne	.-8      	; 0x3e <__SP_H__>
+  46:	49 d0       	rcall	.+146    	; 0xda <main>
+  48:	55 c0       	rjmp	.+170    	; 0xf4 <_exit>
+
+0000004a <__bad_interrupt>:
+  4a:	da cf       	rjmp	.-76     	; 0x0 <__heap_end>
+
+0000004c <__vector_5>:
+#include "iocompat.h"           /* Note [1] */
+
+enum { UP, DOWN };
+
+ISR (TIMER1_OVF_vect)           /* Note [2] */
+{
+  4c:	1f 92       	push	r1
+  4e:	0f 92       	push	r0
+  50:	0f b6       	in	r0, 0x3f	; 63
+  52:	0f 92       	push	r0
+  54:	11 24       	eor	r1, r1
+  56:	2f 93       	push	r18
+  58:	8f 93       	push	r24
+  5a:	9f 93       	push	r25
+    static uint16_t pwm;        /* Note [3] */
+    static uint8_t direction;
+
+    switch (direction)          /* Note [4] */
+  5c:	80 91 60 00 	lds	r24, 0x0060
+  60:	88 23       	and	r24, r24
+  62:	19 f0       	breq	.+6      	; 0x6a <__vector_5+0x1e>
+  64:	81 30       	cpi	r24, 0x01	; 1
+  66:	f1 f4       	brne	.+60     	; 0xa4 <__vector_5+0x58>
+  68:	10 c0       	rjmp	.+32     	; 0x8a <__vector_5+0x3e>
+    {
+        case UP:
+            if (++pwm == TIMER1_TOP)
+  6a:	80 91 61 00 	lds	r24, 0x0061
+  6e:	90 91 62 00 	lds	r25, 0x0062
+  72:	01 96       	adiw	r24, 0x01	; 1
+  74:	90 93 62 00 	sts	0x0062, r25
+  78:	80 93 61 00 	sts	0x0061, r24
+  7c:	8f 5f       	subi	r24, 0xFF	; 255
+  7e:	93 40       	sbci	r25, 0x03	; 3
+  80:	89 f4       	brne	.+34     	; 0xa4 <__vector_5+0x58>
+                direction = DOWN;
+  82:	81 e0       	ldi	r24, 0x01	; 1
+  84:	80 93 60 00 	sts	0x0060, r24
+  88:	0d c0       	rjmp	.+26     	; 0xa4 <__vector_5+0x58>
+            break;
+
+        case DOWN:
+            if (--pwm == 0)
+  8a:	80 91 61 00 	lds	r24, 0x0061
+  8e:	90 91 62 00 	lds	r25, 0x0062
+  92:	01 97       	sbiw	r24, 0x01	; 1
+  94:	90 93 62 00 	sts	0x0062, r25
+  98:	80 93 61 00 	sts	0x0061, r24
+  9c:	89 2b       	or	r24, r25
+  9e:	11 f4       	brne	.+4      	; 0xa4 <__vector_5+0x58>
+                direction = UP;
+  a0:	10 92 60 00 	sts	0x0060, r1
+            break;
+    }
+
+    OCR = pwm;                  /* Note [5] */
+  a4:	80 91 61 00 	lds	r24, 0x0061
+  a8:	90 91 62 00 	lds	r25, 0x0062
+  ac:	9b bd       	out	0x2b, r25	; 43
+  ae:	8a bd       	out	0x2a, r24	; 42
+  b0:	9f 91       	pop	r25
+  b2:	8f 91       	pop	r24
+  b4:	2f 91       	pop	r18
+  b6:	0f 90       	pop	r0
+  b8:	0f be       	out	0x3f, r0	; 63
+  ba:	0f 90       	pop	r0
+  bc:	1f 90       	pop	r1
+  be:	18 95       	reti
+
+000000c0 <ioinit>:
+
+void
+ioinit (void)                   /* Note [6] */
+{
+    /* Timer 1 is 10-bit PWM (8-bit PWM on some ATtinys). */
+    TCCR1A = TIMER1_PWM_INIT;
+  c0:	83 e8       	ldi	r24, 0x83	; 131
+  c2:	8f bd       	out	0x2f, r24	; 47
+     * Start timer 1.
+     *
+     * NB: TCCR1A and TCCR1B could actually be the same register, so
+     * take care to not clobber it.
+     */
+    TCCR1B |= TIMER1_CLOCKSOURCE;
+  c4:	8e b5       	in	r24, 0x2e	; 46
+  c6:	81 60       	ori	r24, 0x01	; 1
+  c8:	8e bd       	out	0x2e, r24	; 46
+#if defined(TIMER1_SETUP_HOOK)
+    TIMER1_SETUP_HOOK();
+#endif
+
+    /* Set PWM value to 0. */
+    OCR = 0;
+  ca:	1b bc       	out	0x2b, r1	; 43
+  cc:	1a bc       	out	0x2a, r1	; 42
+
+    /* Enable OC1 as output. */
+    DDROC = _BV (OC1);
+  ce:	88 e0       	ldi	r24, 0x08	; 8
+  d0:	87 bb       	out	0x17, r24	; 23
+
+    /* Enable timer 1 overflow interrupt. */
+    TIMSK = _BV (TOIE1);
+  d2:	80 e8       	ldi	r24, 0x80	; 128
+  d4:	89 bf       	out	0x39, r24	; 57
+    sei ();
+  d6:	78 94       	sei
+  d8:	08 95       	ret
+
+000000da <main>:
+}
+
+int
+main (void)
+{
+  da:	cf ed       	ldi	r28, 0xDF	; 223
+  dc:	d0 e0       	ldi	r29, 0x00	; 0
+  de:	de bf       	out	0x3e, r29	; 62
+  e0:	cd bf       	out	0x3d, r28	; 61
+
+    ioinit ();
+  e2:	ee df       	rcall	.-36     	; 0xc0 <ioinit>
+
+    /* loop forever, the interrupts are doing the rest */
+
+    for (;;)                    /* Note [7] */
+        sleep_mode();
+  e4:	85 b7       	in	r24, 0x35	; 53
+  e6:	80 62       	ori	r24, 0x20	; 32
+  e8:	85 bf       	out	0x35, r24	; 53
+  ea:	88 95       	sleep
+  ec:	85 b7       	in	r24, 0x35	; 53
+  ee:	8f 7d       	andi	r24, 0xDF	; 223
+  f0:	85 bf       	out	0x35, r24	; 53
+  f2:	f8 cf       	rjmp	.-16     	; 0xe4 <__stack+0x5>
+
+000000f4 <_exit>:
+  f4:	ff cf       	rjmp	.-2      	; 0xf4 <_exit>

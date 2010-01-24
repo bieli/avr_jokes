@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl">
+<head>
+	<meta http-equiv="ContentType" content="application/xhtml+xml; charset=utf-8"/>
+	<title> Centralka alarmowa </title>
+	<link rel="stylesheet" href="Centralka%20alarmowa_pliki/base.css" type="text/css"/>
+	<link rel="stylesheet" href="Centralka%20alarmowa_pliki/highlight.css" type="text/css"/>
+	<link rel="home" title="Strona główna" href="http://www.opcode.eu.org/"/>
+	
+</head><body>
+<table><tr><td valign="top" class="menu"/><td valign="top" rowspan="2">
+<!-- DOCUMENT -->
+
+
+<p class="art_menu"/>
+<div id="mikrokontrolery:PROJECTS:centralka_alarmowa"/><h1 class="center">Centralka alarmowa</h1>
+
+<p>Centralka składa się z kilku modułów - płytki podłączeń, centralki i manipulatora. Centralka oparta jest na mikrokontrolerze Atmega16, posiada optoizolowane wejścia (dla 7 czujników PIR - każdy detekcja oraz sabotaż, 6 dla czujek dymu), interfejsy komunikacyjne (RS485 do komunikacji z resztą systemu domowego oraz manipulatorem, 1-wire do komunikacji z termometrami) oraz zestaw wyjść (5 x zasilanie czujek dymu, alarmowe) i 2 linie ogólnego przeznaczenia.</p>
+
+<p>Manipulator komunikuje się z centralą poprzez RS485, dodatkowo podłączony do niego jest kontaktron. Uzbrojenie systemu następuje samoczynnie po wykryciu otwarcia i zamknięcia drzwi, jednak gdy w przeciągu 30 sek od zamknięcia drzwi zostanie wykryty ruch na którejkolwiek z czujek PIR lub zostanie wciśnięty guzik rozbrajający uzbrojenie nie nastąpi. W celu takiego działania sterownik informuje centralę o zmianie stanu otwarcia drzwi, a gdy było to otwarcie i zamknięcie prosi ją o sprawdzanie PIR przez 30 sek po czym (jeżeli nie zostało to przerwane detekcją ruchu lub komunikatem z manipulatora) może ona uzbroić system. Rozbrojenie następuje poprzez podanie kodu, który weryfikowany jest w centrali. Manipulator wprowadza do systemu także informacje od dzwonka i domofonu.</p>
+
+<p>W zawiązku z amatorskim charakterem projektu oraz celem obniżenia kosztów zamiast czujek dymu przeznaczonych do systemów alarmowych zastosowane zostały czujki autonomiczne, których zasilanie zostało scentralizowane oraz w których dodano wyprowadzenie sygnału alarmowego zza tranzystora odpowiedzialnego za podawanie sygnału na piszczek (normalnie jest tam 9V (napięcie zasilania), w przypadku alarmu występują przerwy - po podłączeniu filtra uzyskujemy około 3V).</p>
+
+<p><i><b>UWAGA:</b> projekt w trakcie realizacji - nie jest kompletny, coś może nie działać, mogą nastąpić istotne zmiany.</i></p>
+
+<ul>
+	<li>schemat <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/centralka.sch">ideowy centralki</a></li>
+	<li><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_oswietlenia/sterownik_oswietlenia.c/#mikrokontrolery:PROJECTS:sterownik_oswietlenia:sterownik_oswietlenia.c">program sterujący praca centralki</a></li>
+</ul><ul>
+	<li>schemat <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/manipulator.sch">ideowy manipulatora</a></li>
+	<li><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/sterownik_oswietlenia/sterownik_oswietlenia.c/#mikrokontrolery:PROJECTS:sterownik_oswietlenia:sterownik_oswietlenia.c">program sterujący praca centralki</a></li>
+</ul><ul>
+	<li>schemat <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/centralka_podlaczenia.sch">ideowy płytki podłączeń</a></li>
+	<li><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/centralka_podlaczenia.pcb">projekt płytki podłączeń</a></li>
+</ul>
+
+<p>Wymagane są następujące nagłówki (wykorzystywane także w innych projektach): <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/my_rs485.c/#mikrokontrolery:PROJECTS:biblioteczki:my_rs485.c">my_rs485.c</a> i <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/opoznienia.c/#mikrokontrolery:PROJECTS:biblioteczki:opoznienia.c">opoznienia.c</a>.</p>
+
+</td></tr><tr><td valign="top" class="menu">
+
+<!-- MENU -->
+
+
+<p class="menu_path"><a class="int" href="http://www.opcode.eu.org/">OpCode</a> -&gt; <a class="int" href="http://www.opcode.eu.org/mikrokontrolery/">Mikrokontrolery</a> -&gt; Centralka alarmowa:</p><hr/>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/manipulator.c/">manipulator.c</a></p>
+<p class="menu_link"><a class="int" href="http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa/centralka.c/">centralka.c</a></p>
+<!-- WYSZUKIWARKA -->
+<form method="get" action="http://www.google.pl/search" class="search">
+	<p class="center">
+		<input type="hidden" name="num" value="30"/>
+		<input type="hidden" name="ie" value="utf-8"/>
+		<input type="hidden" name="oe" value="utf-8"/>
+		<i><label for="q">Wyszukiwarka:</label></i><br/>
+		<input type="text" name="q" id="q" size="25" maxlength="1024"/><br/>
+		<input type="checkbox" name="lr" id="lr" value="lang_pl"/><label for="lr">tylko w języku polskim</label><br/>
+		<input type="checkbox" name="as_q" id="as_q" value="site:opcode.eu.org" checked="checked"/><label for="as_q">tylko ten serwis WWW *</label><br/>
+		<input type="submit" value="  Szukaj z Google  "/>
+	</p>
+	<p class="fotter">*) to że czegoś nie można znaleźć nie oznacza że tego tu niema ... - niektóre strony z jakiś powodów mogą nie być (jeszcze) zindeksowane.</p>
+	<p class="center"><a href="http://www.google.pl/"><img src="Centralka%20alarmowa_pliki/powered_by_google.png" alt="Powered by Google"/></a></p>
+</form>
+ 
+
+</td></tr></table>
+
+<hr/>
+<p class="fotter">
+Copyright (c) 1999-2008, Robert Paciorek (http://www.opcode.eu.org/), <a class="Wikipedia" href="http://pl.wikipedia.org/wiki/Licencja_BSD">BSD-type license</a>
+				<br/><br/><br/>Redystrybucja wersji źródłowych i wynikowych, po lub bez dokonywania
+modyfikacji JEST DOZWOLONA, pod warunkiem zachowania niniejszej informacji o
+prawach autorskich. Autor NIE ponosi JAKIEJKOLWIEK odpowiedzialności za skutki
+użytkowania tego dokumentu/programu oraz za wykorzystanie zawartych tu informacji.<br/><br/>This program is free software. Redistribution and use in source and binary
+forms, with or without modification, ARE PERMITTED provided save this copyright
+notice. This document/program is distributed WITHOUT any warranty, use at YOUR
+own risk.<br/>
+</p>
+<p class="fotter"><a href="http://validator.w3.org/check/referer">
+	<img height="31" width="88" src="Centralka%20alarmowa_pliki/valid-xhtml11.png" alt="Valid XHTML 1.1" class="right noprint"/></a>
+	Dokument ten (URL: http://www.opcode.eu.org/mikrokontrolery/centralka_alarmowa)
+	należy do serwisu <a href="http://www.opcode.eu.org/">OpCode</a>. Autorem tej strony jest <a href="http://www.opcode.eu.org/bercik/">Robert Paciorek</a>,
+	wszelkie uwagi proszę kierować na adres e-mail serwisu: <a href="mailto:webmaster@opcode.eu.org">webmaster@opcode.eu.org</a>.
+	<br/>Data ostatniej modyfikacji artykulu: 2008-01-15 19:33:12 (UTC) (data ta może być zafałszowana niemerytorycznymi modyfikacjami artykułu).</p>
+
+
+</body></html>

@@ -1,0 +1,1474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Using the Analog To Digital Converter. | eXtreme Electronics</title>
+
+<meta name="generator" content="WordPress abc" /> <!-- leave this for stats -->
+<meta http-equiv="Page-Enter" content="revealTrans(Duration=1.0,Transition=12)" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.css" type="text/css" media="screen" />
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://extremeelectronics.co.in/feed/" />
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://extremeelectronics.co.in/feed/rss/" />
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://extremeelectronics.co.in/feed/atom/" />
+<link rel="pingback" href="http://extremeelectronics.co.in/xmlrpc.php" />
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber.js"></script>
+<script type="text/javascript" src="http://extremeelectronics.co.in/wp-content/themes/green-park-26/tabber-minimized.js"></script>
+
+
+	<link rel='archives' title='January 2010' href='http://extremeelectronics.co.in/2010/01/' />
+	<link rel='archives' title='October 2009' href='http://extremeelectronics.co.in/2009/10/' />
+	<link rel='archives' title='September 2009' href='http://extremeelectronics.co.in/2009/09/' />
+	<link rel='archives' title='August 2009' href='http://extremeelectronics.co.in/2009/08/' />
+	<link rel='archives' title='July 2009' href='http://extremeelectronics.co.in/2009/07/' />
+	<link rel='archives' title='May 2009' href='http://extremeelectronics.co.in/2009/05/' />
+	<link rel='archives' title='April 2009' href='http://extremeelectronics.co.in/2009/04/' />
+	<link rel='archives' title='March 2009' href='http://extremeelectronics.co.in/2009/03/' />
+	<link rel='archives' title='February 2009' href='http://extremeelectronics.co.in/2009/02/' />
+	<link rel='archives' title='January 2009' href='http://extremeelectronics.co.in/2009/01/' />
+	<link rel='archives' title='December 2008' href='http://extremeelectronics.co.in/2008/12/' />
+	<link rel='archives' title='November 2008' href='http://extremeelectronics.co.in/2008/11/' />
+	<link rel='archives' title='October 2008' href='http://extremeelectronics.co.in/2008/10/' />
+	<link rel='archives' title='September 2008' href='http://extremeelectronics.co.in/2008/09/' />
+	<link rel='archives' title='July 2008' href='http://extremeelectronics.co.in/2008/07/' />
+	<link rel='archives' title='May 2008' href='http://extremeelectronics.co.in/2008/05/' />
+	<link rel='archives' title='April 2008' href='http://extremeelectronics.co.in/2008/04/' />
+	<link rel='archives' title='March 2008' href='http://extremeelectronics.co.in/2008/03/' />
+
+<link type="text/css" rel="stylesheet" href="http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/uitabs.css" />
+<link rel="alternate" type="application/rss+xml" title="eXtreme Electronics &raquo; Using the Analog To Digital Converter. Comments Feed" href="http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/feed/" />
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-includes/js/jquery/jquery.js?ver=1.3.2'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.dimensions.pack.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.accordion.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/js/jquery.easing.js?ver=abc'></script>
+<script type='text/javascript' src='http://extremeelectronics.co.in/wp-content/plugins/tabbed-widgets/tabbed-widgets.php?returnjs=true&#038;ver=abc'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://extremeelectronics.co.in/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://extremeelectronics.co.in/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='eXtreme Electronics' href='http://extremeelectronics.co.in' />
+<link rel='start' title='Part I &#8211; Introduction' href='http://extremeelectronics.co.in/avr-tutorials/part-i-introduction/' />
+<link rel='prev' title='Using Internal peripherals of AVR MCUs.' href='http://extremeelectronics.co.in/avr-tutorials/using-internal-peripherals-of-avr-mcus/' />
+<link rel='next' title='AVR Timers &#8211; An Introduction' href='http://extremeelectronics.co.in/avr-tutorials/avr-timers-an-introduction/' />
+
+<!-- All in One SEO Pack 1.6.5 by Michael Torbert of Semper Fi Web Design[284,381] -->
+<meta name="description" content="In this tutorial we learn how to use the internal ADC of AVR Microcontroller." />
+<meta name="keywords" content="avr,mcu,microcontroller,analog,adc,tutorial,article,analog to digital converter,avr tutorials" />
+<!-- /all in one seo pack -->
+</head>
+<body>
+
+
+
+<div id="header">
+
+		<div id="rss">
+		<!-- <a href="http://extremeelectronics.co.in/feed/" title="Subscribe"></a>-->
+                <a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Subscribe"></a>
+		</div>
+
+
+	
+	
+</div>
+<div id="banner">
+               
+		<!--			
+		<div id="home">
+		<a href="http://extremeelectronics.co.in" title="eXtreme Electronics"></a>
+		</div>
+                -->
+	
+	       
+
+
+</div>
+<div id="navigation">	
+<div id="menu">
+
+	<ul>
+		<li><a href="http://extremeelectronics.co.in" class=" active"><span>Home</span></a></li>
+		 
+                <li> <script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "5525065725";
+google_ad_width = 468;
+google_ad_height = 15;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+ </li>
+	</ul>
+
+</div>
+	<div id="search">
+			 <form class="searchform" method="get" action="http://extremeelectronics.co.in/" name="f">
+			<input name="s" type="text" class="s" value="Search here" onfocus="value=''" />
+			<input name="go" type="submit" class="go" value="Search" />
+			</form> 
+</div>
+
+<div align="center" style="margin-top: 81px;">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+/* eXtreme_728x90_leader */
+google_ad_slot = "2730004978";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+</div>  <div id="container" class="clearfix">
+    <div id="content">
+				
+  	
+
+	
+		<div class="post" id="post-17">
+<div class="date"> Sep-18th-2008 </div>
+			<h3 class="posttitle"><a href="http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/" rel="bookmark" title="Permanent Link: Using the Analog To Digital Converter.">Using the Analog To Digital Converter.</a></h3>
+	
+			<div class="entry">
+
+			<br /><div style="float:left;margin-right:10px;margin-bottom:10px;"><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2066037706";
+google_ad_width = 300;
+google_ad_height = 250;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>				<p>Most of the physical quantities around us are continuous. By continuous we mean that the quantity can take any value between two extreme. For example the atmospheric temperature can take any value (within certain range). If an electrical quantity is made to vary directly in proportion to this value (temperature etc)
+then what we have is Analogue signal. Now we have we have brought a physical quantity into electrical domain. The electrical quantity in most case is voltage.To bring this quantity into digital domain we have to convert this into digital form. For this a ADC or analog to digital converter is needed. Most modern MCU
+including AVRs has an ADC on chip.
+
+An ADC converts an input voltage into a number. An ADC has a resolution. A 10 Bit ADC has a range of 0-1023. (2^10=1024) The ADC also has a Reference voltage(ARef). When input voltage is GND the output is 0 and when input voltage is equal to ARef the output is 1023. So the input range is 0-ARef and digital output is 0-1023.
+<table border="0" cellspacing="1" cellpadding="1" width="98%">
+  <tbody>
+    <tr> 
+      <td> <div>
+          <div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/adc-theory.gif" alt="ADC Theory" width="480" height="196" /></div>
+        </div></td>
+    </tr>
+    <tr>
+      <td><div align="center">
+          <h3>Fig: ADC Theory</h3>
+        </div></td>
+    </tr>
+    <tr> 
+      <td><div></div></td>
+    </tr>
+  </tbody>
+</table>
+<h2>Inbuilt ADC of AVR</h2>
+<p>Now you know the basics of ADC let us see how we can use the inbuilt ADC of 
+  AVR MCU. The ADC is multiplexed with PORTA that means the ADC channels are shared 
+  with PORTA. The ADC can be operated in single conversion and free running more. 
+  In single conversion mode the ADC does the conversion and then stop. While in 
+  free it is continuously converting. It does a conversion and then start next 
+  conversion immediately after that. </p>
+<h4>ADC Prescaler. </h4>
+<p>The ADC needs a clock pulse to do its conversion. This clock generated by system 
+  clock by dividing it to get smaller frequency. The ADC requires a frequency 
+  between 50KHz to 200KHz. At higher frequency the conversion is fast while a 
+  lower frequency the conversion is more accurate. As the system frequency can 
+  be set to any value by the user (using internal or externals oscillators)( In 
+  xBoard™ a 16MHz crystal is used). <em><strong>So the Prescaler is provided to 
+  produces acceptable frequency for ADC from any system clock frequency. System</strong></em> 
+  clock can be divided by 2,4,16,32,64,128 by setting the Prescaler. </p>
+<h4>ADC Channels<strong> </strong> </h4>
+<p>The ADC in ATmega32 has 8 channels that means you can take samples from eight 
+  different terminal. You can connect up to 8 different sensors and get their 
+  values separately. </p>
+<h4>ADC Registers. </h4>
+<p>As you know the registers related to any particular peripheral module(like 
+  ADC, Timer, USART etc.) provides the communication link between the CPU and 
+  that peripheral. You configure the ADC according to need using these registers 
+  and you also get the conversion result also using appropriate registers. The 
+  ADC has only four registers. </p>
+<ol>
+  <li><strong>ADC Multiplexer Selection Register – ADMUX</strong> : For selecting 
+    the reference voltage and the input channel. </li>
+  <li><strong> ADC Control and Status Register A – ADCSRA</strong> : As the name 
+    says it has the status of ADC and is also use for controlling it. </li>
+  <li><strong> The ADC Data Register – ADCL and ADCH</strong> : The final result 
+    of conversion is here. </li>
+</ol>
+<p>(Please Read the Tutorial <a href="http://extremeelectronics.co.in/avr-tutorials/using-internal-peripherals-of-avr-mcus/">"Internal 
+  Peripherals of AVR"</a> before using ADC of AVRs.)</p>
+<h2>Using the ADC.</h2>
+<p>In this sample we will setup and use the ADC in single conversion mode. We 
+  will connect a LDR( light dependent resistor) which is a light sensor to input. 
+  The result will be shown in LCD. </p>
+<h4>Initialization.</h4>
+<p> We have to configure the ADC by setting up ADMUX and ADCSRA registers. The 
+  ADMUX has following bits. </p>
+<h4>ADMUX Register.</h4>
+<table width="550" border="0" cellspacing="10" cellpadding="10">
+  <tr>
+    <td><img src="http://www.extremeelectronics.co.in/avrtutorials/images/ADMUX.gif" alt="" width="480" height="48" /></td>
+  </tr>
+</table>
+<p>REFS1 REFS0 selects the reference voltage. See table below – </p>
+<table border="0" cellspacing="1" cellpadding="1" width="49%">
+  <tbody>
+    <tr bgcolor="#0000FF"> 
+      <td width="17%"><font color="#FFFFFF"><strong>REFS1</strong></font></td>
+      <td width="18%"><font color="#FFFFFF"><strong>REFS0</strong></font></td>
+      <td width="65%"><font color="#FFFFFF"><strong>Voltage Reference Selection</strong></font></td>
+    </tr>
+    <tr bgcolor="#0099FF"> 
+      <td>0</td>
+      <td>0</td>
+      <td>ARef internal Vref Turned off</td>
+    </tr>
+    <tr bgcolor="#0099FF"> 
+      <td><em><strong>0</strong></em></td>
+      <td><em><strong>1</strong></em></td>
+      <td><em><strong>AVCC</strong></em></td>
+    </tr>
+    <tr bgcolor="#0099FF"> 
+      <td>1</td>
+      <td>0</td>
+      <td>Reserved</td>
+    </tr>
+    <tr bgcolor="#0099FF"> 
+      <td>1</td>
+      <td>1</td>
+      <td>Internal 2.56 Voltage Reference</td>
+    </tr>
+  </tbody>
+</table>
+We will go for 2nd option, i.e. Our reference voltage will be Vcc(5v). So we
+set
+<pre>ADMUX=(1&lt;&lt;REFS0);</pre>
+<p><strong>The ADCSRA Register.</strong></p>
+<table width="550" border="0" cellspacing="10" cellpadding="10">
+  <tr> 
+    <td><img src="http://www.extremeelectronics.co.in/avrtutorials/images/ADSRA.gif" alt="" width="480" height="48" /></td>
+  </tr>
+</table>
+<ul>
+  <li> <em><strong>ADEN –</strong></em> Set this to 1 to enable ADC </li>
+  <li><strong><em>ADSC – </em></strong>We need to set this to one whenever we 
+    need adc to do a conversion. </li>
+  <li><strong><em>ADIF –</em></strong> This is the interrupt bit this is set to 
+    1 by the hardware when conversion is complete. So we can wait till conversion 
+    is complete by polling this bit like
+    <pre>//Wait for conversion to complete
+while(!(ADCSRA &amp; (1&lt;&lt;ADIF)));</pre>
+  
+  The loop does nothing while ADIF is set to 0, it exits as soon as ADIF is 
+    set to one, i.e. conversion is complete. </li>
+  <li><strong><em>ADPS2-ADPS0 –</em></strong> These selects the Prescaler for 
+    ADC. As I said the ADC frequency must be between 50KHz to 200KHz. </li>
+</ul>
+<table width="550" border="0" cellspacing="10" cellpadding="10">
+  <tr>
+    <td><img src="http://www.extremeelectronics.co.in/avrtutorials/images/ADPS.gif" alt="" width="267" height="140" /></td>
+  </tr>
+</table>
+<p> We need to select division factor so as to get a acceptable frequency from 
+  our 16Mhz clock. We select division factor as 128.So ADC clock frequency = 16000000/128 
+  = 125000 = 125KHz (which is in range of 50KHz to 200KHz). So we set ADCSRA as</p>
+<pre> ADCSRA=(1&lt;&lt;ADEN)|(1&lt;&lt;ADPS2)|(ADPS1)|(ADPS0); <font color="#006600"><strong>//Enable ADC with Prescalar=Fcpu/128</strong></font> </pre>
+<h2>Reading an analog value.</h2>
+Now every thing is set up. We now write a routine that will ReadADC.
+<pre><code><span style="color: #000000;">
+
+uint16_t ReadADC(uint8_t ch)
+{
+   <span style="color: #000080;"><em>//Select ADC Channel ch must be 0-7</em></span>
+   ch=ch&amp;<span style="color: #ff0080;">0b00000111</span>;
+   ADMUX|=ch;
+
+   <span style="color: #000080;"><em>//Start Single conversion</em></span>
+   ADCSRA|=(<span style="color: #ff0080;">1</span>&lt;&lt;ADSC);
+
+   <span style="color: #000080;"><em>//Wait for conversion to complete</em></span>
+   <strong>while</strong>(!(ADCSRA &amp; (<span style="color: #ff0080;">1</span>&lt;&lt;ADIF)));
+
+   <span style="color: #000080;"><em>//Clear ADIF by writing one to it</em></span>
+   ADCSRA|=(<span style="color: #ff0080;">1</span>&lt;&lt;ADIF);
+
+   <strong>return</strong>(ADC);
+}
+</span>
+</code></pre>
+We can call this function from any where from our code and simply need to pass
+0-7 as for which channel we need to read.
+<h2>Sample Code.</h2>
+The following is complete code to Read Channel 0 and display its value on LCD.
+<pre><code><span style="color: #000000;">
+<span style="color: #008000;">#include &lt;avr/io.h&gt;</span>
+
+<span style="color: #008000;">#include "lcd.h"</span>
+
+<strong>void</strong> InitADC()
+{
+ADMUX=(<span style="color: #ff0080;">1</span>&lt;&lt;REFS0);                         <span style="color: #000080;"><em>// For Aref=AVcc;</em></span>
+ADCSRA=(<span style="color: #ff0080;">1</span>&lt;&lt;ADEN)|(<span style="color: #ff0080;">1</span>&lt;&lt;ADPS2)|(<span style="color: #ff0080;">1</span>&lt;&lt;ADPS1)|(<span style="color: #ff0080;">1</span>&lt;&lt;ADPS0); <span style="color: #000080;"><em>//Rrescalar div factor =128</em></span>
+}
+
+uint16_t ReadADC(uint8_t ch)
+{
+   <span style="color: #000080;"><em>//Select ADC Channel ch must be 0-7</em></span>
+   ch=ch&amp;<span style="color: #ff0080;">0b00000111</span>;
+   ADMUX|=ch;
+
+   <span style="color: #000080;"><em>//Start Single conversion</em></span>
+   ADCSRA|=(<span style="color: #ff0080;">1</span>&lt;&lt;ADSC);
+
+   <span style="color: #000080;"><em>//Wait for conversion to complete</em></span>
+   <strong>while</strong>(!(ADCSRA &amp; (<span style="color: #ff0080;">1</span>&lt;&lt;ADIF)));
+
+   <span style="color: #000080;"><em>//Clear ADIF by writing one to it</em></span>
+   <span style="color: #000080;"><em>//Note you may be wondering why we have write one to clear it</em></span>
+   <span style="color: #000080;"><em>//This is standard way of clearing bits in io as said in datasheets.</em></span>
+   <span style="color: #000080;"><em>//The code writes '1' but it result in setting bit to '0' !!!</em></span>
+
+   ADCSRA|=(<span style="color: #ff0080;">1</span>&lt;&lt;ADIF);
+
+   <strong>return</strong>(ADC);
+}
+
+<strong>void</strong> Wait()
+{
+   uint8_t i;
+   <strong>for</strong>(i=<span style="color: #ff0080;">0</span>;i&lt;<span style="color: #ff0080;">20</span>;i++)
+      _delay_loop_2(<span style="color: #ff0080;">0</span>);
+}
+
+<strong>void</strong> main()
+{
+   uint16_t adc_result;
+
+   <span style="color: #000080;"><em>//Initialize LCD</em></span>
+   LCDInit(LS_BLINK|LS_ULINE);
+   LCDClear();
+
+   <span style="color: #000080;"><em>//Initialize ADC</em></span>
+   InitADC();
+
+   <span style="color: #000080;"><em>//Put some intro text into LCD</em></span>
+   LCDWriteString(<span style="color: #0000ff;">"ADC Test"</span>);
+   LCDWriteStringXY(<span style="color: #ff0080;">0</span>,<span style="color: #ff0080;">1</span>,<span style="color: #0000ff;">"ADC="</span>);
+
+   <strong>while</strong>(<span style="color: #ff0080;">1</span>)
+   {
+      adc_result=ReadADC(<span style="color: #ff0080;">0</span>);           <span style="color: #000080;"><em>// Read Analog value from channel-0</em></span>
+      LCDWriteIntXY(<span style="color: #ff0080;">4</span>,<span style="color: #ff0080;">1</span>,adc_result,<span style="color: #ff0080;">4</span>); <span style="color: #000080;"><em>//Print the value in 4th column second line</em></span>
+      Wait();
+   }
+}
+</span>
+</code></pre>
+<h2>Hardware</h2>
+<table width="550" border="0" align="center" cellpadding="10" cellspacing="10">
+  <tr>
+    <td><div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/ldr.gif" alt="using adc of avr to sense light using ldr" width="180" height="261" /></div></td>
+  </tr>
+  <tr> 
+    <td><h3 align="center">Fig: LDR Connected to ADC of AVR</h3></td>
+  </tr>
+</table>
+You have to connect a LDR (light dependant resistor) as shown above. After burning 
+the code on chip use a light source to throw some light on LDR, the ADC will show 
+a value between 0-1024 depending on light. For dark the value should be close 
+to 0 while for bright condition the value will become close to 1000. 
+<table border="0" cellspacing="1" cellpadding="1" width="98%">
+  <tbody>
+    <tr> 
+      <td> <div> 
+          <div align="center"><img src="http://www.extremeelectronics.co.in/avrtutorials/images/adc-test.jpg" alt="using adc of avr" width="408" height="354" /></div>
+        </div></td>
+    </tr>
+    <tr>
+      <td><div align="center">
+          <h3>Fig: Screenshot of ADC Test App.</h3>
+        </div></td>
+    </tr>
+    <tr> 
+      <td><div></div></td>
+    </tr>
+  </tbody>
+</table>
+<em><strong>Note:</strong></em>
+<ul>
+	<li>I used the <a href="http://xboard.extremeelectronics.co.in">xBoard</a> for testing the application but you can use your own development board. <a href="http://extremeelectronics.co.in/hardwares/home-made-avr-devboard/">See Home Made AVR Devboard.</a></li>
+	<li>You can also get a low cost <a href="http://shop.extremeelectronics.co.in/index.php?cPath=23">ATmega8 based board</a> and <a href="http://shop.extremeelectronics.co.in/index.php?cPath=21">"USB AVR Programmer"</a> for quick start.</li>
+	
+  <li><a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/">For 
+    LCD Interfacing See- "LCD Interfacing Tutorial"</a></li>
+	<li>Please Read the Tutorial <a href="http://extremeelectronics.co.in/avr-tutorials/using-internal-peripherals-of-avr-mcus/">"Internal Peripherals of AVR"</a> before using ADC of AVRs.</li>
+</ul>
+<div>
+<p style="text-align: right;"><a href="http://www.extremeelectronics.co.in/avrtutorials/pdf/adc.pdf">Download PDF version</a> | <a href="http://www.adobe.com/products/acrobat/readstep2.html">Get Adobe Reader Free !!!</a></p>
+
+</div></p>
+
+
+			<br /><script type="text/javascript"><!--
+google_ad_client = "pub-2529619032290091";
+google_ad_slot = "2591430734";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	
+				</div>
+</div>
+
+				<p class="postmetadata alt">
+					<small>
+						This entry was posted
+						
+						on Thursday, September 18th, 2008 at 12:13 pm						and is filed under <a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts in AVR Tutorials" rel="category tag">AVR Tutorials</a>.
+						You can follow any responses to this entry through the <a href='http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/feed/'>RSS 2.0</a> feed. 
+						
+													You can <a href="#respond">leave a response</a>, or <a href="http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/trackback/" rel="trackback">trackback</a> from your own site.
+						
+												
+					</small>
+				</p>
+		<div class="navigation">
+			<div class="alignleft"></div>
+		</div>
+	<div class="post">
+		
+	
+<!-- You can start editing here. -->
+
+	<h4 id="comments">41 Responses to &#8220;Using the Analog To Digital Converter.&#8221;</h4> 
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-62">
+<div class="commentnumber">1</div>
+			<cite><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-temperature-sensor-lm35/' rel='external nofollow' class='url'>Interfacing Temperature Sensor with AVR Microcontrollers - LM35 | eXtreme Electronics</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] Using the ADC of AVRs [...]</p>
+<small class="commentmetadata"><a href="#comment-62" title="">October 12th, 2008 at 4:24 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-152">
+<div class="commentnumber">2</div>
+			<cite>hamid Says: </cite>
+						<br />
+
+
+
+<p>hi.please guide me that how to use 2 or more channel of atmega32 adc(porta.0 ..7) togher by bascom. thanks alot best regard</p>
+<small class="commentmetadata"><a href="#comment-152" title="">November 7th, 2008 at 1:57 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-634">
+<div class="commentnumber">3</div>
+			<cite>John Says: </cite>
+						<br />
+
+
+
+<p>Is it possible to configure different pins with different reference voltages simultaneously?</p>
+<p>For example, PA1 at 2.56V, PA2 at VCC, and PA3 at VREF?</p>
+<small class="commentmetadata"><a href="#comment-634" title="">December 10th, 2008 at 2:23 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-635">
+<div class="commentnumber">4</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Jhon</p>
+<p>Actually there is only one ADC inside the chip and the Input to it is multiplexed. So setting of different reference voltage for individual pins is not possible. But you can set the Reference voltage of ADC to required before taking the input for the desired pin.</p>
+<p>For example set<br />
+ref=2.56 before sampling PA1<br />
+ref=VCC before sampling PA2<br />
+and ref=VCC before sampling PA3</p>
+<p>this should give you desired result.</p>
+<small class="commentmetadata"><a href="#comment-635" title="">December 10th, 2008 at 7:26 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-636">
+<div class="commentnumber">5</div>
+			<cite>John Says: </cite>
+						<br />
+
+
+
+<p>Two more quick questions . . .</p>
+<p>If I set the ref voltage to 2.56V, and send a 5V signal to that ADC pin, would it get damaged?</p>
+<p>Some of the ATmega&#8217;s, such as the 2560, have two ADC ports (16 pins). Could the the reference voltage on each be set differently?</p>
+<small class="commentmetadata"><a href="#comment-636" title="">December 10th, 2008 at 7:39 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-637">
+<div class="commentnumber">6</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Jhon</p>
+<p>Ya than would damage the chip. With AVRs with two or more ADCs thats easily possible. Or if you want more ADCs you can go for separate ADC chips. Then you can design more complex circuit.</p>
+<small class="commentmetadata"><a href="#comment-637" title="">December 10th, 2008 at 8:00 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-638">
+<div class="commentnumber">7</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Jhon</p>
+<p>The following is an excerpt from data sheet</p>
+<p>&#8220;If the user has a fixed voltage source connected to the AREF pin, the user may not use<br />
+the other reference voltage options in the application, as they will be shorted to the<br />
+external voltage. If no external voltage is applied to the AREF pin, the user may switch<br />
+between AVCC and 2.56V as reference selection. The first ADC conversion result after<br />
+switching reference voltage source may be inaccurate, and the user is advised to dis-<br />
+card this result.<br />
+&#8221;</p>
+<p>So you can easily switch between internal reference of 2.56 and 5.00 volts. But if you also need a third i.e. Custom Voltage applied to Vref it is not possible unless you have more onchip/off chip ADCs</p>
+<small class="commentmetadata"><a href="#comment-638" title="">December 10th, 2008 at 8:11 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-668">
+<div class="commentnumber">8</div>
+			<cite>raghu Says: </cite>
+						<br />
+
+
+
+<p>it means that only two ref voltages can be used either 2.56v or 5v &#8230;&#8230;&#8230;..but what to do if we want any voltage other than those two &#8230;</p>
+<small class="commentmetadata"><a href="#comment-668" title="">December 24th, 2008 at 9:10 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-671">
+<div class="commentnumber">9</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Raghu</p>
+<p>&#8220;it means that only two ref voltages can be used either 2.56v or 5v ………..but what to do if we want any voltage other than those two …&#8221;</p>
+<p>its simple , see the table in ADMUX register description above . In this example we have gone for 2nd option (bold italics) but to use any other volatge go for first option. Then you can apply any voltage to Aref pin (its pin 21 on mega8) and it will be the reference voltage.</p>
+<p>Hope you got it!</p>
+<small class="commentmetadata"><a href="#comment-671" title="">December 24th, 2008 at 9:53 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1179">
+<div class="commentnumber">10</div>
+			<cite>ade Says: </cite>
+						<br />
+
+
+
+<p>Hi,<br />
+can you pls provide the asm code to this program.Thanks alot</p>
+<small class="commentmetadata"><a href="#comment-1179" title="">February 23rd, 2009 at 4:05 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1255">
+<div class="commentnumber">11</div>
+			<cite>Dhawal Says: </cite>
+						<br />
+
+
+
+<p>Can I use 2 multiplexer pins for ADC Analog Compare and rest for Input?&#8230;&#8230;</p>
+<small class="commentmetadata"><a href="#comment-1255" title="">March 10th, 2009 at 3:42 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1318">
+<div class="commentnumber">12</div>
+			<cite><a href='http://homecommander.wordpress.com/2009/03/19/reading-temperature-sensor-from-stk500/' rel='external nofollow' class='url'>Reading Temperature Sensor from STK500 &laquo; Home Commander</a> Says: </cite>
+						<br />
+
+
+
+<p>[...] Reading Temperature Sensor from&nbsp;STK500 By Willem Visser  See: <a href="http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/" rel="nofollow">http://extremeelectronics.co.in/avr-tutorials/using-the-analog-to-digital-converter/</a> [...]</p>
+<small class="commentmetadata"><a href="#comment-1318" title="">March 20th, 2009 at 12:08 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1427">
+<div class="commentnumber">13</div>
+			<cite>Adeola Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,<br />
+your tutorials are very helpful especially for newbies,my question is how can use your adc test for two channels.What i want to do is to measure voltages from two adc channels say 0 &amp; 1 and display the result on the LCD.<br />
+  Thank you.</p>
+<small class="commentmetadata"><a href="#comment-1427" title="">April 7th, 2009 at 6:06 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1430">
+<div class="commentnumber">14</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Adeola,</p>
+<p>I think that is very easy once you understand the above code.</p>
+<small class="commentmetadata"><a href="#comment-1430" title="">April 8th, 2009 at 7:37 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1462">
+<div class="commentnumber">15</div>
+			<cite>cgo Says: </cite>
+						<br />
+
+
+
+<p>how to write as sembly language program in 8051 in order to make a light adc involving sensor an lcd?</p>
+<small class="commentmetadata"><a href="#comment-1462" title="">April 15th, 2009 at 6:43 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1465">
+<div class="commentnumber">16</div>
+			<cite>wube Says: </cite>
+						<br />
+
+
+
+<p>HI<br />
+ I like your tutorial,but i have one question i.e. how to use assembly language rather than c.<br />
+Thank you</p>
+<small class="commentmetadata"><a href="#comment-1465" title="">April 15th, 2009 at 11:35 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1474">
+<div class="commentnumber">17</div>
+			<cite>Sandeep Says: </cite>
+						<br />
+
+
+
+<p>Hi Avinash,<br />
+I am reading voltage from six adc channels of atmega32 in round-robin fashion and displaying the voltage on LCD. But I am getting different voltage of all channels in diferent round means I am not getting constant voltage in different rounds. With Voltmeter I checked the voltage at microcontroller pins, it is constant. I am feeding Unity gain opamp output to ADC inputs.<br />
+Please tell me the solution.</p>
+<small class="commentmetadata"><a href="#comment-1474" title="">April 17th, 2009 at 2:30 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1475">
+<div class="commentnumber">18</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Sandeep,</p>
+<p>U r usin 6 ADC ch then r u using the other 2 Pins of PORTA for any digital IO (like Interface to LCD?).</p>
+<p>If thats the case then free those PINs</p>
+<p>Also let me see the code and schematic</p>
+<p>mail them to <a href="mailto:me@avinashgupta.com">me@avinashgupta.com</a></p>
+<small class="commentmetadata"><a href="#comment-1475" title="">April 17th, 2009 at 5:10 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1519">
+<div class="commentnumber">19</div>
+			<cite>Sandeep Says: </cite>
+						<br />
+
+
+
+<p>Dear Avinash,<br />
+I have sent the required information on urs email (me@avinashgupta.com). Plz tell me the solution.</p>
+<small class="commentmetadata"><a href="#comment-1519" title="">April 23rd, 2009 at 4:16 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1709">
+<div class="commentnumber">20</div>
+			<cite>santosh Says: </cite>
+						<br />
+
+
+
+<p>hello&#8230;.if the vref=2.5 and the input voltage is 3vol..then the how much &#8216;ll b the decimal value in ADCH</p>
+<small class="commentmetadata"><a href="#comment-1709" title="">May 17th, 2009 at 7:09 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1713">
+<div class="commentnumber">21</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@santosh<br />
+<a title="Click To Enlarge ..." href="http://extremeelectronics.co.in/wp-content/uploads/2009/05/adc_input_max.jpg" rel="nofollow"><br />
+<img src="http://extremeelectronics.co.in/wp-content/uploads/2009/05/adc_input_max.jpg" width=445 height=121 alt="adc" /><br />
+</a></p>
+<small class="commentmetadata"><a href="#comment-1713" title="">May 18th, 2009 at 8:43 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1714">
+<div class="commentnumber">22</div>
+			<cite>asyar Says: </cite>
+						<br />
+
+
+
+<p>hi everybody.<br />
+i have no good knowledge about ADC conversion. at my projects i just can use only 1 channel ADC on ATmega32, but actually i want to use 4 channel ADC in the same time. please help me how to use 4 channel ADC?</p>
+<small class="commentmetadata"><a href="#comment-1714" title="">May 18th, 2009 at 1:04 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1740">
+<div class="commentnumber">23</div>
+			<cite><a href='http://robolabz.multiply.com' rel='external nofollow' class='url'>Ashutosh</a> Says: </cite>
+						<br />
+
+
+
+<p>Sorry  made a mistake in the comment that i use a following problem</p>
+<p>it is I use the following program and problem is unit digit fluctuation please help me to make ADC reading stable on the seven segment display</p>
+<small class="commentmetadata"><a href="#comment-1740" title="">May 21st, 2009 at 3:55 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1773">
+<div class="commentnumber">24</div>
+			<cite>snowserf Says: </cite>
+						<br />
+
+
+
+<p>Para leer de ADC0 a ADC7 cambia esto:<br />
+__###################__<br />
+/* ch=ch&amp;0b00000111;<br />
+   ADMUX|=ch; */        &lt;&#8212;&#8211; Error<br />
+__###################__</p>
+<p>Por esto:<br />
+__###################__<br />
+ch=ch&amp;0&#215;07;<br />
+ADMUX = (ADMUX&amp;0xF8)|ch;<br />
+__###################__</p>
+<small class="commentmetadata"><a href="#comment-1773" title="">May 26th, 2009 at 9:40 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1822">
+<div class="commentnumber">25</div>
+			<cite>pandrosof Says: </cite>
+						<br />
+
+
+
+<p>Hello i´m making a voltmeter with assembler, my question is if i want to send to the lcd the value of the voltage instead of the binary number what do i have to do?<br />
+I think i have to compare the result of the ADC and then assigned the value that i want in the LCD but i have to compare several values and i think i lost time comparing , or what do you think?</p>
+<small class="commentmetadata"><a href="#comment-1822" title="">June 1st, 2009 at 11:40 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1823">
+<div class="commentnumber">26</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Conver the binary no to a string say if ADC read out is 792 (stored in int) break it to &#8216;7&#8242;, &#8216;9&#8242;,  &#8216;2&#8242; ij ASCII and sent to LCD</p>
+<p>The algo would be</p>
+<p><code><br />
+int a;</p>
+<p>a=ReadADC();</p>
+<p>while(a)<br />
+{<br />
+    char ch;<br />
+    ch=a%10; // divide by 10 and strore remainder in ch, 792%10=2 so u get the last digit<br />
+    ch=ch=10; // remove last digit, 792/10= 79<br />
+}<br />
+</code></p>
+<small class="commentmetadata"><a href="#comment-1823" title="">June 2nd, 2009 at 6:17 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1831">
+<div class="commentnumber">27</div>
+			<cite>Johan Says: </cite>
+						<br />
+
+
+
+<p>Hello Avinash!<br />
+Great tutorials! A question regarding &#8220;Fig: LDR Connected to ADC of AVR&#8221;. What I see there is 100 kohm resitor going to ground. Is that a standard resitor value for all types of ADC connections? I have seen 10 kohm resitor values as well in schematics. What I try to say is: should it always be a resistor placed (to ground) like that when using AVR adc?</p>
+<p>Regards<br />
+Johan</p>
+<small class="commentmetadata"><a href="#comment-1831" title="">June 3rd, 2009 at 2:19 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-1837">
+<div class="commentnumber">28</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Johan</p>
+<p>Here LDR and R(100K) froms a Voltage Divider. More info here <a href="http://en.wikipedia.org/wiki/Voltage_divider" rel="nofollow">http://en.wikipedia.org/wiki/Voltage_divider</a></p>
+<small class="commentmetadata"><a href="#comment-1837" title="">June 4th, 2009 at 8:28 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1838">
+<div class="commentnumber">29</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Johan</p>
+<p>here LDR is changing resistance according to light but ADC can measure Voltage only. To convert RESISTANCE to VOLTAGE we have used a Voltage Divider.</p>
+<small class="commentmetadata"><a href="#comment-1838" title="">June 4th, 2009 at 8:31 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2216">
+<div class="commentnumber">30</div>
+			<cite>sanjay Says: </cite>
+						<br />
+
+
+
+<p>hi avinash<br />
+my question is how to get ADC from multiple channels simultaneously.i used to get but the result of all the channel was same .</p>
+<small class="commentmetadata"><a href="#comment-2216" title="">July 27th, 2009 at 1:01 am</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2667">
+<div class="commentnumber">31</div>
+			<cite><a href='http://www.vsthirunavukkarasu.blogspot.com' rel='external nofollow' class='url'>thiru</a> Says: </cite>
+						<br />
+
+
+
+<p>thanks for your help</p>
+<small class="commentmetadata"><a href="#comment-2667" title="">September 11th, 2009 at 5:14 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2772">
+<div class="commentnumber">32</div>
+			<cite>jing jie Says: </cite>
+						<br />
+
+
+
+<p>i am connecting a LDR to a PIC. i want to compare the value that the LDR to the preset value. how do i represent this preset value in hex? for example, if the value of LDR is less than 3V, then do the following commands. how to concert the 3V to hex value? thanks.</p>
+<small class="commentmetadata"><a href="#comment-2772" title="">September 28th, 2009 at 12:28 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2773">
+<div class="commentnumber">33</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p><strong>@Jing</p>
+<p>3v is 60% of 5v (Ref Voltage) so 60% of 1024 (Max Value for 10BIT A/D) is required value. 60% of 1024 is 614.4 = 614 and its HEX equivalent is 266. You must write 0&#215;266 (prefix by 0x) in &#8216;C&#8217; so that compiler knows it is a HEX and not decimal.</strong></p>
+<small class="commentmetadata"><a href="#comment-2773" title="">September 28th, 2009 at 12:42 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2877">
+<div class="commentnumber">34</div>
+			<cite>Pranav Says: </cite>
+						<br />
+
+
+
+<p>Hey Avinash,<br />
+Where do you buy all your electronics stuff in India? I live near Dehradun and for me it seems impossible to get any stuff, no hobby shops around!! Is there any safe online shop which deals with it and do you know any place around Delhi or preferably Lucknow?<br />
+I was able to get in touch with ATmega16 there in Lucknow for my surprise!! :p</p>
+<small class="commentmetadata"><a href="#comment-2877" title="">October 20th, 2009 at 1:55 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2878">
+<div class="commentnumber">35</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>Hello Pranav,<br />
+Many people in India face same problem. Thats why I started a Online Shop. You can visit it here<br />
+<a href="http://shop.extremeelectronics.co.in/" rel="nofollow">http://shop.extremeelectronics.co.in/</a></p>
+<p>I was very angry by local dealers not giving correct parts and also charge so high.</p>
+<small class="commentmetadata"><a href="#comment-2878" title="">October 20th, 2009 at 4:07 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-2887">
+<div class="commentnumber">36</div>
+			<cite><a href='http://www.aashitechnologies.com' rel='external nofollow' class='url'>Saif ullah khalid</a> Says: </cite>
+						<br />
+
+
+
+<p>hi pranav,<br />
+U better visit delhi,s lajpat rai market for required stuff ass you can found every thing required there&#8230;and that cheaper then any where else u will get</p>
+<small class="commentmetadata"><a href="#comment-2887" title="">October 21st, 2009 at 10:02 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3178">
+<div class="commentnumber">37</div>
+			<cite>Phill Says: </cite>
+						<br />
+
+
+
+<p>Hi, I&#8217;ve build a filtering ciruit and attached it to the adc, connected to the adc is a resistor, on one side of this i&#8217;m getting 2.5v on the micro side im getting 0v. if I remove the micro, this goes up to 2.5v. The signal is at approx 0.2mA is this enough? What do i need to set the DDR to for the adc port? I want to use some of the other portbits as digital inputs. Thanks for any help!</p>
+<small class="commentmetadata"><a href="#comment-3178" title="">December 11th, 2009 at 8:10 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3206">
+<div class="commentnumber">38</div>
+			<cite>mohan Says: </cite>
+						<br />
+
+
+
+<p>hi avinash, good work.<br />
+hi i am very poor in basic electronics and also in practicle(circuit designing)&#8230;.<br />
+hi can u sugest me some good websites that gives some idea on basics and circuit design..</p>
+<small class="commentmetadata"><a href="#comment-3206" title="">December 15th, 2009 at 4:09 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3218">
+<div class="commentnumber">39</div>
+			<cite>Andrew Says: </cite>
+						<br />
+
+
+
+<p>Hi<br />
+l am just starting to work with atmega16 controller and got a hang first tutorials and desided to try this one to but then l connect everything together but then l start a program a result l get is always 1023 and l tryed hooking up a pontiometer insted a LRD and turning it but always l get only 1023 is there something l do wrong with my software? maybe with registers? l used exactly a same code as your posted in this tutorial and l got nothing. Connections is ok</p>
+<small class="commentmetadata"><a href="#comment-3218" title="">December 18th, 2009 at 5:52 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="" id="comment-3220">
+<div class="commentnumber">40</div>
+			<cite>Avinash Says: </cite>
+						<br />
+
+
+
+<p>@Andrew</p>
+<p>Please disconnect everything from the ADC port. The value now should show random value. Now connect it directly to Vcc the value should be 1023 and then connect (ADC0) to the GND pin it should show 0.</p>
+<small class="commentmetadata"><a href="#comment-3220" title="">December 18th, 2009 at 6:56 pm</a> </small>
+
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3222">
+<div class="commentnumber">41</div>
+			<cite>Andrew Says: </cite>
+						<br />
+
+
+
+<p>yeah tryed it and then noticed some mistakes in a code l wrote it works nicely thx <img src='http://extremeelectronics.co.in/wp-includes/images/smilies/icon_smile.gif' alt=':)' class='wp-smiley' /> </p>
+<small class="commentmetadata"><a href="#comment-3222" title="">December 18th, 2009 at 8:53 pm</a> </small>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h4 id="respond">Leave a Reply</h4>
+
+
+<form action="http://extremeelectronics.co.in/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="17" />
+</p>
+
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+
+</form>
+
+
+	
+		
+    </div>
+	
+    </div>
+	<div id="side">
+	<div class="tabber">
+	 	 <div class="tabbertab">
+		<h2>New Products</h2>
+					
+				<div class="partners">
+
+
+
+<!-- Begin AdServe code : banner:side_top-3/4 -->
+<a target='_blank' href='http://extremeelectronics.co.in/wp-content/plugins/wp-adserve/adclick.php?id=9' style='margin:0px;border:0px;'><img src='http://extremeelectronics.co.in/images/ad/xboard_mini_v2.jpg' alt='xBoard MINI v2.0' /></a>
+<!-- End AdServe code -->
+
+</div>				
+			
+	 </div>
+	 	 <!--<div class="tabbertab">
+		
+			
+				<h2>Useful Links</h2>
+
+				<ul>
+
+					<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+
+				</ul>
+
+			
+	 </div>-->
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Tags</h2>
+	   
+	<ul>
+				<a href='http://extremeelectronics.co.in/tag/xboard/' class='tag-link-40' title='1 topic' rel="tag" style='font-size: 11pt;'>xBoard</a>
+<a href='http://extremeelectronics.co.in/tag/avrs/' class='tag-link-8' title='1 topic' rel="tag" style='font-size: 11pt;'>avrs</a>
+<a href='http://extremeelectronics.co.in/tag/seven-segment/' class='tag-link-29' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Seven Segment</a>
+<a href='http://extremeelectronics.co.in/tag/timer0/' class='tag-link-33' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Timer0</a>
+<a href='http://extremeelectronics.co.in/tag/ir/' class='tag-link-45' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ir</a>
+<a href='http://extremeelectronics.co.in/tag/multiplexing/' class='tag-link-28' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Multiplexing</a>
+<a href='http://extremeelectronics.co.in/tag/timer1/' class='tag-link-35' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>timer1</a>
+<a href='http://extremeelectronics.co.in/tag/adc/' class='tag-link-21' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>ADC</a>
+<a href='http://extremeelectronics.co.in/tag/programming/' class='tag-link-13' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>programming</a>
+<a href='http://extremeelectronics.co.in/tag/internal-peripherals/' class='tag-link-20' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>internal peripherals</a>
+<a href='http://extremeelectronics.co.in/tag/avr-gcc/' class='tag-link-48' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr gcc</a>
+<a href='http://extremeelectronics.co.in/tag/isr/' class='tag-link-26' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>isr</a>
+<a href='http://extremeelectronics.co.in/tag/atmega8/' class='tag-link-62' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>atmega8</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech-c/' class='tag-link-103' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech c</a>
+<a href='http://extremeelectronics.co.in/tag/pic-development-board/' class='tag-link-119' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>PIC Development Board</a>
+<a href='http://extremeelectronics.co.in/tag/rf-module/' class='tag-link-132' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>rf module</a>
+<a href='http://extremeelectronics.co.in/tag/hi-tech/' class='tag-link-85' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>hi-tech</a>
+<a href='http://extremeelectronics.co.in/tag/i2c/' class='tag-link-75' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>i2c</a>
+<a href='http://extremeelectronics.co.in/tag/microcontrollers/' class='tag-link-12' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>microcontrollers</a>
+<a href='http://extremeelectronics.co.in/tag/usb-programmer/' class='tag-link-65' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>USB Programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pwm/' class='tag-link-66' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>pwm</a>
+<a href='http://extremeelectronics.co.in/tag/hyperterminal/' class='tag-link-57' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>Hyperterminal</a>
+<a href='http://extremeelectronics.co.in/tag/avr-programmer/' class='tag-link-7' title='2 topics' rel="tag" style='font-size: 11.9166666667pt;'>avr programmer</a>
+<a href='http://extremeelectronics.co.in/tag/interrupt/' class='tag-link-27' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>interrupt</a>
+<a href='http://extremeelectronics.co.in/tag/lcd/' class='tag-link-39' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>lcd</a>
+<a href='http://extremeelectronics.co.in/tag/c/' class='tag-link-9' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>c</a>
+<a href='http://extremeelectronics.co.in/tag/mplab/' class='tag-link-84' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>mplab</a>
+<a href='http://extremeelectronics.co.in/tag/usb-pic-programmer/' class='tag-link-101' title='3 topics' rel="tag" style='font-size: 12.8333333333pt;'>usb pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/timer/' class='tag-link-32' title='4 topics' rel="tag" style='font-size: 13.75pt;'>Timer</a>
+<a href='http://extremeelectronics.co.in/tag/mcu/' class='tag-link-16' title='4 topics' rel="tag" style='font-size: 13.75pt;'>mcu</a>
+<a href='http://extremeelectronics.co.in/tag/pic-programmer/' class='tag-link-98' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic programmer</a>
+<a href='http://extremeelectronics.co.in/tag/pic-tutorial/' class='tag-link-106' title='4 topics' rel="tag" style='font-size: 13.75pt;'>pic tutorial</a>
+<a href='http://extremeelectronics.co.in/tag/usart/' class='tag-link-54' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>USART</a>
+<a href='http://extremeelectronics.co.in/tag/atmega16/' class='tag-link-61' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>atmega16</a>
+<a href='http://extremeelectronics.co.in/tag/rs232/' class='tag-link-53' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>rs232</a>
+<a href='http://extremeelectronics.co.in/tag/pic18/' class='tag-link-102' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic18</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f877/' class='tag-link-81' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f877</a>
+<a href='http://extremeelectronics.co.in/tag/pic16f/' class='tag-link-96' title='5 topics' rel="tag" style='font-size: 14.6666666667pt;'>pic16f</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f/' class='tag-link-97' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>pic18f</a>
+<a href='http://extremeelectronics.co.in/tag/atmega32/' class='tag-link-41' title='6 topics' rel="tag" style='font-size: 15.5833333333pt;'>atmega32</a>
+<a href='http://extremeelectronics.co.in/tag/microchip/' class='tag-link-78' title='7 topics' rel="tag" style='font-size: 16.5pt;'>microchip</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f2550/' class='tag-link-82' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f2550</a>
+<a href='http://extremeelectronics.co.in/tag/pic18f4550/' class='tag-link-83' title='9 topics' rel="tag" style='font-size: 18.3333333333pt;'>pic18f4550</a>
+<a href='http://extremeelectronics.co.in/tag/pic/' class='tag-link-79' title='11 topics' rel="tag" style='font-size: 20.1666666667pt;'>pic</a>
+<a href='http://extremeelectronics.co.in/tag/avr/' class='tag-link-6' title='13 topics' rel="tag" style='font-size: 22pt;'>AVR</a>			</ul>
+	
+</div>
+   	 	   <div class="tabbertab">
+					
+
+				<h2>Meta</h2>
+	
+				<ul>
+
+					<li><a href="http://extremeelectronics.co.in/wp-login.php">Log in</a></li>
+
+                                        <!--
+							<li><a href="http://extremeelectronics.co.in/feed/" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+
+                                          -->
+
+                                         <li><a href="http://feeds.feedburner.com/~r/ExtremeElectronics/~6/1" title="Syndicate this site using RSS"><abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						    <li><a href="http://extremeelectronics.co.in/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+						 	<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform."><abbr title="WordPress">Wordpress</abbr></a></li>
+							<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+
+				</ul>
+
+			
+
+</div>
+</div>	<div class="tabber">
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Recent Post</h2>
+
+
+				<ul>
+					<li><a href='http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/' title='RF Communication Between Microcontrollers – Part III'>RF Communication Between Microcontrollers – Part III</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/' title='Interfacing DS1307 RTC Chip with AVR Microcontroller'>Interfacing DS1307 RTC Chip with AVR Microcontroller</a></li>
+	<li><a href='http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/' title='Interfacing LCD Modules with PIC Microcontrollers.'>Interfacing LCD Modules with PIC Microcontrollers.</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/' title='AVR Project &#8211; Relay Timer with ATmega8 AVR MCU'>AVR Project &#8211; Relay Timer with ATmega8 AVR MCU</a></li>
+	<li><a href='http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/' title='AVR Development Board &#8211; Assembly Instructions'>AVR Development Board &#8211; Assembly Instructions</a></li>
+
+				</ul>
+			
+	 </div>
+	 	 <div class="tabbertab">
+		
+			
+				<h2>Comments</h2>
+
+		<ul>
+                
+		 
+                
+
+               <div class="MyRecentComments">
+                                  <ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul>
+                              </div>
+ 
+		</ul>
+
+			
+	 </div>
+
+
+	 	   <div class="tabbertab">
+ 
+	<h2>Video</h2>
+	   
+		<ul><center>
+		
+<object width="350" height="283"><param name="movie" value="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/gniNl3npxSk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object>
+
+</center></ul>
+	
+</div>
+</div>
+		    <div id="leftnav">
+	  		<div id="sidebarright">
+		<ul>
+<li id="categories-293150131" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+	<li class="cat-item cat-item-133"><a href="http://extremeelectronics.co.in/category/avr-development-board/" title="View all posts filed under AVR Development Board">AVR Development Board</a>
+</li>
+	<li class="cat-item cat-item-121"><a href="http://extremeelectronics.co.in/category/avr-projects/" title="View all posts filed under AVR Projects">AVR Projects</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://extremeelectronics.co.in/category/avr-tutorials/" title="View all posts filed under AVR Tutorials">AVR Tutorials</a>
+</li>
+	<li class="cat-item cat-item-44"><a href="http://extremeelectronics.co.in/category/code-libraries/" title="View all posts filed under Code Libraries">Code Libraries</a>
+</li>
+	<li class="cat-item cat-item-73"><a href="http://extremeelectronics.co.in/category/code-snippets/" title="View all posts filed under Code Snippets">Code Snippets</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://extremeelectronics.co.in/category/hardwares/" title="View all posts filed under Hardwares">Hardwares</a>
+</li>
+	<li class="cat-item cat-item-77"><a href="http://extremeelectronics.co.in/category/microchip-pic-tutorials/" title="View all posts filed under Microchip PIC Tutorials">Microchip PIC Tutorials</a>
+</li>
+	<li class="cat-item cat-item-119"><a href="http://extremeelectronics.co.in/category/pic-development-board/" title="View all posts filed under PIC Development Board">PIC Development Board</a>
+</li>
+	<li class="cat-item cat-item-123"><a href="http://extremeelectronics.co.in/category/programming-in-c/" title="View all posts filed under Programming in &#039;C&#039;">Programming in &#039;C&#039;</a>
+</li>
+	<li class="cat-item cat-item-122"><a href="http://extremeelectronics.co.in/category/rf/" title="View all posts filed under RF">RF</a>
+</li>
+	<li class="cat-item cat-item-114"><a href="http://extremeelectronics.co.in/category/software/" title="View all posts filed under Software">Software</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://extremeelectronics.co.in/category/tools/" title="View all posts filed under Tools">Tools</a>
+</li>
+		</ul>
+</li>
+<li id="text-293151921" class="widget widget_text"><h2 class="widgettitle">Navigation</h2>
+			<div class="textwidget"><p>
+<a href="http://extremeelectronics.co.in">Home</a><br/>
+<a href="http://forum.extremeelectronics.co.in">Forum</a><br/>
+<a href="http://shop.extremeelectronics.co.in">Shop</a><br/>
+<a 
+href="http://extremeelectronics.co.in/links/">Links</a>
+</p></div>
+		</li>
+<li id="text-293154911" class="widget widget_text"><h2 class="widgettitle">Subscribe</h2>
+			<div class="textwidget"><form style="padding:3px;text-align:center;" action="http://www.feedburner.com/fb/a/emailverify" method="post" target="popupwindow" onsubmit="window.open('http://www.feedburner.com/fb/a/emailverifySubmit?feedId=1874818', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+<p>
+<strong>
+Get New Articles Deliverd To Your Inbox!
+</strong>
+</p>
+<p>Email address:</p><p><input type="text" style="width:140px" name="email"/></p><input type="hidden" value="http://feeds.feedburner.com/~e?ffid=1874818" name="url"/><input type="hidden" value="eXtreme Electronics" name="title"/><input type="hidden" name="loc" value="en_US"/><input type="submit" value="Subscribe" /><p>Delivered by <a href="http://www.feedburner.com" target="_blank">FeedBurner</a></p></form>
+
+<br/>
+<p align="center"><a href="http://feeds2.feedburner.com/ExtremeElectronics"><img src="http://feeds2.feedburner.com/~fc/ExtremeElectronics?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" /></a></p><br/></div>
+		</li>
+
+
+		</ul>
+</div>    </div>
+    <div id="rightnav">
+	  		<div id="sidebarleft">
+		<ul>
+		<li id="recent-posts-2" class="widget widget_recent_entries">		<h2 class="widgettitle">Recent Posts</h2>
+		<ul>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/" title="RF Communication Between Microcontrollers – Part III">RF Communication Between Microcontrollers – Part III </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/" title="Interfacing DS1307 RTC Chip with AVR Microcontroller">Interfacing DS1307 RTC Chip with AVR Microcontroller </a></li>
+				<li><a href="http://extremeelectronics.co.in/microchip-pic-tutorials/interfacing-lcd-modules-with-pic-microcontrollers/" title="Interfacing LCD Modules with PIC Microcontrollers.">Interfacing LCD Modules with PIC Microcontrollers. </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-projects/avr-project-relay-timer-with-atmega8-avr-mcu/" title="AVR Project &#8211; Relay Timer with ATmega8 AVR MCU">AVR Project &#8211; Relay Timer with ATmega8 AVR MCU </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-development-board/avr-development-board-assembly-instructions/" title="AVR Development Board &#8211; Assembly Instructions">AVR Development Board &#8211; Assembly Instructions </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/" title="RF Communication Between Microcontrollers &#8211; Part II">RF Communication Between Microcontrollers &#8211; Part II </a></li>
+				<li><a href="http://extremeelectronics.co.in/avr-tutorials/programming-in-c-tips-for-embedded-development/" title="Programming in C &#8211; Tips for Embedded Development.">Programming in C &#8211; Tips for Embedded Development. </a></li>
+				</ul>
+		</li>
+<li id="get-recent-comments" class="widget widget_get_recent_comments"><h2 class="widgettitle">Comments</h2>
+<div id="get_recent_comments_wrap"><ul>	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3408" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> @Avinash Cool down! My fault. Sorry
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3407" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">AVR Micro</a>:
+  </strong> Nice project! I am just about starting a similar RF project.
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-%e2%80%93-part-iii/#comment-3402" title="RF Communication Between Microcontrollers – Part III, January 17, 2010">bittusrk</a>:
+  </strong> is it really necessary to invert the data?
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/interfacing-ds1307-rtc-chip-with-avr-microcontroller/#comment-3392" title="Interfacing DS1307 RTC Chip with AVR Microcontroller, October 23, 2009">Mathivanan</a>:
+  </strong> Great!!! Thanks&#8230;. Fully Explained &#8230;.Very nice Comments&#8230;
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/rf-communication-between-microcontrollers-part-ii/#comment-3386" title="RF Communication Between Microcontrollers &#8211; Part II, August 11, 2009">siddhartha</a>:
+  </strong> we r waiting for th 3rd part !!!
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/rf/rf-communication-between-microcontrollers-part-i/#comment-3382" title="RF Communication Between Microcontrollers &#8211; Part I, July 7, 2009">vipul</a>:
+  </strong> good introduction&#8230;.keep up the good work
+</li>
+	<li>
+  <strong>
+    <a href="http://extremeelectronics.co.in/avr-tutorials/using-lcd-module-with-avrs/#comment-3381" title="Using LCD Module with AVRs, July 28, 2008">ritesh</a>:
+  </strong> ritesh Says: hey avinash…. good work man…do you have any tutorial with LCD connected to...
+</li>
+</ul></div></li>
+		</ul>
+		</div></div>
+
+</div>
+
+	 <div id="bottom">
+<div id="links">
+<p><strong>eXtreme Electronics &copy; 2007-2009 | <a href="http://extremeelectronics.co.in/privacy-policy/" rel="nofollow,noindex">See Our Privacy Policy</a> </strong> 
+</div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-3828390-2");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+  </div>
+</body>
+</html>

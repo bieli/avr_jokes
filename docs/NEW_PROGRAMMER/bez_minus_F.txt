@@ -1,0 +1,231 @@
+$ sudo avrdude  -p m8 -P avrdoper -c stk500v2 -U eeprom:r:/tmp/1231.hex:i -vvvv 
+
+avrdude: Version 5.5, compiled on Jan 28 2009 at 10:40:52
+         Copyright (c) 2000-2005 Brian Dean, http://www.bdmicro.com/
+
+         System wide configuration file is "/etc/avrdude.conf"
+         User configuration file is "/home/mbielak/.avrduderc"
+
+         Using Port            : avrdoper
+         Using Programmer      : stk500v2
+Received 29 bytes data chunk of total 0
+Send: 7 bytes: 1b 01 00 01 0e 01 14  "......."
+Sending 7 bytes data chunk
+Received 29 bytes data chunk of total 17
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 01  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 0b  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 01  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 08  "."
+Receive: 1 bytes: 53  "S"
+Receive: 1 bytes: 54  "T"
+Receive: 1 bytes: 4b  "K"
+Receive: 1 bytes: 35  "5"
+Receive: 1 bytes: 30  "0"
+Receive: 1 bytes: 30  "0"
+Receive: 1 bytes: 5f  "_"
+Receive: 1 bytes: 32  "2"
+Receive: 1 bytes: 02  "."
+avrdude: stk500v2_getsync(): found STK500 programmer
+Received 29 bytes data chunk of total 0
+         AVR Part              : ATMEGA8
+         Chip Erase delay      : 10000 us
+         PAGEL                 : PD7
+         BS2                   : PC2
+         RESET disposition     : dedicated
+         RETRY pulse           : SCK
+         serial program mode   : yes
+         parallel program mode : yes
+         Timeout               : 200
+         StabDelay             : 100
+         CmdexeDelay           : 25
+         SyncLoops             : 32
+         ByteDelay             : 0
+         PollIndex             : 3
+         PollValue             : 0x53
+         Memory Detail         :
+
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           eeprom         4    20   128    0 no        512    0      0  9000  9000 0xff 0xff
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           flash         33    10    64    0 yes      8192   64    128  4500  4500 0xff 0x00
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           lfuse          0     0     0    0 no          1    0      0  2000  2000 0x00 0x00
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           hfuse          0     0     0    0 no          1    0      0  2000  2000 0x00 0x00
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           lock           0     0     0    0 no          1    0      0  2000  2000 0x00 0x00
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           calibration    0     0     0    0 no          4    0      0     0     0 0x00 0x00
+                                  Block Poll               Page                       Polled
+           Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+           ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+           signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+         Programmer Type : STK500V2
+         Description     : Atmel STK500 Version 2.x firmware
+         Programmer Model: STK500
+Send: 8 bytes: 1b 02 00 02 0e 03 90 86  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 02  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 01  "."
+Receive: 1 bytes: 16  "."
+Send: 8 bytes: 1b 03 00 02 0e 03 91 86  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 02  "."
+Receive: 1 bytes: 14  "."
+Send: 8 bytes: 1b 04 00 02 0e 03 92 82  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 04  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 04  "."
+Receive: 1 bytes: 15  "."
+         Hardware Version: 1
+         Firmware Version: 2.04
+Send: 8 bytes: 1b 05 00 02 0e 03 9a 8b  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 05  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: aa  "."
+Receive: 1 bytes: ba  "."
+         Topcard         : STK501
+Send: 8 bytes: 1b 06 00 02 0e 03 94 86  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 06  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 40  "@"
+Receive: 1 bytes: 53  "S"
+         Vtarget         : 6.4 V
+Send: 8 bytes: 1b 07 00 02 0e 03 98 8b  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 07  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 02  "."
+Receive: 1 bytes: 10  "."
+Send: 8 bytes: 1b 08 00 02 0e 03 95 89  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 08  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 1d  "."
+Send: 8 bytes: 1b 09 00 02 0e 03 96 8b  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 09  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 01  "."
+Receive: 1 bytes: 1d  "."
+Send: 8 bytes: 1b 0a 00 02 0e 03 97 89  "........"
+Sending 8 bytes data chunk
+Received 29 bytes data chunk of total 9
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 0a  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 03  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 02  "."
+Receive: 1 bytes: 1d  "."
+         Varef           : 0.0 V
+         Oscillator      : 1.229 MHz
+         SCK period      : 2.2 us
+
+Send: 18 bytes:
+1b 0b 00 0c 0e 10 c8 64  19 20 00 53 03 ac 53 ec   ".......d. .S..S."
+b7 63                                              ".c"
+Sending 18 bytes data chunk
+Received 29 bytes data chunk of total 8
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 0b  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 02  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 10  "."
+Receive: 1 bytes: c0  "."
+Receive: 1 bytes: cc  "."
+avrdude: stk500v2_command(): command failed
+avrdude: initialization failed, rc=-1
+         Double check connections and try again, or use -F to override
+         this check.
+
+Send: 9 bytes:
+1b 0c 00 03 0e 11 01 01  0b                        "........."
+Sending 9 bytes data chunk
+Received 29 bytes data chunk of total 8
+Receive: 1 bytes: 1b  "."
+Receive: 1 bytes: 0c  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 02  "."
+Receive: 1 bytes: 0e  "."
+Receive: 1 bytes: 11  "."
+Receive: 1 bytes: 00  "."
+Receive: 1 bytes: 0a  "."
+
+avrdude done.  Thank you.
+

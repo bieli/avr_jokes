@@ -1,0 +1,10 @@
+
+[Anjuta]
+Maximized=1
+Geometry=1680x978+0+0
+
+[File Loader]
+Files=file:///home/lancos/Progetti/PonyProg_Sourceforge/software/e2cmdw.cpp#12%%%file:///home/lancos/Progetti/PonyProg_Sourceforge/software/fusemdlg.h#1%%%file:///home/lancos/Progetti/PonyProg_Sourceforge/software/rs232int.cpp#1%%%file:///home/lancos/Progetti/PonyProg_Sourceforge/software/e2app.h#17%%%file:///home/lancos/Progetti/PonyProg_Sourceforge/software/globals.h#35%%%file:///home/lancos/Progetti/PonyProg_Sourceforge/software/rs232int.h#1%%%file:///home/lancos/Progetti/PonyProg_Sourceforge/software/e2app.cpp#1
+
+[Execution]
+Run in terminal=2

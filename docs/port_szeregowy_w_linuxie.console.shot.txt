@@ -1,0 +1,232 @@
+stty -F /dev/ttyUSB0 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+stty: /dev/ttyUSB0: No such file or directory
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ stty -F /dev/tty cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+Display all 325 possibilities? (y or n)
+tty    tty27  tty46  tty8   ttyb3  ttyc8  ttydd  ttyp2  ttyq7  ttyrc  ttysd  ttyu2  ttyv7  ttywc  ttyy1  ttyz6
+tty0   tty28  tty47  tty9   ttyb4  ttyc9  ttyde  ttyp3  ttyq8  ttyrd  ttyse  ttyu3  ttyv8  ttywd  ttyy2  ttyz7
+tty1   tty29  tty48  ttya0  ttyb5  ttyca  ttydf  ttyp4  ttyq9  ttyre  ttysf  ttyu4  ttyv9  ttywe  ttyy3  ttyz8
+tty10  tty3   tty49  ttya1  ttyb6  ttycb  ttye0  ttyp5  ttyqa  ttyrf  ttyt0  ttyu5  ttyva  ttywf  ttyy4  ttyz9
+tty11  tty30  tty5   ttya2  ttyb7  ttycc  ttye1  ttyp6  ttyqb  ttys0  ttyt1  ttyu6  ttyvb  ttyx0  ttyy5  ttyza
+tty12  tty31  tty50  ttya3  ttyb8  ttycd  ttye2  ttyp7  ttyqc  ttyS0  ttyt2  ttyu7  ttyvc  ttyx1  ttyy6  ttyzb
+tty13  tty32  tty51  ttya4  ttyb9  ttyce  ttye3  ttyp8  ttyqd  ttys1  ttyt3  ttyu8  ttyvd  ttyx2  ttyy7  ttyzc
+tty14  tty33  tty52  ttya5  ttyba  ttycf  ttye4  ttyp9  ttyqe  ttyS1  ttyt4  ttyu9  ttyve  ttyx3  ttyy8  ttyzd
+tty15  tty34  tty53  ttya6  ttybb  ttyd0  ttye5  ttypa  ttyqf  ttys2  ttyt5  ttyua  ttyvf  ttyx4  ttyy9  ttyze
+tty16  tty35  tty54  ttya7  ttybc  ttyd1  ttye6  ttypb  ttyr0  ttyS2  ttyt6  ttyub  ttyw0  ttyx5  ttyya  ttyzf
+tty17  tty36  tty55  ttya8  ttybd  ttyd2  ttye7  ttypc  ttyr1  ttys3  ttyt7  ttyuc  ttyw1  ttyx6  ttyyb  
+tty18  tty37  tty56  ttya9  ttybe  ttyd3  ttye8  ttypd  ttyr2  ttyS3  ttyt8  ttyud  ttyw2  ttyx7  ttyyc  
+tty19  tty38  tty57  ttyaa  ttybf  ttyd4  ttye9  ttype  ttyr3  ttys4  ttyt9  ttyue  ttyw3  ttyx8  ttyyd  
+tty2   tty39  tty58  ttyab  ttyc0  ttyd5  ttyea  ttypf  ttyr4  ttys5  ttyta  ttyuf  ttyw4  ttyx9  ttyye  
+tty20  tty4   tty59  ttyac  ttyc1  ttyd6  ttyeb  ttyq0  ttyr5  ttys6  ttytb  ttyv0  ttyw5  ttyxa  ttyyf  
+tty21  tty40  tty6   ttyad  ttyc2  ttyd7  ttyec  ttyq1  ttyr6  ttys7  ttytc  ttyv1  ttyw6  ttyxb  ttyz0  
+tty22  tty41  tty60  ttyae  ttyc3  ttyd8  ttyed  ttyq2  ttyr7  ttys8  ttytd  ttyv2  ttyw7  ttyxc  ttyz1  
+tty23  tty42  tty61  ttyaf  ttyc4  ttyd9  ttyee  ttyq3  ttyr8  ttys9  ttyte  ttyv3  ttyw8  ttyxd  ttyz2  
+tty24  tty43  tty62  ttyb0  ttyc5  ttyda  ttyef  ttyq4  ttyr9  ttysa  ttytf  ttyv4  ttyw9  ttyxe  ttyz3  
+tty25  tty44  tty63  ttyb1  ttyc6  ttydb  ttyp0  ttyq5  ttyra  ttysb  ttyu0  ttyv5  ttywa  ttyxf  ttyz4  
+tty26  tty45  tty7   ttyb2  ttyc7  ttydc  ttyp1  ttyq6  ttyrb  ttysc  ttyu1  ttyv6  ttywb  ttyy0  ttyz5  
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ stty -F /dev/tty0 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+stty: /dev/tty0: Permission denied
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/tty0 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+stty: /dev/tty0: wykonanie wszystkich żądanych operacji było niemożliwe
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/tty0 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+stty: /dev/tty0: wykonanie wszystkich żądanych operacji było niemożliwe
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/s cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+scd0        sda2        sda7        sg0         snapshot    sr0         stdout      
+sda         sda5        sequencer   sg1         snd/        stderr      
+sda1        sda6        sequencer2  shm/        sndstat     stdin       
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/tty cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+Display all 325 possibilities? (y or n)
+tty    tty27  tty46  tty8   ttyb3  ttyc8  ttydd  ttyp2  ttyq7  ttyrc  ttysd  ttyu2  ttyv7  ttywc  ttyy1  ttyz6
+tty0   tty28  tty47  tty9   ttyb4  ttyc9  ttyde  ttyp3  ttyq8  ttyrd  ttyse  ttyu3  ttyv8  ttywd  ttyy2  ttyz7
+tty1   tty29  tty48  ttya0  ttyb5  ttyca  ttydf  ttyp4  ttyq9  ttyre  ttysf  ttyu4  ttyv9  ttywe  ttyy3  ttyz8
+tty10  tty3   tty49  ttya1  ttyb6  ttycb  ttye0  ttyp5  ttyqa  ttyrf  ttyt0  ttyu5  ttyva  ttywf  ttyy4  ttyz9
+tty11  tty30  tty5   ttya2  ttyb7  ttycc  ttye1  ttyp6  ttyqb  ttys0  ttyt1  ttyu6  ttyvb  ttyx0  ttyy5  ttyza
+tty12  tty31  tty50  ttya3  ttyb8  ttycd  ttye2  ttyp7  ttyqc  ttyS0  ttyt2  ttyu7  ttyvc  ttyx1  ttyy6  ttyzb
+tty13  tty32  tty51  ttya4  ttyb9  ttyce  ttye3  ttyp8  ttyqd  ttys1  ttyt3  ttyu8  ttyvd  ttyx2  ttyy7  ttyzc
+tty14  tty33  tty52  ttya5  ttyba  ttycf  ttye4  ttyp9  ttyqe  ttyS1  ttyt4  ttyu9  ttyve  ttyx3  ttyy8  ttyzd
+tty15  tty34  tty53  ttya6  ttybb  ttyd0  ttye5  ttypa  ttyqf  ttys2  ttyt5  ttyua  ttyvf  ttyx4  ttyy9  ttyze
+tty16  tty35  tty54  ttya7  ttybc  ttyd1  ttye6  ttypb  ttyr0  ttyS2  ttyt6  ttyub  ttyw0  ttyx5  ttyya  ttyzf
+tty17  tty36  tty55  ttya8  ttybd  ttyd2  ttye7  ttypc  ttyr1  ttys3  ttyt7  ttyuc  ttyw1  ttyx6  ttyyb  
+tty18  tty37  tty56  ttya9  ttybe  ttyd3  ttye8  ttypd  ttyr2  ttyS3  ttyt8  ttyud  ttyw2  ttyx7  ttyyc  
+tty19  tty38  tty57  ttyaa  ttybf  ttyd4  ttye9  ttype  ttyr3  ttys4  ttyt9  ttyue  ttyw3  ttyx8  ttyyd  
+tty2   tty39  tty58  ttyab  ttyc0  ttyd5  ttyea  ttypf  ttyr4  ttys5  ttyta  ttyuf  ttyw4  ttyx9  ttyye  
+tty20  tty4   tty59  ttyac  ttyc1  ttyd6  ttyeb  ttyq0  ttyr5  ttys6  ttytb  ttyv0  ttyw5  ttyxa  ttyyf  
+tty21  tty40  tty6   ttyad  ttyc2  ttyd7  ttyec  ttyq1  ttyr6  ttys7  ttytc  ttyv1  ttyw6  ttyxb  ttyz0  
+tty22  tty41  tty60  ttyae  ttyc3  ttyd8  ttyed  ttyq2  ttyr7  ttys8  ttytd  ttyv2  ttyw7  ttyxc  ttyz1  
+tty23  tty42  tty61  ttyaf  ttyc4  ttyd9  ttyee  ttyq3  ttyr8  ttys9  ttyte  ttyv3  ttyw8  ttyxd  ttyz2  
+tty24  tty43  tty62  ttyb0  ttyc5  ttyda  ttyef  ttyq4  ttyr9  ttysa  ttytf  ttyv4  ttyw9  ttyxe  ttyz3  
+tty25  tty44  tty63  ttyb1  ttyc6  ttydb  ttyp0  ttyq5  ttyra  ttysb  ttyu0  ttyv5  ttywa  ttyxf  ttyz4  
+tty26  tty45  tty7   ttyb2  ttyc7  ttydc  ttyp1  ttyq6  ttyrb  ttysc  ttyu1  ttyv6  ttywb  ttyy0  ttyz5  
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/tty1 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+stty: /dev/tty1: wykonanie wszystkich żądanych operacji było niemożliwe
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/tty1 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts 
+stty: /dev/tty1: wykonanie wszystkich żądanych operacji było niemożliwe
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/tty1 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr
+stty: /dev/tty1: wykonanie wszystkich żądanych operacji było niemożliwe
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo stty -F /dev/stty1 cs8 115200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ modprobe stty
+FATAL: Module stty not found.
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$  setserial -a /dev/ttyS3
+/dev/ttyS3, Line 3, UART: unknown, Port: 0x02e8, IRQ: 3
+	Baud_base: 115200, close_delay: 50, divisor: 0
+	closing_wait: 3000
+	Flags: spd_normal
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -a /dev/ttyS0
+/dev/ttyS0, Line 0, UART: 16550A, Port: 0x03f8, IRQ: 4
+	Baud_base: 115200, close_delay: 50, divisor: 0
+	closing_wait: 3000
+	Flags: spd_normal skip_test
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -a /dev/ttyS0
+/dev/ttyS0, Line 0, UART: 16550A, Port: 0x03f8, IRQ: 4
+	Baud_base: 115200, close_delay: 50, divisor: 0
+	closing_wait: 3000
+	Flags: spd_normal skip_test
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -a /dev/ttyS0
+/dev/ttyS0, Line 0, UART: 16550A, Port: 0x03f8, IRQ: 4
+	Baud_base: 115200, close_delay: 50, divisor: 0
+	closing_wait: 3000
+	Flags: spd_normal skip_test
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ man setserial
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ man setserial -G
+No manual entry for -G
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -g /dev/ttyS0
+/dev/ttyS0, UART: 16550A, Port: 0x03f8, IRQ: 4
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -g /dev/ttyS0
+/dev/ttyS0, UART: 16550A, Port: 0x03f8, IRQ: 4
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -g /dev/ttyS1
+/dev/ttyS1, UART: unknown, Port: 0x02f8, IRQ: 3
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -g /dev/ttyS2
+/dev/ttyS2, UART: unknown, Port: 0x03e8, IRQ: 4
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -g /dev/ttyS0
+/dev/ttyS0, UART: 16550A, Port: 0x03f8, IRQ: 4
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ minicom
+Program minicom nie jest obecnie zainstalowany.  Można go zainstalować wpisując:
+sudo apt-get install minicom
+bash: minicom: polecenie nieodnalezione
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo apt-get install minicom
+Czytanie list pakietów... Gotowe
+Budowanie drzewa zależności       
+Odczyt informacji o stanie... Gotowe
+Następujące pakiety zostały zainstalowane automatycznie i nie są już więcej wymagane:
+  linux-headers-2.6.24-19-generic mozilla-firefox-locale-pl-pl libtorrent10 libschroedinger-0.1-0 g++-4.1 libmp4v2-0
+  python2.4-minimal python2.4 libstdc++6-4.1-dev tango-icon-theme libx264-54 tango-icon-theme-extras libcrypto++6
+  libiso9660-4 libipoddevice0 python-wxversion icedtea-java7-bin linux-headers-2.6.24-19 libungif4g
+Aby je usunąć należy użyć "apt-get autoremove".
+Polecane pakiety:
+  lrzsz
+Zostaną zainstalowane następujące NOWE pakiety:
+  minicom
+0 aktualizowanych, 1 nowo instalowanych, 0 usuwanych i 0 nieaktualizowanych.
+Konieczne pobranie 173kB archiwów.
+Po tej operacji zostanie dodatkowo użyte 1126kB miejsca na dysku.
+Pob: 1 http://pl.archive.ubuntu.com hardy/main minicom 2.3~rc1-2 [173kB]
+Pobrano 173kB w 2s (59,2kB/s)   
+Zaznaczenie poprzednio niezaznaczonego pakietu minicom.
+(Odczytywanie bazy danych ... 197949 plików i katalogów obecnie zainstalowanych.)
+Rozpakowanie minicom (z .../minicom_2.3~rc1-2_i386.deb) ...
+Konfigurowanie minicom (2.3~rc1-2) ...
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ minicom 
+
+
+Witaj w minicom-ie 2.3-rc1                                                                   
+                                                                                             
+OPCJE: I18n                                                                                  
+Skomilowany dnia Dec 10 2007, 10:36:19.                                                      
+Port /dev/tty8                                                                               
+                                                                                             
+              Wciśnij CTRL-A Z po pomoc na temat specjalnych klawiszy                        
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+                                                                                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ CTRL-A Z po pomoc |115200 8N1 | NOR | Minicom 2.3-rc | VT102 |      Offline                                          
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -a /dev/ttyS0
+/dev/ttyS0, Line 0, UART: 16550A, Port: 0x03f8, IRQ: 4
+        Baud_base: 115200, close_delay: 50, divisor: 0
+        closing_wait: 3000
+        Flags: spd_normal skip_test
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial /dev/ttyS0 autoconfig
+Cannot autoconfigure port: Operation not permitted
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo setserial /dev/ttyS0 autoconfig
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ setserial -a /dev/ttyS0
+/dev/ttyS0, Line 0, UART: 16550A, Port: 0x03f8, IRQ: 4
+        Baud_base: 115200, close_delay: 50, divisor: 0
+        closing_wait: 3000
+        Flags: spd_normal skip_test
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ ttylog
+Program ttylog nie jest obecnie zainstalowany.  Można go zainstalować wpisując:
+sudo apt-get install ttylog
+bash: ttylog: polecenie nieodnalezione
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ sudo apt-get install ttylog
+Czytanie list pakietów... Gotowe
+Budowanie drzewa zależności       
+Odczyt informacji o stanie... Gotowe
+Następujące pakiety zostały zainstalowane automatycznie i nie są już więcej wymagane:
+  linux-headers-2.6.24-19-generic mozilla-firefox-locale-pl-pl libtorrent10 libschroedinger-0.1-0 g++-4.1 libmp4v2-0
+  python2.4-minimal python2.4 libstdc++6-4.1-dev tango-icon-theme libx264-54 tango-icon-theme-extras libcrypto++6
+  libiso9660-4 libipoddevice0 python-wxversion icedtea-java7-bin linux-headers-2.6.24-19 libungif4g
+Aby je usunąć należy użyć "apt-get autoremove".
+Zostaną zainstalowane następujące NOWE pakiety:
+  ttylog
+0 aktualizowanych, 1 nowo instalowanych, 0 usuwanych i 0 nieaktualizowanych.
+Konieczne pobranie 5980B archiwów.
+Po tej operacji zostanie dodatkowo użyte 61,4kB miejsca na dysku.
+Pob: 1 http://pl.archive.ubuntu.com hardy/universe ttylog 0.1.b-4 [5980B]
+Pobrano 5980B w 0s (24,6kB/s)
+Zaznaczenie poprzednio niezaznaczonego pakietu ttylog.
+(Odczytywanie bazy danych ... 198007 plików i katalogów obecnie zainstalowanych.)
+Rozpakowanie ttylog (z .../ttylog_0.1.b-4_i386.deb) ...
+Konfigurowanie ttylog (0.1.b-4) ...
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ cat /dev/ttyS0
+
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ ttylog
+ttylog: no params. try ttylog -h
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ ttylog -h
+ttylog version 0.1.a. Programmed by Tibor Koleszar <oldw@debian.org>
+Usage: 
+ -h, --help	This help
+ -v, --version	Version number
+ -b, --baud	Baud rate
+ -d, --device	Serial device (eg. /dev/ttyS1)
+ -f, --flush	Flush output
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ ttylog -b -d /dev/ttyS0 -f
+ttylog: invalid baud rate -d
+bieli@edyta-desktop:~/Pulpit/robots/AVR_GCC/stk200_deploy$ ttylog -b 9600 -d /dev/ttyS0 -f
+
+
+nasluchuje danych na porcie
+
+
