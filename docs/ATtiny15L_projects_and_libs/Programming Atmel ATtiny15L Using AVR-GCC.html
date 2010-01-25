@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0045)http://www.lightner.net/avr/ATtinyAvrGcc.html -->
+<HTML lang="en-US" xmlns="http://www.w3.org/1999/xhtml"><HEAD><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<META name="keywords" content="avr-gcc AVR ATtiny Atmel embeedded programming">
+	<META name="description" content="Programming Atmel ATtiny15L Using AVR-GCC">
+	
+	<TITLE>Programming Atmel ATtiny15L Using AVR-GCC</TITLE>  
+</HEAD><HEAD>
+<STYLE type="text/css">
+<!--
+	BODY {
+		background-image: url("/images/ScrippsPierLaJolla.jpg");
+		background-repeat: no-repeat; background-position: top center;
+		background-attachment:fixed; background-color:#404040";
+	}
+	TD, TH, P, I, EM {
+		font-size: 9pt;
+		font-family: serif, "MS Serif", "Times New Roman";
+	}
+	.text { font-family: courier }
+	H1 { font-size: 18pt }
+	H2 { font-size: 14pt }
+	H3 { font-size: 11pt }
+	H4 { font-size: 9pt }
+	.cmds, SELECT { font-size: 9pt; }
+-->
+</STYLE>
+</HEAD><BODY bgcolor="#404040">
+<CENTER>
+<TABLE border="0" width="800" bgcolor="white">
+<TBODY><TR>
+<TD>&nbsp;</TD>
+<TD text="#000000" align="left" valign="top">
+
+<!-- ************************************************************************** -->
+
+
+
+<H1>
+<IMG src="./Programming Atmel ATtiny15L Using AVR-GCC_files/ATtinySerProg192.jpg" align="right">
+Programming Atmel ATtiny15L Using AVR-GCC
+</H1>  
+
+<P>
+There seems to be a lot of interest in this based on the email I've
+received.  I've put together a distribution for Windows which I use for
+progamming ATtiny15L parts using avr-gcc.  The techniques shown should
+also work for other AVR microcontrollers <EM>without </EM>on-chip SRAM,
+such as the ATtiny12.
+
+</P><P>This technique also was described in an article in
+<A href="http://www.circuitcellar.com/">Circuit Cellar Magazine</A>
+(#192, p. 20, July 2006) named
+<A href="http://www.circuitcellar.com/magazine/192toc.htm">Tiny AVR Serial Port Programmer</A>.
+The <A href="http://www.lightner.net/avr/ATtiny/schematic/">schematics and PCB design files</A> are
+available on this Web site.
+
+</P><P>Take a look at this 3.2 Mbyte ZIP file, which should have almost
+everything you need...
+<IMG src="./Programming Atmel ATtiny15L Using AVR-GCC_files/avr-logo1.gif" align="right">
+
+</P><P>&nbsp;&nbsp;&nbsp;&nbsp;<A href="http://www.lightner.net/avr/ATtiny.zip">http://www.lightner.net/avr/ATtiny.zip</A>
+
+</P><P>If you want, you can browse the
+<A href="http://www.lightner.net/avr/ATtiny/">source code</A> and
+<A href="http://www.lightner.net/avr/ATtiny/">"avr-gcc" toolset binaries</A>
+without downloading the entire ZIP archive.
+
+</P><P>See the <A href="http://www.lightner.net/avr/ATtiny/README.txt">README.txt</A> file in the
+distribution's base directory for ZIP file installation instructions
+and a different <A href="http://www.lightner.net/avr/ATtiny/projects/README.txt">README.txt</A>
+file in the "projects" subdirectory for background on the
+methods used.  Also read the comments at the beginning of the "<A href="http://www.lightner.net/avr/ATtiny/projects/Makefile">Makefile</A>".
+
+</P><P>The Makefile logic is setup for the older "gcc 2.95" so I've included
+a complete binary distribution of this for Windows.  (This also works
+under Linux, if you have the gcc 2.95 avr-gcc distribution, like I do.)
+There are some good reasons for using the older version of "avr-gcc",
+including the fact that the parameter passing scheme for 8-bit values
+is much more efficient, when compared to "avr-gcc" 3.x and 4.x.
+
+</P><P>IMPORTANT NOTE: You will have to adapt the "make load" logic for your own programmer.
+
+</P><P>There is also "make" logic for "make sim" and "make wave" which uses my
+own "home grown" AVR simulator.  This C-based AVR simulator
+runs <EM>faster</EM> than realtime on modern PC processors
+(under both Linux and Windows), but I don't distribute it
+because it's writtin in ugly, blazingly fast, C-code with zero
+documentation.  It can output VCD "waveform" files for viewing using <A href="http://www.geocities.com/SiliconValley/Campus/3216/GTKWave/gtkwave-win32.html">WinWave</A>,
+an amazing bit of open-source software.
+
+</P><P>Please read the comments in the "Makefile" regarding the ATtiny
+"OSCCAL" oscillator calibration byte.  My custom-made AVR PC parallel
+port programmer reads and inserts this value into program memory such
+that the ATtiny part can automatically calibrate itself after reset.
+This makes "bit banged" UARTs work perfectly.
+
+</P><P>I'm happy to answer questions, but be warned, this stuff is
+<EM>not</EM> for "newbies".  Much of this is based on knowing AVR assembly
+code very well, and knowing exactly how "avr-gcc" converts C into AVR
+machine code.
+
+</P><HR>
+Send mail to Bruce D. Lightner at <A href="mailto:lightner@lightner.net">lightner@lightner.net</A> or visit his
+personal Web page at
+<A href="http://www.lightner.net/lightner/bruce.html">www.lightner.net/lightner/bruce.html</A>.
+
+<BR>
+
+<P><I>
+Last updated
+Thu Jan 18 09:43:55 PST 2007
+</I>
+
+
+<!-- ************************************************************************** -->
+
+
+</P></TD>
+<TD>&nbsp;</TD>
+<TD align="right" valign="top">
+<P>
+<SCRIPT type="text/javascript"><!--
+google_ad_client = "pub-6658342594637102";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text_image";
+//google_ad_type = "text";
+//2006-11-29: avr
+			google_ad_channel = "8187837123";
+//google_color_border = "336699";
+//google_color_bg = "FFFFFF";
+//google_color_link = "0000FF";
+//google_color_text = "000000";
+//google_color_url = "008000";
+//--></SCRIPT>
+<SCRIPT type="text/javascript" src="./Programming Atmel ATtiny15L Using AVR-GCC_files/show_ads.js">
+</SCRIPT><SCRIPT src="./Programming Atmel ATtiny15L Using AVR-GCC_files/test_domain.js"></SCRIPT><SCRIPT>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</SCRIPT><IFRAME name="google_ads_frame" width="160" height="600" frameborder="0" src="http://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-6658342594637102&format=160x600_as&output=html&h=600&w=160&channel=8187837123&ad_type=text_image&ea=0&flash=10.0.15&url=http%3A%2F%2Fwww.lightner.net%2Favr%2FATtinyAvrGcc.html&dt=1264377490826&correlator=1264377490829&frm=0&ga_vid=2111951643.1264377491&ga_sid=1264377491&ga_hid=1041555456&ga_fc=0&u_tz=60&u_his=8&u_java=1&u_h=800&u_w=1280&u_ah=800&u_aw=1280&u_cd=24&u_nplug=15&u_nmime=261&biw=1280&bih=640&ref=http%3A%2F%2Fwww.google.pl%2Fsearch%3Fsourceid%3Dchrome%26ie%3DUTF-8%26q%3Dattiny15%2Bavr%2Bgcc%2Bprogramming&fu=0&ifi=1&dtd=15" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></IFRAME>
+&nbsp;
+
+</P><P>
+<SCRIPT type="text/javascript"><!--
+google_ad_client = "pub-6658342594637102";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text_image";
+//google_ad_type = "text";
+//2006-11-29: avr
+			google_ad_channel = "8187837123";
+//google_color_border = "336699";
+//google_color_bg = "FFFFFF";
+//google_color_link = "0000FF";
+//google_color_text = "000000";
+//google_color_url = "008000";
+//--></SCRIPT>
+<SCRIPT type="text/javascript" src="./Programming Atmel ATtiny15L Using AVR-GCC_files/show_ads.js">
+</SCRIPT><SCRIPT>google_protectAndRun("ads_core.google_render_ad", google_handleError, google_render_ad);</SCRIPT><IFRAME name="google_ads_frame" width="160" height="600" frameborder="0" src="http://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-6658342594637102&format=160x600_as&output=html&h=600&w=160&channel=8187837123&ad_type=text_image&ea=0&flash=10.0.15&url=http%3A%2F%2Fwww.lightner.net%2Favr%2FATtinyAvrGcc.html&dt=1264377490846&prev_fmts=160x600_as&correlator=1264377490829&pv_ch=8187837123%2B&frm=0&ga_vid=2111951643.1264377491&ga_sid=1264377491&ga_hid=1041555456&ga_fc=0&u_tz=60&u_his=8&u_java=1&u_h=800&u_w=1280&u_ah=800&u_aw=1280&u_cd=24&u_nplug=15&u_nmime=261&biw=1265&bih=640&ref=http%3A%2F%2Fwww.google.pl%2Fsearch%3Fsourceid%3Dchrome%26ie%3DUTF-8%26q%3Dattiny15%2Bavr%2Bgcc%2Bprogramming&fu=0&ifi=2&dtd=9" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no"></IFRAME>
+</P></TD>
+
+</TR>
+</TBODY></TABLE>
+
+
+
+</CENTER></BODY></HTML>
