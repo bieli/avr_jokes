@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+
+<TITLE>ATtiny.com | Controlling LED displays with an AVR</TITLE>
+
+<LINK REL="SHORTCUT ICON" HREF="http://members.ziggo.nl/electro1/avr/res.ico">
+
+<meta name="Author" content="RES">
+<meta name="GENERATOR" content="Notepad">
+<meta name="KeyWords" content="AVR,7 segments,EEPROM,FRAM,TWI,ATtiny,ATmega,programmer,SP12,flash,forum,PIC,multiplexing,display,dotmatrix,LED,transistor,microcontroller,AVRfreaks,robots">
+
+<STYLE>
+#home {position:absolute; left:70; top:10}
+#back {position:absolute; left:180; top:10}
+#forw {position:absolute; left:290; top:10}
+#data {position:absolute; left:20; top:240}
+#7segm1 {position:absolute; left:20; top:260}
+#info {position:absolute; left:20; top:540; width:200; height:208; font-family:Microsoft Sans Serif}
+#wares {position:absolute; left:20; top:835; width:200; height:208; font-family:Microsoft Sans Serif}
+#list {position:absolute; left:600; top:250; width:280; height:169; font-family:Microsoft Sans Serif; background-color:#B5BDAD}
+#two7segm {position:absolute; left:330; top:850}
+#digi {position:absolute; left:220; top:1100}
+#data2{position:absolute; left:20; top:1250}
+#7segm2 {position:absolute; left:120; top:1280}
+#info2 {position:absolute; left:20; top:1510; width:200; height:208; font-family:Microsoft Sans Serif}
+#list2 {position:absolute; left:670; top:1280; width:150; height:145; font-family:Microsoft Sans Serif; background-color:#B5BDAD}
+</STYLE>
+</HEAD>
+
+<BODY BACKGROUND="circuit.jpg" BGPROPERTIES="fixed">
+
+<SCRIPT LANGUAGE="JavaScript">var GheoStats='Atmel'</SCRIPT>
+<SCRIPT SRC="http://Gheos.net/counter2.js"></SCRIPT>
+
+<DIV ID="home"><A HREF="index.htm"><IMG SRC="home.gif" BORDER="0"></A></DIV>
+<DIV ID="back"><A HREF="displays.htm"><IMG SRC="back.gif" BORDER="0"></A></DIV>
+<DIV ID="forw"><A HREF="eventcounter.htm"><IMG SRC="forw.gif" BORDER="0"></A></DIV>
+
+<BR><BR><BR><CENTER><SCRIPT SRC="links.js"></SCRIPT><BR><BR><FONT FACE="Microsoft Sans Serif" SIZE="7"><B>Controlling 7-segments LED displays</B></FONT><BR><FONT FACE="Microsoft Sans Serif" SIZE="1">Controlling 7-segment LED displays in different ways with an AT90S1200 microcontroller</FONT></CENTER>
+
+<DIV ID="data"><FONT FACE="Microsoft Sans Serif" SIZE="2"><IMG SRC="pdf.gif" BORDER="0"> The <A HREF="http://www.nxp.com/acrobat_download/datasheets/74HC_HCT595_4.pdf"><U>74HC595</U></A> datasheet.</FONT></DIV>
+
+<DIV ID="7segm1"><CENTER><IMG SRC="two7segm.gif"></CENTER></DIV>
+
+<DIV ID="info"><TABLE WIDTH="200" BORDER="0" CELLPADDING="3"><TR><TD><FONT FACE="Microsoft Sans Serif" SIZE="2"><B>Controlling two displays:</B><BR><BR>There are several possibilities to connect a 7-segments LED display to a microcontroller.<BR>Directly to the i/o's of the microcontroller, or a more economic way, with a shift-register e.g. the 74HC595 and multiplex the displays. With a shift register you only need 3 i/o's and you have 8 outputs. Another possibility is the 74LS247 a BCD -> 7-segments driver IC, this takes 4 i/o's. The diagram shows two 7-segments LED displays controlled by only 5 i/o's. Ofcourse you can add more displays. With a minimum of components you're able to control a maximum of displays. The circuit consumes about 20 mA with TDSL-5160 (Vishay) 7-segments LED displays.<BR><BR><B>Download: </B><A HREF="software/upcounter.hex"><U>upcounter.hex</U></A> and <A HREF="software/upcounter.eep"><U>upcounter.eep</U></A></FONT></TD></TR></TABLE></DIV>
+
+<DIV ID="list"><TABLE WIDTH="280" BORDER="0" CELLPADDING="3"><TR><TD BGCOLOR="#E7E7E7">
+<FONT SIZE="2" FACE="Microsoft Sans Serif"><CENTER><B>The many posibilities....</B></FONT></CENTER><FONT FACE="Microsoft Sans Serif" SIZE="1"><BR>Non Multiplexed:<BR><BR>
+1. One or two displays directly to the i/o's<BR>
+2. One display with a 74LS247<BR>
+3. Two displays with a 74HC595 and two 74LS247<BR><BR>
+Multiplexed:<BR><BR>
+1. Two displays with a 74LS247 and 2 i/o's<BR>
+2. Two displays with a 74HC595 and 2 NPN/PNP *<BR>
+3. With a special driver IC e.g. MAX7219<BR>
+</FONT></TD></TR></TABLE></DIV>
+
+<DIV ID="two7segm"><CENTER><IMG SRC="two7smux.jpg"></CENTER></DIV>
+
+<DIV ALIGN="center" ID="digi"><BR><BR><IMG SRC="digits.gif"><BR></DIV>
+
+<DIV ID="data2"><FONT FACE="Microsoft Sans Serif" SIZE="2"><IMG SRC="pdf.gif" BORDER="0"> The <A HREF="software/TDSL5150-60.pdf"><U>TDSL5160</U></A> datasheet.</FONT></DIV>
+
+<DIV ID="7segm2"><CENTER><IMG SRC="one7segm.gif"></CENTER></DIV>
+
+<DIV ID="info2"><TABLE WIDTH="200" BORDER="0" CELLPADDING="3"><TR><TD><FONT FACE="Microsoft Sans Serif" SIZE="2"><B>Controlling one display:</B><BR><BR>If you look at the diagram, you can immidiatly see that this display isn't multiplexed because the Common Cathode is connected to ground. I made an upcounter, by using the EEPROM of the AVR, this makes the program pretty short. I also did put a so called 'lamp test' piece of code in the routine, easy for testing different kind of Common Cathode LED displays. Simply put the segments data into an EEPROM table, this saves a lot of program lines.<BR><BR><B>Download </B><A HREF="software/upcount.asm"><U>upcount.asm</U></A>.</FONT></TD></TR></TABLE></DIV>
+
+<DIV ID="list2"><TABLE WIDTH="150" BORDER="0" CELLPADDING="3"><TR><TD BGCOLOR="#E7E7E7">
+<FONT SIZE="2" FACE="Microsoft Sans Serif"><CENTER><B>Components:</B></FONT></CENTER><FONT FACE="Microsoft Sans Serif" SIZE="1"><BR>1x TDSL5160<BR>1x AT90S1200-12PI<BR>1x 7805<BR>1x 8MHz ceramic resonator<BR>1x 47uF/16V<BR>2x 100n multilayer<BR>1x 100n MKT<BR>1x 10k<BR>7x 1k</FONT></TD></TR></TABLE></DIV>
+
+</BODY>
+</HTML>

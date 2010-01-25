@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+URL = 'http://www.nws.noaa.gov/data/current_obs/KFNL.xml'
+
+import urllib2, signal
+from xml.dom import minidom
+
+
+signal.alarm(120)
+data = urllib2.urlopen(URL).read()
+xml = minidom.parseString(data)
+elem = xml.getElementsByTagName('temp_f')[0]
+temp = elem.childNodes[0].data
+
+fp = open('/tmp/temperature.txt', 'w')
+fp.write('%s\n' % temp)
+fp.close()

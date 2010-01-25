@@ -1,0 +1,218 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import struct
+import socket
+import select
+import string
+import time
+
+serverHost = ''
+serverPort = 3332
+modemline = '/dev/ttyS0'
+newLine = '\r\n'
+
+class connection:
+	def __init__(self, socket):
+		self.socket = socket
+		self.nvpairs = {}
+		self.socketData = ""
+
+	def fileno(self):
+		return(self.socket.fileno())
+
+	#  return 1 if more data to process.  return 0 for parent to discard conn
+	def process(self):
+		data = self.socket.recv(1024)
+		if len(data) < 1:			#  0-length read means socket closed
+			return(0)
+
+		self.socketData = self.socketData + data
+		while 1:
+			#  split the input by lines
+			pos = string.find(self.socketData, "\r")
+			pos2 = string.find(self.socketData, "\n")
+			if pos2 >= 0 and pos2 < pos: pos = pos2
+			if pos < 0: break
+			line = string.strip(self.socketData[:pos])
+			self.socketData = self.socketData[pos + 1:]
+			if len(line) < 1: continue
+
+			equal = string.find(line, '=')
+			if equal == -1:		#  no equal, process as a command
+				attr = 'do_' + string.upper(line)
+				if not hasattr(self, attr):
+					self.socket.send(('500 Unknown command "%s"' % line) + newLine)
+					continue
+				method = getattr(self, attr)
+				if not method():
+					self.close()
+					return(0)
+				return(1)
+
+			else:						#  equal, store it in 'nvpairs'
+				name = string.upper(string.strip(line[:equal]))
+				value = string.strip(line[equal + 1:])
+				self.nvpairs[name] = value
+		return(1)
+
+	def close(self):
+		self.socket.close()
+		self.socket = None
+
+	def do_HELP(self):
+		self.socket.send('200-Help follows...' + newLine)
+		self.socket.send('200-' + newLine)
+		self.socket.send('200-  HELP       #  Display this message' + newLine)
+		self.socket.send('200-  MESSAGE=<Message text>' + newLine)
+		self.socket.send('200-  EXPIRES=<seconds>' + newLine)
+		self.socket.send('200-  DISPLAY    #  Displays message above' + newLine)
+		self.socket.send('200-  CLEAR      #  Clears "missed calls"' + newLine)
+		self.socket.send('200-  NODISPLAY  #  Clears messages.' + newLine)
+		self.socket.send('200-  QUIT       #  Close connection' + newLine)
+		self.socket.send('200-' + newLine)
+		self.socket.send('200 END OF HELP' + newLine)
+		return(1)
+
+	def do_QUIT(self):
+		self.socket.send('200 Thanks for stopping by...' + newLine)
+		return(0)
+
+	def do_NODISPLAY(self):
+		global msgTxt, msgExpires
+		msgTxt = ''
+		msgExpires = 0
+		return(1)
+
+	def do_CLEAR(self):
+		global callCount
+		callCount = 0
+		return(1)
+
+	#  process command from client, return 0 if socket should be closed
+	def do_DISPLAY(self):
+		if not self.nvpairs.has_key('MESSAGE'):
+			self.socket.send('400 "MESSAGE=<message>" required.' + newLine)
+			return(1)
+
+		expires = time.time() + 60
+		if self.nvpairs.has_key('EXPIRES'):
+			try:
+				tmp = string.atoi(self.nvpairs['EXPIRES']) + time.time()
+			except:
+				pass
+		global msgTxt, msgExpires
+		msgTxt = self.nvpairs['MESSAGE']
+		msgExpires = expires
+
+		self.nvpairs = {}
+		return(1)
+
+def setupline(fd):
+	import termios
+	print fd
+	new = termios.tcgetattr(fd)
+	new[0] = termios.IGNBRK | termios.IGNPAR
+	new[1] = 0
+	new[2] = termios.PARENB | termios.CLOCAL | termios.CS7 | termios.CREAD \
+			| termios.B9600
+	new[3] = 0
+	new[4] = termios.B9600
+	new[5] = termios.B9600
+	termios.tcsetattr(fd, termios.TCSANOW, new)
+
+#  set up modem lines
+modem = open(modemline, 'w+')
+modemfd = modem.fileno()
+setupline(modemfd)
+
+betaHeader = struct.pack('20xB3sB2sBBc', 0x01, 'Z00', 0x02, 'AA', 0x1b, 0x20,
+		'b')
+betaExtendedHeader = struct.pack('10xs10xs',
+		']!Z00]"A$AAU000AFF00BAL04A1FF00]#0593]"E2BA1]#0130]$', ']!Z00]"AB') + \
+		betaHeader
+betaFooter = struct.pack('B', 0x04)
+
+betaRed = ']<1'
+betaGreen = ']<2'
+betaAmber = ']<3'
+betaLightRed = ']<4'
+betaLightGreen = ']<5'
+betaBrown = ']<6'
+betaOrange = ']<7'
+betaYellow = ']<8'
+betaFiveRow = ']:1'
+betaSevenRow = ']:3'
+betaNewLine = ']-'
+
+#  open server port
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(( serverHost, serverPort ))
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+server.listen(10)
+clientList = []
+
+last = ''
+nameLast = ''
+callCount = 0
+lastCount = 0
+msgTxt = ''
+msgExpires = 0
+lastMsg = ''
+
+while 1:
+	tempInF = None
+	try:
+		file = '/tmp/temperature.txt'
+		#  only load the temp if it's been updated in the last hour
+		if (time.time() - os.stat(file).st_mtime) < 3600:
+			fp = open(file, 'r')
+			tempInF = string.strip(fp.readline())
+			fp.close()
+	except IOError: pass
+
+	local = time.localtime(time.time())
+	hour = time.strftime('%I', local)
+	if hour[0] == '0': hour = hour[1:]
+
+	if tempInF:
+		now = time.strftime('%%s%d %a %%s:%M %%s%%s', local) % ( betaGreen,
+				hour, betaAmber, tempInF )
+	else:
+		now = time.strftime('%d %a %%s:%M %p', local) % hour
+
+	if now != last or lastCount != callCount \
+			or lastMsg != msgTxt:
+		os.write(modemfd, betaExtendedHeader)
+		if msgExpires >= time.time():
+			os.write(modemfd, betaYellow);
+			os.write(modemfd, msgTxt)
+			os.write(modemfd, betaNewLine)
+		else:
+			msgTxt = ''
+			
+		os.write(modemfd, betaGreen)
+		os.write(modemfd, now)
+		os.write(modemfd, betaFooter)
+		last = now
+		lastMsg = msgTxt
+		lastCount = callCount
+
+	tosleep = 60 - time.localtime(time.time())[5]
+	if tosleep < 1: tosleep = 1
+
+	rlist = []
+	if server != None: rlist.append(server)
+	for client in clientList: rlist.append(client)
+	(rfdl, wfdl, efdl) = select.select(rlist, [], [], tosleep)
+
+	for sock in rfdl:
+		if sock == server:
+			conn, addr = server.accept()
+			clientList.append(connection(conn))
+			conn.send('200 BigBoardMessage server ready\r\n')
+
+		if isinstance(sock, connection):
+			if not sock.process():			#  false indicates socket done with
+				clientList.remove(sock)

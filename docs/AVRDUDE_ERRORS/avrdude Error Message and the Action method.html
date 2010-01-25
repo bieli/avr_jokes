@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>avrdude Error Message and the Action method</TITLE>
+<!-- AllowtelmethodAccess -->
+<LINK REL="STYLESHEET" TYPE="text/css">
+<STYLE TYPE = "text/css">
+<!--
+BODY { margin-left:2em; margin-right:2em; line-height:125%;}
+H4 { margin-top:2em; }
+LI { margin-top:1em; }
+H3 { color:white; background-color:green; font-weight:normal; font-size:120%; margin-top:3em; padding-left: 1em; }
+STRONG { color:red; }
+-->
+</STYLE>
+</HEAD>
+<BODY BACKGROUND="../../img/paper.gif" BGCOLOR="#FFF0E0" TEXT="#101010" ALINK="blue" VLINK="indigo">
+
+<TABLE WIDTH="100%" BORDER="0" CELLSPACING="0" CELLPADDING="1">
+<TR><TD VALIGN="TOP">
+<A HREF="../../index.html">Top Page</A>
+<A HREF="../index.html">Index</A>
+<A HREF="../../about_link.html">About Link</A>
+<SCRIPT SRC="../../mail-text.js" TYPE="text/javascript"></SCRIPT>
+<A HREF="../../mailform.cgi">Mail Form</A>
+<!--::MAILADDRESS::-->
+</TD></TR>
+</TABLE>
+
+<DIV ALIGN="CENTER">
+<H2>avrdude Error Message and the Action method</H2>
+</DIV>
+
+<P>
+<A HREF="index.html">→avrdude-GUI(Japanese)</A>
+</P>
+
+<TABLE BORDER=1 BGCOLOR="white">
+<TR>
+<TH>Error Message</TH><TH>Meaning and Cause</TH><TH>Method of Action etc.</TH>
+</TR><TR>
+<TD>avrdude: error: could not find USB device &quot;USBasp&quot; with vid=0x16c0 pid=0x5dc</TD>
+<TD>&quot;USBasp&quot; is not Connect</TD>
+<TD>Connect USBasp. Or Select other Programmer</TD>
+</TR><TR>
+<TD>avrdude: stk500_2_ReceiveMessage(): timeout</TD>
+<TD>Programmer is not Connect with serial port</TD>
+<TD>Connect Programmer with serial port. Or Select other Programmer, serial port</TD>
+</TR><TR>
+<TD>avrdude: avrdoper_open(): Device not found.</TD>
+<TD>AVR-Doper(HID mode) is not Connect</TD>
+<TD>Connect AVR-Doper. Or Select other Programmer</TD>
+</TR><TR>
+<TD>avrdude: error: programm enable: target doesn't answer. 1</TD>
+<TD>
+<UL>
+<LI>Not Connect Programmer with Target circuit<BR>
+<LI>ISP Connector is bad connection<BR>
+<LI>Target circuit power is OFF</TD>
+</UL>
+<TD>Connect ISP Programmer's Connector exactly. Turn On Target circuit power</TD>
+</TR><TR>
+<TD>avrdude: Device signature = 0xfffff
+avrdude: Yikes! Invalid device signature.</TD>
+<TD>Not read device signature</TD>
+<TD>Set it slow ISP clock</TD>
+</TR><TR>
+<TD>avrdude: verification error, first mismatch at byte 0x002a<BR>
+         0x31 != 0xb1</TD>
+<TD>Verify error</TD>
+<TD>It tries again. Set it slow ISP clock</TD>
+</TR><TR>
+<TD>avrdude: ser_open(): can't open device &quot;USB&quot;: File not found</TD>
+<TD>The port setting is different.</TD>
+<TD>Use <a href="index.html#download">avrdude-GUI version 1.0.5</a> and select 'usb'.</TD>
+</TR><TR>
+<TD></TD>
+<TD></TD>
+<TD></TD>
+</TR>
+</TABLE>
+
+
+
+</BODY>
+</HTML>
