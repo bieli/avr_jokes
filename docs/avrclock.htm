@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+
+<TITLE>ATtiny.com | White 7-segments clock ATtiny26</TITLE>
+
+<LINK REL="SHORTCUT ICON" HREF="../electro1/avr/res.ico">
+
+<meta name="Author" content="RES">
+<meta name="GENERATOR" content="Notepad">
+<meta name="KeyWords" content="white,AVR,clock,LED,segments,EEPROM,FRAM,ATtiny26,programmer,SP12,flash,forum,PIC,seven,shiftregister,multiplexing,display,dotmatrix,LED,transistor,microcontroller,AVRfreaks,robots">
+
+<STYLE>
+#home {position:absolute; left:70; top:10}
+#back {position:absolute; left:180; top:10}
+#forw {position:absolute; left:290; top:10}
+#data {position:absolute; left:20; top:250}
+#list {position:absolute; left:20; top:540; width:120; height:194; font-family:Microsoft Sans Serif; background-color:#B5BDAD}
+#diagram {position:absolute; left:120; top:270}
+#proto {position:absolute; left:300; top:900}
+#movie {position:absolute; left:250; top:1200}
+#info {position:absolute; left:20; top:780; width:200; height:208}
+#info2 {position:absolute; left:700; top:880; width:200; height:208}
+</STYLE>
+</HEAD>
+
+<BODY BACKGROUND="circuit.jpg" BGPROPERTIES="fixed">
+
+<SCRIPT LANGUAGE="JavaScript">var GheoStats='Atmel'</SCRIPT>
+<SCRIPT SRC="http://Gheos.net/counter2.js"></SCRIPT>
+
+<DIV ID="home"><A HREF="index.htm"><IMG SRC="home.gif" BORDER="0"></A></DIV>
+<DIV ID="back"><A HREF="7segm2.htm"><IMG SRC="back.gif" BORDER="0"></A></DIV>
+<DIV ID="forw"><IMG SRC="forw.gif" BORDER="0"></DIV>
+
+<BR><BR><BR><CENTER><SCRIPT SRC="links.js"></SCRIPT><BR><BR><FONT FACE="Microsoft Sans Serif" SIZE="7"><B>White 7-segments clock ATtiny26</B></FONT><BR><FONT FACE="Microsoft Sans Serif" SIZE="1">A four digit digital clock with fading seconds LED set- and dim function</FONT></CENTER>
+
+<DIV ID="data"><FONT FACE="Microsoft Sans Serif" SIZE="2"><IMG SRC="pdf.gif" BORDER="0"> Download here the <A HREF="http://www.atmel.com/dyn/resources/prod_documents/doc1477.pdf" TARGET="_blank"><U>ATtiny26</U></A> datasheet.</FONT></DIV>
+
+<DIV ID="list"><TABLE WIDTH="120" BORDER="0" CELLPADDING="3"><TR><TD BGCOLOR="#E7E7E7">
+<FONT SIZE="2" FACE="Microsoft Sans Serif"><CENTER><B>Part list</B></FONT></CENTER><FONT FACE="Microsoft Sans Serif" SIZE="1"><BR>
+1x ATtiny26<BR>
+1x xtal 4.096MHz<BR>
+2x 27pf ceramic<BR>
+4x 7-segment white CC<BR>
+2x pushbutton<BR>
+1x 78L05<BR>
+1x 47uF/16V electrolytic<BR>
+1x 0.1uF/16V tantalium<BR>
+1x 10k<BR>
+1x 100n multilayer<BR>
+8x 150 Ohm<BR>
+4x 6k8 Ohm<BR>
+4x BC327-25 PNP</FONT></TD></TR></TABLE></DIV>
+
+<DIV ID="diagram"><CENTER><A HREF="whiteclock.gif" ALT="Click on diagram, for diagram on white background" TARGET="_blank"><IMG SRC="whiteclock.gif" BORDER="0" ALT="Click on diagram, for diagram on white background"></A></CENTER></DIV>
+
+<DIV ID="proto"><IMG SRC="wit7segm.jpg"><BR><CENTER><FONT FACE="Microsoft Sans Serif" SIZE="1">Prototype of the white digital clock on a piece of veroboard (mux test)</FONT></CENTER><BR><BR></DIV>
+
+<DIV ID="movie"><object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/4ADq3Y7OGvk&hl=nl&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/4ADq3Y7OGvk&hl=nl&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object><CENTER><FONT FACE="Microsoft Sans Serif" SIZE="1">Short movie of the white LED clock</FONT></CENTER><BR><BR></DIV>
+
+<DIV ID="info"><TABLE WIDTH="200" BORDER="0" CELLPADDING="3"><TR><TD><FONT FACE="Microsoft Sans Serif" SIZE="2"><B>Features (BETA)</B><BR><BR>1. Select Hrs/Min or Min/Sec<BR>2. Time set/ready (single/fast-auto increment)<BR>3. Adjustable intensity (12 steps)<BR><BR><B>System information</B><BR><BR>ATtiny26 fuses: sp12 -wF11101111<BR>Refresh rate: 62.5 Hz<BR>Timer1 @ ck/64 (4.096 MHz)<BR>Timer overflow: 4 msec<BR>Software code: 403 words<BR><BR><B>White digital clock</B><BR><BR>A white seven segments digital clock based on the AVR ATtiny26 microcontroller. On the right you see the diagram of the clock, and below a picture of the prototype. The diagram is straight forward design, eight resistors to the segments, four small signal transistors with four basis resistors. The four 7 segments displays are multiplexed, the white LED in the middle of the displays is for indicating the seconds.<BR><BR><B>Download: </B><A HREF="software/avrclock.zip"><U>avrclock.zip</U></A> (BETA version! (update: 24 FEB 09)<BR><BR>Upload the *.hex file inside the avrclock.zip file into an ATtiny26 AVR microcontroller with <A HREF="programmer.htm" TARGET="_blank">this</A> programmer, and build the circuit, and you have a digital clock.<BR><BR><BR><CENTER><IMG SRC="uc.gif" BORDER="0"><BR><FONT FACE="Microsoft Sans Serif" SIZE="1">* BETA version! *</CENTER><BR><BR>Background music by Jean-Michel Jarre (Chronologie part 4)</FONT></FONT></TD></TR></TABLE><BR><BR></DIV>
+
+<DIV ID="info2"><TABLE WIDTH="200" BORDER="0" CELLPADDING="3"><TR><TD><FONT FACE="Microsoft Sans Serif" SIZE="2"><B>Operation of clock program (BETA)</B><BR><BR>
+The clock starts at 00.00 as hh.mm (Clock mode), with the two buttons the user can select between hh.mm (hours/minutes) or mm.ss (minutes/seconds)<BR>
+Holding down the left button for longer than 2 seconds will enter the Set mode. [SET] appears. When releasing the left button the program stays in Set mode. Now the user can alter the time (by increment) Left button is for setting the hours, right button is for setting the minutes. When holding down a button in the Set mode longer than 0.9 seconds, fast increment starts (countspeed of fast-increment is 0.1 second/digit)
+When buttons released for longer then 3 seconds, a ready [ rdy] message appears for 1 second, and the program returns into Clock mode.<BR>When holding down the left button when Set appears, after 2 seconds the program jumps into Dim mode. [DIM] appears. Release the left button for staying in Dim mode. Now the user can dim the display over 12 levels with the buttons. Left button for dimming display, right button for brighten display.</FONT></TD></TR></TABLE><BR><BR></DIV>
+
+<OBJECT DATA="chrono.mid" TYPE="application/x-mplayer2" width="0" height="0">
+<PARAM NAME="filename" VALUE="chrono.mid">
+<PARAM NAME="playcount" VALUE="-1">
+<PARAM NAME="autostart" VALUE="1">
+</OBJECT>
+
+</BODY>
+</HTML>
