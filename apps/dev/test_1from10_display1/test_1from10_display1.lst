@@ -1,0 +1,450 @@
+
+test_1from10_display1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001c0  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000002c  00800060  000001c0  00000234  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .stab         00000eb8  00000000  00000000  00000260  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      000008ae  00000000  00000000  00001118  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e0 ec       	ldi	r30, 0xC0	; 192
+  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <.do_copy_data_start>
+
+0000003e <.do_copy_data_loop>:
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+
+00000042 <.do_copy_data_start>:
+  42:	ac 38       	cpi	r26, 0x8C	; 140
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	ac e8       	ldi	r26, 0x8C	; 140
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	ac 38       	cpi	r26, 0x8C	; 140
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	60 d0       	rcall	.+192    	; 0x11a <main>
+  5a:	b0 c0       	rjmp	.+352    	; 0x1bc <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__heap_end>
+
+0000005e <delay_ms>:
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  5e:	20 ef       	ldi	r18, 0xF0	; 240
+  60:	30 e0       	ldi	r19, 0x00	; 0
+  62:	04 c0       	rjmp	.+8      	; 0x6c <delay_ms+0xe>
+  64:	f9 01       	movw	r30, r18
+  66:	31 97       	sbiw	r30, 0x01	; 1
+  68:	f1 f7       	brne	.-4      	; 0x66 <delay_ms+0x8>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+  6a:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+  6c:	00 97       	sbiw	r24, 0x00	; 0
+  6e:	d1 f7       	brne	.-12     	; 0x64 <delay_ms+0x6>
+    {
+        _delay_ms(0.96);
+        ms--;
+    }
+}
+  70:	08 95       	ret
+
+00000072 <set_led_1from10_7442>:
+
+void set_led_1from10_7442(unsigned char led_nr)
+{
+    if ( 10 < led_nr )
+  72:	8b 30       	cpi	r24, 0x0B	; 11
+  74:	38 f5       	brcc	.+78     	; 0xc4 <set_led_1from10_7442+0x52>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+  76:	e8 2f       	mov	r30, r24
+  78:	f0 e0       	ldi	r31, 0x00	; 0
+  7a:	ee 0f       	add	r30, r30
+  7c:	ff 1f       	adc	r31, r31
+  7e:	ee 0f       	add	r30, r30
+  80:	ff 1f       	adc	r31, r31
+  82:	df 01       	movw	r26, r30
+  84:	a0 5a       	subi	r26, 0xA0	; 160
+  86:	bf 4f       	sbci	r27, 0xFF	; 255
+  88:	2c 91       	ld	r18, X
+  8a:	33 27       	eor	r19, r19
+  8c:	27 fd       	sbrc	r18, 7
+  8e:	30 95       	com	r19
+  90:	22 0f       	add	r18, r18
+  92:	33 1f       	adc	r19, r19
+  94:	11 96       	adiw	r26, 0x01	; 1
+  96:	8c 91       	ld	r24, X
+  98:	11 97       	sbiw	r26, 0x01	; 1
+  9a:	99 27       	eor	r25, r25
+  9c:	87 fd       	sbrc	r24, 7
+  9e:	90 95       	com	r25
+  a0:	28 0f       	add	r18, r24
+  a2:	39 1f       	adc	r19, r25
+  a4:	22 0f       	add	r18, r18
+  a6:	33 1f       	adc	r19, r19
+  a8:	ee 59       	subi	r30, 0x9E	; 158
+  aa:	ff 4f       	sbci	r31, 0xFF	; 255
+  ac:	80 81       	ld	r24, Z
+  ae:	99 27       	eor	r25, r25
+  b0:	87 fd       	sbrc	r24, 7
+  b2:	90 95       	com	r25
+  b4:	28 0f       	add	r18, r24
+  b6:	39 1f       	adc	r19, r25
+  b8:	22 0f       	add	r18, r18
+  ba:	33 1f       	adc	r19, r19
+  bc:	13 96       	adiw	r26, 0x03	; 3
+  be:	8c 91       	ld	r24, X
+  c0:	82 0f       	add	r24, r18
+  c2:	82 bb       	out	0x12, r24	; 18
+  c4:	08 95       	ret
+
+000000c6 <flash_led>:
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+    {
+        PORTD |= _BV(bit);
+  c6:	21 e0       	ldi	r18, 0x01	; 1
+  c8:	30 e0       	ldi	r19, 0x00	; 0
+  ca:	02 c0       	rjmp	.+4      	; 0xd0 <flash_led+0xa>
+  cc:	22 0f       	add	r18, r18
+  ce:	33 1f       	adc	r19, r19
+  d0:	6a 95       	dec	r22
+  d2:	e2 f7       	brpl	.-8      	; 0xcc <flash_led+0x6>
+        delay_ms(ONE_SECOND);
+        PORTD &= ~_BV(bit);
+  d4:	32 2f       	mov	r19, r18
+  d6:	30 95       	com	r19
+  d8:	40 e0       	ldi	r20, 0x00	; 0
+  da:	50 e0       	ldi	r21, 0x00	; 0
+
+void flash_led(unsigned char nr, unsigned char bit)
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+  dc:	68 2f       	mov	r22, r24
+  de:	70 e0       	ldi	r23, 0x00	; 0
+  e0:	a0 ef       	ldi	r26, 0xF0	; 240
+  e2:	b0 e0       	ldi	r27, 0x00	; 0
+  e4:	16 c0       	rjmp	.+44     	; 0x112 <flash_led+0x4c>
+    {
+        PORTD |= _BV(bit);
+  e6:	82 b3       	in	r24, 0x12	; 18
+  e8:	82 2b       	or	r24, r18
+  ea:	82 bb       	out	0x12, r24	; 18
+  ec:	88 ee       	ldi	r24, 0xE8	; 232
+  ee:	93 e0       	ldi	r25, 0x03	; 3
+  f0:	fd 01       	movw	r30, r26
+  f2:	31 97       	sbiw	r30, 0x01	; 1
+  f4:	f1 f7       	brne	.-4      	; 0xf2 <flash_led+0x2c>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+  f6:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+  f8:	d9 f7       	brne	.-10     	; 0xf0 <flash_led+0x2a>
+
+    for ( n = 0; n < nr; n++ )
+    {
+        PORTD |= _BV(bit);
+        delay_ms(ONE_SECOND);
+        PORTD &= ~_BV(bit);
+  fa:	82 b3       	in	r24, 0x12	; 18
+  fc:	83 23       	and	r24, r19
+  fe:	82 bb       	out	0x12, r24	; 18
+ 100:	88 ee       	ldi	r24, 0xE8	; 232
+ 102:	93 e0       	ldi	r25, 0x03	; 3
+ 104:	fd 01       	movw	r30, r26
+ 106:	31 97       	sbiw	r30, 0x01	; 1
+ 108:	f1 f7       	brne	.-4      	; 0x106 <flash_led+0x40>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 10a:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 10c:	d9 f7       	brne	.-10     	; 0x104 <flash_led+0x3e>
+
+void flash_led(unsigned char nr, unsigned char bit)
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+ 10e:	4f 5f       	subi	r20, 0xFF	; 255
+ 110:	5f 4f       	sbci	r21, 0xFF	; 255
+ 112:	46 17       	cp	r20, r22
+ 114:	57 07       	cpc	r21, r23
+ 116:	3c f3       	brlt	.-50     	; 0xe6 <flash_led+0x20>
+        PORTD |= _BV(bit);
+        delay_ms(ONE_SECOND);
+        PORTD &= ~_BV(bit);
+        delay_ms(ONE_SECOND);
+    }
+}
+ 118:	08 95       	ret
+
+0000011a <main>:
+
+int main(void)
+{
+ 11a:	1f 93       	push	r17
+    int n = 0;
+
+    DDRD = 0xFF;
+ 11c:	8f ef       	ldi	r24, 0xFF	; 255
+ 11e:	81 bb       	out	0x11, r24	; 17
+
+    PORTD = 0;
+ 120:	12 ba       	out	0x12, r1	; 18
+ 122:	40 e0       	ldi	r20, 0x00	; 0
+ 124:	50 e0       	ldi	r21, 0x00	; 0
+ 126:	60 ef       	ldi	r22, 0xF0	; 240
+ 128:	70 e0       	ldi	r23, 0x00	; 0
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+ 12a:	1a e0       	ldi	r17, 0x0A	; 10
+
+    PORTD = 0;
+
+    while(1)
+    {
+        if ( 10 < n)
+ 12c:	4b 30       	cpi	r20, 0x0B	; 11
+ 12e:	51 05       	cpc	r21, r1
+ 130:	14 f0       	brlt	.+4      	; 0x136 <main+0x1c>
+ 132:	40 e0       	ldi	r20, 0x00	; 0
+ 134:	50 e0       	ldi	r21, 0x00	; 0
+        {
+            n = 0;
+        }
+
+        set_led_1from10_7442(n);
+ 136:	e4 2f       	mov	r30, r20
+    }
+}
+
+void set_led_1from10_7442(unsigned char led_nr)
+{
+    if ( 10 < led_nr )
+ 138:	4b 30       	cpi	r20, 0x0B	; 11
+ 13a:	30 f5       	brcc	.+76     	; 0x188 <main+0x6e>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+ 13c:	f0 e0       	ldi	r31, 0x00	; 0
+ 13e:	ee 0f       	add	r30, r30
+ 140:	ff 1f       	adc	r31, r31
+ 142:	ee 0f       	add	r30, r30
+ 144:	ff 1f       	adc	r31, r31
+ 146:	df 01       	movw	r26, r30
+ 148:	a0 5a       	subi	r26, 0xA0	; 160
+ 14a:	bf 4f       	sbci	r27, 0xFF	; 255
+ 14c:	2c 91       	ld	r18, X
+ 14e:	33 27       	eor	r19, r19
+ 150:	27 fd       	sbrc	r18, 7
+ 152:	30 95       	com	r19
+ 154:	22 0f       	add	r18, r18
+ 156:	33 1f       	adc	r19, r19
+ 158:	11 96       	adiw	r26, 0x01	; 1
+ 15a:	8c 91       	ld	r24, X
+ 15c:	11 97       	sbiw	r26, 0x01	; 1
+ 15e:	99 27       	eor	r25, r25
+ 160:	87 fd       	sbrc	r24, 7
+ 162:	90 95       	com	r25
+ 164:	28 0f       	add	r18, r24
+ 166:	39 1f       	adc	r19, r25
+ 168:	22 0f       	add	r18, r18
+ 16a:	33 1f       	adc	r19, r19
+ 16c:	ee 59       	subi	r30, 0x9E	; 158
+ 16e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 170:	80 81       	ld	r24, Z
+ 172:	99 27       	eor	r25, r25
+ 174:	87 fd       	sbrc	r24, 7
+ 176:	90 95       	com	r25
+ 178:	28 0f       	add	r18, r24
+ 17a:	39 1f       	adc	r19, r25
+ 17c:	22 0f       	add	r18, r18
+ 17e:	33 1f       	adc	r19, r19
+ 180:	13 96       	adiw	r26, 0x03	; 3
+ 182:	8c 91       	ld	r24, X
+ 184:	82 0f       	add	r24, r18
+ 186:	82 bb       	out	0x12, r24	; 18
+ 188:	80 e2       	ldi	r24, 0x20	; 32
+ 18a:	93 e0       	ldi	r25, 0x03	; 3
+ 18c:	fb 01       	movw	r30, r22
+ 18e:	31 97       	sbiw	r30, 0x01	; 1
+ 190:	f1 f7       	brne	.-4      	; 0x18e <main+0x74>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 192:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 194:	d9 f7       	brne	.-10     	; 0x18c <main+0x72>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+ 196:	12 ba       	out	0x12, r1	; 18
+ 198:	84 e6       	ldi	r24, 0x64	; 100
+ 19a:	90 e0       	ldi	r25, 0x00	; 0
+ 19c:	fb 01       	movw	r30, r22
+ 19e:	31 97       	sbiw	r30, 0x01	; 1
+ 1a0:	f1 f7       	brne	.-4      	; 0x19e <main+0x84>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 1a2:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 1a4:	d9 f7       	brne	.-10     	; 0x19c <main+0x82>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+ 1a6:	12 bb       	out	0x12, r17	; 18
+ 1a8:	84 e6       	ldi	r24, 0x64	; 100
+ 1aa:	90 e0       	ldi	r25, 0x00	; 0
+ 1ac:	fb 01       	movw	r30, r22
+ 1ae:	31 97       	sbiw	r30, 0x01	; 1
+ 1b0:	f1 f7       	brne	.-4      	; 0x1ae <main+0x94>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 1b2:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 1b4:	d9 f7       	brne	.-10     	; 0x1ac <main+0x92>
+        set_led_1from10_7442(0);
+        delay_ms(100);
+        set_led_1from10_7442(9);
+        delay_ms(100);
+/**/
+        n++;
+ 1b6:	4f 5f       	subi	r20, 0xFF	; 255
+ 1b8:	5f 4f       	sbci	r21, 0xFF	; 255
+ 1ba:	b8 cf       	rjmp	.-144    	; 0x12c <main+0x12>
+
+000001bc <_exit>:
+ 1bc:	f8 94       	cli
+
+000001be <__stop_program>:
+ 1be:	ff cf       	rjmp	.-2      	; 0x1be <__stop_program>

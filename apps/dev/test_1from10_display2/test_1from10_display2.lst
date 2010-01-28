@@ -1,0 +1,561 @@
+
+test_1from10_display2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000284  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000002c  00800060  00000284  000002f8  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000008  0080008c  000002b0  00000324  2**0
+                  ALLOC
+  3 .stab         00000f84  00000000  00000000  00000324  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000abc  00000000  00000000  000012a8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e4 e8       	ldi	r30, 0x84	; 132
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <.do_copy_data_start>
+
+0000003e <.do_copy_data_loop>:
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+
+00000042 <.do_copy_data_start>:
+  42:	ac 38       	cpi	r26, 0x8C	; 140
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	ac e8       	ldi	r26, 0x8C	; 140
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a4 39       	cpi	r26, 0x94	; 148
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	f2 d0       	rcall	.+484    	; 0x23e <main>
+  5a:	12 c1       	rjmp	.+548    	; 0x280 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__heap_end>
+
+0000005e <delay_ms>:
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  5e:	20 ef       	ldi	r18, 0xF0	; 240
+  60:	30 e0       	ldi	r19, 0x00	; 0
+  62:	04 c0       	rjmp	.+8      	; 0x6c <delay_ms+0xe>
+  64:	f9 01       	movw	r30, r18
+  66:	31 97       	sbiw	r30, 0x01	; 1
+  68:	f1 f7       	brne	.-4      	; 0x66 <delay_ms+0x8>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+  6a:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+  6c:	00 97       	sbiw	r24, 0x00	; 0
+  6e:	d1 f7       	brne	.-12     	; 0x64 <delay_ms+0x6>
+    {
+        _delay_ms(0.96);
+        ms--;
+    }
+}
+  70:	08 95       	ret
+
+00000072 <set_led_1from10_7442>:
+
+void set_led_1from10_7442(unsigned char led_nr)
+{
+    if ( 10 < led_nr )
+  72:	8b 30       	cpi	r24, 0x0B	; 11
+  74:	38 f5       	brcc	.+78     	; 0xc4 <set_led_1from10_7442+0x52>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+  76:	e8 2f       	mov	r30, r24
+  78:	f0 e0       	ldi	r31, 0x00	; 0
+  7a:	ee 0f       	add	r30, r30
+  7c:	ff 1f       	adc	r31, r31
+  7e:	ee 0f       	add	r30, r30
+  80:	ff 1f       	adc	r31, r31
+  82:	df 01       	movw	r26, r30
+  84:	a0 5a       	subi	r26, 0xA0	; 160
+  86:	bf 4f       	sbci	r27, 0xFF	; 255
+  88:	2c 91       	ld	r18, X
+  8a:	33 27       	eor	r19, r19
+  8c:	27 fd       	sbrc	r18, 7
+  8e:	30 95       	com	r19
+  90:	22 0f       	add	r18, r18
+  92:	33 1f       	adc	r19, r19
+  94:	11 96       	adiw	r26, 0x01	; 1
+  96:	8c 91       	ld	r24, X
+  98:	11 97       	sbiw	r26, 0x01	; 1
+  9a:	99 27       	eor	r25, r25
+  9c:	87 fd       	sbrc	r24, 7
+  9e:	90 95       	com	r25
+  a0:	28 0f       	add	r18, r24
+  a2:	39 1f       	adc	r19, r25
+  a4:	22 0f       	add	r18, r18
+  a6:	33 1f       	adc	r19, r19
+  a8:	ee 59       	subi	r30, 0x9E	; 158
+  aa:	ff 4f       	sbci	r31, 0xFF	; 255
+  ac:	80 81       	ld	r24, Z
+  ae:	99 27       	eor	r25, r25
+  b0:	87 fd       	sbrc	r24, 7
+  b2:	90 95       	com	r25
+  b4:	28 0f       	add	r18, r24
+  b6:	39 1f       	adc	r19, r25
+  b8:	22 0f       	add	r18, r18
+  ba:	33 1f       	adc	r19, r19
+  bc:	13 96       	adiw	r26, 0x03	; 3
+  be:	8c 91       	ld	r24, X
+  c0:	82 0f       	add	r24, r18
+  c2:	82 bb       	out	0x12, r24	; 18
+  c4:	08 95       	ret
+
+000000c6 <set_led_mask_1from10_7442_1>:
+          + bcd_1from10_7442[ led_nr ][ 2 ] * 2
+          + bcd_1from10_7442[ led_nr ][ 3 ] * 1;
+}
+
+void set_led_mask_1from10_7442_1(unsigned char led_mask, unsigned int delay)
+{
+  c6:	0f 93       	push	r16
+  c8:	1f 93       	push	r17
+  ca:	cf 93       	push	r28
+  cc:	df 93       	push	r29
+  ce:	eb 01       	movw	r28, r22
+  d0:	20 e0       	ldi	r18, 0x00	; 0
+  d2:	30 e0       	ldi	r19, 0x00	; 0
+  d4:	a1 e0       	ldi	r26, 0x01	; 1
+    for ( n = 0; n < delay; n++ )
+    {
+        for ( n = 0; n < 8; n++ )
+        {
+            b *= 2;
+            if  ( b & ( led_mask_shift << n ) )
+  d6:	68 2f       	mov	r22, r24
+  d8:	70 e0       	ldi	r23, 0x00	; 0
+  da:	00 ef       	ldi	r16, 0xF0	; 240
+  dc:	10 e0       	ldi	r17, 0x00	; 0
+  de:	32 c0       	rjmp	.+100    	; 0x144 <set_led_mask_1from10_7442_1+0x7e>
+
+    for ( n = 0; n < delay; n++ )
+    {
+        for ( n = 0; n < 8; n++ )
+        {
+            b *= 2;
+  e0:	aa 0f       	add	r26, r26
+            if  ( b & ( led_mask_shift << n ) )
+  e2:	8a 2f       	mov	r24, r26
+  e4:	90 e0       	ldi	r25, 0x00	; 0
+  e6:	9b 01       	movw	r18, r22
+  e8:	04 2e       	mov	r0, r20
+  ea:	02 c0       	rjmp	.+4      	; 0xf0 <set_led_mask_1from10_7442_1+0x2a>
+  ec:	22 0f       	add	r18, r18
+  ee:	33 1f       	adc	r19, r19
+  f0:	0a 94       	dec	r0
+  f2:	e2 f7       	brpl	.-8      	; 0xec <set_led_mask_1from10_7442_1+0x26>
+  f4:	82 23       	and	r24, r18
+  f6:	93 23       	and	r25, r19
+  f8:	89 2b       	or	r24, r25
+  fa:	c9 f0       	breq	.+50     	; 0x12e <set_led_mask_1from10_7442_1+0x68>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+  fc:	20 81       	ld	r18, Z
+  fe:	33 27       	eor	r19, r19
+ 100:	27 fd       	sbrc	r18, 7
+ 102:	30 95       	com	r19
+ 104:	22 0f       	add	r18, r18
+ 106:	33 1f       	adc	r19, r19
+ 108:	81 81       	ldd	r24, Z+1	; 0x01
+ 10a:	99 27       	eor	r25, r25
+ 10c:	87 fd       	sbrc	r24, 7
+ 10e:	90 95       	com	r25
+ 110:	28 0f       	add	r18, r24
+ 112:	39 1f       	adc	r19, r25
+ 114:	22 0f       	add	r18, r18
+ 116:	33 1f       	adc	r19, r19
+ 118:	82 81       	ldd	r24, Z+2	; 0x02
+ 11a:	99 27       	eor	r25, r25
+ 11c:	87 fd       	sbrc	r24, 7
+ 11e:	90 95       	com	r25
+ 120:	28 0f       	add	r18, r24
+ 122:	39 1f       	adc	r19, r25
+ 124:	22 0f       	add	r18, r18
+ 126:	33 1f       	adc	r19, r19
+ 128:	83 81       	ldd	r24, Z+3	; 0x03
+ 12a:	82 0f       	add	r24, r18
+ 12c:	82 bb       	out	0x12, r24	; 18
+    unsigned char led_mask_shift = led_mask;
+    unsigned char b = 1;
+
+    for ( n = 0; n < delay; n++ )
+    {
+        for ( n = 0; n < 8; n++ )
+ 12e:	4f 5f       	subi	r20, 0xFF	; 255
+ 130:	5f 4f       	sbci	r21, 0xFF	; 255
+ 132:	34 96       	adiw	r30, 0x04	; 4
+ 134:	48 30       	cpi	r20, 0x08	; 8
+ 136:	51 05       	cpc	r21, r1
+ 138:	99 f6       	brne	.-90     	; 0xe0 <set_led_mask_1from10_7442_1+0x1a>
+ 13a:	c8 01       	movw	r24, r16
+ 13c:	01 97       	sbiw	r24, 0x01	; 1
+ 13e:	f1 f7       	brne	.-4      	; 0x13c <set_led_mask_1from10_7442_1+0x76>
+ 140:	29 e0       	ldi	r18, 0x09	; 9
+ 142:	30 e0       	ldi	r19, 0x00	; 0
+    int n = 0;
+
+    unsigned char led_mask_shift = led_mask;
+    unsigned char b = 1;
+
+    for ( n = 0; n < delay; n++ )
+ 144:	2c 17       	cp	r18, r28
+ 146:	3d 07       	cpc	r19, r29
+ 148:	28 f4       	brcc	.+10     	; 0x154 <set_led_mask_1from10_7442_1+0x8e>
+ 14a:	e0 e6       	ldi	r30, 0x60	; 96
+ 14c:	f0 e0       	ldi	r31, 0x00	; 0
+ 14e:	40 e0       	ldi	r20, 0x00	; 0
+ 150:	50 e0       	ldi	r21, 0x00	; 0
+ 152:	c6 cf       	rjmp	.-116    	; 0xe0 <set_led_mask_1from10_7442_1+0x1a>
+            }
+        }
+
+        delay_ms(1);
+    }
+}
+ 154:	df 91       	pop	r29
+ 156:	cf 91       	pop	r28
+ 158:	1f 91       	pop	r17
+ 15a:	0f 91       	pop	r16
+ 15c:	08 95       	ret
+
+0000015e <set_led_mask_1from10_7442>:
+
+void set_led_mask_1from10_7442(unsigned int led_mask, unsigned int delay)
+{
+ 15e:	0f 93       	push	r16
+ 160:	1f 93       	push	r17
+ 162:	cf 93       	push	r28
+ 164:	df 93       	push	r29
+ 166:	8b 01       	movw	r16, r22
+//    for ( n = 0; n < delay; n++ )
+//    {
+        for ( n = 0; n < 10; n++ )
+        {
+            b *= 2;
+            if  ( b & ( led_mask_shift << 1 ) )
+ 168:	bc 01       	movw	r22, r24
+ 16a:	66 0f       	add	r22, r22
+ 16c:	77 1f       	adc	r23, r23
+ 16e:	a0 e6       	ldi	r26, 0x60	; 96
+ 170:	b0 e0       	ldi	r27, 0x00	; 0
+ 172:	41 e0       	ldi	r20, 0x01	; 1
+ 174:	50 e0       	ldi	r21, 0x00	; 0
+ 176:	c0 ef       	ldi	r28, 0xF0	; 240
+ 178:	d0 e0       	ldi	r29, 0x00	; 0
+
+//    for ( n = 0; n < delay; n++ )
+//    {
+        for ( n = 0; n < 10; n++ )
+        {
+            b *= 2;
+ 17a:	44 0f       	add	r20, r20
+ 17c:	55 1f       	adc	r21, r21
+            if  ( b & ( led_mask_shift << 1 ) )
+ 17e:	ca 01       	movw	r24, r20
+ 180:	86 23       	and	r24, r22
+ 182:	97 23       	and	r25, r23
+ 184:	89 2b       	or	r24, r25
+ 186:	39 f1       	breq	.+78     	; 0x1d6 <set_led_mask_1from10_7442+0x78>
+            {1,0,0,0},
+            {1,0,1,0},
+            {1,0,0,1}
+    };
+
+    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
+ 188:	2c 91       	ld	r18, X
+ 18a:	33 27       	eor	r19, r19
+ 18c:	27 fd       	sbrc	r18, 7
+ 18e:	30 95       	com	r19
+ 190:	22 0f       	add	r18, r18
+ 192:	33 1f       	adc	r19, r19
+ 194:	11 96       	adiw	r26, 0x01	; 1
+ 196:	8c 91       	ld	r24, X
+ 198:	11 97       	sbiw	r26, 0x01	; 1
+ 19a:	99 27       	eor	r25, r25
+ 19c:	87 fd       	sbrc	r24, 7
+ 19e:	90 95       	com	r25
+ 1a0:	28 0f       	add	r18, r24
+ 1a2:	39 1f       	adc	r19, r25
+ 1a4:	22 0f       	add	r18, r18
+ 1a6:	33 1f       	adc	r19, r19
+ 1a8:	12 96       	adiw	r26, 0x02	; 2
+ 1aa:	8c 91       	ld	r24, X
+ 1ac:	12 97       	sbiw	r26, 0x02	; 2
+ 1ae:	99 27       	eor	r25, r25
+ 1b0:	87 fd       	sbrc	r24, 7
+ 1b2:	90 95       	com	r25
+ 1b4:	28 0f       	add	r18, r24
+ 1b6:	39 1f       	adc	r19, r25
+ 1b8:	22 0f       	add	r18, r18
+ 1ba:	33 1f       	adc	r19, r19
+ 1bc:	13 96       	adiw	r26, 0x03	; 3
+ 1be:	8c 91       	ld	r24, X
+ 1c0:	13 97       	sbiw	r26, 0x03	; 3
+ 1c2:	82 0f       	add	r24, r18
+ 1c4:	82 bb       	out	0x12, r24	; 18
+ 1c6:	c8 01       	movw	r24, r16
+ 1c8:	04 c0       	rjmp	.+8      	; 0x1d2 <set_led_mask_1from10_7442+0x74>
+ 1ca:	fe 01       	movw	r30, r28
+ 1cc:	31 97       	sbiw	r30, 0x01	; 1
+ 1ce:	f1 f7       	brne	.-4      	; 0x1cc <set_led_mask_1from10_7442+0x6e>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 1d0:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 1d2:	00 97       	sbiw	r24, 0x00	; 0
+ 1d4:	d1 f7       	brne	.-12     	; 0x1ca <set_led_mask_1from10_7442+0x6c>
+ 1d6:	14 96       	adiw	r26, 0x04	; 4
+    unsigned int led_mask_shift = led_mask;
+    unsigned int b = 1;
+
+//    for ( n = 0; n < delay; n++ )
+//    {
+        for ( n = 0; n < 10; n++ )
+ 1d8:	80 e0       	ldi	r24, 0x00	; 0
+ 1da:	a8 38       	cpi	r26, 0x88	; 136
+ 1dc:	b8 07       	cpc	r27, r24
+ 1de:	69 f6       	brne	.-102    	; 0x17a <set_led_mask_1from10_7442+0x1c>
+                delay_ms(delay);
+//                delay_ms(1);
+            }
+        }
+//    }
+}
+ 1e0:	df 91       	pop	r29
+ 1e2:	cf 91       	pop	r28
+ 1e4:	1f 91       	pop	r17
+ 1e6:	0f 91       	pop	r16
+ 1e8:	08 95       	ret
+
+000001ea <flash_led>:
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+    {
+        PORTD |= _BV(bit);
+ 1ea:	21 e0       	ldi	r18, 0x01	; 1
+ 1ec:	30 e0       	ldi	r19, 0x00	; 0
+ 1ee:	02 c0       	rjmp	.+4      	; 0x1f4 <flash_led+0xa>
+ 1f0:	22 0f       	add	r18, r18
+ 1f2:	33 1f       	adc	r19, r19
+ 1f4:	6a 95       	dec	r22
+ 1f6:	e2 f7       	brpl	.-8      	; 0x1f0 <flash_led+0x6>
+        delay_ms(ONE_SECOND);
+        PORTD &= ~_BV(bit);
+ 1f8:	32 2f       	mov	r19, r18
+ 1fa:	30 95       	com	r19
+ 1fc:	40 e0       	ldi	r20, 0x00	; 0
+ 1fe:	50 e0       	ldi	r21, 0x00	; 0
+
+void flash_led(unsigned char nr, unsigned char bit)
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+ 200:	68 2f       	mov	r22, r24
+ 202:	70 e0       	ldi	r23, 0x00	; 0
+ 204:	a0 ef       	ldi	r26, 0xF0	; 240
+ 206:	b0 e0       	ldi	r27, 0x00	; 0
+ 208:	16 c0       	rjmp	.+44     	; 0x236 <flash_led+0x4c>
+    {
+        PORTD |= _BV(bit);
+ 20a:	82 b3       	in	r24, 0x12	; 18
+ 20c:	82 2b       	or	r24, r18
+ 20e:	82 bb       	out	0x12, r24	; 18
+ 210:	88 ee       	ldi	r24, 0xE8	; 232
+ 212:	93 e0       	ldi	r25, 0x03	; 3
+ 214:	fd 01       	movw	r30, r26
+ 216:	31 97       	sbiw	r30, 0x01	; 1
+ 218:	f1 f7       	brne	.-4      	; 0x216 <flash_led+0x2c>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 21a:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 21c:	d9 f7       	brne	.-10     	; 0x214 <flash_led+0x2a>
+
+    for ( n = 0; n < nr; n++ )
+    {
+        PORTD |= _BV(bit);
+        delay_ms(ONE_SECOND);
+        PORTD &= ~_BV(bit);
+ 21e:	82 b3       	in	r24, 0x12	; 18
+ 220:	83 23       	and	r24, r19
+ 222:	82 bb       	out	0x12, r24	; 18
+ 224:	88 ee       	ldi	r24, 0xE8	; 232
+ 226:	93 e0       	ldi	r25, 0x03	; 3
+ 228:	fd 01       	movw	r30, r26
+ 22a:	31 97       	sbiw	r30, 0x01	; 1
+ 22c:	f1 f7       	brne	.-4      	; 0x22a <flash_led+0x40>
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+    {
+        _delay_ms(0.96);
+        ms--;
+ 22e:	01 97       	sbiw	r24, 0x01	; 1
+void delay_ms(unsigned int ms)
+{
+    // we use a calibrated macro. This is more
+    // accurate and not so much compiler dependent
+    // as self made code.
+    while(ms)
+ 230:	d9 f7       	brne	.-10     	; 0x228 <flash_led+0x3e>
+
+void flash_led(unsigned char nr, unsigned char bit)
+{
+    int n = 0;
+
+    for ( n = 0; n < nr; n++ )
+ 232:	4f 5f       	subi	r20, 0xFF	; 255
+ 234:	5f 4f       	sbci	r21, 0xFF	; 255
+ 236:	46 17       	cp	r20, r22
+ 238:	57 07       	cpc	r21, r23
+ 23a:	3c f3       	brlt	.-50     	; 0x20a <flash_led+0x20>
+        PORTD |= _BV(bit);
+        delay_ms(ONE_SECOND);
+        PORTD &= ~_BV(bit);
+        delay_ms(ONE_SECOND);
+    }
+}
+ 23c:	08 95       	ret
+
+0000023e <main>:
+
+int main(void)
+{
+    DDRD = 0xFF;
+ 23e:	8f ef       	ldi	r24, 0xFF	; 255
+ 240:	81 bb       	out	0x11, r24	; 17
+    PORTD = 0;
+ 242:	12 ba       	out	0x12, r1	; 18
+//    unsigned int ch = 513 + 4 + 32;
+// nieswieci jedna - reszta swieci
+// swieca wszystkie oprucz jednego
+    unsigned int ch = 1023 - 64;
+
+    controller.currentSelectedMode = MODE_CONTROLL;
+ 244:	10 92 8d 00 	sts	0x008D, r1
+ 248:	10 92 8c 00 	sts	0x008C, r1
+    controller.currentTempValue = 25;
+ 24c:	89 e1       	ldi	r24, 0x19	; 25
+ 24e:	90 e0       	ldi	r25, 0x00	; 0
+ 250:	90 93 8f 00 	sts	0x008F, r25
+ 254:	80 93 8e 00 	sts	0x008E, r24
+    controller.tempDisplayValue = ch;
+ 258:	8f eb       	ldi	r24, 0xBF	; 191
+ 25a:	93 e0       	ldi	r25, 0x03	; 3
+ 25c:	90 93 91 00 	sts	0x0091, r25
+ 260:	80 93 90 00 	sts	0x0090, r24
+    controller.lowTempFanSpeedValue = 9;
+ 264:	89 e0       	ldi	r24, 0x09	; 9
+ 266:	80 93 92 00 	sts	0x0092, r24
+    controller.highTempFanSpeedValue = 1;
+ 26a:	81 e0       	ldi	r24, 0x01	; 1
+ 26c:	80 93 93 00 	sts	0x0093, r24
+
+    while ( 1 ) {
+//        set_led_mask_1from10_7442_1(ch, 100);
+        set_led_mask_1from10_7442(controller.tempDisplayValue, 1);
+ 270:	80 91 90 00 	lds	r24, 0x0090
+ 274:	90 91 91 00 	lds	r25, 0x0091
+ 278:	61 e0       	ldi	r22, 0x01	; 1
+ 27a:	70 e0       	ldi	r23, 0x00	; 0
+ 27c:	70 df       	rcall	.-288    	; 0x15e <set_led_mask_1from10_7442>
+ 27e:	f8 cf       	rjmp	.-16     	; 0x270 <main+0x32>
+
+00000280 <_exit>:
+ 280:	f8 94       	cli
+
+00000282 <__stop_program>:
+ 282:	ff cf       	rjmp	.-2      	; 0x282 <__stop_program>
