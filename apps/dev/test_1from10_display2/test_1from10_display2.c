@@ -6,12 +6,21 @@
 #define FCPU  1000000
 #define F_CPU FCPU
 
+#define DISPLAY_1FROM10_BCD_INPUT_A0     PIND0
+#define DISPLAY_1FROM10_BCD_INPUT_A1     PIND1
+#define DISPLAY_1FROM10_BCD_INPUT_A2     PIND2
+#define DISPLAY_1FROM10_BCD_INPUT_A3     PIND3
+
 #define ONE_SECOND  1000
+
+//TODO: uzycie pamieci EEPROM do przechowania nastaw granicznych obrotow
+//    unsigned int EEMEM fanLowRangeValue __attribute__ = 56;
+//   unsigned int EEMEM fanHighRangeValue __attribute__ = 123;
 
 #include <util/delay.h>
 //TODO: #include <util/ds18b20_temperature_sensor.h>
 //TODO: #include <util/fan_controller.h>
-//TODO: #include <util/10_leds_display_line.h>
+//TODO: #include <util/leds_10_display_line.h>
 
 typedef enum {
     MODE_CONTROLL = 0,
@@ -45,7 +54,7 @@ void delay_ms(unsigned int ms)
     }
 }
 
-void set_led_1from10_7442(unsigned char led_nr)
+void leds_10_display_line__set_led(unsigned char led_nr)
 {
     if ( 10 < led_nr )
     {
@@ -68,35 +77,13 @@ void set_led_1from10_7442(unsigned char led_nr)
             {1,0,0,1}
     };
 
-    PORTD = bcd_1from10_7442[ led_nr ][ 0 ] * 8
-          + bcd_1from10_7442[ led_nr ][ 1 ] * 4
-          + bcd_1from10_7442[ led_nr ][ 2 ] * 2
-          + bcd_1from10_7442[ led_nr ][ 3 ] * 1;
+    PORTD = bcd_1from10_7442[ led_nr ][ DISPLAY_1FROM10_BCD_INPUT_A0 ] * 8
+          + bcd_1from10_7442[ led_nr ][ DISPLAY_1FROM10_BCD_INPUT_A1 ] * 4
+          + bcd_1from10_7442[ led_nr ][ DISPLAY_1FROM10_BCD_INPUT_A2 ] * 2
+          + bcd_1from10_7442[ led_nr ][ DISPLAY_1FROM10_BCD_INPUT_A3 ] * 1;
 }
 
-void set_led_mask_1from10_7442_1(unsigned char led_mask, unsigned int delay)
-{
-    int n = 0;
-
-    unsigned char led_mask_shift = led_mask;
-    unsigned char b = 1;
-
-    for ( n = 0; n < delay; n++ )
-    {
-        for ( n = 0; n < 8; n++ )
-        {
-            b *= 2;
-            if  ( b & ( led_mask_shift << n ) )
-            {
-                set_led_1from10_7442(n);
-            }
-        }
-
-        delay_ms(1);
-    }
-}
-
-void set_led_mask_1from10_7442(unsigned int led_mask, unsigned int delay)
+void leds_10_display_line__set_led_mask(unsigned int led_mask, unsigned int delay)
 {
     unsigned char n = 0;
 
@@ -110,7 +97,7 @@ void set_led_mask_1from10_7442(unsigned int led_mask, unsigned int delay)
             b *= 2;
             if  ( b & ( led_mask_shift << 1 ) )
             {
-                set_led_1from10_7442(n);
+                leds_10_display_line__set_led(n);
                 delay_ms(delay);
 //                delay_ms(1);
             }
@@ -118,25 +105,14 @@ void set_led_mask_1from10_7442(unsigned int led_mask, unsigned int delay)
 //    }
 }
 
-
-void flash_led(unsigned char nr, unsigned char bit)
-{
-    int n = 0;
-
-    for ( n = 0; n < nr; n++ )
-    {
-        PORTD |= _BV(bit);
-        delay_ms(ONE_SECOND);
-        PORTD &= ~_BV(bit);
-        delay_ms(ONE_SECOND);
-    }
-}
-
-int main(void)
+void system_init()
 {
     DDRD = 0xFF;
     PORTD = 0;
+}
 
+void controller_init(tController *pcontroller)
+{
 // swieca tylko skrajne
 //    unsigned int ch = 513;
 // swieci co druga
@@ -149,15 +125,24 @@ int main(void)
 // swieca wszystkie oprucz jednego
     unsigned int ch = 1023 - 64;
 
-    controller.currentSelectedMode = MODE_CONTROLL;
-    controller.currentTempValue = 25;
-    controller.tempDisplayValue = ch;
-    controller.lowTempFanSpeedValue = 9;
-    controller.highTempFanSpeedValue = 1;
+    pcontroller->currentSelectedMode = MODE_CONTROLL;
+    pcontroller->currentTempValue = 25;
+    pcontroller->tempDisplayValue = ch;
+    pcontroller->lowTempFanSpeedValue = 9;
+    pcontroller->highTempFanSpeedValue = 1;
+}
 
-    while ( 1 ) {
-//        set_led_mask_1from10_7442_1(ch, 100);
-        set_led_mask_1from10_7442(controller.tempDisplayValue, 1);
+
+
+int main(void)
+{
+    system_init();
+
+    controller_init(&controller);
+
+    while ( 1 )
+    {
+        leds_10_display_line__set_led_mask(controller.tempDisplayValue, 1);
     }
 
     return 0;
